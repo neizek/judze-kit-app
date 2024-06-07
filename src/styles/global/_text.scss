@@ -1,0 +1,41 @@
+:root {
+	--default-font-size: 14px;
+	--default-font-color: #{$defaultFontColor};
+	--error-font-color: #{$errorFontColor};
+	
+	&[data-theme='dark'] {
+		--default-font-color: #{$defaultFontColorDark};
+		--error-font-color: #{$errorFontColorDark};
+	}
+
+	font-size: var(--default-font-size);
+}
+
+* {
+	color: var(--default-font-color);
+	font-family: 'Roboto';
+}
+
+h1 {
+	font-size: 28px;
+	font-weight: 300;
+
+	@include mobile {
+		font-size: 20px;
+	}
+}
+
+h2 {
+	font-size: 22px;
+	font-weight: 400;
+}
+
+.link {
+	cursor: pointer;
+	opacity: .6;
+	transition: all .2s ease;
+
+	&:hover {
+		opacity: 1;
+	}
+}

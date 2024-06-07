@@ -1,0 +1,65 @@
+@mixin desktop {
+	@media (min-width: 1025px) {
+		@content;
+	}
+}
+
+@mixin before-desktop {
+	@media (max-width: 1024px) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media (max-width: 1024px) and (min-width: 768px) {
+		@content;
+	}
+}
+
+@mixin after-mobile {
+	@media (min-width: 768px) {
+		@content;
+	}
+}
+
+@mixin mobile {
+	@media (max-width: 767px) {
+		@content;
+	}
+}
+
+@mixin standalone {
+	@media all and (display-mode: standalone) {
+		@content;
+	}
+}
+
+@mixin dark-theme {
+	@media (prefers-color-scheme: dark) {
+		@content;
+	}
+}
+
+@mixin text-inputs {
+	input[type='text'],
+	input[type='tel'],
+	input[type='password'],
+	input[type='email'],
+	input[type='number'],
+	input[type='search'],
+	input[type='url'],
+	[contenteditable=true],
+	textarea,
+	.input {
+		@content;
+	}
+}
+
+@mixin buttons {
+	input[type='button'],
+	input[type='submit'],
+	button,
+	.button {
+		@content;
+	}
+}

@@ -1,0 +1,210 @@
+:root {
+	--button-background-color: #{$c-white};
+	--button-background-color-hover: #{darken($c-white, 2%)};
+	--button-background-color-primary: #{$primaryColor};
+	--button-background-color-primary-hover: #{darken($primaryColor, 7%)};
+	--button-background-color-secondary: #{$secondaryColor};
+	--button-background-color-secondary-hover: #{darken($secondaryColor, 5%)};
+	--button-background-color-dangerous: #{$errorColor};
+	--button-background-color-dangerous-hover: #{darken($errorColor, 7%)};
+	--placeholder-opacity: 0.7;
+	--placeholder-font-weight: 400;
+	--input-background-color: #{$inputBackgroundColor};
+	--input-background-color-hover: #{$inputBackgroundColorHover};
+	--input-background-color-focus: #{lighten($inputBackgroundColor, 5%)};
+	--input-background-color-error: #{mix($inputBackgroundColor, $errorColor, 90%)};
+	--input-border-color: #{$inputBorderColor};
+	--input-border-color-hover: #{$inputBorderColorHover};
+	--input-border-color-focus: #{lighten($primaryColor, 20%)};
+	--input-border-color-error: #{lighten($errorColor, 5%)};
+
+	&[data-theme='dark'] {
+		--button-background-color: #{lighten($bodyBackgroundColorDark, 3%)};
+		--button-background-color-hover: #{lighten($bodyBackgroundColorDark, 7%)};
+		--button-background-color-primary: #{$primaryColorDark};
+		--button-background-color-primary-hover: #{darken($primaryColorDark, 7%)};
+		--button-background-color-secondary: #{$secondaryColorDark};
+		--button-background-color-secondary-hover: #{darken($secondaryColorDark, 5%)};
+		--button-background-color-dangerous: #{$errorColorDark};
+		--button-background-color-dangerous-hover: #{darken($errorColorDark, 5%)};
+		--placeheolder-opacity: 0.3;
+		--placeholder-font-weight: 300;
+		--input-background-color: #{$inputBackgroundColorDark};
+		--input-background-color-hover: #{$inputBackgroundColorDarkHover};
+		--input-background-color-focus: #{darken($inputBackgroundColorDark, 1%)};
+		--input-background-color-error: #{mix(
+				$inputBackgroundColorDark,
+				$errorColorDark,
+				90%
+			)};
+		--input-border-color: #{$inputBorderColorDark};
+		--input-border-color-hover: #{$inputBorderColorDarkHover};
+		--input-border-color-focus: #{mix(
+				$primaryColor,
+				$bodyBackgroundColorDark,
+				65%
+			)};
+		--input-border-color-error: #{$errorColorDark};
+	}
+}
+
+@include buttons {
+	display: flex;
+	align-items: center;
+	vertical-align: baseline;
+	border-radius: #{$inputBorderRadius};
+	padding: 9px 14px;
+	gap: 12px;
+	font-size: 13.5px;
+	background-color: var(--button-background-color);
+	border: 1px solid var(--separation-color);
+	transition: background-color 0.2s, box-shadow 0.2s;
+	box-sizing: border-box;
+
+	&,
+	*:not(i) {
+		font-weight: 500;
+	}
+
+	&:hover {
+		background-color: var(--button-background-color-hover);
+
+		&:not(:disabled) {
+			cursor: pointer;
+		}
+
+		&:disabled {
+			cursor: not-allowed;
+		}
+	}
+
+	&:disabled {
+		box-shadow: none;
+	}
+
+	&.primary,
+	&.secondary,
+	&.dangerous {
+		border: none;
+		padding: 10px 15px;
+		// box-shadow: 0 1px inset #ffffff30, 0 -1px inset #00000030;
+
+		&,
+		* {
+			text-shadow: 1px 1px 1px #00000030;
+			color: darken($c-white, 2%);
+		}
+	}
+
+	&.primary {
+		background-color: var(--button-background-color-primary);
+
+		&:hover {
+			background-color: var(--button-background-color-primary-hover);
+		}
+	}
+
+	&.secondary {
+		background-color: var(--button-background-color-secondary);
+
+		&:hover {
+			background-color: var(--button-background-color-secondary-hover);
+		}
+	}
+
+	&.dangerous {
+		background-color: var(--button-background-color-dangerous);
+
+		&:hover {
+			background-color: var(--button-background-color-dangerous-hover);
+		}
+	}
+
+	&.transparent {
+		background-color: transparent;
+		border-color: transparent;
+
+		&.bordered {
+			border: 1px solid var(--separation-color);
+		}
+		
+		&:hover {
+			background-color: #00000016;
+		}
+	}
+}
+
+input::placeholder {
+	opacity: var(--placeholder-opacity);
+	font-weight: var(--placeholder-font-weight);
+}
+
+@include text-inputs {
+	background-color: var(--input-background-color);
+	border: 1px solid var(--input-border-color);
+	border-radius: #{$inputBorderRadius};
+	padding: 9px 14px;
+	font-size: 13.5px;
+	display: block;
+	width: 100%;
+	transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+
+	&:hover {
+		cursor: TextByCodes;
+		border-color: var(--input-border-color-hover);
+	}
+
+	&:focus-within,
+	&:focus {
+		background-color: var(--input-background-color-focus);
+		border-color: var(--input-border-color-focus);
+		box-shadow: 0 0 0 1px var(--input-border-color-focus),
+			inset 0 0 3px #00000020;
+	}
+
+	&.error {
+		&:not(:focus-within) {
+			background-color: var(--input-background-color-error);
+		}
+
+		border-color: var(--input-border-color-error);
+
+		&:focus-within {
+			box-shadow: 0 0 0 1px var(--input-border-color-error);
+		}
+	}
+
+	&.extended {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 12px;
+
+		&.disabled {
+			color: var(--input-border-color);
+			cursor: not-allowed;
+		}
+
+		input,
+		textarea,
+		[contenteditable=true] {
+			all: unset;
+			background-color: transparent;
+			flex: 1;
+		}
+
+		i {
+			font-size: 14px;
+			opacity: 0.5;
+			transition: opacity 0.2s;
+		}
+
+		&:hover i {
+			opacity: 0.8;
+		}
+
+		&:focus-within i {
+			opacity: 0.9;
+		}
+	}
+}

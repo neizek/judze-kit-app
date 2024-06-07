@@ -1,0 +1,80 @@
+// Color palette
+$c-white: #ffffff;
+$c-black: #000000;
+$c-chalk: #f4f4f4;
+$c-charcoal: #292929;
+$c-wetAsphalt: #282d33;
+$c-sky: #1187f5;
+// $c-sky: #0079eb;
+// $c-grass: #0dce57;
+$c-grass: #14b451;
+$c-candy: #c300ff;
+$c-lightRed: #e94545;
+$c-blood: #da2828;
+$c-wetBlood: #a93d3f;
+$c-wheatYellow: #fc9803;
+
+// Global
+$primaryColor: $c-sky;
+$secondaryColor: $c-grass;
+$primaryColorDark: mix($c-sky, $c-wetAsphalt, 80%);
+$secondaryColorDark: darken($c-grass, 10%);
+$errorColor: $c-lightRed;
+$errorColorDark: $c-wetBlood;
+$separationColor: darken($c-chalk, 10%);
+$separationColorDark: lighten($c-wetAsphalt, 15%);
+
+// Layouts
+$bodyBackgroundColor: $c-chalk;
+$bodyBackgroundColorDark: darken($c-wetAsphalt, 2%);
+$wrapperWidth: 1280px;
+$wrapperSidePaddings: 32px;
+$wrapperSidePaddingsMobile: 10px;
+$sectionBorderRadius: 8px;
+$sectionBackgroundColorDark: lighten($bodyBackgroundColorDark, 3%);
+$sectionBackgroundColor: mix($primaryColor, $c-white, 0%);
+
+// Small layouts
+
+$boxBackgroundColor: mix($primaryColor, $c-white, 0%);
+$boxBackgroundColorDark: lighten($bodyBackgroundColorDark, 3%);
+
+// Text
+$defaultFontColor: $c-charcoal;
+$defaultFontColorDark: rgba($c-white, 0.8);
+$errorFontColor: $c-lightRed;
+$errorFontColorDark: $c-lightRed;
+
+// Input
+$inputBackgroundColor: #ffffff;
+$inputBackgroundColorHover: darken($c-white, 5%);
+$inputBackgroundColorDark: darken($c-wetAsphalt, 6%);
+$inputBackgroundColorDarkHover: darken($c-wetAsphalt, 3%);
+$inputBorderRadius: 4px;
+$inputBorderColor: #00000030;
+$inputBorderColorHover: #00000045;
+$inputBorderColorDark: #ffffff20;
+$inputBorderColorDarkHover: #ffffff35;
+
+// Table
+$tableBorderRadius: 8px;
+$tableHeadColor: $c-white;
+$tableHeadBackgroundColor: $secondaryColor;
+$tableHeadEvenBackgroundColor: $c-white;
+$tableBodyBackgroundColor: mix($primaryColor, $c-white, 0%);
+$tableBodyEvenBackgroundColor: darken($c-white, 3%);
+$tableHeadColorDark: $c-white;
+$tableHeadBackgroundColorDark: $secondaryColorDark;
+$tableHeadEvenBackgroundColorDark: lighten($bodyBackgroundColorDark, 5%);
+$tableBodyBackgroundColorDark: lighten($bodyBackgroundColorDark, 3%);
+$tableBodyEvenBackgroundColorDark: lighten($bodyBackgroundColorDark, 6%);
+
+:root {
+	--primary-color: #{$primaryColor};
+	--separation-color: #{$separationColor};
+
+	&[data-theme='dark'] {
+		--primary-color: #{$primaryColorDark};
+		--separation-color: #{$separationColorDark};
+	}
+}

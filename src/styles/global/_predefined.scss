@@ -1,0 +1,49 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	-webkit-text-fill-color: inherit;
+	box-shadow: 0 0 0px 1000px transparent inset;
+	-webkit-box-shadow: 0 0 0px 1000px transparent inset;
+	transition: background-color 5000s ease-in-out 0s;
+	background: -webkit-linear-gradient(
+		top,
+		rgba(255, 255, 255, 0) 0%,
+		rgba(0, 174, 255, 0.04) 50%,
+		rgba(255, 255, 255, 0) 51%,
+		rgba(0, 174, 255, 0.03) 100%
+	);
+}
+
+input,
+button {
+	width: max-content;
+}
+
+* {
+	box-sizing: border-box;
+	border-width: 0;
+	border-style: solid;
+	border-image: none;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	text-rendering: geometricPrecision;
+	outline: none;
+	outline-style: none;
+	position: relative;
+}
+
+:root {
+	--primary-color: #{$primaryColor};
+	--secondary-color: #{$secondaryColor};
+
+	&[data-theme='dark'] {
+		--primary-color: #{$primaryColorDark};
+		--secondary-color: #{$secondaryColorDark};
+	}
+}

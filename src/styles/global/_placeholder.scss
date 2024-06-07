@@ -1,0 +1,61 @@
+:root {
+	--FormLoader-gradient-background: linear-gradient(90deg, #e1e1e1 20%, #f1f1f1 50%, #e1e1e1 80%);
+
+	&[data-theme='dark'] {
+		--FormLoader-gradient-background: linear-gradient(90deg, #2f353c 20%, #2a3036 50%, #2f353c 80%);
+	}
+}
+.placeholder {
+	display: block;
+	border-radius: 4px;
+	width: 100%;
+	background: var(--FormLoader-gradient-background);
+	animation: loading 1.8s ease infinite;
+	background-size: 600% 100%;
+
+	&.headerSize {
+		height: 27px;
+		width: 80%;
+	}
+
+	&.inputSize {
+		height: 31.5px;
+	}
+
+	&.labelSize {
+		height: 13.5px;
+		width: 100px;
+	}
+
+	&.fileuploaderSize {
+		height: 150px;
+	}
+
+	&.textareaSize {
+		height: 180px;
+	}
+
+	&.tabsSize {
+		height: 80px;
+		width: 150px;
+	}
+
+	&.buttonSize {
+		width: 94px;
+		height: 34px;
+	}
+
+	&.imageSize {
+		height: 100%;
+		border-radius: 0;
+	}
+}
+
+@keyframes loading {
+	0%{
+		background-position: 0% 50%;
+	}
+	100%{
+		background-position: 100% 50%;
+	}
+}

@@ -1,0 +1,281 @@
+:root {
+	--table-head-color: #{$tableHeadColor};
+	--table-head-background-color: #{$tableHeadBackgroundColor};
+	--table-head-even-background-color: #{$tableHeadEvenBackgroundColor};
+	--table-head-even-even-background-color: #{darken(
+			$tableHeadBackgroundColor,
+			3%
+		)};
+	--table-body-background-color: #{$tableBodyBackgroundColor};
+	--table-body-even-background-color: #{$tableBodyEvenBackgroundColor};
+	--table-body-cell-even-background-color: #{darken(
+			$tableBodyBackgroundColor,
+			3%
+		)};
+	--table-body-cell-even-even-background-color: #{darken(
+			$tableBodyEvenBackgroundColor,
+			4%
+		)};
+
+	&[data-theme='dark'] {
+		--table-head-color: #{$tableHeadColorDark};
+		--table-head-background-color: #{$tableHeadBackgroundColorDark};
+		--table-head-even-background-color: #{$tableHeadEvenBackgroundColorDark};
+		--table-head-even-even-background-color: #{darken(
+				$tableHeadBackgroundColorDark,
+				5%
+			)};
+		--table-body-background-color: #{$tableBodyBackgroundColorDark};
+		--table-body-even-background-color: #{$tableBodyEvenBackgroundColorDark};
+		--table-body-cell-even-background-color: #{darken(
+				$tableBodyBackgroundColorDark,
+				1%
+			)};
+		--table-body-cell-even-even-background-color: #{darken(
+				$tableBodyEvenBackgroundColorDark,
+				1.2%
+			)};
+	}
+}
+
+$compile-table-type: 'fancy';
+
+@if $compile-table-type == 'fancy' {
+	table {
+		border-radius: $tableBorderRadius;
+		border-spacing: 0;
+		border-collapse: separate;
+		width: 100%;
+
+		thead {
+			position: sticky;
+			top: 5px;
+			border-radius: $tableBorderRadius $tableBorderRadius 0 0;
+			z-index: 1;
+
+			tr:first-of-type {
+				border-radius: $tableBorderRadius $tableBorderRadius 0 0;
+
+				th {
+					background-color: var(--table-head-background-color);
+
+					&:first-of-type {
+						border-radius: $tableBorderRadius 0 0 0;
+					}
+
+					&:last-of-type {
+						border-radius: 0 $tableBorderRadius 0 0;
+					}
+
+					&:nth-of-type(2n) {
+						background-color: var(--table-head-even-even-background-color);
+					}
+				}
+			}
+
+			tr:last-of-type th {
+				&:first-of-type {
+					border-bottom-left-radius: $tableBorderRadius;
+				}
+
+				&:last-of-type {
+					border-bottom-right-radius: $tableBorderRadius;
+				}
+			}
+		}
+
+		tbody {
+			border-radius: 0 0 $tableBorderRadius $tableBorderRadius;
+
+			&::before {
+				content: '@';
+				display: block;
+				color: transparent;
+				pointer-events: none;
+				line-height: 16px;
+				text-indent: -200px;
+			}
+
+			tr {
+				&:first-of-type td {
+					border-top: 1px solid var(--separation-color);
+
+					&:first-of-type {
+						border-top-left-radius: $tableBorderRadius;
+					}
+
+					&:last-of-type {
+						border-top-right-radius: $tableBorderRadius;
+					}
+				}
+
+				&:last-of-type {
+					border-radius: $tableBorderRadius;
+
+					td {
+						border-bottom: 1px solid var(--separation-color);
+					}
+
+					td:first-of-type {
+						border-bottom-left-radius: $tableBorderRadius;
+					}
+
+					td:last-of-type {
+						border-bottom-right-radius: $tableBorderRadius;
+					}
+				}
+			}
+		}
+
+		th {
+			color: var(--table-head-color);
+			font-weight: 500;
+			font-size: 13px;
+			background-color: var(--table-head-background-color);
+		}
+
+		td {
+			font-weight: 400;
+			font-size: 13.5px;
+			background-color: var(--table-body-background-color);
+
+			&:first-of-type {
+				border-left: 1px solid var(--separation-color);
+			}
+
+			&:last-of-type {
+				border-right: 1px solid var(--separation-color);
+			}
+
+			&:nth-of-type(2n) {
+				background-color: var(--table-body-cell-even-background-color);
+			}
+		}
+
+		tr:nth-child(2n) {
+			th {
+				background-color: var(--table-head-even-background-color);
+			}
+
+			td {
+				background-color: var(--table-body-even-background-color);
+
+				&:nth-of-type(2n) {
+					background-color: var(--table-body-cell-even-even-background-color);
+				}
+			}
+		}
+
+		th,
+		td {
+			text-align: left;
+			padding: 11px 16px;
+			min-height: 1ch;
+		}
+	}
+}
+
+@if $compile-table-type == 'simple' {
+	table {
+		width: 100%;
+		border-radius: $tableBorderRadius;
+		border-spacing: 0;
+		border-collapse: separate;
+
+		thead {
+			border-radius: $tableBorderRadius $tableBorderRadius 0 0;
+			z-index: 1;
+
+			tr:first-of-type {
+				border-radius: $tableBorderRadius $tableBorderRadius 0 0;
+
+				th {
+					background-color: var(--table-head-background-color);
+
+					&:first-of-type {
+						border-radius: $tableBorderRadius 0 0 0;
+					}
+
+					&:last-of-type {
+						border-radius: 0 $tableBorderRadius 0 0;
+					}
+				}
+			}
+
+			tr:last-of-type th {
+				&:first-of-type {
+					border-bottom-left-radius: $tableBorderRadius;
+				}
+
+				&:last-of-type {
+					border-bottom-right-radius: $tableBorderRadius;
+				}
+			}
+		}
+
+		tbody {
+			border-radius: 0 0 $tableBorderRadius $tableBorderRadius;
+
+			&::before {
+				content: '@';
+				display: block;
+				line-height: 16px;
+				text-indent: -200px;
+			}
+
+			tr {
+				&:first-of-type td {
+					&:first-of-type {
+						border-radius: $tableBorderRadius 0 0 0;
+					}
+
+					&:last-of-type {
+						border-radius: 0 $tableBorderRadius 0 0;
+					}
+				}
+
+				&:last-of-type {
+					border-radius: $tableBorderRadius;
+
+					td:first-of-type {
+						border-bottom-left-radius: $tableBorderRadius;
+					}
+
+					td:last-of-type {
+						border-bottom-right-radius: $tableBorderRadius;
+					}
+				}
+			}
+		}
+
+		th {
+			color: var(--table-head-color);
+			font-weight: 500;
+			font-size: 14px;
+			background-color: var(--table-head-background-color);
+		}
+
+		td {
+			font-weight: 400;
+			font-size: 13.5px;
+			background-color: var(--table-body-background-color);
+		}
+
+		tr:nth-child(2n) {
+			th {
+				background-color: var(--table-head-even-background-color);
+			}
+
+			td {
+				background-color: var(--table-body-even-background-color);
+			}
+		}
+
+		th,
+		td {
+			text-align: left;
+			padding: 12px 16px;
+			min-height: 1ch;
+		}
+	}
+}
