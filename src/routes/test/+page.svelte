@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
     import { Geolocation } from '@capacitor/geolocation';
     import type { Position } from '@capacitor/geolocation';
 
@@ -26,4 +26,5 @@
     div {
         padding-top: 50px;
     }
-</style>
+</style> -->
+Bunga
