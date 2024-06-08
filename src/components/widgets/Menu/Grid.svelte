@@ -12,8 +12,8 @@
 
 <div class="Grid section-box">
 	{#each items as item}
-		<a href="{ item.link }" class="vertical-flex space centered-content">
-			<i class="fa-solid fa-{item.icon}"></i>
+		<a href="{ item.link }" class="vertical-flex space centered-content" title="{ item.label }">
+			<img src="/icons/{item.icon}.svg" alt="{item.label}" />
 			<span>{ item.label }</span>
 		</a>
 	{/each}
@@ -23,11 +23,15 @@
 	.Grid {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
+		grid-gap: 16px;
+		
+		@include desktop {
+			grid-template-columns: repeat(6, 1fr);
+		}
 
-		a {
-			i {
-				font-size: 32px;
-			}
+		img {
+			height: 50px;
+			width: 50px;
 		}
 	}
 </style>

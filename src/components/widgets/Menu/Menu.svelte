@@ -9,14 +9,14 @@
 </script>
 	
 <script lang="ts">
-	export let menu: MenuSection[];
+	export let navTree: MenuSection[];
 </script>
 
-<div class="vertical-flex space">
-	{#each menu as section }
-		<div class="vertical space">
+<section class="vertical-flex">
+	{#each navTree as section }
+		<div class="vertical small space">
 			<h2>{section.label}</h2>
 			<Grid items="{section.items}" />
 		</div>
 	{/each}
-</div>
+</section>
