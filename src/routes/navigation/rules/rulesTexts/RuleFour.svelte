@@ -1,0 +1,1 @@
+<p>Rules in this Section apply in any condition of visibility.</p>

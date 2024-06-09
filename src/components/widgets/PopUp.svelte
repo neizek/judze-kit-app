@@ -110,6 +110,10 @@
 <slot></slot>
 
 <style lang="scss">
+	.focus-background {
+		display: flex;
+	}
+	
 	.box {
 		will-change: transform;
 		background: #FFF;

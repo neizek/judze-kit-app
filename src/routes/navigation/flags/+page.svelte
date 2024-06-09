@@ -2,6 +2,7 @@
     import { getContext } from "svelte";
     import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
     import { title } from "$lib/meta";
+    import isMobile from "$lib/deviceDetector";
 
 	const flags = [
 		{letter: 'A', name: 'Alpfa', icon: 'A', description: 'I have a diver down; keep well clear at slow speed.'},
@@ -49,7 +50,7 @@
 			createPopup({
 				header: `"${flag}" flag meaning`,
 				content: description,
-				bottomSticked: true
+				bottomSticked: isMobile
 			})
 		}
 	}
@@ -74,6 +75,11 @@
 		grid-template-columns: repeat(3, 1fr);
 		width: 100%;
 		grid-gap: 16px;
+
+		@include after-mobile {
+			grid-template-columns: repeat(6, 1fr);
+			grid-gap: 32px;
+		}
 
 		img {
 			height: 100%;

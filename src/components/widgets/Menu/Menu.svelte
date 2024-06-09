@@ -12,7 +12,7 @@
 	export let navTree: MenuSection[];
 </script>
 
-<section class="vertical-flex">
+<section class="vertical-flex max-width">
 	{#each navTree as section }
 		<div class="vertical small space">
 			<h2>{section.label}</h2>
