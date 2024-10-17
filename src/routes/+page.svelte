@@ -1,5 +1,6 @@
 <script lang="ts">
     import { title } from "$lib/meta";
+    import { getCurrentPosition } from "$lib/position";
     import Menu from "../components/widgets/Menu/Menu.svelte";
 
     const navTree = [
@@ -19,10 +20,17 @@
 				{label: 'Wind', icon: 'wind-rose', link: 'weather/wind'},
 				{label: 'Clouds', icon: 'clouds', link: 'weather/clouds'}
 			]			
+		},
+		{
+			label: 'Celestial',
+			items: [
+				{label: 'Gyro Error', icon: 'wind-rose', link: 'celestial/gyroerror'},
+			]			
 		}
 	]
 
-	title.set('Judze')
+	getCurrentPosition();
+	title.set('Judze');
 </script>
 
 <Menu navTree="{navTree}"/>
