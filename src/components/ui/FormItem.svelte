@@ -41,6 +41,11 @@
 		&:focus-within .errors {
 			display: block;
 		}
+
+		span:not(.label) {
+			display: flex;
+			align-items: end;
+		}
 	}
 
 	.label {

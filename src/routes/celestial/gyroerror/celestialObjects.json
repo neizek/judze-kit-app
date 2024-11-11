@@ -1,0 +1,370 @@
+{
+	"sun": {
+		
+	},
+	"moon": {
+
+	},
+	"planets": [
+		{
+			"value": "jupiter",
+			"label": "Jupiter"
+		},
+		{
+			"value": "mars",
+			"label": "Mars"
+		},
+		{
+			"value": "saturnus",
+			"label": "Saturnus"
+		},		
+		{
+			"value": "venus",
+			"label": "Venus"
+		}
+	],
+	"stars": [
+		{
+			"value": "acamar",
+			"label": "Acamar",
+			"dec2000": -40.31,
+			"ra2000": 2.97111111111111
+		},
+		{
+			"value": "achernar",
+			"label": "Achernar",
+			"ra2000": 1.628611111,
+			"dec2000": -57.24333333
+		},
+		{
+			"value": "acrux",
+			"label": "Acrux",
+			"ra2000": 12.44333333,
+			"dec2000": -63.09166667
+		},
+		{
+			"value": "adhara",
+			"label": "Adhara",
+			"ra2000": 6.9775,
+			"dec2000": -28.97333333
+		},
+		{
+			"value": "aldebaran",
+			"label": "Aldebaran",
+			"ra2000": 4.598888889,
+			"dec2000": 16.50833333
+		},
+		{
+			"value": "alioth",
+			"label": "Alioth",
+			"ra2000": 12.9,
+			"dec2000": 55.95666667
+		},
+		{
+			"value": "alkaid",
+			"label": "Alkaid",
+			"ra2000": 13.79194444,
+			"dec2000": 49.31166667
+		},
+		{
+			"value": "al_nair",
+			"label": "Al Na'ir",
+			"ra2000": 22.13638889,
+			"dec2000": -46.965
+		},
+		{
+			"value": "alnilam",
+			"label": "Alnilam",
+			"ra2000": 5.603611111,
+			"dec2000": -1.195
+		},
+		{
+			"value": "alphard",
+			"label": "Alphard",
+			"ra2000": 9.46,
+			"dec2000": -8.658333333
+		},
+		{
+			"value": "alphecca",
+			"label": "Alphecca",
+			"ra2000": 15.5775,
+			"dec2000": 26.715
+		},
+		{
+			"value": "alpheratz",
+			"label": "Alpheratz",
+			"ra2000": 0.139444444,
+			"dec2000": 29.09166667
+		},
+		{
+			"value": "altair",
+			"label": "Altair",
+			"ra2000": 19.84583333,
+			"dec2000": 8.868333333
+		},
+		{
+			"value": "ankaa",
+			"label": "Ankaa",
+			"ra2000": 0.437777778,
+			"dec2000": -42.31166667
+		},
+		{
+			"value": "antares",
+			"label": "Antares",
+			"ra2000": 16.48944444,
+			"dec2000": -26.42833333
+		},
+		{
+			"value": "arcturus",
+			"label": "Arcturus",
+			"ra2000": 14.26083333,
+			"dec2000": 19.18666667
+		},
+		{
+			"value": "atria",
+			"label": "Atria",
+			"ra2000": 16.80972222,
+			"dec2000": -69.02333333
+		},
+		{
+			"value": "avior",
+			"label": "Avior",
+			"ra2000": 8.375833333,
+			"dec2000": -59.50833333
+		},
+		{
+			"value": "bellatrix",
+			"label": "Bellatrix",
+			"ra2000": 5.418888889,
+			"dec2000": 6.348333333
+		},
+		{
+			"value": "betelgeuse",
+			"label": "Betelgeuse",
+			"ra2000": 5.919722222,
+			"dec2000": 7.405
+		},
+		{
+			"value": "canopus",
+			"label": "Canopus",
+			"ra2000": 6.399722222,
+			"dec2000": -52.69833333
+		},
+		{
+			"value": "capella",
+			"label": "Capella",
+			"ra2000": 5.278333333,
+			"dec2000": 45.99833333
+		},
+		{
+			"value": "deneb",
+			"label": "Deneb",
+			"ra2000": 20.69,
+			"dec2000": 45.28166667
+		},
+		{
+			"value": "denebola",
+			"label": "Denebola",
+			"ra2000": 11.8175,
+			"dec2000": 14.57166667
+		},
+		{
+			"value": "diphda",
+			"label": "Diphda",
+			"ra2000": 0.726111111,
+			"dec2000": -17.99
+		},
+		{
+			"value": "dubhe",
+			"label": "Dubhe",
+			"ra2000": 11.06194444,
+			"dec2000": 61.74666667
+		},
+		{
+			"value": "elnath",
+			"label": "Elnath",
+			"ra2000": 5.438333333,
+			"dec2000": 28.60666667
+		},
+		{
+			"value": "eltanin",
+			"label": "Eltanin",
+			"ra2000": 17.94277778,
+			"dec2000": 51.48833333
+		},
+		{
+			"value": "enif",
+			"label": "Enif",
+			"ra2000": 21.73611111,
+			"dec2000": 9.875
+		},
+		{
+			"value": "formalhaut",
+			"label": "Formalhaut",
+			"ra2000": 22.96027778,
+			"dec2000": -29.62666667
+		},
+		{
+			"value": "gacrux",
+			"label": "Gacrux",
+			"ra2000": 12.51944444,
+			"dec2000": -57.10666667
+		},
+		{
+			"value": "gienah",
+			"label": "Gienah",
+			"ra2000": 12.26333333,
+			"dec2000": -17.53833333
+		},
+		{
+			"value": "hadar",
+			"label": "Hadar",
+			"ra2000": 14.06333333,
+			"dec2000": -60.36666667
+		},
+		{
+			"value": "hamal",
+			"label": "Hamal",
+			"ra2000": 2.119444444,
+			"dec2000": 23.46333333
+		},
+		{
+			"value": "kaus_austr.",
+			"label": "Kaus Austr.",
+			"ra2000": 18.40194444,
+			"dec2000": -34.38333333
+		},
+		{
+			"value": "kochab",
+			"label": "Kochab",
+			"ra2000": 14.84416667,
+			"dec2000": 74.15333333
+		},
+		{
+			"value": "markab",
+			"label": "Markab",
+			"ra2000": 23.07888889,
+			"dec2000": 15.205
+		},
+		{
+			"value": "menkar",
+			"label": "Menkar",
+			"ra2000": 3.038055556,
+			"dec2000": 4.086666667
+		},
+		{
+			"value": "menkent",
+			"label": "Menkent",
+			"ra2000": 14.11111111,
+			"dec2000": -36.365
+		},
+		{
+			"value": "miaplacidus",
+			"label": "Miaplacidus",
+			"ra2000": 9.221111111,
+			"dec2000": -69.71333333
+		},
+		{
+			"value": "mirfak",
+			"label": "Mirfak",
+			"ra2000": 3.405555556,
+			"dec2000": 49.86166667
+		},
+		{
+			"value": "nunki",
+			"label": "Nunki",
+			"ra2000": 18.92027778,
+			"dec2000": -26.295
+		},
+		{
+			"value": "peacock",
+			"label": "Peacock",
+			"ra2000": 20.42638889,
+			"dec2000": -56.73666667
+		},
+		{
+			"value": "pollux",
+			"label": "Pollux",
+			"ra2000": 7.755555556,
+			"dec2000": 28.025
+		},
+		{
+			"value": "procyon",
+			"label": "Procyon",
+			"ra2000": 7.655277778,
+			"dec2000": 5.225
+		},
+		{
+			"value": "rasalhague",
+			"label": "Rasalhague",
+			"ra2000": 17.58166667,
+			"dec2000": 12.56166667
+		},
+		{
+			"value": "regulus",
+			"label": "Regulus",
+			"ra2000": 10.13944444,
+			"dec2000": 11.96666667
+		},
+		{
+			"value": "rigel",
+			"label": "Rigel",
+			"ra2000": 5.2425,
+			"dec2000": -8.205
+		},
+		{
+			"value": "rigil_kent",
+			"label": "Rigil Kent",
+			"ra2000": 14.66027778,
+			"dec2000": -60.83
+		},
+		{
+			"value": "sabik",
+			"label": "Sabik",
+			"ra2000": 17.17222222,
+			"dec2000": -15.72333333
+		},
+		{
+			"value": "schedar",
+			"label": "Schedar",
+			"ra2000": 0.675,
+			"dec2000": 56.54
+		},
+		{
+			"value": "shaula",
+			"label": "Shaula",
+			"ra2000": 17.55944444,
+			"dec2000": -37.10166667
+		},
+		{
+			"value": "sirius",
+			"label": "Sirius",
+			"ra2000": 6.752777778,
+			"dec2000": -16.715
+		},
+		{
+			"value": "spica",
+			"label": "Spica",
+			"ra2000": 13.41972222,
+			"dec2000": -11.15833333
+		},
+		{
+			"value": "suhail",
+			"label": "Suhail",
+			"ra2000": 9.133611111,
+			"dec2000": -43.43
+		},
+		{
+			"value": "vega",
+			"label": "Vega",
+			"ra2000": 18.615,
+			"dec2000": 38.78333333
+		},
+		{
+			"value": "zubenubi",
+			"label": "Zuben'ubi",
+			"ra2000": 14.8475,
+			"dec2000": -16.03833333
+		}
+	]
+}

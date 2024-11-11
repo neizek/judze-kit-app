@@ -26,12 +26,14 @@
 			{#if $page.url.pathname !== '/'}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
-				<i class="fa-solid fa-arrow-left" on:click={() => window.history.back()}/>
+				<span class="material-icons notranslate">chevron_left</span>
+				<!-- <i class="fa-solid fa-arrow-left" on:click={() => window.history.back()}/> -->
 			{/if}
 		</div>
 		<h1>{ $title }</h1>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<i class="fa-solid fa-gear" on:click={openSettings} />
+		<!-- <i class="fa-solid fa-gear" on:click={openSettings} /> -->
+		<span class="material-icons notranslate" on:click={openSettings}>settings</span>
 	</div>
 </header>
 
@@ -45,8 +47,8 @@
 		position: fixed;
 		z-index: 99;
 
-		i {
-			font-size: 24px;
-		}
+		// i {
+		// 	font-size: 24px;
+		// }
 	}
 </style>

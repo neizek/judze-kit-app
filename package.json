@@ -33,6 +33,7 @@
 		"@capacitor/cli": "^6.0.0",
 		"@capacitor/core": "^6.0.0",
 		"@capacitor/geolocation": "^6.0.0",
-		"@capacitor/ios": "^6.0.0"
+		"@capacitor/ios": "^6.0.0",
+		"astronomy-bundle": "^7.7.7"
 	}
 }

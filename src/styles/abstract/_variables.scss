@@ -7,6 +7,7 @@ $c-wetAsphalt: #282d33;
 $c-sky: #1187f5;
 // $c-sky: #0079eb;
 // $c-grass: #0dce57;
+$c-sea: #00b1b9;
 $c-grass: #14b451;
 $c-candy: #c300ff;
 $c-lightRed: #e94545;
@@ -16,7 +17,7 @@ $c-wheatYellow: #fc9803;
 
 // Global
 $primaryColor: $c-sky;
-$secondaryColor: $c-grass;
+$secondaryColor: $c-sea;
 $primaryColorDark: mix($c-sky, $c-wetAsphalt, 80%);
 $secondaryColorDark: darken($c-grass, 10%);
 $errorColor: $c-lightRed;
