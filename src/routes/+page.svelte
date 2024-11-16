@@ -15,17 +15,18 @@
 			]
 		},
 		{
-			label: 'Weather',
+			label: 'Weather & Celestial',
 			items: [
 				{label: 'Wind', icon: 'wind-rose', link: 'weather/wind'},
-				{label: 'Clouds', icon: 'clouds', link: 'weather/clouds'}
+				{label: 'Clouds', icon: 'clouds', link: 'weather/clouds'},
+				{label: 'Gyro Error', icon: 'compass', link: 'celestial/gyroerror'}
 			]			
 		},
 		{
-			label: 'Celestial',
+			label: 'Other',
 			items: [
-				{label: 'Gyro Error', icon: 'wind-rose', link: 'celestial/gyroerror'},
-			]			
+				{label: 'Donations', icon: 'money-with-wings-two', link: 'other/donate'}
+			]
 		}
 	]
 

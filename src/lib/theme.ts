@@ -1,5 +1,6 @@
 import { derived, get, writable, type Writable } from "svelte/store";
 import storage from "./storage";
+import { browser } from "$app/environment";
 
 export const THEME_STORAGE_KEY = 'theme';
 export const DARK_THEME_NAME = 'dark';
@@ -51,7 +52,7 @@ export function getThemeName(t: Theme): string {
 export const theme: Writable<Theme> = writable(getInitialTheme());
 
 function watchPreferredTheme(): void {
-	if (window.matchMedia) {
+	if (browser && window.matchMedia) {
 		window.
 			matchMedia('(prefers-color-scheme: dark)').
 			addEventListener('change', () => {
@@ -68,7 +69,7 @@ function watchPreferredTheme(): void {
 }
 
 function getInitialTheme() {
-	const initTheme = storage.get(THEME_STORAGE_KEY) as string | null;
+	const initTheme = browser ? storage.get(THEME_STORAGE_KEY) as string | null : null;
 
 	if (initTheme !== null) {
 		return initTheme as Theme;
@@ -79,11 +80,13 @@ function getInitialTheme() {
 
 export function initTheme(): void {
 	theme.subscribe(newTheme => {
-		storage.set(THEME_STORAGE_KEY, newTheme);
-		document.documentElement.setAttribute(
-			THEME_ATTRIBUTE,
-			getThemeName(newTheme)
-		);
+		if (browser) {
+			storage.set(THEME_STORAGE_KEY, newTheme);
+			document.documentElement.setAttribute(
+				THEME_ATTRIBUTE,
+				getThemeName(newTheme)
+			);
+		}
 	});
 
 	watchPreferredTheme();
@@ -92,14 +95,17 @@ export function initTheme(): void {
 export const themesItems = [
 	{
 		label: 'Browser',
-		value: Theme.Browser
+		value: Theme.Browser,
+		icon: 'night_sight_auto'
 	},
 	{
 		label: 'Light',
-		value: Theme.Light
+		value: Theme.Light,
+		icon: 'light_mode'
 	},
 	{
 		label: 'Dark',
-		value: Theme.Dark
+		value: Theme.Dark,
+		icon: 'dark_mode'
 	}
 ]

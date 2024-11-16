@@ -1,5 +1,8 @@
 <script lang="ts">
-    import { title } from "$lib/meta";
+    import isMobile from "$lib/deviceDetector";
+import { title } from "$lib/meta";
+    import EqualGrid from "../../../components/ui/EqualGrid.svelte";
+    import Image from "../../../components/ui/Image.svelte";
 
 	$title = 'Clouds'
 
@@ -27,40 +30,27 @@
 				{title: 'Stratus', img: 'stratus', description: ''}	
 			]
 		}
-	]</script>
-<div class="vertical-flex max-width space">
+	]
+</script>
+<section class="vertical-flex max-width">
 	{#each cloudsArray as cloudCategory}
-		<h2>{ cloudCategory.header }</h2>
-		<div class="Clouds section-box equal-flex">
-			{#each cloudCategory.clouds as cloud}
-			<div class="vertical-flex space">
-				<img src="/clouds/{cloud.img}.jpg" alt="{cloud.title}">
-				<span>{cloud.title}</span>
-			</div>
-			{/each}
+		<div class="vertical-flex max-width space">
+			<h2>{ cloudCategory.header }</h2>
+			<EqualGrid --mobileColumnsQty="{3}" --desktopColumnsQty="{3}" class="section-box equal-flex">
+					{#each cloudCategory.clouds as cloud}
+						<div class="vertical-flex space">
+							<Image
+								src="/clouds/{cloud.img}.jpg"
+								alt="{cloud.title}"
+								--height="{isMobile ? `100px` : `250px`}"
+								--width="100%"
+								--object-fit="cover"
+							/>
+							<span>{cloud.title}</span>
+						</div>
+					{/each}
+			</EqualGrid>
 		</div>
 	{/each}
-</div>
-
-<style lang="scss">
-	.Clouds {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		grid-gap: 8px;
-
-		@include after-mobile {
-			grid-gap: 16px;
-		}
-
-		div > img {
-			height: 100px;
-			width: 100%;
-			object-fit: cover;
-
-			@include after-mobile {
-				height: 250px;
-			}
-		}
-	}
-</style>
+</section>
 

@@ -1,8 +1,11 @@
 <script lang="ts">
     import { title } from "$lib/meta";
+    import { initTheme } from "$lib/theme";
     import Footer from "../components/widgets/Footer.svelte";
     import Header from "../components/widgets/Header.svelte";
     import PopUp from "../components/widgets/PopUp.svelte";
+
+	initTheme();
 </script>
 
 <svelte:head>

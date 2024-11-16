@@ -3,25 +3,20 @@
 	export let alt: string;
 
 	let isLoading: boolean = true;
-
-	$: console.log(isLoading)
 </script>
 
-{#if isLoading}
-	<div class="img"></div>
-{:else}
-	<img src="{src}" alt="{alt}" on:load="{() => isLoading = false}"/>
-{/if}
+<img
+	src="{src}"
+	class:placeholder="{isLoading}"
+	alt="{alt}"
+	on:load="{() => isLoading = false}"
+/>
 
 <style lang="scss">
-	:root {
-		--height: 100%;
-		--width: 100%;
-	}
-
-	img,
-	.img {
-		height: var(--height);
-		width: var(--width);
+	img {
+		object-fit: var(--object-fit, 'cover');
+		height: var(--height, '100%');
+		width: var(--width, '100%');
+		aspect-ratio: var(--aspect-ratio, 'auto');
 	}
 </style>

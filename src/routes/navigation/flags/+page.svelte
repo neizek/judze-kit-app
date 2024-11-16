@@ -3,6 +3,8 @@
     import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
     import { title } from "$lib/meta";
     import isMobile from "$lib/deviceDetector";
+    import Image from "../../../components/ui/Image.svelte";
+    import EqualGrid from "../../../components/ui/EqualGrid.svelte";
 
 	const flags = [
 		{letter: 'A', name: 'Alpfa', icon: 'A', description: 'I have a diver down; keep well clear at slow speed.'},
@@ -58,33 +60,24 @@
 	title.set('Flags')
 </script>
 
-<div class="Flags section-box">
+<EqualGrid --mobileColumnsQty="{3}" --desktopColumnsQty="{6}" class="section-box">
 	{#each flags as flag }
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<div class="vertical-flex space" on:click={() => openDescription(flag.name, flag.description)}>
-			<img src="/flagIcons/{flag.icon.toLowerCase()}.svg" alt="{flag.letter}" />
+		<div
+			class="vertical-flex space"
+			on:click={() => openDescription(flag.name, flag.description)}
+		>
+			<Image
+				src="/flagIcons/{flag.icon.toLowerCase()}.svg"
+				alt="{flag.letter}"
+				--height="100%"
+				--width="100%"
+				--aspect-ratio="1/1"
+				--object-fit="contain"
+			/>
 			<span>{flag.letter} - {flag.name}</span>
 		</div>
 	{/each}
-</div>
-
-<style lang="scss">
-	.Flags {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		width: 100%;
-		grid-gap: 16px;
-
-		@include after-mobile {
-			grid-template-columns: repeat(6, 1fr);
-			grid-gap: 32px;
-		}
-
-		img {
-			height: 100%;
-			width: 100%;
-		}
-	}
-</style>
+</EqualGrid>
 

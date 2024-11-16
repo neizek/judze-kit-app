@@ -1,3 +1,5 @@
+import { browser } from "$app/environment";
+
 export interface StorageItem<T> {
 	value: T;
 	/**
@@ -50,7 +52,7 @@ class AppStorage {
 	}
 
 	public remove(key: string): void {
-		localStorage.removeItem(key);
+		if (browser) localStorage.removeItem(key);
 	}
 }
 

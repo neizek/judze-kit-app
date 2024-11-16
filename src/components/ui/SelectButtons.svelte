@@ -19,7 +19,7 @@
 	});
 
 </script>
-<div class="line-blocks">
+<div class="line-blocks space">
 	{#each items as item, index}
 		<div
 			on:click={() => chooseItem(index)}

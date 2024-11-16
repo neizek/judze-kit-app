@@ -93,7 +93,8 @@
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<span class="opacity-transition" on:click={() => popUp.id ? closePopUp(popUp.id) : null}>
-					<i class="fa-solid fa-xmark"></i>
+					<!-- <i class="fa-solid fa-xmark"></i> -->
+					<span class="material-icons">close</span>
 				</span>
 			</header>
 			<article class="hide-scroll">
@@ -116,7 +117,7 @@
 	
 	.box {
 		will-change: transform;
-		background: #FFF;
+		background: var(--box-background-color);
 
 		article {
 			padding: 0px;

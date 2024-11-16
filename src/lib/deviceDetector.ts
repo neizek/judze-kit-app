@@ -19,6 +19,7 @@ const isMobile: boolean = (() => {
 })();
 
 export function isFirefox(): boolean {
+	if (!browser) return false;
 	return navigator.userAgent.indexOf('Firefox') > 0;
 }
 

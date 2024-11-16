@@ -7,31 +7,17 @@
 </script>
 
 <script lang="ts">
+    import EqualGrid from "../../ui/EqualGrid.svelte";
+    import Image from "../../ui/Image.svelte";
+
 	export let items: MenuItem[];
 </script>
 
-<div class="Grid section-box">
+<EqualGrid --mobileColumnsQty="{4}" --desktopColumnsQty="{6}" class="section-box">
 	{#each items as item}
 		<a href="{ item.link }" class="vertical-flex space centered-content" title="{ item.label }">
-			<img src="/icons/{item.icon}.svg" alt="{item.label}" />
+			<Image src="/icons/{item.icon}.svg" alt="{item.label}" --height="50px" --width="50px"/>
 			<span>{ item.label }</span>
 		</a>
 	{/each}
-</div>
-
-<style lang="scss">
-	.Grid {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		grid-gap: 16px;
-		
-		@include desktop {
-			grid-template-columns: repeat(6, 1fr);
-		}
-
-		img {
-			height: 50px;
-			width: 50px;
-		}
-	}
-</style>
+</EqualGrid>

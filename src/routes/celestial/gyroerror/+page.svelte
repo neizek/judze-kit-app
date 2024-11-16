@@ -6,6 +6,7 @@
     import Select from "../../../components/ui/Select/Select.svelte";
     import SelectButtons from "../../../components/ui/SelectButtons.svelte";
 	import celestialObjects from "./celestialObjects.json";
+    import isMobile from "$lib/deviceDetector";
 
 	let object: string;
 	let givenDateTime: Date = new Date(2024, 9, 29, 16, 30, 30);
@@ -19,8 +20,7 @@
 	let GB: number;
 	let variation: number;
 	let MC: number;
-	let givenStar: string | undefined;
-	let givenPlanet: string | undefined;
+	let givenStarOrPlanet: string | undefined;
 
 	$: TC = GC && azimuth && GB ? (GC - (azimuth - GB)) : undefined;
 
@@ -346,21 +346,32 @@
 		}
 	}
 
-	function getPlanetData(time: number, planet?: string) {
-		const date = dateToExcelSerial(givenDateTime);
-		const esun = 0.093405 + 0.000000002516 * (time + 1.5);
+	// function getVenusData(time: number) {
+	// 	const date = dateToExcelSerial(givenDateTime);
 
-		const N = toRadians(49.5574 + 0.0000211081 * (time + 1.5));
-		const i = toRadians(1.8497 - 0.0000000178 * (time + 1.5));
-		const w = toRadians(286.5016 + 0.0000292961 * (time + 1.5));
-		const a = 1.523688;
-		// const e = mod((23.4393 - 0.0000003563 * time), 360);
-		const e = 0.093405 + 0.000000002516 * (time + 1.5);
-		const M = mod(toRadians(18.6021 + 0.5240207766 * (time + 1.5)), (2 * Math.PI));
+	// 	const N = toRadians(76.6799 + 0.000024659 * (time + 1.5));
+	// 	const i = toRadians(3.3946 + 0.0000000275 * (time + 1.5));
+	// 	const w = toRadians(54.891 + 0.0000138374 * (time + 1.5));
+	// 	const a = 0.72333;
+	// 	const e = 0.006773 - 0.000000001302 * (time + 1.5);
+	// 	const M = mod(toRadians(48.0052 + 1.6021302244 * (time + 1.5)), (2 * Math.PI));
+
+	// }
+
+	function calculatePlanetData(
+		time: number,
+		N: number,
+		i: number,
+		w: number,
+		e: number,
+		a: number,
+		M: number,
+		loncorr: number
+	) {
 		const E = M + e * Math.sin(M) * (1 + e * Math.cos(M));
 
-		const xv = a * (Math.cos(E) - esun);
-		const yv = a * (Math.sqrt(1 - esun * esun) * Math.sin(E));
+		const xv = a * (Math.cos(E) - e);
+		const yv = a * (Math.sqrt(1 - e * e) * Math.sin(E));
 		const v = (() => {
 			let v;
 
@@ -382,8 +393,6 @@
 		const xh = r * (Math.cos(N) * Math.cos(v + w) - Math.sin(N) * Math.sin(v + w) * Math.cos(i));
 		const yh = r * (Math.sin(N) * Math.cos(v + w) + Math.cos(N) * Math.sin(v + w) * Math.cos(i));
 		const zh = r * (Math.sin(v + w) * Math.sin(i))
-
-		const loncorr = 0.0000382394 * (365.2422 * ((2000 - (36526 - date) / 365) - 2000) - (time + 1.5));
 
 		const lonecl = (() => {
 			let lonecl;
@@ -483,6 +492,61 @@
 		}
 	}
 
+	function getPlanetData(time: number, planet?: string) {
+		const date = dateToExcelSerial(givenDateTime);
+		let N: number = 0;
+		let i: number = 0;
+		let w: number = 0;
+		let a: number = 0;
+		let e: number = 0;
+		let M: number = 0;
+		let loncorr: number = 0;
+		
+		switch (planet) {
+			case 'mars': 
+				N = toRadians(49.5574 + 0.0000211081 * (time + 1.5));
+				i = toRadians(1.8497 - 0.0000000178 * (time + 1.5));
+				w = toRadians(286.5016 + 0.0000292961 * (time + 1.5));
+				a = 1.523688;
+				e = 0.093405 + 0.000000002516 * (time + 1.5);
+				M = mod(toRadians(18.6021 + 0.5240207766 * (time + 1.5)), (2 * Math.PI));
+				loncorr = 0.0000382394 * (365.2422 * ((2000 - (36526 - date) / 365) - 2000) - (time + 1.5));
+			break;
+
+			case 'venus': 
+				N = toRadians(76.6799 + 0.000024659 * (time + 1.5));
+				i = toRadians(3.3946 + 0.0000000275 * (time + 1.5));
+				w = toRadians(54.891 + 0.0000138374 * (time + 1.5));
+				a = 0.72333;
+				e = 0.006773 - 0.000000001302 * (time + 1.5);
+				M = mod(toRadians(48.0052 + 1.6021302244 * (time + 1.5)), (2 * Math.PI));
+				loncorr = 0.0000382394 * (365.2422 * ((2000 - (36526 - date) / 365) - 2000) - (time + 1.5));
+			break;
+
+			case 'jupiter':
+				N = toRadians(100.4542 + 0.0000276854 * (time + 1.5));
+				i = toRadians(1.303 - 0.0000001557 * (time + 1.5));
+				w = toRadians(273.8777 + 0.0000164505 * (time + 1.5));
+				a = 5.20256;
+				e = 0.048498 + 0.000000004469 * (time + 1.5);
+				M = mod(toRadians(19.895 + 0.0830853001 * (time + 1.5)), (2 * Math.PI));
+				loncorr = 0.0000382394 * (365.2422 * ((2000 - (36526 - date) / 365) - 2000) - (time + 1.5));
+			break;
+
+			case 'saturnus':
+				N = toRadians(113.6634 + 0.000023898 * (time + 1.5));
+				i = toRadians(2.4886 - 0.0000001081 * (time + 1.5));
+				w = toRadians(339.3939 + 0.0000297661 * (time + 1.5));
+				a = 9.55475;
+				e = 0.055546 - 0.000000009499 * (time + 1.5);
+				M = mod(toRadians(316.967 + 0.0334442282 * (time + 1.5)), (2 * Math.PI));
+				loncorr = 0.0000382394 * (365.2422 * ((2000 - (36526 - date) / 365) - 2000) - (time + 1.5));
+			break;
+		}
+		
+		return calculatePlanetData(time, N, i, w, e, a, M, loncorr);
+	}
+
 	function performCalculations() {
 		const date = dateToExcelSerial(givenDateTime);
 		const hours = givenDateTime.getHours();
@@ -503,9 +567,9 @@
 				case 'moon':
 					return getMoonData(time);
 				case 'stars':
-					return getStarData(time, givenStar);
+					return getStarData(time, givenStarOrPlanet);
 				case 'planets':
-					return getPlanetData(time, givenPlanet);
+					return getPlanetData(time, givenStarOrPlanet);
 			}
 		})();
 
@@ -520,10 +584,10 @@
 			Azimuth: ${objectData.azimuth.toFixed(3)}
 		`)
 
-		azimuth = Number(objectData.azimuth.toFixed(1));
-		LHA = Number(objectData.LHA.toFixed(2));
-		declination = Number(objectData.declination.toFixed(2));
-		GHA = Number(objectData.GHA.toFixed(2));
+		azimuth = Number(objectData.azimuth);
+		LHA = Number(objectData.LHA);
+		declination = Number(objectData.declination);
+		GHA = Number(objectData.GHA);
 	}
 
 	onMount(() => {
@@ -545,104 +609,111 @@
 			}
 		})();
 		number = number > 0 ? number : -number;
-		return `${Math.trunc(number)}°${((number - Math.trunc(number)) * 60).toFixed(1)} ${sign}`;
+		return `${Math.trunc(number)}°${((number - Math.floor(number)) * 60).toFixed(1)} ${sign}`;
 	}
 </script>
-
-<div class="max-width equal-flex space">
-	<div class="section-box vertical-flex space">
+<section class="vertical-flex max-width">
+	<!-- <div class="max-width {isMobile ? `vertical-flex` : `equal-flex`} space"> -->
+	<div class="vertical-flex max-width space">
 		<h2>General data</h2>
-		<FormItem label="Choose object">
-			<SelectButtons
-				items="{solarSystemObjects}"
-				bind:selectedItem={object}
-			/>
-		</FormItem>
-		{#key object}			
-			{#if object === 'planets' || object === 'stars'}
-				<Select items="{celestialObjects[object]}" bind:value="{givenStar}"></Select>
-			{/if}
-		{/key}
-		<FormItem label="UTC Time">
-			<Input type="text" bind:value="{givenDateTime}" />
-		</FormItem>
-		<FormItem label="Longitude">
-			<Input type="number" bind:value="{longitude}" />
-		</FormItem>
-		<FormItem label="Latitude">
-			<Input type="number" bind:value="{latitude}" />
-		</FormItem>
-		<h2>Ship's heading</h2>
-		<FormItem label="True course">
-			{#if GC && azimuth && GB}
-				<span>{(GC - (azimuth - GB)).toFixed(1)}&#176;</span>
-			{:else}
-				<span>-</span>
-			{/if}
-		</FormItem>
-		<FormItem label="Gyro course">
-			<Input type="number" bind:value="{GC}" />
-		</FormItem>
-		<FormItem label="Standard course">
-			<Input type="number" bind:value="{MC}" />
-		</FormItem>
+		<div class="section-box vertical-flex space">
+			<FormItem label="Choose object">
+				<SelectButtons
+					items="{solarSystemObjects}"
+					bind:selectedItem={object}
+				/>
+			</FormItem>
+			{#key object}			
+				{#if object === 'planets' || object === 'stars'}
+					<Select items="{celestialObjects[object]}" bind:value="{givenStarOrPlanet}"></Select>
+				{/if}
+			{/key}
+			<FormItem label="UTC Time">
+				<Input type="text" bind:value="{givenDateTime}" />
+			</FormItem>
+			<FormItem label="Longitude">
+				<Input type="number" bind:value="{longitude}" />
+			</FormItem>
+			<FormItem label="Latitude">
+				<Input type="number" bind:value="{latitude}" />
+			</FormItem>
+			<h2>Ship's heading</h2>
+			<FormItem label="True course">
+				{#if GC && azimuth && GB}
+					<span>{(GC - (azimuth - GB)).toFixed(1)}&#176;</span>
+				{:else}
+					<span>-</span>
+				{/if}
+			</FormItem>
+			<FormItem label="Gyro course">
+				<Input type="number" bind:value="{GC}" />
+			</FormItem>
+			<FormItem label="Standard course">
+				<Input type="number" bind:value="{MC}" />
+			</FormItem>
+		</div>
 	</div>
-	<div class="section-box vertical-flex space">
+	<div class="vertical-flex max-width space">
 		<h2>Object's bearing</h2>
-		<FormItem label="True">
-			<span>{azimuth}&#176;</span>
-		</FormItem>
-		<FormItem label="Gyro">
-			<Input type="number" bind:value="{GB}"/>
-		</FormItem>
-		<FormItem label="Standard">
-			{#if MC && TC && azimuth}
-				<span>{(azimuth + (MC - TC)).toFixed(1)}&#176;</span>
-			{:else}
-				<span>-</span>
-			{/if}
-		</FormItem>
-		<h2>Corrections</h2>
-		<FormItem label="Gyro Error">
-			{#if azimuth && GB}
-				<span>{(azimuth - GB).toFixed(1)}&#176;</span>
-			{:else}
-				<span>-</span>
-			{/if}
-		</FormItem>
-		<FormItem label="Standard">
-			{#if MC && TC && azimuth}
-				<span>{(MC - TC).toFixed(1)}&#176;</span>
-			{:else}
-				<span>-</span>
-			{/if}
-		</FormItem>
-		<FormItem label="Variation">
-			<Input type="number" bind:value="{variation}" />
-		</FormItem>
-		<FormItem label="Deviation">
-			{#if TC && MC && variation}
-				<span>{(MC - TC - variation).toFixed(1)}&#176;</span>
-			{:else}
-				<span>-</span>
-			{/if}
-			<!-- <span>{deviation.toFixed(1)}&#176;</span> -->
-		</FormItem>
-		<Button type="secondary" label="Calculate" on:click={performCalculations} />
+		<div class="section-box vertical-flex space">
+			<FormItem label="True">
+				<span>{azimuth}&#176;</span>
+			</FormItem>
+			<FormItem label="Gyro">
+				<Input type="number" bind:value="{GB}"/>
+			</FormItem>
+			<FormItem label="Standard">
+				{#if MC && TC && azimuth}
+					<span>{(azimuth + (MC - TC)).toFixed(1)}&#176;</span>
+				{:else}
+					<span>-</span>
+				{/if}
+			</FormItem>
+			<h2>Corrections</h2>
+			<FormItem label="Gyro Error">
+				{#if azimuth && GB}
+					<span>{(azimuth - GB).toFixed(1)}&#176;</span>
+				{:else}
+					<span>-</span>
+				{/if}
+			</FormItem>
+			<FormItem label="Standard">
+				{#if MC && TC && azimuth}
+					<span>{(MC - TC).toFixed(1)}&#176;</span>
+				{:else}
+					<span>-</span>
+				{/if}
+			</FormItem>
+			<FormItem label="Variation">
+				<Input type="number" bind:value="{variation}" />
+			</FormItem>
+			<FormItem label="Deviation">
+				{#if TC && MC && variation}
+					<span>{(MC - TC - variation).toFixed(1)}&#176;</span>
+				{:else}
+					<span>-</span>
+				{/if}
+				<!-- <span>{deviation.toFixed(1)}&#176;</span> -->
+			</FormItem>
+			<Button type="secondary" label="Calculate" on:click={performCalculations} />
+		</div>
 	</div>
-	<div class="section-box vertical-flex space">
+	<div class="vertical-flex max-width space">
 		<h2>Calculated data</h2>
-		<FormItem label="GHA">
-			<span>{transformToCoordinates(GHA)}</span>
-		</FormItem>
-		<FormItem label="LHA">
-			<span>{transformToCoordinates(LHA)}</span>
-		</FormItem>
-		<FormItem label="Declination">
-			<span>{transformToCoordinates(declination, 'y')}</span>
-		</FormItem>
-		<FormItem label="Azimuth">
-			<span>{azimuth}&#176;</span>
-		</FormItem>
+		<div class="section-box vertical-flex space">
+			<FormItem label="GHA">
+				<span>{transformToCoordinates(GHA)}</span>
+			</FormItem>
+			<FormItem label="LHA">
+				<span>{transformToCoordinates(LHA)}</span>
+			</FormItem>
+			<FormItem label="Declination">
+				<span>{transformToCoordinates(declination, 'y')}</span>
+			</FormItem>
+			<FormItem label="Azimuth">
+				<span>{Number(azimuth).toFixed(1)}&#176;</span>
+			</FormItem>
+		</div>
 	</div>
-</div>
+	<!-- </div> -->
+</section>
