@@ -1,5 +1,5 @@
 <script lang="ts">
-    import isMobile from "$lib/deviceDetector";
+    import isMobile, { isMobileScreen } from "$lib/deviceDetector";
 	import { title } from "$lib/meta";
     import EqualGrid from "../../../components/ui/EqualGrid.svelte";
     import Image from "../../../components/ui/Image.svelte";
@@ -36,7 +36,7 @@
 		}
 	]
 </script>
-<section class="vertical-flex max-width">
+<section class="{isMobileScreen ? `vertical-flex` : `equal-flex`} max-width">
 	{#each signalsArray as signalCategory}
 		<div class="vertical-flex max-width space">
 			<h2>{ signalCategory.header }</h2>

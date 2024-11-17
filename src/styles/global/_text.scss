@@ -8,6 +8,10 @@
 		--error-font-color: #{$errorFontColorDark};
 	}
 
+	@include after-mobile {
+		--default-font-size: 14px;
+	}
+
 	font-size: var(--default-font-size);
 }
 
@@ -37,6 +41,10 @@ h3 {
 
 .bold {
 	font-weight: 400;
+}
+
+p {
+	text-align: justify;
 }
 
 .link {

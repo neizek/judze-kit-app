@@ -3,6 +3,7 @@
 import { title } from "$lib/meta";
     import EqualGrid from "../../../components/ui/EqualGrid.svelte";
     import Image from "../../../components/ui/Image.svelte";
+    import Section from "../../../components/ui/Section.svelte";
 
 	$title = 'Clouds'
 
@@ -34,9 +35,8 @@ import { title } from "$lib/meta";
 </script>
 <section class="vertical-flex max-width">
 	{#each cloudsArray as cloudCategory}
-		<div class="vertical-flex max-width space">
-			<h2>{ cloudCategory.header }</h2>
-			<EqualGrid --mobileColumnsQty="{3}" --desktopColumnsQty="{3}" class="section-box equal-flex">
+		<Section title="{cloudCategory.header}">
+			<EqualGrid --mobileColumnsQty="{3}" --desktopColumnsQty="{3}">
 					{#each cloudCategory.clouds as cloud}
 						<div class="vertical-flex space">
 							<Image
@@ -45,12 +45,13 @@ import { title } from "$lib/meta";
 								--height="{isMobile ? `100px` : `250px`}"
 								--width="100%"
 								--object-fit="cover"
+								--border-radius="5px"
 							/>
 							<span>{cloud.title}</span>
 						</div>
 					{/each}
 			</EqualGrid>
-		</div>
+		</Section>
 	{/each}
 </section>
 

@@ -6,7 +6,7 @@
     import Select from "../../../components/ui/Select/Select.svelte";
     import SelectButtons from "../../../components/ui/SelectButtons.svelte";
 	import celestialObjects from "./celestialObjects.json";
-    import isMobile from "$lib/deviceDetector";
+    import isMobile, { isMobileScreen } from "$lib/deviceDetector";
 
 	let object: string;
 	let givenDateTime: Date = new Date(2024, 9, 29, 16, 30, 30);
@@ -612,7 +612,7 @@
 		return `${Math.trunc(number)}°${((number - Math.floor(number)) * 60).toFixed(1)} ${sign}`;
 	}
 </script>
-<section class="vertical-flex max-width">
+<section class="Celestial {isMobileScreen ? `vertical-flex` : `equal-flex`} max-width">
 	<!-- <div class="max-width {isMobile ? `vertical-flex` : `equal-flex`} space"> -->
 	<div class="vertical-flex max-width space">
 		<h2>General data</h2>
@@ -637,20 +637,24 @@
 			<FormItem label="Latitude">
 				<Input type="number" bind:value="{latitude}" />
 			</FormItem>
+		</div>
+		<div class="vertical-flex max-width space">
 			<h2>Ship's heading</h2>
-			<FormItem label="True course">
-				{#if GC && azimuth && GB}
-					<span>{(GC - (azimuth - GB)).toFixed(1)}&#176;</span>
-				{:else}
-					<span>-</span>
-				{/if}
-			</FormItem>
-			<FormItem label="Gyro course">
-				<Input type="number" bind:value="{GC}" />
-			</FormItem>
-			<FormItem label="Standard course">
-				<Input type="number" bind:value="{MC}" />
-			</FormItem>
+			<div class="section-box vertical-flex space">
+				<FormItem label="True course">
+					{#if GC && azimuth && GB}
+						<span>{(GC - (azimuth - GB)).toFixed(1)}&#176;</span>
+					{:else}
+						<span>-</span>
+					{/if}
+				</FormItem>
+				<FormItem label="Gyro course">
+					<Input type="number" bind:value="{GC}" />
+				</FormItem>
+				<FormItem label="Standard course">
+					<Input type="number" bind:value="{MC}" />
+				</FormItem>
+			</div>
 		</div>
 	</div>
 	<div class="vertical-flex max-width space">
@@ -669,33 +673,37 @@
 					<span>-</span>
 				{/if}
 			</FormItem>
+		</div>
+		<div class="vertical-flex max-width space">
 			<h2>Corrections</h2>
-			<FormItem label="Gyro Error">
-				{#if azimuth && GB}
-					<span>{(azimuth - GB).toFixed(1)}&#176;</span>
-				{:else}
-					<span>-</span>
-				{/if}
-			</FormItem>
-			<FormItem label="Standard">
-				{#if MC && TC && azimuth}
-					<span>{(MC - TC).toFixed(1)}&#176;</span>
-				{:else}
-					<span>-</span>
-				{/if}
-			</FormItem>
-			<FormItem label="Variation">
-				<Input type="number" bind:value="{variation}" />
-			</FormItem>
-			<FormItem label="Deviation">
-				{#if TC && MC && variation}
-					<span>{(MC - TC - variation).toFixed(1)}&#176;</span>
-				{:else}
-					<span>-</span>
-				{/if}
-				<!-- <span>{deviation.toFixed(1)}&#176;</span> -->
-			</FormItem>
-			<Button type="secondary" label="Calculate" on:click={performCalculations} />
+			<div class="section-box vertical-flex space">
+				<FormItem label="Gyro Error">
+					{#if azimuth && GB}
+						<span>{(azimuth - GB).toFixed(1)}&#176;</span>
+					{:else}
+						<span>-</span>
+					{/if}
+				</FormItem>
+				<FormItem label="Standard">
+					{#if MC && TC && azimuth}
+						<span>{(MC - TC).toFixed(1)}&#176;</span>
+					{:else}
+						<span>-</span>
+					{/if}
+				</FormItem>
+				<FormItem label="Variation">
+					<Input type="number" bind:value="{variation}" />
+				</FormItem>
+				<FormItem label="Deviation">
+					{#if TC && MC && variation}
+						<span>{(MC - TC - variation).toFixed(1)}&#176;</span>
+					{:else}
+						<span>-</span>
+					{/if}
+					<!-- <span>{deviation.toFixed(1)}&#176;</span> -->
+				</FormItem>
+				<!-- <Button type="secondary" label="Calculate" on:click={performCalculations} /> -->
+			</div>
 		</div>
 	</div>
 	<div class="vertical-flex max-width space">
@@ -717,3 +725,16 @@
 	</div>
 	<!-- </div> -->
 </section>
+
+<!-- <style lang="scss">
+	@include after-mobile {
+		.Celestial {
+			display: flex;
+			flex-direction: row;
+
+			> div {
+				flex: 1;
+			}
+		}
+	}
+</style> -->

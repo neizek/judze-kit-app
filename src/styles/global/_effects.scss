@@ -1,0 +1,11 @@
+.opacity-transition {
+	@include desktop {
+		opacity: 0.7;
+		transition: opacity .2s ease;
+		cursor: pointer;
+	
+		&:hover {
+			opacity: 1;
+		}
+	}
+}

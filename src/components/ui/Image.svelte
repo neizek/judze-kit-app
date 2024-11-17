@@ -18,5 +18,6 @@
 		height: var(--height, '100%');
 		width: var(--width, '100%');
 		aspect-ratio: var(--aspect-ratio, 'auto');
+		border-radius: var(--border-radius, '0');
 	}
 </style>

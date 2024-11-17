@@ -37,10 +37,16 @@ main {
 
 section {
 	display: flex;
-	flex-direction: column;
 	gap: 16px;
 	border-radius: #{$sectionBorderRadius};
+	
+	&-column {
+		flex-direction: column;
+	}
 
+	@include after-mobile {
+		gap: 32px;
+	}
 }
 
 .section-box {
@@ -191,6 +197,10 @@ section {
 		&.small {
 			gap: 5px;
 		}
+	}
+
+	&.big {
+		gap: 16px;
 	}
 
 	&.compact:not(.vertical) {
