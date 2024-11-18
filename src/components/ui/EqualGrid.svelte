@@ -11,7 +11,7 @@
 
 		@include after-mobile {
 			grid-template-columns: repeat(var(--desktopColumnsQty, 6), 1fr);
-			grid-gap: 32px;
+			grid-gap: 24px;
 		}
 	}
 </style>

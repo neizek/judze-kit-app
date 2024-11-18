@@ -14,6 +14,7 @@
 
 <style lang="scss">
 	img {
+		font-size: 0;
 		object-fit: var(--object-fit, 'cover');
 		height: var(--height, '100%');
 		width: var(--width, '100%');

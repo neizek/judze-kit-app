@@ -6,7 +6,7 @@
     import SelectButtons from "../ui/SelectButtons.svelte";
 
 </script>
-<div class="vertical-flex space wrapper w400">
+<div class="Settings vertical-flex space">
 	<FormItem label="Color theme">
 		<SelectButtons
 			items="{themesItems}"
@@ -14,3 +14,11 @@
 		/>
 	</FormItem>
 </div>
+
+<style lang="scss">
+	@include after-mobile {
+		.Settings {
+			min-width: 300px;
+		}
+	}
+</style>

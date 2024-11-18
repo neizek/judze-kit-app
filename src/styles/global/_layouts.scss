@@ -52,7 +52,7 @@ section {
 .section-box {
 	border-radius: #{$sectionBorderRadius};
 	background-color: var(--box-background-color);
-	padding: 20px;
+	padding: 24px;
 
 	&.bordered {
 		border: 1px solid var(--box-border-color);
