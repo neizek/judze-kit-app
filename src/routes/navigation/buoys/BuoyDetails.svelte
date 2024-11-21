@@ -6,7 +6,7 @@
 
 <div class="horizontal-layout space big">
 	<Image
-		src="/buoys/{buoy.image}.png"
+		src="/buoys/{buoy.image}"
 		alt="{buoy.title}"
 		--width="100px"
 		--height="100px"

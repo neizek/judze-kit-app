@@ -1,18 +1,24 @@
 <script lang="ts">
+    import { isMobileScreen } from "$lib/deviceDetector";
     import { title } from "$lib/meta";
+    import { getContext } from "svelte";
+    import Button from "../../../components/ui/Button.svelte";
     import EqualGrid from "../../../components/ui/EqualGrid.svelte";
     import Section from "../../../components/ui/Section.svelte";
+    import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
+    import WindCalculator from "./WindCalculator.svelte";
     import WindCard from "./WindCard.svelte";
 
 	title.set('Wind')
 
 	const windTable = [
 		{
+			id: 0,
 			header: 'Beaufort scale',
 			steps: [
-				{number: 0, description: 'Calm', windSpeed: '< 1 kn', waveHeight: '0m', seaState: '0', image: 'bf-0', seaConditions: 'Sea like a mirror'},
-				{number: 1, description: 'Light air', windSpeed: '1–3 kn', waveHeight: '0 – 0.3m', seaState: '1', image: 'bf-1', seaConditions: 'Ripples with appearance of scales are formed, without foam crests'},
-				{number: 2, description: 'Light breeze', windSpeed: '4–6 kn', waveHeight: '0.3 – 0.6m', seaState: '2', image: 'bf-2', seaConditions: 'Small wavelets still short but more pronounced; crests have a glassy appearance but do not break'},
+				{number: 0, description: 'Calm', windSpeed: '< 1 kn', waveHeight: '0 m', seaState: '0', image: 'bf-0', seaConditions: 'Sea like a mirror'},
+				{number: 1, description: 'Light air', windSpeed: '1–3 kn', waveHeight: '0 – 0.3 m', seaState: '1', image: 'bf-1', seaConditions: 'Ripples with appearance of scales are formed, without foam crests'},
+				{number: 2, description: 'Light breeze', windSpeed: '4–6 kn', waveHeight: '0.3 – 0.6 m', seaState: '2', image: 'bf-2', seaConditions: 'Small wavelets still short but more pronounced; crests have a glassy appearance but do not break'},
 				{number: 3, description: 'Gentle breeze', windSpeed: '7–10 kn', waveHeight: '0.6–1.2 m', seaState: '3', image: 'bf-3', seaConditions: 'Large wavelets; crests begin to break; foam of glassy appearance; perhaps scattered white horses '},
 				{number: 4, description: 'Moderate breeze', windSpeed: '11–16 kn', waveHeight: '1–2 m', seaState: '3-4', image: 'bf-4', seaConditions: 'Small waves becoming longer; fairly frequent white horses'},
 				{number: 5, description: 'Fresh breeze', windSpeed: '17–21 kn', waveHeight: '2–3 m', seaState: '4', image: 'bf-5', seaConditions: 'Moderate waves taking a more pronounced long form; many white horses are formed; chance of some spray'},
@@ -21,18 +27,68 @@
 				{number: 8, description: 'Gale', windSpeed: '34–40 kn', waveHeight: '5.5–7.5 m', seaState: '6-7', image: 'bf-8', seaConditions: 'Moderately high waves of greater length; edges of crests break into spindrift; foam is blown in well-marked streaks along the direction of the wind '},
 				{number: 9, description: 'Strong gale', windSpeed: '41–47 kn', waveHeight: '7–10 m', seaState: '7', image: 'bf-9', seaConditions: 'High waves; dense streaks of foam along the direction of the wind; sea begins to roll; spray affects visibility '},
 				{number: 10, description: 'Storm', windSpeed: '48–55 kn', waveHeight: '9–12.5 m', seaState: '8', image: 'bf-10', seaConditions: 'Very high waves with long overhanging crests; resulting foam in great patches is blown in dense white streaks along the direction of the wind; on the whole the surface of the sea takes on a white appearance; rolling of the sea becomes heavy; visibility affected '},
-				{number: 11, description: 'Violent storm', windSpeed: '56–63 kn', waveHeight: '11.5–16 m', seaState: '8', image: 'bf-11', seaConditions: 'Exceptionally high waves; small- and medium-sized ships might be for a long time lost to view behind the waves; sea is covered with long white patches of foam; everywhere the edges of the wave crests are blown into foam; visibility affected '},
+				{number: 11, description: 'Violent storm', windSpeed: '56–63 kn', waveHeight: '11.5–16 m', seaState: '8', image: 'bf-11', seaConditions: 'Exceptionally high waves; small- and medium-sized ships might be for a long time lost to view behind the waves; sea is covered with long white patches of foam; everywhere the edges of the wave crests are blown into foam; visibility affected'},
 				{number: 12, description: 'Hurricane', windSpeed: '≥ 64 kn', waveHeight: '≥ 14 m', seaState: '9', image: 'bf-12', seaConditions: 'The air is filled with foam and spray; sea is completely white with driving spray; visibility very seriously affected '},					
+			]
+		},
+		{
+			id: 1,
+			header: 'Douglas scale',
+			steps: [
+				{number: 0, description: 'Glassy', waveHeight: '0 m', image: 'bf-0', seaConditions: 'Sea like a mirror'},
+				{number: 1, description: 'Rippled', waveHeight: '0 – 0.1 m', image: 'bf-1', seaConditions: 'Ripples with appearance of scales are formed, without foam crests'},
+				{number: 2, description: 'Smooth', waveHeight: '0.1 – 0.5 m', image: 'bf-2', seaConditions: 'Small wavelets still short but more pronounced; crests have a glassy appearance but do not break'},
+				{number: 3, description: 'Slight', waveHeight: '0.5–1.25 m', image: 'bf-3', seaConditions: 'Large wavelets; crests begin to break; foam of glassy appearance; perhaps scattered white horses '},
+				{number: 4, description: 'Moderate', waveHeight: '1.25–2.5 m', image: 'bf-5', seaConditions: 'Moderate waves taking a more pronounced long form; many white horses are formed; chance of some spray'},
+				{number: 5, description: 'Rough', waveHeight: '2.5–4 m', image: 'bf-8', seaConditions: 'Moderately high waves of greater length; edges of crests break into spindrift; foam is blown in well-marked streaks along the direction of the wind'},
+				{number: 6, description: 'Very rough', waveHeight: '4–6 m', image: 'bf-9', seaConditions: 'High waves; dense streaks of foam along the direction of the wind; sea begins to roll; spray affects visibility'},
+				{number: 7, description: 'High', waveHeight: '6–9 m', image: 'bf-10', seaConditions: 'Very high waves with long overhanging crests. The resulting foam, in great patches, is blown in dense white streaks along the direction of the wind. On the whole the surface of the sea takes on a white appearance. The tumbling of the sea becomes heavy and shock-like. Visibility affected.'},
+				{number: 8, description: 'Very high', waveHeight: '9–14 m', image: 'bf-11', seaConditions: 'Exceptionally high waves (small and medium-size ships might be for a time lost to view behind the waves). The sea is completely covered with long white patches of foam lying along the direction of the wind. Everywhere the edges of the wave crests are blown into froth. Visibility affected.'},
+				{number: 9, description: 'Phenomenal', waveHeight: '> 14 m', image: 'bf-12', seaConditions: 'Huge waves. Sea is completely white with foam and spray. Air is filled with driving spray, greately reducing visibility.'},				
 			]
 		}
 	]
+
+	let activeSection: number = 0;
+	$: windTableType = windTable.find(object => object.id === activeSection);
+	if (!windTableType) windTableType = windTable[0];
+
+	const createPopup: CreatePopup = getContext('createPopup');
+
+	function createCalculator() {
+		createPopup({
+			header: "True Wind Calculator",
+			content: {
+				component: WindCalculator,
+			},
+			bottomSticked: isMobileScreen
+		})
+	}
 </script>
-{#each windTable as windTableType}
+
+<div class="vertical-flex right space">
+	<div class="line-blocks space" style="align-self: end;">
+		<Button
+			type="{activeSection === 0 ? `primary` : `transparent`}"
+			label="Beaufort scale"
+			on:click="{() => activeSection = 0}"
+		/>
+		<Button
+			type="{activeSection === 1 ? `primary` : `transparent`}"
+			label="Douglas scale"
+			on:click="{() => activeSection = 1}"
+		/>
+		<Button
+			type="transparent"
+			label="Wind calculator"
+			on:click="{createCalculator}"
+		/>
+	</div>
 	<Section title="{windTableType.header}">
 		<EqualGrid --desktopColumnsQty="{3}" --mobileColumnsQty{1}>
 			{#each windTableType.steps as step}
-				<WindCard windStep="{step}" />
+				<WindCard windStep="{step}" isBf="{windTableType.id === 0}"/>
 			{/each}
 		</EqualGrid>
 	</Section>
-{/each}
+</div>

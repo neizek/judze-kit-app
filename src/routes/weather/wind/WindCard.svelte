@@ -3,6 +3,7 @@
     import Image from "../../../components/ui/Image.svelte";
 
 	export let windStep;
+	export let isBf: boolean;
 	let showDetails: boolean = false;
 </script>
 
@@ -17,18 +18,22 @@
 		--object-fit="cover"
 	/>
 	<div class="header space-between space max-width">
-		<h3>BF {windStep.number}</h3>
+		<h3>{isBf ? 'BF ': ''}{windStep.number}</h3>
 		<div class="vertical-flex" style="text-align: right;">
 			<h3>{windStep.description}</h3>
-			<span>{windStep.windSpeed}</span>
+			{#if windStep.windSpeed}
+				<span>{windStep.windSpeed}</span>
+			{/if}
 		</div>
 	</div>
 	{#if showDetails && windStep.seaConditions}
 		<div class="description vertical-flex space" transition:fly="{{ y: 200, duration: 200}}">
-			<div class="space-between">
-				<span>State: {windStep.seaState}</span>
-				<span>Waves: {windStep.waveHeight}</span>
-			</div>
+			{#if windStep.seaState && windStep.seaState}
+				<div class="space-between">
+					<span>State: {windStep.seaState}</span>
+					<span>Waves: {windStep.waveHeight}</span>
+				</div>
+			{/if}
 			<p>{windStep.seaConditions}</p>
 		</div>
 	{/if}
