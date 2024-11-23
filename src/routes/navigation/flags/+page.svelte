@@ -122,7 +122,7 @@
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<!-- svelte-ignore a11y-no-static-element-interactions -->
 					<div
-						class="vertical-flex space opacity-transition"
+						class="vertical-flex space"
 						on:click={() => openDescription(flag)}
 					>
 						<Image

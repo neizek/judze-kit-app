@@ -20,5 +20,6 @@
 		width: var(--width, '100%');
 		aspect-ratio: var(--aspect-ratio, 'auto');
 		border-radius: var(--border-radius, '0');
+		background-color: var(--background-color, 'transparent');
 	}
 </style>

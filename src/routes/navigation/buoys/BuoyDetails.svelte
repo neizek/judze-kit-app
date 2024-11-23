@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
     import Image from "../../../components/ui/Image.svelte";
 
 	export let buoy;
@@ -11,6 +11,7 @@
 		--width="100px"
 		--height="100px"
 		--border-radius="5px"
+		--background-color="#ffffff"
 	/>
 	<p>{buoy.description}</p>
-</div>
+</div> -->

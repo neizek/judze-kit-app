@@ -10,6 +10,7 @@
 				{label: 'Flags', icon: 'flag', link: 'navigation/flags'},
 				{label: 'Sound Signals', icon: 'speaker', link: 'navigation/soundsignals'},
 				{label: 'Lights', icon: 'lighthouse', link: 'navigation/lights'},
+				{label: 'Shapes', icon: 'shapes', link: 'navigation/shapes'},
 				{label: 'Buoys', icon: 'buoy', link: 'navigation/buoys'},
 				{label: 'Rules', icon: 'books', link: 'navigation/rules'}
 			]
