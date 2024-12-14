@@ -1,14 +1,25 @@
 <script lang="ts">
+    import { browser } from "$app/environment";
+    import { onMount } from "svelte";
+
 	export let src: string;
 	export let alt: string;
 
 	let isLoading: boolean = true;
+	let imageRef: HTMLImageElement;
+
+	onMount(() => {
+		if (imageRef.complete) {
+			isLoading = false;
+		}
+	});	
 </script>
 
 <img
 	src="{src}"
 	class:placeholder="{isLoading}"
 	alt="{alt}"
+	bind:this="{imageRef}"
 	on:load="{() => isLoading = false}"
 />
 

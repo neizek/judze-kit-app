@@ -8,6 +8,8 @@
     import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
     import WindCalculator from "./WindCalculator.svelte";
     import WindCard from "./WindCard.svelte";
+    import Image from "../../../components/ui/Image.svelte";
+    import DetailsCard from "../../../components/ui/DetailsCard.svelte";
 
 	title.set('Wind')
 
@@ -64,9 +66,39 @@
 			bottomSticked: isMobileScreen
 		})
 	}
+
+	function openDescription(step: any) {
+		createPopup({
+			header: step.description,
+			content: {
+				component: DetailsCard,
+				props: {
+					image: {
+						src: `/wind/${step.image}.jpg`,
+						alt: step.description
+					},
+					details: [
+						{
+							tag: 'p',
+							text: step.seaConditions
+						},
+						{
+							tag: 'span',
+							text: `Waves: ${step.waveHeight}`
+						},
+						{
+							tag: 'span',
+							text: `Wind: ${step.windSpeed}`
+						}
+					]
+				}
+			},
+			bottomSticked: isMobileScreen
+		});
+	}
 </script>
 
-<div class="vertical-flex right space">
+<div class="vertical-flex right space max-width">
 	<div class="line-blocks space" style="align-self: end;">
 		<Button
 			type="{activeSection === 0 ? `primary` : `transparent`}"
@@ -85,9 +117,22 @@
 		/>
 	</div>
 	<Section title="{windTableType.header}">
-		<EqualGrid --desktopColumnsQty="{3}" --mobileColumnsQty{1}>
+		<EqualGrid --desktopColumnsQty="{4}" --mobileColumnsQty="{2}">
 			{#each windTableType.steps as step}
-				<WindCard windStep="{step}" isBf="{windTableType.id === 0}"/>
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div class="vertical-flex space" role="button" tabindex="0" on:click="{() => openDescription(step)}">
+					<Image
+						src="/wind/{step.image}.jpg"
+						alt="{step.description}"
+						--width="100%"
+						--aspect-ratio="1/1"
+						--object-fit="contain"
+						--border-radius="5px"
+						--background-color="#ffffff"
+					/>
+					<span>{step.number} - {step.description}</span>
+				</div>
+				<!-- <WindCard windStep="{step}" isBf="{windTableType.id === 0}"/> -->
 			{/each}
 		</EqualGrid>
 	</Section>

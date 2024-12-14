@@ -23,6 +23,10 @@
 	.Content {
 		display: flex;
 		flex: 1;
-		margin-top: 82px;
+		margin-top: 66px;
+
+		@include after-mobile {
+			margin-top: 82px;
+		}
 	}
 </style>

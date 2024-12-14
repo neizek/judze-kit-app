@@ -46,7 +46,7 @@ import Image from "../../../components/ui/Image.svelte";
 	}
 </script>
 
-<Section>
+<Section title="Navigational shapes">
 	<EqualGrid --desktopColumnsQty="{4}" --mobileColumnsQty="{2}">
 		{#each shapes as shape}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->

@@ -52,10 +52,14 @@ section {
 .section-box {
 	border-radius: #{$sectionBorderRadius};
 	background-color: var(--box-background-color);
-	padding: 24px;
+	padding: 16px;
 
 	&.bordered {
 		border: 1px solid var(--box-border-color);
+	}
+
+	@include after-mobile {
+		padding: 24px;
 	}
 }
 
