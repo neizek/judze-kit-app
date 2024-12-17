@@ -5,6 +5,7 @@
     import type { CreatePopup } from "./PopUp.svelte";
     import Settings from "./Settings.svelte";
     import isMobile from "$lib/deviceDetector";
+    import { theme } from "$lib/theme";
 
 	const createPopup: CreatePopup = getContext('createPopup');
 
@@ -21,16 +22,24 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <header>
-	<div class="line-blocks space wrapper w1000">
-		<div class="equal-flex">
-			{#if $page.url.pathname !== '/'}
+	<div class="space-between space wrapper w1000">
+		{#if $page.url.pathname !== '/'}
+			<div class="equal-flex">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<span class="material-icons notranslate" on:click={() => window.history.back()}>chevron_left</span>
 				<!-- <i class="fa-solid fa-arrow-left" on:click={() => window.history.back()}/> -->
-			{/if}
-		</div>
-		<h1 class="max-width">{ $title }</h1>
+			</div>
+		{/if}
+		{#if $page.url.pathname === '/'}
+			<img
+				src="/judze-logo-letters{$theme === 'light' ? '' : '-white'}.svg"
+				alt="Judze logo letters"
+				style="height: 100%; padding: 14px;"
+			/>
+		{:else}
+			<h1 class="max-width">{ $title }</h1>
+		{/if}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- <i class="fa-solid fa-gear" on:click={openSettings} /> -->
 		<span class="material-icons filled notranslate" on:click={openSettings}>settings</span>
