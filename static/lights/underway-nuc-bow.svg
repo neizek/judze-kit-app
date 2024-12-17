@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:url(#SVGID_00000051352650196542847730000016042773712906408374_);}
+	.st2{fill:#ED1C24;}
+	.st3{fill:#1CA500;}
+	.st4{fill:none;}
+</style>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="249.6" y1="-2" x2="249.6" y2="498" gradientTransform="matrix(1 0 0 1 0 2)">
+	<stop  offset="0" style="stop-color:#262262"/>
+	<stop  offset="0.1758" style="stop-color:#1D1752"/>
+	<stop  offset="0.4535" style="stop-color:#0C003B"/>
+	<stop  offset="0.6935" style="stop-color:#000029"/>
+	<stop  offset="0.8835" style="stop-color:#00001A"/>
+	<stop  offset="1" style="stop-color:#000013"/>
+</linearGradient>
+<rect x="-0.8" class="st0" width="500.8" height="500"/>
+<linearGradient id="SVGID_00000035516784995130524990000007598053335670022058_" gradientUnits="userSpaceOnUse" x1="919.2" y1="115.6" x2="919.2" y2="115.6" gradientTransform="matrix(1 0 0 1 0 2)">
+	<stop  offset="0" style="stop-color:#262262"/>
+	<stop  offset="0.1758" style="stop-color:#1D1752"/>
+	<stop  offset="0.4535" style="stop-color:#0C003B"/>
+	<stop  offset="0.6935" style="stop-color:#000029"/>
+	<stop  offset="0.8835" style="stop-color:#00001A"/>
+	<stop  offset="1" style="stop-color:#000013"/>
+</linearGradient>
+<path style="fill:url(#SVGID_00000035516784995130524990000007598053335670022058_);" d="M919.2,117.6"/>
+<rect y="388" width="500" height="112"/>
+<circle class="st2" cx="306.3" cy="340.2" r="20.8"/>
+<circle class="st3" cx="193.3" cy="340.2" r="20.8"/>
+<path d="M307.9,336.5h-5.7v-16.9h-6.8v-46.1h6.8v-20.2h-47.7V117.6h-8.8v135.8H198v20.2h6.8v46.1H198v16.9h-5.7H192h-25.3
+	c0,0,7.3,66.6,25.3,67.4v0.1h116.1c18.2,0,25.6-67.5,25.6-67.5h-25.8V336.5z"/>
+<ellipse transform="matrix(0.1602 -0.9871 0.9871 0.1602 46.6902 385.6777)" class="st2" cx="250" cy="165.4" rx="20.8" ry="20.8"/>
+<circle class="st4" cx="250" cy="57.1" r="20.8"/>
+<circle class="st4" cx="250" cy="273.6" r="20.8"/>
+<ellipse transform="matrix(0.1602 -0.9871 0.9871 0.1602 100.1903 340.1596)" class="st2" cx="250" cy="111.2" rx="20.8" ry="20.8"/>
+<ellipse transform="matrix(0.1602 -0.9871 0.9871 0.1602 -6.7113 431.1118)" class="st4" cx="250" cy="219.5" rx="20.8" ry="20.8"/>
+</svg>

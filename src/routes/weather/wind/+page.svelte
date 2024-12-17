@@ -57,15 +57,15 @@
 
 	const createPopup: CreatePopup = getContext('createPopup');
 
-	function createCalculator() {
-		createPopup({
-			header: "True Wind Calculator",
-			content: {
-				component: WindCalculator,
-			},
-			bottomSticked: isMobileScreen
-		})
-	}
+	// function createCalculator() {
+	// 	createPopup({
+	// 		header: "True Wind Calculator",
+	// 		content: {
+	// 			component: WindCalculator,
+	// 		},
+	// 		bottomSticked: isMobileScreen
+	// 	})
+	// }
 
 	function openDescription(step: any) {
 		createPopup({
@@ -110,11 +110,11 @@
 			label="Douglas scale"
 			on:click="{() => activeSection = 1}"
 		/>
-		<Button
+		<!-- <Button
 			type="transparent"
 			label="Wind calculator"
 			on:click="{createCalculator}"
-		/>
+		/> -->
 	</div>
 	<Section title="{windTableType.header}">
 		<EqualGrid --desktopColumnsQty="{4}" --mobileColumnsQty="{2}">

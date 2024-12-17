@@ -35,7 +35,7 @@
 			<img
 				src="/judze-logo-letters{$theme === 'light' ? '' : '-white'}.svg"
 				alt="Judze logo letters"
-				style="height: 100%; padding: 14px;"
+				style="height: 100%; padding: 14px 0;"
 			/>
 		{:else}
 			<h1 class="max-width">{ $title }</h1>

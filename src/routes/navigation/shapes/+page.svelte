@@ -6,6 +6,7 @@ import Image from "../../../components/ui/Image.svelte";
     import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
     import DetailsCard from "../../../components/ui/DetailsCard.svelte";
     import { isMobileScreen } from "$lib/deviceDetector";
+    import { title } from "$lib/meta";
 
 	const shapes = [
 		{title: 'Anchored', image: 'anchored', description: 'A vessel at anchor shows a single ball.'},
@@ -44,6 +45,8 @@ import Image from "../../../components/ui/Image.svelte";
 			bottomSticked: isMobileScreen
 		});
 	}
+
+	title.set('Navigational shapes');
 </script>
 
 <Section title="Navigational shapes">

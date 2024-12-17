@@ -7,6 +7,7 @@
     import { isMobileScreen } from "$lib/deviceDetector";
     import BuoyDetails from "./BuoyDetails.svelte";
     import DetailsCard from "../../../components/ui/DetailsCard.svelte";
+    import { title } from "$lib/meta";
 	const buoysArray = [
 		{
 			header: 'Lateral marks',
@@ -58,6 +59,8 @@
 			bottomSticked: isMobileScreen
 		});
 	}
+
+	title.set('Buoys')
 </script>
 <section class="vertical-flex max-width">
 	{#each buoysArray as buoysCategory}

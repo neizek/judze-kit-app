@@ -30,6 +30,8 @@
 
 <style lang="scss">
 	button {
+		white-space: nowrap;
+		
 		@include mobile {
 			width: 100%;
 		}
