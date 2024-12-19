@@ -78,7 +78,7 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
-		class="{popUp.bottomSticked ? `bottom` : `regular`} focus-background"
+		class="Popup focus-background"
 		transition:fade="{{ duration: 200}}"
 		on:click|self={() => closePopUp(popUp.id)}
 	>
@@ -124,7 +124,48 @@
 		}
 	}
 
-	.regular {
+	// .regular {
+	// 		justify-content: center;
+	// 		align-items: center;
+	
+	// 		.box {
+	// 			padding: 20px;
+	// 			max-width: 90%;
+	// 			max-height: 70vh;
+	// 			border-radius: 8px;
+	
+	// 			@include desktop {
+	// 				max-width: 40%;
+	// 			}
+	
+	// 			@include mobile {
+	// 				width: 90vw;
+	// 			}
+	// 		}
+	// 	}
+
+	// .bottom {
+	// 		.box {
+	// 			width: 100%;
+	// 			left: 0;
+	// 			right: 0;
+	// 			bottom: 0;
+	// 			border-radius: 10px 10px 0 0;
+	// 			padding: 20px 20px calc(20px + env(safe-area-inset-bottom)) 20px;
+	// 			position: fixed;
+	// 			box-shadow: 0 0 20px 1px #0000001a;
+	// 			max-height: 70lvh;
+	// 			overflow: hidden;
+
+	// 			article {
+	// 				overflow-y: scroll;
+	// 				overflow-x: hidden;
+	// 			}
+	// 		}
+	// 	}
+	
+	.Popup {
+		@include after-mobile {
 			justify-content: center;
 			align-items: center;
 	
@@ -144,7 +185,7 @@
 			}
 		}
 
-	.bottom {
+		@include mobile {
 			.box {
 				width: 100%;
 				left: 0;
@@ -163,5 +204,6 @@
 				}
 			}
 		}
+	}
 
 </style>

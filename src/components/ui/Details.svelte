@@ -1,35 +1,53 @@
 <script lang="ts">
+    import { fade, slide } from "svelte/transition";
+
 	export let header: string;
 </script>
 
 <details>
 	<summary class="space-between">
 		<h3>{ header }</h3>
-		<i class="fa-solid fa-chevron-left"></i>
+		<span class="material-icons notranslate">chevron_right</span>
 	</summary>
-	<article><slot></slot></article>
+	<article in:fade="{{duration: 200}}"><slot></slot></article>
 </details>
 
 <style lang="scss">
-	summary::marker {
-		content: '';
-	}
+	details {
+		cursor: pointer;
 
-	article {
-		border-left: 2px solid $c-sky;
-		padding: 10px;
-		margin-top: 10px;
+		&[open] > summary {
+			background-color: var(--button-background-color-hover);
+			
+			> span.material-icons {
+				transform: rotate(90deg);
+			}	
+		}
 
-		@include after-mobile {
-			padding: 20px;
+		summary {
+			height: 32px;
+			border-radius: 5px;
+
+			&:hover {
+				background-color: var(--button-background-color-hover);
+			}
+
+			h3 {
+				padding-left: 8px;
+			}
+
+			&::marker {
+				content: '';
+			}
+
+			> span.material-icons {
+				transition: transform .3s ease-in-out;
+			}
+		}
+
+		article {
+			padding: 10px;
 		}
 	}
 
-	summary > i {
-		transition: transform .2s ease-in-out;
-	}
-
-	details[open] > summary > i {
-		transform: rotate(-90deg);
-	}
 </style>

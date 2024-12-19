@@ -22,7 +22,7 @@
 
 h1 {
 	font-size: 24px;
-	font-weight: 300;
+	font-weight: 400;
 
 	@include mobile {
 		font-size: 20px;
@@ -31,7 +31,7 @@ h1 {
 
 h2 {
 	font-size: 20px;
-	font-weight: 300;
+	font-weight: 400;
 }
 
 h3 {
@@ -45,6 +45,15 @@ h3 {
 
 p {
 	text-align: justify;
+	line-height: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+ul {
+	list-style: none;
+	padding-left: 2rem;
+	line-height: 1.5rem;
+	margin: 1rem 0;
 }
 
 .link {

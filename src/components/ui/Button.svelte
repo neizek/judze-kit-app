@@ -31,7 +31,8 @@
 <style lang="scss">
 	button {
 		white-space: nowrap;
-		
+		justify-content: center;
+
 		@include mobile {
 			width: 100%;
 		}

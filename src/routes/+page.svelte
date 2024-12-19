@@ -23,12 +23,12 @@
 				{label: 'Gyro Error', icon: 'compass', link: 'celestial/gyroerror'}
 			]			
 		},
-		{
-			label: 'Other',
-			items: [
-				{label: 'Donations', icon: 'money-with-wings-two', link: 'other/donate'}
-			]
-		}
+		// {
+		// 	label: 'Other',
+		// 	items: [
+		// 		{label: 'Donations', icon: 'money-with-wings-two', link: 'other/donate'}
+		// 	]
+		// }
 	]
 
 	getCurrentPosition();

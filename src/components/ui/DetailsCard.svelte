@@ -6,7 +6,7 @@
 	export let details;
 </script>
 
-<div class="horizontal-layout space big">
+<div class="Card horizontal-layout space big">
 	<Image
 		src="{image.src}"
 		alt="{image.alt}"
@@ -23,3 +23,11 @@
 		{/each}
 	</div>
 </div>
+
+<style lang="scss">
+	.Card {
+		@include after-mobile {
+			width: 400px;
+		}
+	}
+</style>

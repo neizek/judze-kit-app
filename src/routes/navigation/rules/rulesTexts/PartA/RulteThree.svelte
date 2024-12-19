@@ -1,0 +1,24 @@
+<p class="bold">(A amended paragraph (a) and a new paragraph (m) shall enter into force on 29 November 2003, as amended by Resolution A.919(22))</p>
+<p>For the purpose of these Rules, except where the context otherwise requires:</p>
+<p>(a) The word 'vessel includes every description of water craft, including non-displacement craft, WIG craft and seaplanes, used or capable of being used as a means of transportation on water'.</p>
+<p>(b) The term 'power-driven vessel' means any vessel propelled by machinery.</p>
+<p>(c) The term 'sailing vessel' means any vessel under sail provided that propelling machinery, if fitted, is not being used.</p>
+<p>(d) The term 'vessel engaged in fishing' means any vessel fishing with nets, lines, trawls or other fishing apparatus which restrict manoeuvrability, but does not include a vessel fishing with trolling lines or other fishing apparatus which do not restrict manoeuvrability.</p>
+<p>(e) The word 'seaplane' includes any aircraft designed to manoeuvre on the water.</p>
+<p>(f) The term  'vessel not under command' means a vessel which through some exceptional circumstance is unable to manoeuvre as required by these Rules and is therefore unable to keep out of the way of another vessel.</p>
+<p>(g) The term 'vessel restricted in her ability to manoeuvre' means a vessel which from the nature of her work is restricted in her ability to manoeuvre as required by these Rules and therefore is unable to keep out of the way of another vessel.</p>
+<p>The term 'vessels restricted in their ability to manoeuvre' shall include but not be limited to:</p>
+<ul>
+	<li>(i)	a vessel engaged in laying, servicing or picking up a navigation mark, submarine cable or pipeline;</li>
+	<li>(ii) a vessel engaged in dredging, surveying or underwater operations;</li>
+	<li>(iii) a vessel engaged in replenishment or transferring persons, provisions or cargo while underway;</li>
+	<li>(iv) a vessel engaged in the launching or recovery of aircraft;</li>
+	<li>(v)	a vessel engaged in mineclearance operations;</li>
+	<li>(vi) a vessel engaged in a towing operation such as severely restricts the towing vessel and her tow in their ability to deviate from their course.</li>
+</ul>
+<p>(h) The term 'vessel constrained by her draught' means a power-driven vessel which because of her draught in relation to the available depth and width of navigable water, is severely restricted in her ability to deviate from the course she is following.</p>
+<p>(i) The word 'underway' means that a vessel is not at anchor, or made fast to the shore, or aground.</p>
+<p>(j) The words 'length' and 'breadth' of a vessel mean her length overall and greatest breadth.</p>
+<p>(k) Vessels shall be deemed to be in sight of one another only when one can be observed visually from the other.</p>
+<p>(l) The term 'restricted visibility' means any condition in which visibility is restricted by fog, mist, falling snow, heavy rainstorms, sandstorms or any other similar causes.</p>
+<p>(m) The term 'Wing-In-Ground (WIG) craft' means a multimodal craft which, in its main operational mode, flies in close proximity to the surface by utilizing surface-effect action.</p>
