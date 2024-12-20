@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+    import { popUpsQuantity } from '$lib/popupCounter';
     import type { AnyObject } from '$lib/types';
 
 	interface PopUpComponent {
@@ -22,7 +23,6 @@
 </script>
 
 <script lang="ts">
-    // import { popUpsQuantity } from 'Utils/general/popupCounter';
 	import { setContext, type ComponentType } from 'svelte';
     import { writable, type Writable } from 'svelte/store';
 	import { 
@@ -59,12 +59,12 @@
 			count += 1;
 			return newArray;
 		});
-		// $popUpsQuantity++;
+		$popUpsQuantity++;
 	}
 
 	export const closePopUp = (id: number) => {
 		popUps.update(current => current.filter((popup) => popup.id !== id));
-		// $popUpsQuantity--;
+		$popUpsQuantity--;
 	}
 
 	setContext('createPopup', createPopup);

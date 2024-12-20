@@ -36,7 +36,7 @@
 		}
 	]
 </script>
-<section class="{isMobileScreen ? `vertical-flex` : `equal-flex`} max-width">
+<section class="equal-flex mobile max-width">
 	{#each signalsArray as signalCategory}
 		<div class="vertical-flex max-width space">
 			<h2>{ signalCategory.header }</h2>

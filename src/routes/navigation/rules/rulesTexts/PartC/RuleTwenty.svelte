@@ -1,0 +1,5 @@
+<p>(a) Rules in this Part shall be complied with in all weathers.</p>
+<p>(b) The Rules concerning lights shall be complied with from sunset to sunrise, and during such times no other lights shall be exhibited, except such lights as cannot be mistaken for the lights specified in these Rules or do not impair their visibility or distinctive character, or interfere with the keeping of a proper look-out.</p>
+<p>(c) The lights prescribed by these Rules shall, if carried, also be exhibited from sunrise to sunset in restricted visibility and may be exhibited in all other circumstances when it is deemed necessary.</p>
+<p>(d) The Rules concerning shapes shall be complied with by day.</p>
+<p>(e) The lights and shapes specified in these Rules shall comply with the provisions of Annex I to these Regulations.</p>

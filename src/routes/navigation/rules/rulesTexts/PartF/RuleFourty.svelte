@@ -1,0 +1,1 @@
+<p>Contracting Parties shall use the provisions of the Code for Implementation in the execution of their obligations and responsibilities contained in the present Convention.</p>

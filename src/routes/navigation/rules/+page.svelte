@@ -21,10 +21,33 @@
     import RulteThree from "./rulesTexts/PartA/RulteThree.svelte";
     import RuleEighteen from "./rulesTexts/PartB/RuleEighteen.svelte";
     import RuleNineteen from "./rulesTexts/PartB/RuleNineteen.svelte";
+    import RuleTwenty from "./rulesTexts/PartC/RuleTwenty.svelte";
+    import RuleTwentyOne from "./rulesTexts/PartC/RuleTwentyOne.svelte";
+    import RuleTwentyTwo from "./rulesTexts/PartC/RuleTwentyTwo.svelte";
+    import RulteTwentyThree from "./rulesTexts/PartC/RuleTwentyThree.svelte";
+    import RuleTwentyFour from "./rulesTexts/PartC/RuleTwentyFour.svelte";
+    import RuleTwentyThree from "./rulesTexts/PartC/RuleTwentyThree.svelte";
+    import RuleTwentyFive from "./rulesTexts/PartC/RuleTwentyFive.svelte";
+    import RuleTwentySix from "./rulesTexts/PartC/RuleTwentySix.svelte";
+    import RuleTwentySeven from "./rulesTexts/PartC/RuleTwentySeven.svelte";
+    import RuleTwentyEight from "./rulesTexts/PartC/RuleTwentyEight.svelte";
+    import RuleTwentyNine from "./rulesTexts/PartC/RuleTwentyNine.svelte";
+    import RuleThirty from "./rulesTexts/PartC/RuleThirty.svelte";
+    import RuleFourtyOne from "./rulesTexts/PartF/RuleFourtyOne.svelte";
+    import RuleFourty from "./rulesTexts/PartF/RuleFourty.svelte";
+    import RuleThirtyNine from "./rulesTexts/PartF/RuleThirtyNine.svelte";
+    import RuleThirtyEight from "./rulesTexts/PartE/RuleThirtyEight.svelte";
+    import RuleThirtyThree from "./rulesTexts/PartD/RuleThirtyThree.svelte";
+    import RuleThirtyTwo from "./rulesTexts/PartD/RuleThirtyTwo.svelte";
+    import RuleThirtyFour from "./rulesTexts/PartD/RuleThirtyFour.svelte";
+    import RuleThirtyFive from "./rulesTexts/PartD/RuleThirtyFive.svelte";
+    import RuleThirtySix from "./rulesTexts/PartD/RuleThirtySix.svelte";
+    import RuleThirtySeven from "./rulesTexts/PartD/RuleThirtySeven.svelte";
+    import RuleThirtyOne from "./rulesTexts/PartC/RuleThirtyOne.svelte";
 
 	title.set('Rules')
 </script>
-<div class="vertical-flex space max-width">
+<div class="vertical-flex space big max-width">
 	<Section title="Part A - General">
 		<Details header="Rule 1 - Application">
 			<RuleOne />
@@ -87,6 +110,80 @@
 		<h3 class="subheader">Section III - In Restricted Visibility</h3>
 		<Details header="Rule 19 - Conduct in Restricted Visibility">
 			<RuleNineteen />
+		</Details>
+	</Section>
+	<Section title="Part C - Lights & Shapes">
+		<Details header="Rule 20 - Application">
+			<RuleTwenty />
+		</Details>
+		<Details header="Rule 21 - Definitions">
+			<RuleTwentyOne />
+		</Details>
+		<Details header="Rule 22 - Visibility of Lights">
+			<RuleTwentyTwo />
+		</Details>
+		<Details header="Rule 23 - Power-driven Vessels underway">
+			<RuleTwentyThree />
+		</Details>
+		<Details header="Rule 24 - Towing and Pushing">
+			<RuleTwentyFour />
+		</Details>
+		<Details header="Rule 25 - Sailing Vessels underway and Vessels under Oars">
+			<RuleTwentyFive />
+		</Details>
+		<Details header="Rule 26 - Fishing Vessels">
+			<RuleTwentySix />
+		</Details>
+		<Details header="Rule 27 - Vessels not under Command or Restricted in their Ability to Manoeuvre">
+			<RuleTwentySeven />
+		</Details>
+		<Details header="Rule 28 - Vessel constrained by their draught">
+			<RuleTwentyEight />
+		</Details>
+		<Details header="Rule 29 - Pilot Vessels">
+			<RuleTwentyNine />
+		</Details>
+		<Details header="Rule 30 - Anchored Vessels and Vessels aground">
+			<RuleThirty />
+		</Details>
+		<Details header="Rule 31 - Seaplanes">
+			<RuleThirtyOne />
+		</Details>
+	</Section>
+	<Section title="Part D - Sound and Light Signals">
+		<Details header="Rule 32 - Definitions">
+			<RuleThirtyTwo />
+		</Details>
+		<Details header="Rule 33 - Equipment for Sound">
+			<RuleThirtyThree />
+		</Details>
+		<Details header="Rule 34 - Manoeuvring and warning">
+			<RuleThirtyFour />
+		</Details>
+		<Details header="Rule 35 - Restricted Visibility">
+			<RuleThirtyFive />
+		</Details>
+		<Details header="Rule 36 - Signals to Attract Attention">
+			<RuleThirtySix />
+		</Details>
+		<Details header="Rule 37 - Distress Signals">
+			<RuleThirtySeven />
+		</Details>
+	</Section>
+	<Section title="Part E - Exemptions">
+		<Details header="Rule 38 - Exemptions">
+			<RuleThirtyEight />
+		</Details>
+	</Section>
+	<Section title="Part F - Verification of compliance with the provisions of the Convention">
+		<Details header="Rule 39 - Definitions">
+			<RuleThirtyNine />
+ 		</Details>
+		<Details header="Rule 40 - Application">
+			<RuleFourty />
+		</Details>
+		<Details header="Rule 41 - Verification of Compliance">
+			<RuleFourtyOne />
 		</Details>
 	</Section>
 </div>

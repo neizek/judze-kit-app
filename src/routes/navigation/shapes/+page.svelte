@@ -46,7 +46,7 @@ import Image from "../../../components/ui/Image.svelte";
 		});
 	}
 
-	title.set('Navigational shapes');
+	title.set('Shapes');
 </script>
 
 <Section title="Navigational shapes">

@@ -54,6 +54,10 @@ ul {
 	padding-left: 2rem;
 	line-height: 1.5rem;
 	margin: 1rem 0;
+
+	li:not(:last-child) {
+		margin-bottom: 0.5rem;
+	}
 }
 
 .link {

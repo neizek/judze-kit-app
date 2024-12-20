@@ -117,7 +117,7 @@ import Section from "../../../components/ui/Section.svelte";
 		}
 	]
 
-	title.set('Navigational lights')
+	title.set('Lights')
 </script>
 <section class="vertical-flex max-width">
 	{#each lights as lightscategory}

@@ -25,15 +25,11 @@
 		}
 
 		summary {
-			height: 32px;
+			padding: 6px 0 6px 8px;
 			border-radius: 5px;
 
 			&:hover {
 				background-color: var(--button-background-color-hover);
-			}
-
-			h3 {
-				padding-left: 8px;
 			}
 
 			&::marker {

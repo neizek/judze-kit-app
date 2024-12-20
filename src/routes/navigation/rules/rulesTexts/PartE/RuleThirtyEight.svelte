@@ -1,0 +1,11 @@
+<p>Any vessel (or class of vessels) provided that she complies with the requirements of the International Regulations for Preventing Collisions at Sea, 1960, the keel of which is laid or which is at a corresponding stage of construction before the entry into force of these Regulations may be exempted from compliance therewith as follows:</p>
+<p>(a) The installation of lights with ranges prescribed in Rule 22, until four years after the date of entry into force of these Regulations.</p>
+<p>(b) The installation of lights with colour specifications as prescribed in Section 7 of Annex I to these Regulations, until four years after the date of entry into force of these Regulations.</p>
+<p>(c) The repositioning of lights as a result of conversion from Imperial to metric units and rounding off measurement figures, permanent exemption.</p>
+<p>(d)</p>
+<p>(i) The repositioning of masthead lights on vessels of less than 150 meters in length, resulting from the prescriptions of Section 3(a) of Annex I to these Regulations, permanent exemption.</p>
+<p>(ii) The repositioning of masthead lights on vessels of 150 meters or more in length, resulting from the prescriptions of Section 3(a) of Annex I to these Regulations, until nine years after the date of entry into force of these Regulations.</p>
+<p>(e) The repositioning of masthead lights resulting from the prescriptions of Section 2(b) of Annex I to these Regulations, until nine years after the date of entry into force of these Regulations.</p>
+<p>(f) The repositioning of sidelights resulting from the prescriptions of Sections 2(g) and 3(b) of Annex I to these Regulations, until nine years after the date of entry into force of these Regulations.</p>
+<p>(g) The requirements for sound signal appliances prescribed in Annex III to these regulations, until nine years after the date of entry into force of these Regulations.</p>
+<p>(h) The repositioning of all-round lights resulting from the prescription of Section 9(b) of Annex I to these Regulations, permanent exemption.</p>

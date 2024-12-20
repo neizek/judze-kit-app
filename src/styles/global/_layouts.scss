@@ -144,6 +144,12 @@ section {
 	& .doubled {
 		flex: 0 1 200%;
 	}
+
+	@include mobile {
+		&.mobile {
+			flex-direction: column;
+		}
+	}
 }
 
 .max-width {

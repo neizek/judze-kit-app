@@ -38,7 +38,7 @@
 				style="height: 100%; padding: 14px 0;"
 			/>
 		{:else}
-			<h1 class="max-width">{ $title }</h1>
+			<h1 class="max-width" style="font-weight: 500;">{ $title }</h1>
 		{/if}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- <i class="fa-solid fa-gear" on:click={openSettings} /> -->
