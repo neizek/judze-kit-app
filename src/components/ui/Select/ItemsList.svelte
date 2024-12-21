@@ -3,6 +3,9 @@
 
 	export let shownItems: SelectItem[];
 	export let onSelect: (item: SelectItem) => void;
+	
+	export let closePopup: ((id: number) => void) | undefined = undefined;
+	export let popupId: number | undefined = undefined;
 </script>
 
 <div class="items">
@@ -14,7 +17,10 @@
 		{#each shownItems as item}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<div class="item space-between" on:click="{() => onSelect(item)}">
+			<div class="item space-between" on:click="{() => {
+					onSelect(item);
+					popupId && closePopup ? closePopup(popupId) : undefined
+				}}">
 				<span>{item.label}</span>
 				{#if item.icon}
 					<i class="fa-solid fa-{item.icon}" />

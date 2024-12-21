@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { createEventDispatcher, onMount } from "svelte";
 
 	interface SelectButtonItem {
 		value: any,
@@ -10,8 +10,11 @@
 	export let items: SelectButtonItem[];
 	export let selectedItem: string;
 
+	const dispatch = createEventDispatcher();
+
 	function chooseItem(index: number) {
 		selectedItem = items[index].value;
+		dispatch('choose');
 	}
 
 	onMount(() => {

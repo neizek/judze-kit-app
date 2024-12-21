@@ -35,6 +35,8 @@
 		"@capacitor/core": "^6.0.0",
 		"@capacitor/geolocation": "^6.0.0",
 		"@capacitor/ios": "^6.0.0",
+		"@capacitor/status-bar": "^6.0.2",
+		"@hugotomazi/capacitor-navigation-bar": "^4.0.1",
 		"astronomy-bundle": "^7.7.7"
 	}
 }

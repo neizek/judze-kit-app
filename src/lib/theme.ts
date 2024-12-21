@@ -1,6 +1,8 @@
 import { derived, get, writable, type Writable } from "svelte/store";
 import storage from "./storage";
 import { browser } from "$app/environment";
+import { StatusBar, Style } from "@capacitor/status-bar";
+import { NavigationBar } from "@hugotomazi/capacitor-navigation-bar";
 
 export const THEME_STORAGE_KEY = 'theme';
 export const DARK_THEME_NAME = 'dark';
@@ -86,6 +88,10 @@ export function initTheme(): void {
 				THEME_ATTRIBUTE,
 				getThemeName(newTheme)
 			);
+			StatusBar.setBackgroundColor({color: newTheme !== Theme.Dark ? '#FFFFFF': '#2A3036'});
+			StatusBar.setStyle({style: newTheme !== Theme.Dark ? Style.Light : Style.Dark});
+			NavigationBar.setColor({color: newTheme !== Theme.Dark ? '#F4F4F4': '#24282D'});
+			// NavigationBar.setTransparency({isTransparent: true});
 		}
 	});
 

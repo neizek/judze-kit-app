@@ -92,7 +92,7 @@
 				</h3>
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
-				<span class="opacity-transition" on:click={() => popUp.id ? closePopUp(popUp.id) : null}>
+				<span class="opacity-transition" on:click={() => closePopUp(popUp.id)}>
 					<!-- <i class="fa-solid fa-xmark"></i> -->
 					<span class="material-icons">close</span>
 				</span>

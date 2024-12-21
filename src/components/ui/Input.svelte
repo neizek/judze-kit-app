@@ -13,6 +13,15 @@
 	export let min: number | undefined = undefined;
 	export let disabled: boolean = false;
 
+	$: {
+		if (value){
+			if (type === 'number' && min !== undefined && max !== undefined) {
+				value = value < min ? min : value;
+				value = value > max ? max : value;
+			}
+		}
+	}
+
 	const ref = (node: HTMLInputElement) => {
 		node.type = type;
 	};
@@ -54,3 +63,17 @@
 		<div class="errorIcon">!</div>
 	{/if}
 </label>
+
+<style lang="scss">
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	input[type=number] {
+		-moz-appearance: textfield;
+		appearance: textfield;
+	}
+</style>

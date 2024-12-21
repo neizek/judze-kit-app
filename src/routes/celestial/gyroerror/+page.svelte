@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { onDestroy, onMount, tick, type ComponentType, type SvelteComponent } from "svelte";
     import Button from "../../../components/ui/Button.svelte";
     import FormItem from "../../../components/ui/FormItem.svelte";
     import Input from "../../../components/ui/Input.svelte";
@@ -7,6 +7,8 @@
     import SelectButtons from "../../../components/ui/SelectButtons.svelte";
 	import celestialObjects from "./celestialObjects.json";
     import isMobile, { isMobileScreen } from "$lib/deviceDetector";
+    import CoordinatesInput from "../../../components/ui/CoordinatesInput.svelte";
+    import DateTimeInput from "../../../components/ui/DateTimeInput.svelte";
 
 	let object: string;
 	let givenDateTime: Date = new Date(2024, 9, 29, 16, 30, 30);
@@ -611,8 +613,18 @@
 		number = number > 0 ? number : -number;
 		return `${Math.trunc(number)}°${((number - Math.floor(number)) * 60).toFixed(1)} ${sign}`;
 	}
+
+	let field: SvelteComponent;
+	$: {
+		if (field && !givenStarOrPlanet) {
+			field.openRemotely();
+			// field.$onDestroy(() => {
+			// 	givenStarOrPlanet = undefined;
+			// });
+		}
+	}
 </script>
-<section class="Celestial {isMobileScreen ? `vertical-flex` : `equal-flex`} max-width">
+<section class="Celestial equal-flex mobile space max-width">
 	<!-- <div class="max-width {isMobile ? `vertical-flex` : `equal-flex`} space"> -->
 	<div class="vertical-flex max-width space">
 		<h2>General data</h2>
@@ -621,21 +633,39 @@
 				<SelectButtons
 					items="{solarSystemObjects}"
 					bind:selectedItem={object}
+					on:choose="{givenStarOrPlanet = undefined}"
 				/>
 			</FormItem>
 			{#key object}			
 				{#if object === 'planets' || object === 'stars'}
-					<Select items="{celestialObjects[object]}" bind:value="{givenStarOrPlanet}"></Select>
+					<Select
+						bind:this="{field}"
+						items="{celestialObjects[object]}"
+						bind:value="{givenStarOrPlanet}"
+						placeholder="Choose object"
+						on:select="{performCalculations}"
+					></Select>
 				{/if}
 			{/key}
-			<FormItem label="UTC Time">
-				<Input type="text" bind:value="{givenDateTime}" />
-			</FormItem>
+			<!-- <FormItem label="UTC Time">
+				<Input type="text" bind:value="{givenDateTime}" /> -->
+				<DateTimeInput bind:value="{givenDateTime}" on:change="{performCalculations}"/>
+			<!-- </FormItem> -->
 			<FormItem label="Longitude">
-				<Input type="number" bind:value="{longitude}" />
+				<CoordinatesInput
+					coordinatesType="longitude"
+					bind:value="{longitude}"
+					on:change="{performCalculations}"
+				/>
+				<!-- <Input type="number" bind:value="{longitude}" /> -->
 			</FormItem>
 			<FormItem label="Latitude">
-				<Input type="number" bind:value="{latitude}" />
+				<CoordinatesInput
+					coordinatesType="latitude"
+					bind:value="{latitude}"
+					on:change="{performCalculations}"
+				/>
+				<!-- <Input type="number" bind:value="{latitude}" /> -->
 			</FormItem>
 		</div>
 		<div class="vertical-flex max-width space">
@@ -661,10 +691,14 @@
 		<h2>Object's bearing</h2>
 		<div class="section-box vertical-flex space">
 			<FormItem label="True">
-				<span>{azimuth}&#176;</span>
+				{#if azimuth}
+					<span>{azimuth.toFixed(1)}&#176;</span>
+				{:else}
+					<span>-</span>
+				{/if}
 			</FormItem>
 			<FormItem label="Gyro">
-				<Input type="number" bind:value="{GB}"/>
+				<Input type="number" bind:value="{GB}" min="{0}" max="{360}" />
 			</FormItem>
 			<FormItem label="Standard">
 				{#if MC && TC && azimuth}

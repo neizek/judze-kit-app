@@ -13,10 +13,10 @@
 	export let items: MenuItem[];
 </script>
 
-<EqualGrid --mobileColumnsQty="{4}" --desktopColumnsQty="{6}" class="section-box">
+<EqualGrid --mobileColumnsQty="{3}" --desktopColumnsQty="{6}" class="section-box">
 	{#each items as item}
 		<a href="{ item.link }" class="vertical-flex space centered-content" title="{ item.label }">
-			<Image src="/icons/{item.icon}.svg" alt="{item.label}" --height="50px" --width="50px"/>
+			<Image src="/icons/{item.icon}.svg" alt="{item.label}" --height="55px" --width="55px"/>
 			<span>{ item.label }</span>
 		</a>
 	{/each}

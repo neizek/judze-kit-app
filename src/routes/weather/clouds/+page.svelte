@@ -76,7 +76,8 @@ import { title } from "$lib/meta";
 							<Image
 								src="/clouds/{cloud.img}.jpg"
 								alt="{cloud.title}"
-								--height="{isMobile ? `100px` : `250px`}"
+								--aspect-ratio="1/1"
+								--height="auto"
 								--width="100%"
 								--object-fit="cover"
 								--border-radius="5px"

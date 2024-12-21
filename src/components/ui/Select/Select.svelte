@@ -2,12 +2,15 @@
 	// import { compareObjects } from '@utils/common/objects';
 	// import { clickOutside } from '@utils/components/clickOutside';
 	// import { isMobile } from '@utils/device';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, getContext } from 'svelte';
 	// import BottomBox from '../BottomBox/BottomBox.svelte';
 	import ItemsList from './ItemsList.svelte';
 	import type { SelectItem } from './types';
     import { compareObjects } from '$lib/objects';
     import { clickOutside } from '$lib/utils';
+    import { isMobileScreen } from '$lib/deviceDetector';
+    import type { CreatePopup } from '../../widgets/PopUp.svelte';
+    import { browser } from '$app/environment';
 
 	function getSelectedLabel(
 		selectedValue: any,
@@ -68,6 +71,10 @@
 		}
 
 		return false;
+	}
+
+	export function openRemotely() {
+		open = true;
 	}
 
 	function onClear(): void {
@@ -144,6 +151,25 @@
 	}
 
 	$: currentLabel = getSelectedLabel(value, items);
+	$: {
+		if (open && isMobileScreen) {
+			const createPopup: CreatePopup = getContext('createPopup');
+
+			createPopup({
+				header: 'Choose something',
+				content: {
+					component: ItemsList,
+					props: {
+						shownItems,
+						onSelect
+					}
+				},
+				bottomSticked: true
+			})
+
+		}
+		
+	}
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -195,7 +221,7 @@
 			<div class="errorIcon">!</div>
 		{/if}
 	</label>
-	{#if open}
+	{#if open && browser && !isMobileScreen}
 		<!-- {#if isMobile}
 			<BottomBox bind:isOpened={open}>
 				<ItemsList shownItems="{shownItems}" onSelect="{onSelect}" />
