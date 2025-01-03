@@ -31,6 +31,7 @@
 <style lang="scss">
 	footer {
 		padding: 10px;
+		padding-bottom: calc(10px + env(safe-area-inset-bottom, 0));
 		display: flex;
 		width: 100%;
 		justify-content: center;
