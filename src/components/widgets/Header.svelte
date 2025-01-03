@@ -6,6 +6,7 @@
     import Settings from "./Settings.svelte";
     import isMobile from "$lib/deviceDetector";
     import { theme } from "$lib/theme";
+	import LogoSVG from "$lib/judze-logo-letters.svg?raw";
 
 	const createPopup: CreatePopup = getContext('createPopup');
 
@@ -32,11 +33,14 @@
 			</div>
 		{/if}
 		{#if $page.url.pathname === '/'}
-			<img
+			<!-- <img
 				src="/judze-logo-letters{$theme === 'light' ? '' : '-white'}.svg"
 				alt="Judze logo letters"
 				style="height: 100%; padding: 14px 0;"
-			/>
+			/> -->
+			<div class="Logo" style="height: 100%; padding: 14px 0;">
+				{@html LogoSVG}
+			</div>
 		{:else}
 			<h1 class="max-width" style="font-weight: 500;">{ $title }</h1>
 		{/if}
@@ -46,7 +50,14 @@
 	</div>
 </header>
 
-<style lang="scss">	
+<style lang="scss">
+	:root {
+		--logo-filter: none;
+
+		&[data-theme='dark'] {
+			--logo-filter: invert(100%);
+		}
+	}
 	header {
 		height: 50px;
 		top: 0;
@@ -59,5 +70,11 @@
 		-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
 		-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
 		box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+
+		.Logo {
+			height: 100%;
+			padding: 14px 0;
+			filter: var(--logo-filter);
+		}
 	}
 </style>

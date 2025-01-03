@@ -17,7 +17,7 @@
 				{morse: '···', description: 'Operating reverse propulsion'},
 				{morse: '·····', description: 'I do not agree. I am unclear as to your intentions'},
 				{morse: '--·', description: 'I wish to overtake to your starboard'},
-				{morse: '--··', description: 'I wish to overtake to your starboard'},
+				{morse: '--··', description: 'I wish to overtake to your port'},
 				{morse: '-·-·', description: 'I agree with your overtake'}
 			]
 		},

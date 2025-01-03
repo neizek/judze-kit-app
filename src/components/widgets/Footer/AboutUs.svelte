@@ -1,3 +1,4 @@
 <div class="w400">
-	<p>The app is made to assist navigators in their job. Creaters of the app are fully engaged in maritime life therefore we know the work from the insides.</p>
+	<p>The transcription of the name "Jūdze" is represented as /juːdze/. This word is a feminine noun in Latvian, typically referring to a unit of length equivalent to a mile or a historical measure used in navigation. Therefore it reflects both, the country where it comes from and the main idea of the app.</p>
+	<p>With a knowledge of the industry from inside we try to reach the best user experience and comfort in making navigators' life easier. For any questions or suggestions you can mail us to dnicer3@gmail.com.</p>
 </div>

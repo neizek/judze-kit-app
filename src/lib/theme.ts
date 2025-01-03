@@ -77,7 +77,30 @@ function getInitialTheme() {
 		return initTheme as Theme;
 	}
 
-	return Theme.Browser;	
+	return Theme.Browser;
+}
+
+const isDarkTheme = (newTheme: Theme) => {
+	switch (newTheme) {
+		case Theme.Dark:
+			return true;
+		case Theme.Light:
+			return false;
+		default:
+			return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+	}
+	// switch (theme) {
+	// 	case 'dark':
+	// 		StatusBar.setBackgroundColor({color: '#2A3036'});
+	// 		StatusBar.setStyle({style: Style.Dark});
+	// 		NavigationBar.setColor({color: '#24282D'});
+	// 	break;
+	// 	case 'light':
+	// 		StatusBar.setBackgroundColor({color: '#2A3036'});
+	// 		StatusBar.setStyle({style: Style.Dark});
+	// 		NavigationBar.setColor({color: '#24282D'});
+	// 	break;
+	// }
 }
 
 export function initTheme(): void {
@@ -88,9 +111,21 @@ export function initTheme(): void {
 				THEME_ATTRIBUTE,
 				getThemeName(newTheme)
 			);
-			StatusBar.setBackgroundColor({color: newTheme !== Theme.Dark ? '#FFFFFF': '#2A3036'});
-			StatusBar.setStyle({style: newTheme !== Theme.Dark ? Style.Light : Style.Dark});
-			NavigationBar.setColor({color: newTheme !== Theme.Dark ? '#F4F4F4': '#24282D'});
+			// if (newTheme === Theme.Light) {
+			// 	setAppTheme('light');
+			// } else if (newTheme === Theme.Dark) {
+			// 	setAppTheme('dark');
+			// } else {
+			// 	if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			// 		setAppTheme('dark');
+			// 	} else {
+			// 		setAppTheme('light');
+			// 	}
+			// }
+
+			StatusBar.setBackgroundColor({color: isDarkTheme(newTheme) ? '#2A3036': '#FFFFFF'});
+			StatusBar.setStyle({style: isDarkTheme(newTheme) ? Style.Dark : Style.Light});
+			NavigationBar.setColor({color: isDarkTheme(newTheme) ? '#24282D' : '#F4F4F4'});
 			// NavigationBar.setTransparency({isTransparent: true});
 		}
 	});

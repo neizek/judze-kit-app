@@ -15,6 +15,7 @@
 <style lang="scss">
 	details {
 		cursor: pointer;
+		-webkit-tap-highlight-color: transparent;
 
 		&[open] > summary {
 			background-color: var(--button-background-color-hover);
@@ -25,6 +26,7 @@
 		}
 
 		summary {
+			-webkit-tap-highlight-color: transparent;
 			padding: 6px 0 6px 8px;
 			border-radius: 5px;
 

@@ -551,9 +551,9 @@
 
 	function performCalculations() {
 		const date = dateToExcelSerial(givenDateTime);
-		const hours = givenDateTime.getHours();
-		const minutes = givenDateTime.getMinutes();
-		const seconds = givenDateTime.getSeconds();
+		const hours = givenDateTime.getUTCHours();
+		const minutes = givenDateTime.getUTCMinutes();
+		const seconds = givenDateTime.getUTCSeconds();
 
 		const time = -36525 + date - 1.5 + (hours + minutes / 60 + seconds / 3600) / 24;
 		// const b = -36525 + date - 1.5 + hours / 24;
@@ -633,7 +633,10 @@
 				<SelectButtons
 					items="{solarSystemObjects}"
 					bind:selectedItem={object}
-					on:choose="{givenStarOrPlanet = undefined}"
+					on:choose="{() => {
+						givenStarOrPlanet = undefined;
+						if (object === 'sun' || object === 'moon') performCalculations();
+					}}"
 				/>
 			</FormItem>
 			{#key object}			
@@ -648,17 +651,9 @@
 				{/if}
 			{/key}
 			<!-- <FormItem label="UTC Time">
-				<Input type="text" bind:value="{givenDateTime}" /> -->
-				<DateTimeInput bind:value="{givenDateTime}" on:change="{performCalculations}"/>
-			<!-- </FormItem> -->
-			<FormItem label="Longitude">
-				<CoordinatesInput
-					coordinatesType="longitude"
-					bind:value="{longitude}"
-					on:change="{performCalculations}"
-				/>
-				<!-- <Input type="number" bind:value="{longitude}" /> -->
-			</FormItem>
+				<Input type="text" bind:value="{givenDateTime}" />
+			</FormItem> -->
+			<DateTimeInput bind:value="{givenDateTime}" on:change="{performCalculations}"/>
 			<FormItem label="Latitude">
 				<CoordinatesInput
 					coordinatesType="latitude"
@@ -666,6 +661,14 @@
 					on:change="{performCalculations}"
 				/>
 				<!-- <Input type="number" bind:value="{latitude}" /> -->
+			</FormItem>
+			<FormItem label="Longitude">
+				<CoordinatesInput
+					coordinatesType="longitude"
+					bind:value="{longitude}"
+					on:change="{performCalculations}"
+				/>
+				<!-- <Input type="number" bind:value="{longitude}" /> -->
 			</FormItem>
 		</div>
 		<div class="vertical-flex max-width space">

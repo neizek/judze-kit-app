@@ -174,6 +174,7 @@
 				max-width: 90%;
 				max-height: 70vh;
 				border-radius: 8px;
+				overflow-y: scroll;
 	
 				@include desktop {
 					max-width: 40%;
