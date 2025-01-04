@@ -32,7 +32,7 @@
 				<!-- <i class="fa-solid fa-arrow-left" on:click={() => window.history.back()}/> -->
 			</div>
 		{/if}
-		{#if $page.url.pathname === '/'}
+		{#if $page.url.pathname === '/' || $page.url.pathname === ''}
 			<!-- <img
 				src="/judze-logo-letters{$theme === 'light' ? '' : '-white'}.svg"
 				alt="Judze logo letters"

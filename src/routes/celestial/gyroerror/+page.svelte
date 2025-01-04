@@ -9,6 +9,7 @@
     import isMobile, { isMobileScreen } from "$lib/deviceDetector";
     import CoordinatesInput from "../../../components/ui/CoordinatesInput.svelte";
     import DateTimeInput from "../../../components/ui/DateTimeInput.svelte";
+    import { title } from "$lib/meta";
 
 	let object: string;
 	let givenDateTime: Date = new Date(2024, 9, 29, 16, 30, 30);
@@ -623,6 +624,8 @@
 			// });
 		}
 	}
+
+	title.set('Gyro Error');
 </script>
 <section class="Celestial equal-flex mobile space max-width">
 	<!-- <div class="max-width {isMobile ? `vertical-flex` : `equal-flex`} space"> -->

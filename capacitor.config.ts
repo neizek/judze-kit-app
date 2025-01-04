@@ -5,7 +5,12 @@ const config: CapacitorConfig = {
   appName: 'Judze',
   webDir: 'build',
   backgroundColor: '2e333a',
-  bundledWebRuntime: false
+  bundledWebRuntime: false,
+  plugins: {
+      SwipeBack: {
+        enabled: true
+      }
+  }
 };
 
 export default config;

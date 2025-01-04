@@ -38,6 +38,7 @@
 		"@capacitor/ios": "^6.0.0",
 		"@capacitor/status-bar": "^6.0.2",
 		"@hugotomazi/capacitor-navigation-bar": "^4.0.1",
-		"astronomy-bundle": "^7.7.7"
+		"astronomy-bundle": "^7.7.7",
+		"capacitor-swipe-back-plugin": "^2.0.0"
 	}
 }
