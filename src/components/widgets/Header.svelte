@@ -24,7 +24,7 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <header>
 	<div class="space-between space wrapper w1000">
-		{#if $page.url.pathname !== '/'}
+		{#if $page.url.pathname !== '/' && $page.url.pathname !== ''}
 			<div class="equal-flex">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -59,7 +59,7 @@
 		}
 	}
 	header {
-		height: 50px;
+		height: calc(50px + env(safe-area-inset-top));
 		top: 0;
 		left: 0;
 		right: 0;

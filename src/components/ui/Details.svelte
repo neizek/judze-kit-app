@@ -29,6 +29,7 @@
 			-webkit-tap-highlight-color: transparent;
 			padding: 6px 0 6px 8px;
 			border-radius: 5px;
+			list-style: none;
 
 			&:hover {
 				background-color: var(--button-background-color-hover);
@@ -36,6 +37,10 @@
 
 			&::marker {
 				content: '';
+			}
+
+			&::-webkit-details-marker {
+				display:none;
 			}
 
 			> span.material-icons {

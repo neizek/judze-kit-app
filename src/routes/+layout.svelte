@@ -26,7 +26,7 @@
 		margin-top: calc(66px + env(safe-area-inset-top));
 
 		@include after-mobile {
-			margin-top: 82px;
+			margin-top: calc(82px + env(safe-area-inset-top));
 		}
 	}
 </style>
