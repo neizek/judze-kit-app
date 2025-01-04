@@ -30,7 +30,7 @@
 {#if isFirefox() && autocomplete !== undefined}
 	<input
 		type="{type}"
-		inputmode="{type === 'number' ? 'numeric' : 'text'}"
+		inputmode="{type === 'number' ? 'decimal' : 'text'}"
 		style="display:none;"
 		tabindex="-1"
 		autocomplete="{autocomplete}"
@@ -44,7 +44,7 @@
 	{/if}
 	<input
 		placeholder="{placeholder}"
-		inputmode="{type === 'number' ? 'numeric' : 'text'}"
+		inputmode="{type === 'number' ? 'decimal' : 'text'}"
 		maxlength="{max}"
 		min="{min}"
 		max="{max}"
