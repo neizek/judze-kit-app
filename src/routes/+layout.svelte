@@ -23,7 +23,7 @@
 	.Content {
 		display: flex;
 		flex: 1;
-		margin-top: 66px;
+		margin-top: calc(66px + env(safe-area-inset-top));
 
 		@include after-mobile {
 			margin-top: 82px;
