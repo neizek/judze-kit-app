@@ -69,7 +69,7 @@ import { title } from "$lib/meta";
 <section class="vertical-flex max-width">
 	{#each cloudsArray as cloudCategory}
 		<Section title="{cloudCategory.header}">
-			<EqualGrid --mobileColumnsQty="{3}" --desktopColumnsQty="{3}">
+			<EqualGrid --mobileColumnsQty="{2}" --desktopColumnsQty="{3}">
 					{#each cloudCategory.clouds as cloud}
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<div class="vertical-flex space" role="button" tabindex="0" on:click={() => openDescription(cloud)}>

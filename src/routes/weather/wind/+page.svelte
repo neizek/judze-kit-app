@@ -86,10 +86,10 @@
 							tag: 'span',
 							text: `Waves: ${step.waveHeight}`
 						},
-						{
+						step.windSpeed ? {
 							tag: 'span',
 							text: `Wind: ${step.windSpeed}`
-						}
+						} : {}
 					]
 				}
 			},

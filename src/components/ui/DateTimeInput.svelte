@@ -2,6 +2,7 @@
     import { createEventDispatcher } from "svelte";
     import Input from "./Input.svelte";
     import FormItem from "./FormItem.svelte";
+    import Button from "./Button.svelte";
 
 	let day: number;
 	let month: number;
@@ -12,13 +13,17 @@
 
 	export let value: Date;
 
-	if (value) {
-		day = value.getUTCDay();
+	function setValue() {
+		day = value.getUTCDate();
 		month = value.getUTCMonth() + 1;
 		year = value.getUTCFullYear();
 		hours = value.getUTCHours();
 		minutes = value.getUTCMinutes();
 		seconds = value.getUTCSeconds();
+	}
+
+	if (value) {
+		setValue();
 	}
 
 	const dispatch = createEventDispatcher();
@@ -28,6 +33,11 @@
 			value = new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds));
 			dispatch('change')
 		}
+	}
+
+	function updateDateTime() {
+		value = new Date();
+		setValue();
 	}
 </script>
 <div class="vertical-flex space max-width">
@@ -45,6 +55,7 @@
 			<Input type="number" bind:value="{seconds}" min="{0}" max="{59}" />
 		</div>
 	</FormItem>
+	<Button label="Set current date & time" on:click="{updateDateTime}" maxwidth />
 </div>
 
 <style lang="scss">

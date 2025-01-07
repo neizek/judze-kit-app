@@ -43,16 +43,16 @@
 		{
 			header: 'Numeric flags',
 			flags: [
-				{letter: '0', morse: '·----', name: 'Zero', icon: '0', description: ''},
-				{letter: '1', morse: '··---', name: 'One', icon: '1', description: ''},
-				{letter: '2', morse: '···--', name: 'Two', icon: '2', description: ''},
-				{letter: '3', morse: '····-', name: 'Three', icon: '3', description: ''},
-				{letter: '4', morse: '·····', name: 'Four', icon: '4', description: ''},
-				{letter: '5', morse: '-····', name: 'Five', icon: '5', description: ''},
-				{letter: '6', morse: '--···', name: 'Six', icon: '6', description: ''},
-				{letter: '7', morse: '---··', name: 'Seven', icon: '7', description: ''},
-				{letter: '8', morse: '----·', name: 'Eight', icon: '8', description: ''},
-				{letter: '9', morse: '-----', name: 'Nine', icon: '9', description: ''},				
+				{letter: '0', morse: '·----', name: 'Zero', icon: '0', description: 'Zero'},
+				{letter: '1', morse: '··---', name: 'One', icon: '1', description: 'One'},
+				{letter: '2', morse: '···--', name: 'Two', icon: '2', description: 'Two'},
+				{letter: '3', morse: '····-', name: 'Three', icon: '3', description: 'Three'},
+				{letter: '4', morse: '·····', name: 'Four', icon: '4', description: 'Four'},
+				{letter: '5', morse: '-····', name: 'Five', icon: '5', description: 'Five'},
+				{letter: '6', morse: '--···', name: 'Six', icon: '6', description: 'Six'},
+				{letter: '7', morse: '---··', name: 'Seven', icon: '7', description: 'Seven'},
+				{letter: '8', morse: '----·', name: 'Eight', icon: '8', description: 'Eight'},
+				{letter: '9', morse: '-----', name: 'Nine', icon: '9', description: 'Nine'},				
 			]
 		}
 	]
@@ -98,7 +98,7 @@
 	const createPopup: CreatePopup = getContext('createPopup');
 
 	function openDescription(flag: any) {
-		if (flag.description !== '') {
+		// if (flag.description !== '') {
 			createPopup({
 				header: `"${flag.name}" flag meaning`,
 				content: {
@@ -109,7 +109,7 @@
 				},
 				bottomSticked: isMobileScreen
 			})
-		}
+		// }
 	}
 
 	title.set('Flags')
@@ -122,7 +122,7 @@
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<!-- svelte-ignore a11y-no-static-element-interactions -->
 					<div
-						class="vertical-flex space"
+						class="vertical-flex space Flag"
 						on:click={() => openDescription(flag)}
 					>
 						<Image
@@ -141,5 +141,14 @@
 		</Section>
 	{/each}
 </section>
+
+<!-- <style lang="scss">
+	.Flag {
+		:global(img) {
+			background-color: rgba(0, 0, 0, 0.1);
+			box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+		}
+	}
+</style> -->
 
 

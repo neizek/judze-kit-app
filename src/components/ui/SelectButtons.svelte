@@ -45,6 +45,6 @@
 	}
 
 	.chosen > * {
-		color: var(--secondary-color);
+		color: var(--button-background-color-primary);
 	}
 </style>

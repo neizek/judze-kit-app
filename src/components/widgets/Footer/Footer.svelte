@@ -30,8 +30,8 @@
 
 <style lang="scss">
 	footer {
-		padding: 10px;
-		padding-bottom: calc(10px + env(safe-area-inset-bottom));
+		padding-top: 24px;
+		padding-bottom: calc(16px + env(safe-area-inset-bottom));
 		display: flex;
 		width: 100%;
 		justify-content: center;

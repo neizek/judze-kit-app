@@ -10,6 +10,9 @@
     import CoordinatesInput from "../../../components/ui/CoordinatesInput.svelte";
     import DateTimeInput from "../../../components/ui/DateTimeInput.svelte";
     import { title } from "$lib/meta";
+    import { Geolocation } from "@capacitor/geolocation";
+    import { position } from "$lib/position";
+    import VariationInput from "../../../components/ui/VariationInput.svelte";
 
 	let object: string;
 	let givenDateTime: Date = new Date(2024, 9, 29, 16, 30, 30);
@@ -580,12 +583,12 @@
 			return;
 		}
 
-		console.log(`
-			GHA: ${objectData.GHA.toFixed(3)},
-			LHA: ${objectData.LHA.toFixed(3)},
-			Declination: ${objectData.declination.toFixed(3)},
-			Azimuth: ${objectData.azimuth.toFixed(3)}
-		`)
+		// console.log(`
+		// 	GHA: ${objectData.GHA.toFixed(3)},
+		// 	LHA: ${objectData.LHA.toFixed(3)},
+		// 	Declination: ${objectData.declination.toFixed(3)},
+		// 	Azimuth: ${objectData.azimuth.toFixed(3)}
+		// `)
 
 		azimuth = Number(objectData.azimuth);
 		LHA = Number(objectData.LHA);
@@ -625,54 +628,81 @@
 		}
 	}
 
+	async function getCurrentPosition() {
+		return await Geolocation.getCurrentPosition();
+	}
+
+	let isLoadingPosition: boolean = false;
+	// let updatePositionFields: () => void;
+	let positionObtained = false;
+
+	function updatePosition() {
+		isLoadingPosition = true;
+		getCurrentPosition().then(position => {
+			longitude = Number(position.coords.longitude);
+			latitude = Number(position.coords.latitude);
+			positionObtained = !positionObtained;
+			performCalculations();
+		}).finally(() => {
+			isLoadingPosition = false;
+		});
+	}
+
 	title.set('Gyro Error');
 </script>
-<section class="Celestial equal-flex mobile space max-width">
+<section class="Celestial equal-flex mobile space big max-width">
 	<!-- <div class="max-width {isMobile ? `vertical-flex` : `equal-flex`} space"> -->
-	<div class="vertical-flex max-width space">
-		<h2>General data</h2>
-		<div class="section-box vertical-flex space">
-			<FormItem label="Choose object">
-				<SelectButtons
-					items="{solarSystemObjects}"
-					bind:selectedItem={object}
-					on:choose="{() => {
-						givenStarOrPlanet = undefined;
-						if (object === 'sun' || object === 'moon') performCalculations();
-					}}"
-				/>
-			</FormItem>
-			{#key object}			
-				{#if object === 'planets' || object === 'stars'}
-					<Select
-						bind:this="{field}"
-						items="{celestialObjects[object]}"
-						bind:value="{givenStarOrPlanet}"
-						placeholder="Choose object"
-						on:select="{performCalculations}"
-					></Select>
-				{/if}
-			{/key}
-			<!-- <FormItem label="UTC Time">
-				<Input type="text" bind:value="{givenDateTime}" />
-			</FormItem> -->
-			<DateTimeInput bind:value="{givenDateTime}" on:change="{performCalculations}"/>
-			<FormItem label="Latitude">
-				<CoordinatesInput
-					coordinatesType="latitude"
-					bind:value="{latitude}"
-					on:change="{performCalculations}"
-				/>
-				<!-- <Input type="number" bind:value="{latitude}" /> -->
-			</FormItem>
-			<FormItem label="Longitude">
-				<CoordinatesInput
-					coordinatesType="longitude"
-					bind:value="{longitude}"
-					on:change="{performCalculations}"
-				/>
-				<!-- <Input type="number" bind:value="{longitude}" /> -->
-			</FormItem>
+	<div class="vertical-flex max-width space big">
+		<div class="vertical-flex max-width space">
+			<h2>General data</h2>
+			<div class="section-box vertical-flex space">
+				<FormItem label="Choose object">
+					<SelectButtons
+						items="{solarSystemObjects}"
+						bind:selectedItem={object}
+						on:choose="{() => {
+							givenStarOrPlanet = undefined;
+							if (object === 'sun' || object === 'moon') performCalculations();
+						}}"
+					/>
+				</FormItem>
+				{#key object}			
+					{#if object === 'planets' || object === 'stars'}
+						<Select
+							bind:this="{field}"
+							items="{celestialObjects[object]}"
+							bind:value="{givenStarOrPlanet}"
+							placeholder="Choose object"
+							on:select="{performCalculations}"
+						></Select>
+					{/if}
+				{/key}
+				<!-- <FormItem label="UTC Time">
+					<Input type="text" bind:value="{givenDateTime}" />
+				</FormItem> -->
+				<DateTimeInput bind:value="{givenDateTime}" on:change="{performCalculations}"/>
+				<FormItem label="Latitude">
+					{#key positionObtained}
+						<CoordinatesInput
+							coordinatesType="latitude"
+							bind:value="{latitude}"
+							on:change="{performCalculations}"
+						/>
+					{/key}
+					<!-- <Input type="number" bind:value="{latitude}" /> -->
+				</FormItem>
+				<FormItem label="Longitude">
+					{#key positionObtained}	
+						<CoordinatesInput
+							coordinatesType="longitude"
+							bind:value="{longitude}"
+							on:change="{performCalculations}"
+						/>
+					{/key}
+					<!-- <Input type="number" bind:value="{longitude}" /> -->
+				</FormItem>
+				<Button label="Set current position" on:click="{updatePosition}" isLoading="{isLoadingPosition}" maxwidth />
+		</div>
 		</div>
 		<div class="vertical-flex max-width space">
 			<h2>Ship's heading</h2>
@@ -685,34 +715,36 @@
 					{/if}
 				</FormItem>
 				<FormItem label="Gyro course">
-					<Input type="number" bind:value="{GC}" />
+					<Input type="number" bind:value="{GC}" min="{0}" max="{360}" step="{0.1}" />
 				</FormItem>
 				<FormItem label="Standard course">
-					<Input type="number" bind:value="{MC}" />
+					<Input type="number" bind:value="{MC}" min="{0}" max="{360}" step="{0.1}" />
 				</FormItem>
 			</div>
 		</div>
 	</div>
-	<div class="vertical-flex max-width space">
-		<h2>Object's bearing</h2>
-		<div class="section-box vertical-flex space">
-			<FormItem label="True">
-				{#if azimuth}
-					<span>{azimuth.toFixed(1)}&#176;</span>
-				{:else}
-					<span>-</span>
-				{/if}
-			</FormItem>
-			<FormItem label="Gyro">
-				<Input type="number" bind:value="{GB}" min="{0}" max="{360}" />
-			</FormItem>
-			<FormItem label="Standard">
-				{#if MC && TC && azimuth}
-					<span>{(azimuth + (MC - TC)).toFixed(1)}&#176;</span>
-				{:else}
-					<span>-</span>
-				{/if}
-			</FormItem>
+	<div class="vertical-flex max-width space big">
+		<div class="vertical-flex max-width space">
+			<h2>Object's bearing</h2>
+			<div class="section-box vertical-flex space">
+				<FormItem label="True">
+					{#if azimuth}
+						<span>{azimuth.toFixed(1)}&#176;</span>
+					{:else}
+						<span>-</span>
+					{/if}
+				</FormItem>
+				<FormItem label="Gyro">
+					<Input type="number" bind:value="{GB}" min="{0}" max="{360}" step="{0.1}" />
+				</FormItem>
+				<FormItem label="Standard">
+					{#if MC && TC && azimuth}
+						<span>{(azimuth + (MC - TC)).toFixed(1)}&#176;</span>
+					{:else}
+						<span>-</span>
+					{/if}
+				</FormItem>
+			</div>
 		</div>
 		<div class="vertical-flex max-width space">
 			<h2>Corrections</h2>
@@ -732,7 +764,7 @@
 					{/if}
 				</FormItem>
 				<FormItem label="Variation">
-					<Input type="number" bind:value="{variation}" />
+					<VariationInput bind:value="{variation}" />
 				</FormItem>
 				<FormItem label="Deviation">
 					{#if TC && MC && variation}

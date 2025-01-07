@@ -31,9 +31,14 @@
 	}
 
 	if (value) {
-		degrees = Math.trunc(value);
-		minutes = Math.trunc((value - degrees) / 60);
-		seconds = 0;
+		valueUpdated();
+	}
+
+	export function valueUpdated() {
+		degrees = Math.floor(value);
+		let minutesDecimal = (value - degrees) * 60
+		minutes = Math.floor(minutesDecimal);
+		seconds = Math.round((minutesDecimal - minutes) * 60);
 		if (coordinatesType === 'longitude') {
 			direction = value < 0 ? 'e' : 'w';
 		} else {

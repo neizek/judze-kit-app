@@ -1,5 +1,6 @@
 <script lang="ts">
-	// import Loader from "../Loader/Loader.svelte";
+    import Loader from "./Loader.svelte";
+
 
 	export let icon: string | undefined = undefined;
 	export let type: 'primary' | 'secondary' | 'dangerous' | 'transparent' | undefined = undefined;
@@ -7,7 +8,7 @@
 	export let submit = false;
 	export let bordered = false;
 	export let disabled = false;
-	// export let isLoading = false;
+	export let isLoading = false;
 	export let maxwidth = false;
 </script>
 
@@ -23,9 +24,9 @@
 	{#if label}
 		<span>{label}</span>
 	{/if}
-	<!-- {#if isLoading}
-		<Loader --size="16px" --line-width="2px" --fill-color="#ffffff" />
-	{/if} -->
+	{#if isLoading}
+		<Loader --size="16px" --line-width="2px" />
+	{/if}
 </button>
 
 <style lang="scss">

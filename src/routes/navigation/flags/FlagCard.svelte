@@ -10,6 +10,7 @@
 		alt="{flag.letter}"
 		--width="100px"
 		--height="100px"
+		--object-fit="contain"
 		--border-radius="5px"
 	/>
 	<div class="vertical-flex Description">
@@ -23,6 +24,7 @@
 
 <style lang="scss">
 	.Description {
+		flex: 1;
 		@include after-mobile {
 			width: 300px;
 		}
