@@ -1,17 +1,18 @@
 <script lang="ts">
     import Image from "./Image.svelte";
 
-
 	export let image;
 	export let details;
+	export let isBigImage: boolean = false;
 </script>
 
-<div class="Card horizontal-layout space big">
+<div class="Card {isBigImage ? `vertical-flex` : `horizontal-layout`} space big">
 	<Image
 		src="{image.src}"
 		alt="{image.alt}"
-		--width="100px"
-		--height="100px"
+		--width="{isBigImage ? `100%` : `100px`}"
+		--aspect-ratio="{isBigImage ? `16/9` : '1/1'}"
+		--object-fit="cover"
 		--border-radius="5px"
 		--background-color="#ffffff"
 	/>

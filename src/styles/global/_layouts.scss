@@ -213,6 +213,10 @@ section {
 		gap: 16px;
 	}
 
+	&.very-big {
+		gap: 24px;
+	}
+
 	&.compact:not(.vertical) {
 		gap: 0;
 

@@ -40,7 +40,7 @@
 		minutes = Math.floor(minutesDecimal);
 		seconds = Math.round((minutesDecimal - minutes) * 60);
 		if (coordinatesType === 'longitude') {
-			direction = value < 0 ? 'e' : 'w';
+			direction = value < 0 ? 'w' : 'e';
 		} else {
 			direction = value < 0 ? 's' : 'n';
 		}

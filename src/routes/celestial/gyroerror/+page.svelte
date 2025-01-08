@@ -6,12 +6,10 @@
     import Select from "../../../components/ui/Select/Select.svelte";
     import SelectButtons from "../../../components/ui/SelectButtons.svelte";
 	import celestialObjects from "./celestialObjects.json";
-    import isMobile, { isMobileScreen } from "$lib/deviceDetector";
     import CoordinatesInput from "../../../components/ui/CoordinatesInput.svelte";
     import DateTimeInput from "../../../components/ui/DateTimeInput.svelte";
     import { title } from "$lib/meta";
     import { Geolocation } from "@capacitor/geolocation";
-    import { position } from "$lib/position";
     import VariationInput from "../../../components/ui/VariationInput.svelte";
 
 	let object: string;
@@ -352,18 +350,6 @@
 		}
 	}
 
-	// function getVenusData(time: number) {
-	// 	const date = dateToExcelSerial(givenDateTime);
-
-	// 	const N = toRadians(76.6799 + 0.000024659 * (time + 1.5));
-	// 	const i = toRadians(3.3946 + 0.0000000275 * (time + 1.5));
-	// 	const w = toRadians(54.891 + 0.0000138374 * (time + 1.5));
-	// 	const a = 0.72333;
-	// 	const e = 0.006773 - 0.000000001302 * (time + 1.5);
-	// 	const M = mod(toRadians(48.0052 + 1.6021302244 * (time + 1.5)), (2 * Math.PI));
-
-	// }
-
 	function calculatePlanetData(
 		time: number,
 		N: number,
@@ -622,9 +608,6 @@
 	$: {
 		if (field && !givenStarOrPlanet) {
 			field.openRemotely();
-			// field.$onDestroy(() => {
-			// 	givenStarOrPlanet = undefined;
-			// });
 		}
 	}
 
@@ -633,7 +616,6 @@
 	}
 
 	let isLoadingPosition: boolean = false;
-	// let updatePositionFields: () => void;
 	let positionObtained = false;
 
 	function updatePosition() {
@@ -651,7 +633,6 @@
 	title.set('Gyro Error');
 </script>
 <section class="Celestial equal-flex mobile space big max-width">
-	<!-- <div class="max-width {isMobile ? `vertical-flex` : `equal-flex`} space"> -->
 	<div class="vertical-flex max-width space big">
 		<div class="vertical-flex max-width space">
 			<h2>General data</h2>
@@ -677,9 +658,6 @@
 						></Select>
 					{/if}
 				{/key}
-				<!-- <FormItem label="UTC Time">
-					<Input type="text" bind:value="{givenDateTime}" />
-				</FormItem> -->
 				<DateTimeInput bind:value="{givenDateTime}" on:change="{performCalculations}"/>
 				<FormItem label="Latitude">
 					{#key positionObtained}
@@ -689,7 +667,6 @@
 							on:change="{performCalculations}"
 						/>
 					{/key}
-					<!-- <Input type="number" bind:value="{latitude}" /> -->
 				</FormItem>
 				<FormItem label="Longitude">
 					{#key positionObtained}	
@@ -699,7 +676,6 @@
 							on:change="{performCalculations}"
 						/>
 					{/key}
-					<!-- <Input type="number" bind:value="{longitude}" /> -->
 				</FormItem>
 				<Button label="Set current position" on:click="{updatePosition}" isLoading="{isLoadingPosition}" maxwidth />
 		</div>
@@ -772,9 +748,7 @@
 					{:else}
 						<span>-</span>
 					{/if}
-					<!-- <span>{deviation.toFixed(1)}&#176;</span> -->
 				</FormItem>
-				<!-- <Button type="secondary" label="Calculate" on:click={performCalculations} /> -->
 			</div>
 		</div>
 	</div>
@@ -795,18 +769,4 @@
 			</FormItem>
 		</div>
 	</div>
-	<!-- </div> -->
 </section>
-
-<!-- <style lang="scss">
-	@include after-mobile {
-		.Celestial {
-			display: flex;
-			flex-direction: row;
-
-			> div {
-				flex: 1;
-			}
-		}
-	}
-</style> -->

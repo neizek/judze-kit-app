@@ -59,7 +59,8 @@ import { title } from "$lib/meta";
 							tag: 'p',
 							text: cloud.description
 						}
-					]
+					],
+					isBigImage: true
 				}
 			},
 			bottomSticked: isMobileScreen

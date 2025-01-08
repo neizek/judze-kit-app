@@ -135,7 +135,7 @@ export function initTheme(): void {
 
 export const themesItems = [
 	{
-		label: 'Browser',
+		label: 'Auto',
 		value: Theme.Browser,
 		icon: 'night_sight_auto'
 	},

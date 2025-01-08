@@ -122,7 +122,7 @@ import Section from "../../../components/ui/Section.svelte";
 <section class="vertical-flex max-width">
 	{#each lights as lightscategory}
 		<Section title="{lightscategory.title}">
-			<div class="vertical-flex space big">
+			<div class="vertical-flex space very-big">
 				{#each lightscategory.lights as light}
 					<div class="Card vertical-flex space">
 						<div class="bow">

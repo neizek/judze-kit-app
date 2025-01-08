@@ -57,15 +57,15 @@
 
 	const createPopup: CreatePopup = getContext('createPopup');
 
-	// function createCalculator() {
-	// 	createPopup({
-	// 		header: "True Wind Calculator",
-	// 		content: {
-	// 			component: WindCalculator,
-	// 		},
-	// 		bottomSticked: isMobileScreen
-	// 	})
-	// }
+	function createCalculator() {
+		createPopup({
+			header: "True Wind Calculator",
+			content: {
+				component: WindCalculator,
+			},
+			bottomSticked: isMobileScreen
+		})
+	}
 
 	function openDescription(step: any) {
 		createPopup({
@@ -90,7 +90,8 @@
 							tag: 'span',
 							text: `Wind: ${step.windSpeed}`
 						} : {}
-					]
+					],
+					isBigImage: true
 				}
 			},
 			bottomSticked: isMobileScreen
@@ -110,30 +111,31 @@
 			label="Douglas scale"
 			on:click="{() => activeSection = 1}"
 		/>
-		<!-- <Button
-			type="transparent"
-			label="Wind calculator"
-			on:click="{createCalculator}"
-		/> -->
 	</div>
 	<Section title="{windTableType.header}">
-		<EqualGrid --desktopColumnsQty="{4}" --mobileColumnsQty="{2}">
-			{#each windTableType.steps as step}
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<div class="vertical-flex space" role="button" tabindex="0" on:click="{() => openDescription(step)}">
-					<Image
-						src="/wind/{step.image}.jpg"
-						alt="{step.description}"
-						--width="100%"
-						--aspect-ratio="1/1"
-						--object-fit="contain"
-						--border-radius="5px"
-						--background-color="#ffffff"
-					/>
-					<span>{step.number} - {step.description}</span>
-				</div>
-				<!-- <WindCard windStep="{step}" isBf="{windTableType.id === 0}"/> -->
-			{/each}
-		</EqualGrid>
+		<div class="vertical-flex space big">
+			<Button
+				label="True wind calculator"
+				on:click="{createCalculator}"
+			/>
+			<EqualGrid --desktopColumnsQty="{4}" --mobileColumnsQty="{2}">
+				{#each windTableType.steps as step}
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div class="vertical-flex space" role="button" tabindex="0" on:click="{() => openDescription(step)}">
+						<Image
+							src="/wind/{step.image}.jpg"
+							alt="{step.description}"
+							--width="100%"
+							--aspect-ratio="1/1"
+							--object-fit="contain"
+							--border-radius="5px"
+							--background-color="#ffffff"
+						/>
+						<span>{step.number} - {step.description}</span>
+					</div>
+					<!-- <WindCard windStep="{step}" isBf="{windTableType.id === 0}"/> -->
+				{/each}
+			</EqualGrid>
+		</div>
 	</Section>
 </div>
