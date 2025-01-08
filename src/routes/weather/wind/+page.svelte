@@ -114,10 +114,10 @@
 	</div>
 	<Section title="{windTableType.header}">
 		<div class="vertical-flex space big">
-			<Button
+			<!-- <Button
 				label="True wind calculator"
 				on:click="{createCalculator}"
-			/>
+			/> -->
 			<EqualGrid --desktopColumnsQty="{4}" --mobileColumnsQty="{2}">
 				{#each windTableType.steps as step}
 					<!-- svelte-ignore a11y-click-events-have-key-events -->

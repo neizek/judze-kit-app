@@ -22,7 +22,7 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class="line-blocks space big">
-		<span class="link" on:click="{() => openPopUp('Donations', Donations)}">Donations</span>
+		<span class="link" on:click="{() => openPopUp('Support Us', Donations)}">Support Us</span>
 		<span class="link" on:click="{() => openPopUp('About Us', AboutUs)}">About Us</span>
 	</div>
 	<span>Judze {new Date().getFullYear()}</span>

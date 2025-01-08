@@ -6,6 +6,7 @@ import '../styles/global/global.scss';
 
 import { App, type BackButtonListenerEvent } from "@capacitor/app";
 
+
 CapacitorSwipeBackPlugin.enable();
 if (browser) {
 	App.addListener('backButton', (event: BackButtonListenerEvent) => {
