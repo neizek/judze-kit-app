@@ -34,21 +34,25 @@
 	</form> -->
 	<p>The app is made for seafarers by seafarers. We have a lot of ideas on how to improve the quality and variaty of avaliable functions, however it takes a lot of time and power. Therefore to keep it free of charge, we would like to kindly ask for any support. You can feel free to contact us for any of these things:</p>
 	<ul>
-		<li>- Sponsorship or donations,</li>
+		<!-- <li>- Sponsorship or donations,</li> -->
 		<li>- App's improvement suggestions,</li>
 		<li>- Review and feedback,</li>
-		<li>- Purchasing of the app,</li>
+		<!-- <li>- Purchasing of the app,</li> -->
 		<li>- Any other question related to the app.</li>
 	</ul>
 	<div class="space-between space">
-		<a href="mailto:dnicer3@gmail.com" class="space-between space">
+		<!-- <a href="mailto:dnicer3@gmail.com" class="space-between space"> -->
+		<div class="space-between space">
 			<span class="material-icons notranslate">mail</span>
 			<span>dnicer3@gmail.com</span>
-		</a>
-		<a href="tel:+37126972159" class="space-between space">
+		</div>
+		<!-- </a> -->
+		<!-- <a href="tel:+37126972159" class="space-between space"> -->
+		<div class="space-between space">
 			<span class="material-icons notranslate">phone_in_talk</span>
 			<span>+371 26 97 2159</span>
-		</a>
+		</div>
+		<!-- </a> -->
 	</div>
 </div>
 
