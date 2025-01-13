@@ -1,6 +1,7 @@
 <script lang="ts">
     import { title } from "$lib/meta";
     import { initTheme } from "$lib/theme";
+    import { fade } from "svelte/transition";
     import Footer from "../components/widgets/Footer/Footer.svelte";
     import Header from "../components/widgets/Header.svelte";
     import PopUp from "../components/widgets/PopUp.svelte";
@@ -13,9 +14,9 @@
 </svelte:head>
 <PopUp>
 	<Header />
-	<div class="Content wrapper w1000">
-		<slot></slot>
-	</div>
+		<div class="Content wrapper w1000">
+			<slot></slot>
+		</div>
 	<Footer />
 </PopUp>
 

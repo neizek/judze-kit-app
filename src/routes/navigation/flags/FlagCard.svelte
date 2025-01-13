@@ -6,7 +6,7 @@
 
 <div class="horizontal-layout space big">
 	<Image
-		src="/flagIcons/{flag.icon.toLowerCase()}.svg"
+		src="/flagIcons/{flag.letter ? 'navigational' : 'national'}/{flag.icon.toLowerCase()}.svg"
 		alt="{flag.letter}"
 		--width="100px"
 		--height="100px"

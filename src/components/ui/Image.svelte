@@ -8,20 +8,27 @@
 	let isLoading: boolean = true;
 	let imageRef: HTMLImageElement;
 
+	$: {
+		if (src) {
+			isLoading = true;
+		}
+	}
+
 	onMount(() => {
 		if (imageRef.complete) {
 			isLoading = false;
 		}
 	});	
 </script>
-
-<img
-	src="{src}"
-	class:placeholder="{isLoading}"
-	alt="{alt}"
-	bind:this="{imageRef}"
-	on:load="{() => isLoading = false}"
-/>
+{#key src}
+	<img
+		src="{src}"
+		class:placeholder="{isLoading}"
+		alt="{alt}"
+		bind:this="{imageRef}"
+		on:load="{() => isLoading = false}"
+	/>
+{/key}
 
 <style lang="scss">
 	img {

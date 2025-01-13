@@ -73,7 +73,7 @@ import FormItem from "../../../components/ui/FormItem.svelte";
 	// 		return;
 	// 	}
     //     const centerX = drawing.width / 2;
-    //     const centerY = drawing.height / 2;
+    //     const centerY = drawing.height / 2; 
 	// 	ctx.translate(centerX, centerY);
     //     ctx.beginPath();
     //     ctx.arc(0, 0, circleRadius, 0, Math.PI * 2);
@@ -121,13 +121,13 @@ import FormItem from "../../../components/ui/FormItem.svelte";
 			<!-- <DegreesInput bind:value="{relativeWindDirection}" /> -->
 		</FormItem>
 		<FormItem label="Relative wind speed">
-			<Input bind:value="{relativeWindSpeed}" on:input="{calculateWind}" />
+			<Input bind:value="{relativeWindSpeed}" on:input="{calculateWind}" min="{0}" max="{250}" step="{0.1}" />
 		</FormItem>
 		<FormItem label="Ship's true course">
-			<Input bind:value="{shipsCourse}" on:input="{calculateWind}" />
+			<Input bind:value="{shipsCourse}" on:input="{calculateWind}" min="{0}" max="{360}" step="{1}" />
 		</FormItem>
 		<FormItem label="Ship's speed">
-			<Input bind:value="{shipsSpeed}" on:input="{calculateWind}" />
+			<Input bind:value="{shipsSpeed}" on:input="{calculateWind}" min="{0}" step="{0.1}" />
 		</FormItem>
 	</div>
 	<div class="vertical-flex space big">

@@ -1,6 +1,5 @@
 <script lang="ts">
     import { title } from "$lib/meta";
-    import { getCurrentPosition } from "$lib/position";
     import Menu from "../components/widgets/Menu/Menu.svelte";
 
     const navTree = [
@@ -22,16 +21,9 @@
 				{label: 'Clouds', icon: 'clouds', link: 'weather/clouds'},
 				{label: 'Gyro Error', icon: 'compass', link: 'celestial/gyroerror'}
 			]			
-		},
-		// {
-		// 	label: 'Other',
-		// 	items: [
-		// 		{label: 'Donations', icon: 'money-with-wings-two', link: 'other/donate'}
-		// 	]
-		// }
+		}
 	]
 
-	getCurrentPosition();
 	title.set('Judze');
 </script>
 
