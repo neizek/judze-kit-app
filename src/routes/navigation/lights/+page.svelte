@@ -1,7 +1,13 @@
 <script lang="ts">
-    import { title } from "$lib/meta";
+    import { isMobileScreen } from "$lib/deviceDetector";
+import { title } from "$lib/meta";
+    import { getContext } from "svelte";
+    import Button from "../../../components/ui/Button.svelte";
+    import EqualGrid from "../../../components/ui/EqualGrid.svelte";
     import Image from "../../../components/ui/Image.svelte";
 import Section from "../../../components/ui/Section.svelte";
+    import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
+    import VisibilityRange from "./VisibilityRange.svelte";
 
 	const lights = [
 		{
@@ -115,11 +121,31 @@ import Section from "../../../components/ui/Section.svelte";
 				},
 			]
 		}
-	]
+	];
+
+	const createPopup: CreatePopup = getContext('createPopup');
+
+	function openVisibilityRanges() {
+		createPopup({
+			header: "Visibility range of lights",
+			content: {
+				component: VisibilityRange,
+			},
+			bottomSticked: isMobileScreen
+		})
+	}
 
 	title.set('Lights')
 </script>
 <section class="vertical-flex max-width">
+	<div class="line-blocks space" style="align-self: end;">
+		<Button
+			type="transparent"
+			bordered
+			label="Visibility ranges"
+			on:click="{openVisibilityRanges}"
+		/>
+	</div>
 	{#each lights as lightscategory}
 		<Section title="{lightscategory.title}">
 			<div class="vertical-flex space very-big">

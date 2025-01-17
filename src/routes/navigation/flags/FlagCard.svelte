@@ -12,6 +12,7 @@
 		--height="100px"
 		--object-fit="contain"
 		--border-radius="5px"
+		dropShadow
 	/>
 	<div class="vertical-flex Description">
 		<div class="space-between">

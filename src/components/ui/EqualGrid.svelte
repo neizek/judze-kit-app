@@ -6,7 +6,7 @@
 	.Grid {
 		display: grid;
 		grid-template-columns: repeat(var(--mobileColumnsQty), 1fr);
-		width: 100%;
+		width: var(--width, 100%);
 		grid-gap: 16px;
 
 		@include after-mobile {

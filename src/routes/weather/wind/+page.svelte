@@ -10,6 +10,7 @@
     import WindCard from "./WindCard.svelte";
     import Image from "../../../components/ui/Image.svelte";
     import DetailsCard from "../../../components/ui/DetailsCard.svelte";
+    import Details from "../../../components/ui/Details.svelte";
 
 	title.set('Wind')
 
@@ -17,6 +18,7 @@
 		{
 			id: 0,
 			header: 'Beaufort scale',
+			description: 'The Beaufort scale, created by Sir Francis Beaufort in 1805, primarily measures wind speed and its effects on the sea surface. It provides a qualitative description of wind strength and its impact on water conditions.',
 			steps: [
 				{number: 0, description: 'Calm', windSpeed: '< 1 kn', waveHeight: '0 m', seaState: '0', image: 'bf-0', seaConditions: 'Sea like a mirror'},
 				{number: 1, description: 'Light air', windSpeed: '1–3 kn', waveHeight: '0 – 0.3 m', seaState: '1', image: 'bf-1', seaConditions: 'Ripples with appearance of scales are formed, without foam crests'},
@@ -36,6 +38,7 @@
 		{
 			id: 1,
 			header: 'Douglas scale',
+			description: 'The Douglas scale, also known as the Douglas sea scale or international sea and swell scale, measures the roughness of the sea by assessing wave heights and swell conditions. It was developed in 1921 by Captain H.P. Douglas.',
 			steps: [
 				{number: 0, description: 'Glassy', waveHeight: '0 m', image: 'bf-0', seaConditions: 'Sea like a mirror'},
 				{number: 1, description: 'Rippled', waveHeight: '0 – 0.1 m', image: 'bf-1', seaConditions: 'Ripples with appearance of scales are formed, without foam crests'},
@@ -114,10 +117,13 @@
 	</div>
 	<Section title="{windTableType.header}">
 		<div class="vertical-flex space big">
-			<Button
+			<!-- <Button
 				label="True wind calculator"
 				on:click="{createCalculator}"
-			/>
+			/> -->
+			<Details header="Description">
+				<p>{windTableType.description}</p>
+			</Details>
 			<EqualGrid --desktopColumnsQty="{4}" --mobileColumnsQty="{2}">
 				{#each windTableType.steps as step}
 					<!-- svelte-ignore a11y-click-events-have-key-events -->

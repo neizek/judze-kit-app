@@ -14,6 +14,7 @@
 		--aspect-ratio="{isNavigational ? `1/1` : `4/3`}"
 		--object-fit="contain"
 		--border-radius="5px"
+		dropShadow
 	/>
 	<span>{title}</span>
 </div>

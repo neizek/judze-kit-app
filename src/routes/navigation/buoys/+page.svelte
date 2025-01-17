@@ -19,10 +19,10 @@
 		{
 			header: 'Cardinal marks',
 			buoys: [
-				{title: 'North cardinal mark', image: 'cardinal-north.svg', description: 'Cardinal marks are used where lateral marks would be inappropriate or confusing. They indicate the safe side to pass a danger or a feature, such as a bend in channel or end of a shoal. You should pass to the north of this cardinal mark.'},
-				{title: 'East cardinal mark', image: 'cardinal-east.svg', description: 'Cardinal marks are used where lateral marks would be inappropriate or confusing. They indicate the safe side to pass a danger or a feature, such as a bend in channel or end of a shoal. You should pass to the east of this cardinal mark.'},
-				{title: 'South cardinal mark', image: 'cardinal-south.svg', description: 'Cardinal marks are used where lateral marks would be inappropriate or confusing. They indicate the safe side to pass a danger or a feature, such as a bend in channel or end of a shoal. You should pass to the south of this cardinal mark.'},
-				{title: 'West cardinal mark', image: 'cardinal-west.svg', description: 'Cardinal marks are used where lateral marks would be inappropriate or confusing. They indicate the safe side to pass a danger or a feature, such as a bend in channel or end of a shoal. You should pass to the west of this cardinal mark.'}
+				{title: 'North cardinal mark', image: 'cardinal-north.svg', lightSequence: 'VQ or Q', description: 'Cardinal marks are used where lateral marks would be inappropriate or confusing. They indicate the safe side to pass a danger or a feature, such as a bend in channel or end of a shoal. You should pass to the north of this cardinal mark.'},
+				{title: 'East cardinal mark', image: 'cardinal-east.svg', lightSequence: 'VQ (3) 5s or Q (3) 10s',description: 'Cardinal marks are used where lateral marks would be inappropriate or confusing. They indicate the safe side to pass a danger or a feature, such as a bend in channel or end of a shoal. You should pass to the east of this cardinal mark.'},
+				{title: 'South cardinal mark', image: 'cardinal-south.svg', lightSequence: 'VQ (6) + LFL 10s or Q (6) + LFL 15s', description: 'Cardinal marks are used where lateral marks would be inappropriate or confusing. They indicate the safe side to pass a danger or a feature, such as a bend in channel or end of a shoal. You should pass to the south of this cardinal mark.'},
+				{title: 'West cardinal mark', image: 'cardinal-west.svg', lightSequence: 'VQ (9) 10s or Q (9) 15s', description: 'Cardinal marks are used where lateral marks would be inappropriate or confusing. They indicate the safe side to pass a danger or a feature, such as a bend in channel or end of a shoal. You should pass to the west of this cardinal mark.'}
 			]
 		},
 		{
@@ -52,6 +52,11 @@
 						{
 							tag: 'p',
 							text: buoy.description
+						},
+						{
+							tag: 'span',
+							title: 'Light sequence',
+							text: buoy.lightSequence
 						}
 					]
 				}

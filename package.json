@@ -41,6 +41,7 @@
 		"@hugotomazi/capacitor-navigation-bar": "^4.0.1",
 		"astronomy-bundle": "^7.7.7",
 		"capacitor-swipe-back-plugin": "^2.0.0",
-		"cordova-plugin-purchase": "^13.12.1"
+		"cordova-plugin-purchase": "^13.12.1",
+		"vite-plugin-svelte-svgr": "^1.0.4"
 	}
 }

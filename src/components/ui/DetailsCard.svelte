@@ -18,9 +18,11 @@
 	/>
 	<div class="vertical-flex space">
 		{#each details as detail}
-			<svelte:element this="{detail.tag}">
-				{detail.text}
-			</svelte:element>
+			{#if detail.tag !== undefined && detail.text !== undefined}
+				<svelte:element this="{detail.tag}">
+					{detail.title ? `${detail.title}: ` : ``}{detail.text}
+				</svelte:element>
+			{/if}
 		{/each}
 	</div>
 </div>
