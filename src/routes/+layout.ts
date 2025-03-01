@@ -6,6 +6,25 @@ import '../styles/global/global.scss';
 
 import { App, type BackButtonListenerEvent } from "@capacitor/app";
 
+export const csr = true;
+
+export const load = ({ url }) => {
+	return {
+	  url: url.pathname,
+	};
+  };
+  
+//   export function onNavigate(navigation) {
+// 	if (!document.startViewTransition) return;
+  
+// 	return new Promise((resolve) => {
+// 	  document.startViewTransition(async () => {
+// 		resolve();
+// 		await navigation.complete;
+// 	  });
+// 	});
+//   }
+  
 
 CapacitorSwipeBackPlugin.enable();
 if (browser) {

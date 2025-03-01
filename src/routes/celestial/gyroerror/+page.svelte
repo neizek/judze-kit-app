@@ -632,9 +632,9 @@
 
 	title.set('Gyro Error');
 </script>
-<section class="Celestial equal-flex mobile space big max-width">
-	<div class="vertical-flex max-width space big">
-		<div class="vertical-flex max-width space">
+<section class="Celestial equal-flex mobile space-xl max-width">
+	<div class="vertical-flex max-width space-xl">
+		<div class="vertical-flex max-width space big">
 			<h2>General data</h2>
 			<div class="section-box vertical-flex space">
 				<FormItem label="Choose object">
@@ -680,7 +680,7 @@
 				<Button label="Set current position" on:click="{updatePosition}" isLoading="{isLoadingPosition}" maxwidth />
 		</div>
 		</div>
-		<div class="vertical-flex max-width space">
+		<div class="vertical-flex max-width space big">
 			<h2>Ship's heading</h2>
 			<div class="section-box vertical-flex space">
 				<FormItem label="True course">
@@ -699,8 +699,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="vertical-flex max-width space big">
-		<div class="vertical-flex max-width space">
+	<div class="vertical-flex max-width space-xl">
+		<div class="vertical-flex max-width space big">
 			<h2>Object's bearing</h2>
 			<div class="section-box vertical-flex space">
 				<FormItem label="True">
@@ -722,7 +722,7 @@
 				</FormItem>
 			</div>
 		</div>
-		<div class="vertical-flex max-width space">
+		<div class="vertical-flex max-width space big">
 			<h2>Corrections</h2>
 			<div class="section-box vertical-flex space">
 				<FormItem label="Gyro Error">
@@ -752,7 +752,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="vertical-flex max-width space">
+	<div class="vertical-flex max-width space big">
 		<h2>Calculated data</h2>
 		<div class="section-box vertical-flex space">
 			<FormItem label="GHA">

@@ -67,7 +67,7 @@ import { title } from "$lib/meta";
 		});
 	}
 </script>
-<section class="vertical-flex max-width">
+<section class="vertical-flex max-width space-xl">
 	{#each cloudsArray as cloudCategory}
 		<Section title="{cloudCategory.header}">
 			<EqualGrid --mobileColumnsQty="{2}" --desktopColumnsQty="{3}">

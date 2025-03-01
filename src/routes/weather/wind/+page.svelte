@@ -102,7 +102,7 @@
 	}
 </script>
 
-<div class="vertical-flex right space max-width">
+<div class="vertical-flex right space-xl max-width">
 	<div class="line-blocks space" style="align-self: end;">
 		<Button
 			type="{activeSection === 0 ? `primary` : `transparent`}"

@@ -4,6 +4,7 @@
     import Donations from "./Donations.svelte";
     import { isMobileScreen } from "$lib/deviceDetector";
     import AboutUs from "./AboutUs.svelte";
+	// import WaveSVG from "../../../../static/wave.svg"
 
 	const createPopup: CreatePopup = getContext('createPopup');
 
@@ -26,9 +27,14 @@
 		<span class="link" on:click="{() => openPopUp('About Us', AboutUs)}">About Us</span>
 	</div>
 	<span>Judze {new Date().getFullYear()}</span>
+	<!-- <WaveSVG />  -->
 </footer>
 
 <style lang="scss">
+	.link {
+		padding: 8px;
+	}
+	
 	footer {
 		padding-top: 24px;
 		padding-bottom: calc(16px + env(safe-area-inset-bottom));
@@ -36,5 +42,7 @@
 		width: 100%;
 		justify-content: center;
 		align-items: center;
+		// background: url('/wave.svg') no-repeat center center;
+		// background-size: cover;
 	}
 </style>

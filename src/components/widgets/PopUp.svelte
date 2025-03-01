@@ -24,6 +24,7 @@
 
 <script lang="ts">
 	import { setContext, type ComponentType } from 'svelte';
+  import { backOut, cubicOut } from 'svelte/easing';
     import { writable, type Writable } from 'svelte/store';
 	import { 
 		fade,
@@ -83,8 +84,8 @@
 		on:click|self={() => closePopUp(popUp.id)}
 	>
 		<div
-			class="box vertical-flex space light-shadow"
-			transition:fly="{{ y: 200, duration: 200}}"
+			class="box vertical-flex space-xl light-shadow"
+			transition:fly="{{ y: 200, duration: 300, easing: cubicOut}}"
 		>
 			<header class="space-between mobile space">
 				<h3>

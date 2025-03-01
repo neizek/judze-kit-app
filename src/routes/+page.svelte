@@ -1,5 +1,7 @@
 <script lang="ts">
     import { title } from "$lib/meta";
+//   import CircleDiagram from "../components/ui/CircleDiagram.svelte";
+//   import EqualGrid from "../components/ui/EqualGrid.svelte";
     import Menu from "../components/widgets/Menu/Menu.svelte";
 
     const navTree = [
@@ -21,10 +23,26 @@
 				{label: 'Clouds', icon: 'clouds', link: 'weather/clouds'},
 				{label: 'Gyro Error', icon: 'compass', link: 'celestial/gyroerror'}
 			]			
+		},
+		{
+			label: 'Other',
+			items: [
+				{label: 'Distress Signals', icon: 'lifebuoy', link: 'other/distress'},
+				{label: 'Chimes', icon: 'chime', link: 'other/chime'}
+			]
 		}
 	]
 
 	title.set('Judze');
 </script>
 
-<Menu navTree="{navTree}"/>
+<div class="vertical-flex space-xl max-width">
+	<!-- <EqualGrid --mobileColumnsQty="{2}" --desktopColumnsQty="{2}">
+		<CircleDiagram />
+		<div class="vertical-flex">
+			<span>Days left: 91</span>
+			<span>Time done: </span>
+		</div>
+	</EqualGrid> -->
+	<Menu navTree="{navTree}"/>
+</div>

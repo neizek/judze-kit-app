@@ -67,7 +67,7 @@
 
 	title.set('Buoys')
 </script>
-<section class="vertical-flex max-width">
+<section class="vertical-flex max-width space-xl">
 	{#each buoysArray as buoysCategory}
 		<Section title="{buoysCategory.header}">
 			<EqualGrid --desktopColumnsQty="{4}" --mobileColumnsQty="{2}">

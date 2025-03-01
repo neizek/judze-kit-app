@@ -47,7 +47,7 @@
 
 	title.set('Rules')
 </script>
-<div class="vertical-flex space big max-width">
+<div class="vertical-flex space-xl max-width">
 	<Section title="Part A - General">
 		<Details header="Rule 1 - Application">
 			<RuleOne />

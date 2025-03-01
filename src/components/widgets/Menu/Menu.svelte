@@ -9,14 +9,14 @@
 </script>
 	
 <script lang="ts">
+  import { title } from "$lib/meta";
+  import Section from "../../ui/Section.svelte";
+
 	export let navTree: MenuSection[];
 </script>
 
-<section class="vertical-flex max-width">
-	{#each navTree as section }
-		<div class="vertical small space">
-			<h2>{section.label}</h2>
-			<Grid items="{section.items}" />
-		</div>
-	{/each}
-</section>
+{#each navTree as section }
+	<Section title="{section.label}">
+		<Grid items="{section.items}" />
+	</Section>
+{/each}

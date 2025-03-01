@@ -1,77 +1,83 @@
 <script lang="ts">
-    import isMobile, { isMobileScreen } from "$lib/deviceDetector";
+    import { isMobileScreen } from "$lib/deviceDetector";
 	import { title } from "$lib/meta";
-    import EqualGrid from "../../../components/ui/EqualGrid.svelte";
-    import Image from "../../../components/ui/Image.svelte";
+	import { getContext } from "svelte";	
     import Bell from "./Bell.svelte";
     import BellGong from "./BellGong.svelte";
+	import Bells from "./Bells.svelte";
+	import BellsGong from "./BellsGong.svelte";
+	import SoundSignalDetails from "./SoundSignalDetails.svelte";
+	import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
+	import MorseCode from "./MorseCode.svelte";
+	import type { SoundSignalsType, SoundSignalType } from "./types";
+	import Section from "../../../components/ui/Section.svelte";
 
 	$title = 'Sound signals'
 
-	const signalsArray = [
+	const signalsArray: SoundSignalsType[] = [
 		{
 			header: "Perfect visibility",
 			signals: [
-				{morse: '·', description: 'Altering course to starboard'},
-				{morse: '··', description: 'Altering course to port'},
-				{morse: '···', description: 'Operating reverse propulsion'},
-				{morse: '·····', description: 'I do not agree. I am unclear as to your intentions'},
-				{morse: '--·', description: 'I wish to overtake to your starboard'},
-				{morse: '--··', description: 'I wish to overtake to your port'},
-				{morse: '-·-·', description: 'I agree with your overtake'}
+				{morse: '·', pattern: '.', description: 'Altering course to starboard'},
+				{morse: '··', pattern: '. .', description: 'Altering course to port'},
+				{morse: '···', pattern: '. . .', description: 'Operating reverse propulsion'},
+				{morse: '·····', pattern: '. . . . .', description: 'I do not agree. I am unclear as to your intentions'},
+				{morse: '--·', pattern: '- - .', description: 'I wish to overtake to your starboard'},
+				{morse: '--··', pattern: '- - . .', description: 'I wish to overtake to your port'},
+				{morse: '-·-·', pattern: '- . - .', description: 'I agree with your overtake'}
 			]
 		},
 		{
 			header: "Restricted visibility",
 			signals: [
-				{morse: '-', description: 'Under power, under way and making way'},
-				{morse: '--', description: 'Under power, under way and NOT making way'},
-				{morse: '-··', description: 'Towing vessel | Not under command | Constrained by draft | Restricted maneuvrebility | Fishing'},
-				{morse: '-···', description: 'Towed vessel'},
-				{morse: '·-·', description: 'At anchor'},
-				{morse: '····', description: 'Pilot vessel'},
-				{morse: Bell, description: 'A vessel at anchor (< 100m length)'},
-				{morse: BellGong, description: 'A vessel at anchor (> 100m length)'}
+				{morse: '-', pattern: '-', description: 'Under power, under way and making way'},
+				{morse: '--', pattern: '- -', description: 'Under power, under way and NOT making way'},
+				{morse: '-··', pattern: '- . .', description: 'Towing vessel | Not under command | Constrained by draft | Restricted maneuvrebility | Fishing'},
+				{morse: '-···', pattern: '- . . .', description: 'Towed vessel'},
+				{morse: '·-·', pattern: '. - .', description: 'At anchor'},
+				{morse: '····', pattern: '. . . .', description: 'Pilot vessel'},
+				{morse: Bell, pattern: 'B', description: 'A vessel at anchor (< 100m length)'},
+				{morse: BellGong, pattern: 'B G', description: 'A vessel at anchor (> 100m length)'},
+				{morse: Bells, pattern: 'bbb B bbb', description: 'A vessel aground (< 100m length)'},
+				{morse: BellsGong, pattern: 'bbb B bbb G', description: 'A vessel aground (< 100m length)'}
 			]
 		}
 	]
-</script>
-<section class="equal-flex mobile max-width">
-	{#each signalsArray as signalCategory}
-		<div class="vertical-flex max-width space">
-			<h2>{ signalCategory.header }</h2>
-			<div class="Signals section-box equal-flex">
-				{#each signalCategory.signals as signal}
-					{#if typeof signal.morse === 'string'}
-						<span class="morse">{signal.morse}</span>		
-					{:else}
-						<svelte:component this="{signal.morse}" />
-					{/if}
-					<span>{signal.description}</span>
-				{/each}
-			</div>
-		</div>
-	{/each}
-</section>
 
-<style lang="scss">
-	.Signals {
-		display: grid;
-		grid-template-columns: 1fr 2fr;
-		width: 100%;
-		grid-gap: 16px;
-		align-items: center;
+	const createPopup: CreatePopup = getContext('createPopup');
 
-		@include after-mobile {
-			grid-template-columns: 1fr 2fr;
-			grid-gap: 32px;
-		}
-
-		.morse {
-			font-family: monospace; /* Use a monospace font for better alignment */
-			letter-spacing: 2px; /* Space between characters */
-			font-size: 36px;
+	function openDescription(signal: SoundSignalType) {
+		if (signal.description !== '' && signal.description) {
+			createPopup({
+				header: 'Sound signal details',
+				content: {
+					component: SoundSignalDetails,
+					props: {
+						signal
+					}
+				},
+				bottomSticked: isMobileScreen
+			})
 		}
 	}
-</style>
+</script>
+<section class="equal-flex mobile max-width space-xl">
+	{#each signalsArray as signalCategory}
+		<Section title="{signalCategory.header}">
+			<div class="vertical space big">
+				{#each signalCategory.signals as signal, index}
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<!-- svelte-ignore a11y-no-static-element-interactions -->
+					<div
+						class="equal-flex inlined space-xl"
+						on:click="{() => openDescription(signal)}"
+					>
+						<MorseCode morse="{signal.morse}" />
+						<span class="doubled">{signal.description}</span>
+					</div>
+				{/each}
+			</div>
+		</Section>
+	{/each}
+</section>
 

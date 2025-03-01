@@ -137,7 +137,7 @@ import Section from "../../../components/ui/Section.svelte";
 
 	title.set('Lights')
 </script>
-<section class="vertical-flex max-width">
+<section class="vertical-flex max-width space-xl">
 	<div class="line-blocks space" style="align-self: end;">
 		<Button
 			type="transparent"
@@ -148,7 +148,7 @@ import Section from "../../../components/ui/Section.svelte";
 	</div>
 	{#each lights as lightscategory}
 		<Section title="{lightscategory.title}">
-			<div class="vertical-flex space very-big">
+			<div class="vertical-flex space-xl">
 				{#each lightscategory.lights as light}
 					<div class="Card vertical-flex space">
 						<div class="bow">

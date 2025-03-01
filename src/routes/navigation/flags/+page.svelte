@@ -38,7 +38,7 @@
 
 	title.set('Flags')
 </script>
-<div class="vertical-flex space max-width">
+<div class="vertical-flex space-xl max-width">
 	<div class="line-blocks space" style="align-self: end;">
 		<Button
 			type="{isNavigational ? `primary` : `transparent`}"

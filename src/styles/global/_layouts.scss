@@ -141,6 +141,10 @@ section {
 		flex: 0 1 100%;
 	}
 
+	& .inlined {
+		align-items: center;
+	}
+
 	& .doubled {
 		flex: 0 1 200%;
 	}
@@ -213,7 +217,7 @@ section {
 		gap: 16px;
 	}
 
-	&.very-big {
+	&-xl {
 		gap: 24px;
 	}
 
