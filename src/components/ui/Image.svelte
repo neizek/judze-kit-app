@@ -1,7 +1,7 @@
 <script lang="ts">
     import { browser } from "$app/environment";
     import { onMount } from "svelte";
-  import { scale } from "svelte/transition";
+  import { fade, scale } from "svelte/transition";
 
 	export let src: string;
 	export let alt: string;
@@ -24,7 +24,7 @@
 </script>
 {#key src}
 	<img
-		in:scale
+		in:fade
 		src="{src}"
 		class:dropShadow
 		class:placeholder="{isLoading}"

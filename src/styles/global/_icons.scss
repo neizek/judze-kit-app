@@ -1,3 +1,5 @@
+@use '../abstract/abstract.scss' as *;
+
 .errorIcon {
 	background-color: #{$errorColor};
 	color: #{$c-white};

@@ -22,8 +22,14 @@
 			
 			> span.material-icons {
 				transform: rotate(90deg);
-			}	
+			}
+			
+
 		}
+
+		// &[open] article {
+		// 	max-height: 1000px;
+		// }
 
 		summary {
 			-webkit-tap-highlight-color: transparent;
@@ -50,7 +56,12 @@
 
 		article {
 			padding: 10px;
+			// max-height: 0;
+			// overflow: hidden;
+			// transition: max-height 0.5s ease-out;
 		}
+
+
 	}
 
 </style>

@@ -1,3 +1,5 @@
+@use '../abstract/abstract.scss' as *;
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus input:-webkit-autofill,
@@ -37,7 +39,6 @@ button {
 	outline-style: none;
 	position: relative;
 }
-
 :root {
 	--primary-color: #{$primaryColor};
 	--secondary-color: #{$secondaryColor};

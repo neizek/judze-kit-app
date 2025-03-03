@@ -24,9 +24,8 @@
     import RuleTwenty from "./rulesTexts/PartC/RuleTwenty.svelte";
     import RuleTwentyOne from "./rulesTexts/PartC/RuleTwentyOne.svelte";
     import RuleTwentyTwo from "./rulesTexts/PartC/RuleTwentyTwo.svelte";
-    import RulteTwentyThree from "./rulesTexts/PartC/RuleTwentyThree.svelte";
-    import RuleTwentyFour from "./rulesTexts/PartC/RuleTwentyFour.svelte";
     import RuleTwentyThree from "./rulesTexts/PartC/RuleTwentyThree.svelte";
+    import RuleTwentyFour from "./rulesTexts/PartC/RuleTwentyFour.svelte";
     import RuleTwentyFive from "./rulesTexts/PartC/RuleTwentyFive.svelte";
     import RuleTwentySix from "./rulesTexts/PartC/RuleTwentySix.svelte";
     import RuleTwentySeven from "./rulesTexts/PartC/RuleTwentySeven.svelte";

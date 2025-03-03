@@ -1,4 +1,4 @@
-import { derived, get, writable, type Writable } from "svelte/store";
+import { get, writable, type Writable } from "svelte/store";
 import storage from "./storage";
 import { browser } from "$app/environment";
 import { StatusBar, Style } from "@capacitor/status-bar";
@@ -89,18 +89,6 @@ const isDarkTheme = (newTheme: Theme) => {
 		default:
 			return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 	}
-	// switch (theme) {
-	// 	case 'dark':
-	// 		StatusBar.setBackgroundColor({color: '#2A3036'});
-	// 		StatusBar.setStyle({style: Style.Dark});
-	// 		NavigationBar.setColor({color: '#24282D'});
-	// 	break;
-	// 	case 'light':
-	// 		StatusBar.setBackgroundColor({color: '#2A3036'});
-	// 		StatusBar.setStyle({style: Style.Dark});
-	// 		NavigationBar.setColor({color: '#24282D'});
-	// 	break;
-	// }
 }
 
 export function initTheme(): void {
@@ -111,22 +99,10 @@ export function initTheme(): void {
 				THEME_ATTRIBUTE,
 				getThemeName(newTheme)
 			);
-			// if (newTheme === Theme.Light) {
-			// 	setAppTheme('light');
-			// } else if (newTheme === Theme.Dark) {
-			// 	setAppTheme('dark');
-			// } else {
-			// 	if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			// 		setAppTheme('dark');
-			// 	} else {
-			// 		setAppTheme('light');
-			// 	}
-			// }
 
 			StatusBar.setBackgroundColor({color: isDarkTheme(newTheme) ? '#2A3036': '#FFFFFF'});
 			StatusBar.setStyle({style: isDarkTheme(newTheme) ? Style.Dark : Style.Light});
 			NavigationBar.setColor({color: isDarkTheme(newTheme) ? '#24282D' : '#F4F4F4'});
-			// NavigationBar.setTransparency({isTransparent: true});
 		}
 	});
 

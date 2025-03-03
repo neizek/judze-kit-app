@@ -1,3 +1,5 @@
+@use '../abstract/abstract.scss' as *;
+
 :root {
 	--default-font-size: 12px;
 	--default-font-color: #{$defaultFontColor};
@@ -12,7 +14,9 @@
 		--default-font-size: 14px;
 	}
 
-	font-size: var(--default-font-size);
+	& {
+		font-size: var(--default-font-size);
+	}
 }
 
 * {

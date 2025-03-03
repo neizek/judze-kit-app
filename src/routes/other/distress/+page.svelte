@@ -17,7 +17,8 @@
 		{img: 'sos', label: 'SOS'},
 		{img: 'radio', label: 'MayDay by Radio'},
 		{img: 'gun', label: 'Gun Fired'},
-		{img: 'parachute', label: 'Parachute Flare'}
+		{img: 'parachute', label: 'Parachute Flare'},
+		{img: 'smoke', label: 'Smoke'}
 	];
 
 	function openDescription(signal: DistressSignalType) {
@@ -39,7 +40,7 @@
 								--width="100%"
 								--object-fit="cover"
 								--border-radius="5px"
-								--padding="20px"
+								--padding="16px"
 							/>
 							<span>{signal.label}</span>
 						</div>

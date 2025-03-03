@@ -9,6 +9,13 @@
   import { cubicOut } from "svelte/easing";
 
 	initTheme();
+
+	import { LocalNotifications } from '@capacitor/local-notifications';
+
+	async function requestPermission() {
+		await LocalNotifications.requestPermissions();
+	}
+
 	export let data;
 
 	let previousPath = '';
@@ -40,9 +47,17 @@
 </PopUp>
 
 <style lang="scss">
-	// :global(.Container) {
-	// 	background:  linear-gradient(to top,#001a2b,transparent 400px);
-	// }
+	:root {
+		--gradient-color: #ffffff;
+
+		&[data-theme='dark'] {
+			--gradient-color: #001429;
+		}
+	}
+
+	:global(.Container) {
+		background: linear-gradient(0deg, var(--gradient-color) 0%, transparent 200px);
+	}
 
 	.Content {
 		display: flex;

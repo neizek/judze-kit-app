@@ -1,45 +1,48 @@
+@use "sass:color";
+@use '../abstract/abstract.scss' as *;
+
 :root {
 	--button-background-color: #{$c-white};
-	--button-background-color-hover: #{darken($c-white, 2%)};
+	--button-background-color-hover: #{color.adjust($c-white, $lightness: -2%)};
 	--button-background-color-primary: #{$primaryColor};
-	--button-background-color-primary-hover: #{darken($primaryColor, 7%)};
+	--button-background-color-primary-hover: #{color.adjust($primaryColor, $lightness: -7%)};
 	--button-background-color-secondary: #{$secondaryColor};
-	--button-background-color-secondary-hover: #{darken($secondaryColor, 5%)};
+	--button-background-color-secondary-hover: #{color.adjust($secondaryColor, $lightness: -5%)};
 	--button-background-color-dangerous: #{$errorColor};
-	--button-background-color-dangerous-hover: #{darken($errorColor, 7%)};
+	--button-background-color-dangerous-hover: #{color.adjust($errorColor, $lightness: -7%)};
 	--placeholder-opacity: 0.7;
 	--placeholder-font-weight: 400;
 	--input-background-color: #{$inputBackgroundColor};
 	--input-background-color-hover: #{$inputBackgroundColorHover};
-	--input-background-color-focus: #{lighten($inputBackgroundColor, 5%)};
-	--input-background-color-error: #{mix($inputBackgroundColor, $errorColor, 90%)};
+	--input-background-color-focus: #{color.adjust($inputBackgroundColor, $lightness: 5%)};
+	--input-background-color-error: #{color.mix($inputBackgroundColor, $errorColor, 90%)};
 	--input-border-color: #{$inputBorderColor};
 	--input-border-color-hover: #{$inputBorderColorHover};
-	--input-border-color-focus: #{lighten($primaryColor, 20%)};
-	--input-border-color-error: #{lighten($errorColor, 5%)};
+	--input-border-color-focus: #{color.adjust($primaryColor, $lightness: 20%)};
+	--input-border-color-error: #{color.adjust($errorColor, $lightness: 5%)};
 
 	&[data-theme='dark'] {
-		--button-background-color: #{lighten($bodyBackgroundColorDark, 3%)};
-		--button-background-color-hover: #{lighten($bodyBackgroundColorDark, 7%)};
+		--button-background-color: #{color.adjust($bodyBackgroundColorDark, $lightness: 3%)};
+		--button-background-color-hover: #{color.adjust($bodyBackgroundColorDark, $lightness: 7%)};
 		--button-background-color-primary: #{$primaryColorDark};
-		--button-background-color-primary-hover: #{darken($primaryColorDark, 7%)};
+		--button-background-color-primary-hover: #{color.adjust($primaryColorDark, $lightness: -7%)};
 		--button-background-color-secondary: #{$secondaryColorDark};
-		--button-background-color-secondary-hover: #{darken($secondaryColorDark, 5%)};
+		--button-background-color-secondary-hover: #{color.adjust($secondaryColorDark, $lightness: -5%)};
 		--button-background-color-dangerous: #{$errorColorDark};
-		--button-background-color-dangerous-hover: #{darken($errorColorDark, 5%)};
+		--button-background-color-dangerous-hover: #{color.adjust($errorColorDark, $lightness: -5%)};
 		--placeheolder-opacity: 0.3;
 		--placeholder-font-weight: 300;
 		--input-background-color: #{$inputBackgroundColorDark};
 		--input-background-color-hover: #{$inputBackgroundColorDarkHover};
-		--input-background-color-focus: #{darken($inputBackgroundColorDark, 1%)};
-		--input-background-color-error: #{mix(
+		--input-background-color-focus: #{color.adjust($inputBackgroundColorDark, $lightness: -1%)};
+		--input-background-color-error: #{color.mix(
 				$inputBackgroundColorDark,
 				$errorColorDark,
 				90%
 			)};
 		--input-border-color: #{$inputBorderColorDark};
 		--input-border-color-hover: #{$inputBorderColorDarkHover};
-		--input-border-color-focus: #{mix(
+		--input-border-color-focus: #{color.mix(
 				$primaryColor,
 				$bodyBackgroundColorDark,
 				65%
@@ -92,7 +95,7 @@
 		&,
 		* {
 			text-shadow: 1px 1px 1px #00000030;
-			color: darken($c-white, 2%);
+			color: color.adjust($c-white, $lightness: 2%);
 		}
 	}
 
@@ -167,7 +170,9 @@ input::placeholder {
 			background-color: var(--input-background-color-error);
 		}
 
-		border-color: var(--input-border-color-error);
+		& {
+			border-color: var(--input-border-color-error);
+		}
 
 		&:focus-within {
 			box-shadow: 0 0 0 1px var(--input-border-color-error);

@@ -8,7 +8,7 @@
 	{#if title}
 		<h2 in:fade>{title}</h2>
 	{/if}
-	<div class="section-box">
+	<div class="section-box vertical space">
 		<slot></slot>
 	</div>
 </div>

@@ -1,3 +1,5 @@
+@use '../abstract/mixins' as *;
+
 .opacity-transition {
 	@include desktop {
 		opacity: 0.7;

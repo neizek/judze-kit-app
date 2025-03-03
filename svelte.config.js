@@ -7,7 +7,7 @@ const config = {
 	// for more information about preprocessors
 	preprocess: vitePreprocess({
 		scss: {
-			prependData: `@import "./src/styles/abstract/abstract.scss";`,
+			prependData: `@use "/src/styles/abstract/abstract.scss"; as *`,
 		},
 	}),
 

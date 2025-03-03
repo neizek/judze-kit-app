@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Color palette
 $c-white: #ffffff;
 $c-black: #000000;
@@ -18,27 +20,27 @@ $c-wheatYellow: #fc9803;
 // Global
 $primaryColor: $c-sky;
 $secondaryColor: $c-sea;
-$primaryColorDark: mix($c-sky, $c-wetAsphalt, 80%);
-$secondaryColorDark: darken($c-grass, 10%);
+$primaryColorDark: color.mix($c-sky, $c-wetAsphalt, 80%);
+$secondaryColorDark: color.adjust($c-grass, $lightness: -10%);
 $errorColor: $c-lightRed;
 $errorColorDark: $c-wetBlood;
-$separationColor: darken($c-chalk, 10%);
-$separationColorDark: lighten($c-wetAsphalt, 15%);
+$separationColor: color.adjust($c-chalk, $lightness: -10%);
+$separationColorDark: color.adjust($c-wetAsphalt, $lightness: 15%);
 
 // Layouts
 $bodyBackgroundColor: $c-chalk;
-$bodyBackgroundColorDark: darken($c-wetAsphalt, 2%);
+$bodyBackgroundColorDark: color.adjust($c-wetAsphalt, $lightness: -2%);
 $wrapperWidth: 1280px;
 $wrapperSidePaddings: 32px;
 $wrapperSidePaddingsMobile: 10px;
 $sectionBorderRadius: 8px;
-$sectionBackgroundColorDark: lighten($bodyBackgroundColorDark, 3%);
-$sectionBackgroundColor: mix($primaryColor, $c-white, 0%);
+$sectionBackgroundColorDark: color.adjust($bodyBackgroundColorDark, $lightness: 3%);
+$sectionBackgroundColor: color.mix($primaryColor, $c-white, 0%);
 
 // Small layouts
 
-$boxBackgroundColor: mix($primaryColor, $c-white, 0%);
-$boxBackgroundColorDark: lighten($bodyBackgroundColorDark, 3%);
+$boxBackgroundColor: color.mix($primaryColor, $c-white, 0%);
+$boxBackgroundColorDark: color.adjust($bodyBackgroundColorDark, $lightness: 3%);
 
 // Text
 $defaultFontColor: $c-charcoal;
@@ -48,9 +50,9 @@ $errorFontColorDark: $c-lightRed;
 
 // Input
 $inputBackgroundColor: #ffffff;
-$inputBackgroundColorHover: darken($c-white, 5%);
-$inputBackgroundColorDark: darken($c-wetAsphalt, 6%);
-$inputBackgroundColorDarkHover: darken($c-wetAsphalt, 3%);
+$inputBackgroundColorHover: color.adjust($c-white, $lightness: -5%);
+$inputBackgroundColorDark: color.adjust($c-wetAsphalt, $lightness: -6%);
+$inputBackgroundColorDarkHover: color.adjust($c-wetAsphalt, $lightness: -3%);
 $inputBorderRadius: 4px;
 $inputBorderColor: #00000030;
 $inputBorderColorHover: #00000045;
@@ -62,13 +64,13 @@ $tableBorderRadius: 8px;
 $tableHeadColor: $c-white;
 $tableHeadBackgroundColor: $secondaryColor;
 $tableHeadEvenBackgroundColor: $c-white;
-$tableBodyBackgroundColor: mix($primaryColor, $c-white, 0%);
-$tableBodyEvenBackgroundColor: darken($c-white, 3%);
+$tableBodyBackgroundColor: color.mix($primaryColor, $c-white, 0%);
+$tableBodyEvenBackgroundColor: color.adjust($c-white, $lightness: -3%);
 $tableHeadColorDark: $c-white;
 $tableHeadBackgroundColorDark: $secondaryColorDark;
-$tableHeadEvenBackgroundColorDark: lighten($bodyBackgroundColorDark, 5%);
-$tableBodyBackgroundColorDark: lighten($bodyBackgroundColorDark, 3%);
-$tableBodyEvenBackgroundColorDark: lighten($bodyBackgroundColorDark, 6%);
+$tableHeadEvenBackgroundColorDark: color.adjust($bodyBackgroundColorDark, $lightness: 5%);
+$tableBodyBackgroundColorDark: color.adjust($bodyBackgroundColorDark, $lightness: 3%);
+$tableBodyEvenBackgroundColorDark: color.adjust($bodyBackgroundColorDark, $lightness: 6%);
 
 :root {
 	--primary-color: #{$primaryColor};

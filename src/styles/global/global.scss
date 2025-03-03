@@ -1,10 +1,9 @@
-@import './fonts';
-@import './placeholder';
-@import './predefined';
-@import './layouts';
-@import './text';
-@import './table';
-@import './input';
-@import './icons';
-@import './effects';
+@forward './fonts';
+@forward './placeholder';
+@forward './predefined';
+@forward './layouts';
+@forward './text';
+@forward './input';
+@forward './icons';
+@forward './effects';
 

@@ -1,3 +1,5 @@
+@use '../abstract/abstract.scss' as *;
+
 :root {
 	--body-background-color: #{$bodyBackgroundColor};
 	--box-background-color: #{$boxBackgroundColor};

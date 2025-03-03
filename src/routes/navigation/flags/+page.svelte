@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getContext } from "svelte";
+    import { getContext, onMount } from "svelte";
     import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
     import { title } from "$lib/meta";
     import { isMobileScreen } from "$lib/deviceDetector";
@@ -10,13 +10,31 @@
     import Button from "../../../components/ui/Button.svelte";
     import { allFlags, type FlagCategory } from "./flagsArrays";
     import FlagItem from "./FlagItem.svelte";
+	// import FloatingSearch from "../../../components/ui/FloatingSearch.svelte";
 
 	// let choosenCategory: 'national' | 'navigational' = 'navigational'
+	// let searchValue: string;
 	let isNavigational: boolean = true;
 	let flagsArray: FlagCategory[];
 
+	function getAllFlags() {
+		flagsArray = allFlags.filter(category => {
+			return category.isNavigational === isNavigational
+		});
+		// if (searchValue !== '' && searchValue) {
+		// 	flagsArray.forEach((category, index) => {
+		// 		category.flags = category.flags.filter(flag => flag.name.indexOf(searchValue) !== -1);
+		// 	})
+		// }
+		// console.log(flagsArray)
+	}
+
+	getAllFlags();
+
 	$: {
-		flagsArray = allFlags.filter(category => category.isNavigational === isNavigational);
+		isNavigational;
+		// searchValue;
+		getAllFlags();
 	}
 
 	const createPopup: CreatePopup = getContext('createPopup');
@@ -65,5 +83,6 @@
 			</EqualGrid>
 		</Section>
 	{/each}
+	<!-- <FloatingSearch bind:value="{searchValue}" /> -->
 </div>
 
