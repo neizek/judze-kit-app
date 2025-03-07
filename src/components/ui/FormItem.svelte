@@ -36,7 +36,7 @@
 
 	.formItem {
 		display: grid;
-		gap: 7px;
+		gap: 8px;
 
 		&:focus-within .errors {
 			display: block;

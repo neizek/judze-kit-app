@@ -3,7 +3,7 @@
     import type { AnyObject } from '$lib/types';
 
 	interface PopUpComponent {
-		component: ComponentType,
+		component: ConstructorOfATypedSvelteComponent,
 		props?: AnyObject
 	}
 
@@ -23,8 +23,8 @@
 </script>
 
 <script lang="ts">
-	import { setContext, type ComponentType } from 'svelte';
-  import { backOut, cubicOut } from 'svelte/easing';
+	import { setContext, type ComponentType, type SvelteComponent } from 'svelte';
+	import { cubicOut } from 'svelte/easing';
     import { writable, type Writable } from 'svelte/store';
 	import { 
 		fade,

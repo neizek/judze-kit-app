@@ -29,15 +29,9 @@
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<span class="material-icons notranslate" on:click={() => window.history.back()}>chevron_left</span>
-				<!-- <i class="fa-solid fa-arrow-left" on:click={() => window.history.back()}/> -->
 			</div>
 		{/if}
 		{#if $page.url.pathname === '/' || $page.url.pathname === ''}
-			<!-- <img
-				src="/judze-logo-letters{$theme === 'light' ? '' : '-white'}.svg"
-				alt="Judze logo letters"
-				style="height: 100%; padding: 14px 0;"
-			/> -->
 			<div class="Logo" style="height: 100%; padding: 14px 0;">
 				{@html LogoSVG}
 			</div>
@@ -59,11 +53,15 @@
 		}
 	}
 	header {
-		height: calc(50px + env(safe-area-inset-top));
+		height: calc(50px + var(--safe-area-inset-top, env(safe-area-inset-top)));
+		// height: calc(50px + env(safe-area-inset-top, 20px));
+		// height: 70px;
 		top: 0;
 		left: 0;
 		right: 0;
-		padding-top: env(safe-area-inset-top);
+		padding-top: var(--safe-area-inset-top, env(safe-area-inset-top));
+		// padding-top: env(safe-area-inset-top, 20px);
+		// padding-top: 20px;
 		background-color: var(--box-background-color);
 		position: fixed;
 		z-index: 99;

@@ -1,21 +1,24 @@
+import { browser } from "$app/environment";
+import { LocalNotifications, type LocalNotificationSchema } from "@capacitor/local-notifications";
 import { writable, type Writable } from "svelte/store";
 
-type ChimeType = {
-	title: string,
-	body: string,
-	id: number,
-	// schedule: { at: new Date(Date.now() + 5000) },
-	// sound: null,
-	// attachments: null,
-	// actionTypeId: "",
-	// extra: null
+async function scheduleNotifications(chimes: LocalNotificationSchema[]) {
+	if (!browser) { 
+		return;
+	}
+	
+	await LocalNotifications.schedule({
+		notifications: chimes
+	  });
 }
 
-export function addChime(chime: ChimeType) {
+export function addChime(chime: LocalNotificationSchema) {
 	chimes.update((currentChimes) => {
 		currentChimes = [...currentChimes, chime];
+		scheduleNotifications(currentChimes);
 		return currentChimes;
 	})
+
 }
 
-export const chimes: Writable<ChimeType[]> = writable([])
+export const chimes: Writable<LocalNotificationSchema[]> = writable([])

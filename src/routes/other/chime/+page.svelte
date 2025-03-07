@@ -6,7 +6,7 @@
 	import Details from "../../../components/ui/Details.svelte";
 	import Section from "../../../components/ui/Section.svelte";
 	import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
-  import NewChimeForm from "./NewChimeForm.svelte";
+	import NewChimeForm from "./NewChimeForm.svelte";
 
 	$title = 'Custom notifications'
 

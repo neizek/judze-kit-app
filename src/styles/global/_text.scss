@@ -73,3 +73,33 @@ ul {
 		opacity: 1;
 	}
 }
+
+.text {
+	&-size {
+		&-m {
+			font-size: 16px;
+		}
+
+		&-l {
+			font-size: 24px;
+		}
+
+		&-xl {
+			font-size: 32px;
+		}
+	}
+
+	&-weight {
+		&-l {
+			font-weight: 500;
+		}
+		
+		&-xl {
+			font-weight: 600;
+		}
+	}
+
+	&-centered {
+		text-align: center;
+	}
+}

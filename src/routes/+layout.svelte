@@ -10,12 +10,6 @@
 
 	initTheme();
 
-	import { LocalNotifications } from '@capacitor/local-notifications';
-
-	async function requestPermission() {
-		await LocalNotifications.requestPermissions();
-	}
-
 	export let data;
 
 	let previousPath = '';
@@ -62,10 +56,14 @@
 	.Content {
 		display: flex;
 		flex: 1;
-		margin-top: calc(74px + env(safe-area-inset-top));
+		margin-top: calc(74px + var(--safe-area-inset-top, env(safe-area-inset-top)));
+		// margin-top: calc(74px + env(safe-area-inset-top, 20px));
+		// margin-top: 94px;
 
 		@include after-mobile {
-			margin-top: calc(82px + env(safe-area-inset-top));
+			margin-top: calc(82px + var(--safe-area-inset-top, env(safe-area-inset-top)));
+			// margin-top: calc(82px + env(safe-area-inset-top, 20px));
+			// margin-top: 102px;
 		}
 	}
 </style>

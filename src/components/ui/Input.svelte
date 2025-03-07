@@ -12,6 +12,7 @@
 	export let max: number | undefined = undefined;
 	export let min: number | undefined = undefined;
 	export let disabled: boolean = false;
+	export let masks: ((input: string) => void)[] = [];
 
 	$: {
 		if (value){
@@ -19,7 +20,15 @@
 				value = value < min ? min : value;
 				value = value > max ? max : value;
 			}
+			if (masks.length > 0) {
+				let newValue = value;
+				masks.forEach(mask => {
+					newValue = mask(newValue)
+				})
+				value = newValue;
+			}
 		}
+		
 	}
 
 	const ref = (node: HTMLInputElement) => {

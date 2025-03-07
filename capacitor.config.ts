@@ -5,16 +5,25 @@ const config: CapacitorConfig = {
   appName: 'Judze',
   webDir: 'build',
   backgroundColor: '2e333a',
-  bundledWebRuntime: false,
   plugins: {
       SwipeBack: {
         enabled: true
       },
-      LocalNotifications: {
-        smallIcon: "ic_stat_icon_config_sample",
-        iconColor: "#488AFF",
-        sound: "beep.wav"
-      }
+      LocalNotifications: {},
+      SplashScreen: {
+        launchShowDuration: 2000,
+        launchAutoHide: true, 
+        launchFadeOutDuration: 500,
+        splashFullScreen: true,
+        splashImmersive: true,
+        androidScaleType: "CENTER_CROP",
+        androidSplashResourceName: "splash",
+        // "backgroundColor": "#ffffffff",
+        // "showSpinner": true,
+        // "androidSpinnerStyle": "large",
+        // "iosSpinnerStyle": "small",
+        // "spinnerColor": "#999999",
+      },
   }
 };
 

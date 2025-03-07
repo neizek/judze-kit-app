@@ -1,18 +1,21 @@
 <script lang="ts">
-  import { addChime } from "$lib/chime";
-  import Button from "../../../components/ui/Button.svelte";
-import FormItem from "../../../components/ui/FormItem.svelte";
-  import Input from "../../../components/ui/Input.svelte";
+	import { addChime } from "$lib/chime";
+	import Button from "../../../components/ui/Button.svelte";
+	import FormItem from "../../../components/ui/FormItem.svelte";
+	import Input from "../../../components/ui/Input.svelte";
 
-  let body: string;
+	let body: string;
 
-  function handleAdd() {
+	function handleAdd() {
 	addChime({
 		title: 'Judze',
 		body: body,
-		id: 0
+		id: 0,
+		schedule: {
+			at: new Date(Date.now() + 5000)
+		}
 	})
-  }
+	}
 </script>
 
 <div class="vertical-flex space-xl">

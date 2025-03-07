@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { title } from "$lib/meta";
-//   import CircleDiagram from "../components/ui/CircleDiagram.svelte";
-//   import EqualGrid from "../components/ui/EqualGrid.svelte";
-    import Menu from "../components/widgets/Menu/Menu.svelte";
+	import { daysCounterStore } from "$lib/daysCounter";
+	import { title } from "$lib/meta";
+	import DaysLeft from "../components/widgets/DaysLeft.svelte";
+	import Menu from "../components/widgets/Menu/Menu.svelte";
 
     const navTree = [
 		{
@@ -37,12 +37,8 @@
 </script>
 
 <div class="vertical-flex space-xl max-width">
-	<!-- <EqualGrid --mobileColumnsQty="{2}" --desktopColumnsQty="{2}">
-		<CircleDiagram />
-		<div class="vertical-flex">
-			<span>Days left: 91</span>
-			<span>Time done: </span>
-		</div>
-	</EqualGrid> -->
+	{#key $daysCounterStore}
+		<DaysLeft startDate="{$daysCounterStore.startFrom}" endDate="{$daysCounterStore.endTo}"/>
+	{/key}
 	<Menu navTree="{navTree}"/>
 </div>

@@ -23,7 +23,7 @@
 				}}">
 				<span>{item.label}</span>
 				{#if item.icon}
-					<i class="fa-solid fa-{item.icon}" />
+					<i class="fa-solid fa-{item.icon}"></i>
 				{/if}
 			</div>
 		{/each}

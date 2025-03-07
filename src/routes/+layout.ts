@@ -1,33 +1,30 @@
-export const prerender = true;
-
 import { browser } from '$app/environment';
-import { CapacitorSwipeBackPlugin } from 'capacitor-swipe-back-plugin';
+// import { CapacitorSwipeBackPlugin } from 'capacitor-swipe-back-plugin';
 import '../styles/global/global.scss';
+import '@capacitor-community/safe-area';
 
 import { App, type BackButtonListenerEvent } from "@capacitor/app";
+import { LocalNotifications } from '@capacitor/local-notifications';
 
 export const csr = true;
+export const prerender = false;
 
 export const load = ({ url }) => {
 	return {
 	  url: url.pathname,
 	};
   };
-  
-//   export function onNavigate(navigation) {
-// 	if (!document.startViewTransition) return;
-  
-// 	return new Promise((resolve) => {
-// 	  document.startViewTransition(async () => {
-// 		resolve();
-// 		await navigation.complete;
-// 	  });
-// 	});
-//   }
-  
 
-CapacitorSwipeBackPlugin.enable();
+async function requestForNotifications() {
+	await LocalNotifications.requestPermissions();
+}
+
 if (browser) {
+	requestForNotifications();
+}
+
+// CapacitorSwipeBackPlugin.enable();
+if (browser && window) {
 	App.addListener('backButton', (event: BackButtonListenerEvent) => {
 		if (window && event.canGoBack) {
 			window.history.back();

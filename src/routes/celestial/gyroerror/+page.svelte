@@ -13,6 +13,7 @@
     import VariationInput from "../../../components/ui/VariationInput.svelte";
   import Section from "../../../components/ui/Section.svelte";
   import EqualGrid from "../../../components/ui/EqualGrid.svelte";
+  import { browser } from "$app/environment";
 
 	let object: string;
 	let givenDateTime: Date = new Date(2024, 9, 29, 16, 30, 30);

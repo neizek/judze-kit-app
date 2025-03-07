@@ -1,8 +1,8 @@
 import { get, writable, type Writable } from "svelte/store";
 import storage from "./storage";
 import { browser } from "$app/environment";
-import { StatusBar, Style } from "@capacitor/status-bar";
-import { NavigationBar } from "@hugotomazi/capacitor-navigation-bar";
+// import { StatusBar, Style } from "@capacitor/status-bar";
+import { SafeArea } from "@capacitor-community/safe-area";
 
 export const THEME_STORAGE_KEY = 'theme';
 export const DARK_THEME_NAME = 'dark';
@@ -100,9 +100,15 @@ export function initTheme(): void {
 				getThemeName(newTheme)
 			);
 
-			StatusBar.setBackgroundColor({color: isDarkTheme(newTheme) ? '#2A3036': '#FFFFFF'});
-			StatusBar.setStyle({style: isDarkTheme(newTheme) ? Style.Dark : Style.Light});
-			NavigationBar.setColor({color: isDarkTheme(newTheme) ? '#24282D' : '#F4F4F4'});
+			SafeArea.enable({
+				config: {
+					customColorsForSystemBars: true,
+					statusBarColor: '#00000000', // transparent
+					statusBarContent: isDarkTheme(newTheme) ? 'light' : 'dark',
+					navigationBarColor: '#00000000', // transparent
+					navigationBarContent: isDarkTheme(newTheme) ? 'light' : 'dark',
+				},
+			});
 		}
 	});
 
