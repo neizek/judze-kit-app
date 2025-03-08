@@ -36,7 +36,7 @@
 	</FormItem>
 	{#if $daysCounterStore.enabled}
 		<FormItem label="Start of the contract">
-			<DatePicker bind:value="{startDate}" />
+			<DatePicker bind:value="{startDate}" maxDate="{endDate}"/>
 		</FormItem>
 		<FormItem label="End of the contract">
 			<DatePicker bind:value="{endDate}" minDate="{startDate}"/>

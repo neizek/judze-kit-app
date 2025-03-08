@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <!-- Body -->
+  <circle cx="150" cy="200" r="30" fill="black" />
+  <rect x="140" y="230" width="20" height="50" fill="black" />
+
+  <!-- Arms -->
+  <line x1="150" y1="200" x2="100" y2="150" stroke="black" stroke-width="10" />
+  <line x1="150" y1="200" x2="200" y2="150" stroke="black" stroke-width="10" />
+
+  <!-- Additional Arms -->
+  <line x1="150" y1="200" x2="80" y2="120" stroke="black" stroke-width="10" opacity="0.5" />
+  <line x1="150" y1="200" x2="220" y2="120" stroke="black" stroke-width="10" opacity="0.5" />
+
+  <line x1="150" y1="200" x2="60" y2="90" stroke="black" stroke-width="10" opacity="0.3" />
+  <line x1="150" y1="200" x2="240" y2="90" stroke="black" stroke-width="10" opacity="0.3" />
+
+  <!-- Hands -->
+  <circle cx="100" cy="150" r="10" fill="black"/>
+  <circle cx="200" cy="150" r="10" fill="black"/>
+
+  <!-- Additional Hands -->
+  <circle cx="80" cy="120" r="10" fill="#00000080"/>
+  <circle cx="220" cy="120" r="#00000080"/>
+
+<opacity

@@ -1,7 +1,5 @@
-import type { ComponentType } from "svelte";
-
 export type SoundSignalType = {
-	morse: string | ComponentType;
+	morse: string | ConstructorOfATypedSvelteComponent;
 	pattern: string;
 	description: string;
 }

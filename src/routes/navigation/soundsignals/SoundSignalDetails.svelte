@@ -2,7 +2,6 @@
   import { scale } from "svelte/transition";
   import MorseCode from "./MorseCode.svelte";
   import type { SoundSignalType, SoundsType } from "./types";
-  import type { ClosePopup } from "../../../components/widgets/PopUp.svelte";
   import { onDestroy } from "svelte";
 
 	export let signal: SoundSignalType;
@@ -22,12 +21,14 @@
 	function playAudioForLetter(letter: string, callback: () => void) {
 		currentAudio = sounds[letter];
 
-		if (currentAudio) {
+		if (currentAudio !== undefined) {
 			currentAudio.play();
 			currentAudio.onended = () => {
 				callback();
 			}
 		}
+
+		stopPlay();
 	}
 
 	function playSound(pattern: string, index = 0) {

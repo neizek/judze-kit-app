@@ -1,7 +1,13 @@
 <script lang="ts">
     import Image from "./Image.svelte";
 
-	export let image;
+	interface ImageInterface {
+		src: string;
+		alt: string;
+		bgColor?: string;
+	}
+
+	export let image: ImageInterface;
 	export let details;
 	export let isBigImage: boolean = false;
 </script>
@@ -14,7 +20,7 @@
 		--aspect-ratio="{isBigImage ? `16/9` : '1/1'}"
 		--object-fit="cover"
 		--border-radius="5px"
-		--background-color="#ffffff"
+		--background-color="{image.bgColor ?? `#ffffff`}"
 	/>
 	<div class="vertical-flex space">
 		{#each details as detail}

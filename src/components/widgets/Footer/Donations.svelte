@@ -44,7 +44,7 @@
 		<!-- <a href="mailto:dnicer3@gmail.com" class="space-between space"> -->
 		<div class="space-between space">
 			<span class="material-icons notranslate">mail</span>
-			<span>dnicer3@gmail.com</span>
+			<span>huhrjanskis@proton.me</span>
 		</div>
 		<!-- </a> -->
 		<!-- <a href="tel:+37126972159" class="space-between space"> -->

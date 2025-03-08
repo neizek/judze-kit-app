@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getContext, type ComponentType, type SvelteComponent } from "svelte";
+    import { getContext } from "svelte";
     import type { CreatePopup } from "../PopUp.svelte";
     import Donations from "./Donations.svelte";
     import { isMobileScreen } from "$lib/deviceDetector";
@@ -8,7 +8,7 @@
 
 	const createPopup: CreatePopup = getContext('createPopup');
 
-	function openPopUp(header: string, component: ComponentType) {
+	function openPopUp(header: string, component: ConstructorOfATypedSvelteComponent) {
 		createPopup({
 			header: header,
 			content: {

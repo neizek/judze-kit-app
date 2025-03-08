@@ -1,5 +1,16 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
 	export let percentage: number;
+
+	onMount(() => {
+		if (percentage < 0) {
+			percentage = 0;
+		}
+		if (percentage > 100) {
+			percentage = 100;
+		}
+	})
 </script>
 
 <div class="single-chart">
@@ -19,44 +30,39 @@
 	<slot></slot>
   </div>
 
-  <style lang="scss">
-		.circular-chart {
-			display: block;
-			margin: 10px auto;
-			max-width: 80%;
-			max-height: 250px;
-			stroke: var(--primary-color)
-		}
+<style lang="scss">
+	:root {
+		--stroke-color: var(--box-border-color);
 
-		.circle-bg {
-			fill: none;
-			stroke: var(--box-background-color);
-			stroke-width: 2.8;
+		&[data-theme='dark'] {
+			--stroke-color: var(--box-background-color);
 		}
+	}
 
-		.circle {
+	.circular-chart {
+		display: block;
+		margin: 10px auto;
+		max-width: 80%;
+		max-height: 250px;
+		stroke: var(--primary-color)
+	}
+
+	.circle-bg {
 		fill: none;
 		stroke-width: 2.8;
-		stroke-linecap: round;
-		animation: progress 1s ease-out forwards;
-		}
+		stroke: var(--stroke-color)
+	}
 
-		@keyframes progress {
+	.circle {
+	fill: none;
+	stroke-width: 2.8;
+	stroke-linecap: round;
+	animation: progress 1s ease-out forwards;
+	}
+
+	@keyframes progress {
 		0% {
 			stroke-dasharray: 0 100;
 		}
-		}
-
-		// .circular-chart.blue .circle {
-		// stroke: #3c9ee5;
-		// }
-
-		// .percentage {
-		// 	fill: #666;
-		// 	font-family: sans-serif;
-		// 	font-size: 0.5em;
-		// 	text-anchor: middle;
-		// }
-
-
-  </style>
+	}
+</style>

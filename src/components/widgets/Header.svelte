@@ -5,19 +5,18 @@
     import type { CreatePopup } from "./PopUp.svelte";
     import Settings from "./Settings.svelte";
     import isMobile from "$lib/deviceDetector";
-    import { theme } from "$lib/theme";
 	import LogoSVG from "$lib/judze-logo-letters.svg?raw";
 
 	const createPopup: CreatePopup = getContext('createPopup');
 
 	function openSettings() {
-			createPopup({
-				header: "User settings",
-				content: {
-					component: Settings
-				},
-				bottomSticked: isMobile
-			})
+		createPopup({
+			header: "User settings",
+			content: {
+				component: Settings
+			},
+			bottomSticked: isMobile
+		})
 	}
 </script>
 
