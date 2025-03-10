@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { daysCounterStore } from "$lib/daysCounter";
 	import { title } from "$lib/meta";
-	import DaysLeft from "../components/widgets/DaysLeft.svelte";
+	import DaysLeft from "../components/widgets/Menu/DaysCounter/DaysCounter.svelte";
 	import Menu from "../components/widgets/Menu/Menu.svelte";
 
     const navTree = [

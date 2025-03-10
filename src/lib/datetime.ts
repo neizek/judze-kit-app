@@ -1,3 +1,5 @@
+const oneDay = 24 * 60 * 60 * 1000;
+
 export const formatDate = (datetime: string | Date) => 
 	new Date(datetime).toLocaleDateString('en-GB', {year: 'numeric', month: 'long', day: 'numeric'})
 
@@ -21,4 +23,8 @@ export const getTwoYearsAgo = (datetime: Date) =>
 
 export function convertDateToUTC(datetime: Date) { 
 	return new Date(datetime.getUTCFullYear(), datetime.getUTCMonth(), datetime.getUTCDate(), datetime.getUTCHours(), datetime.getUTCMinutes(), datetime.getUTCSeconds()); 
+}
+
+export function getDaysBetweenDates(startDate: Date, endDate: Date) {
+	return Math.round(Math.abs((Number(endDate) - Number(startDate)) / oneDay));
 }
