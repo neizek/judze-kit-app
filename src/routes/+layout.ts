@@ -5,6 +5,7 @@ import '@capacitor-community/safe-area';
 
 import { App, type BackButtonListenerEvent } from "@capacitor/app";
 import { LocalNotifications } from '@capacitor/local-notifications';
+// import { IosSwipeBackPlugin } from 'capacitor-swipe-back';
 
 export const csr = true;
 export const prerender = false;
@@ -24,6 +25,8 @@ if (browser) {
 }
 
 // CapacitorSwipeBackPlugin.enable();
+// await IosSwipeBackPlugin.enable({error: 0});
+
 if (browser && window) {
 	App.addListener('backButton', (event: BackButtonListenerEvent) => {
 		if (window && event.canGoBack) {
