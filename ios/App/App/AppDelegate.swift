@@ -6,19 +6,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Initialize the Bridge
-        let bridge = Bridge(with: self, configuration: nil, launchOptions: launchOptions)!
-        self.bridge = bridge
-        
-        // Enable back/forward swipe gestures
-        bridge.getWebView()?.allowsBackForwardNavigationGestures = true
-        
-        // The rest of your existing code
-        return true
-    }
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true

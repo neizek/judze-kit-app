@@ -42,6 +42,7 @@
     "@capacitor/splash-screen": "^7.0.0",
     "@capacitor/status-bar": "^7.0.0",
     "astronomy-bundle": "^7.7.7",
+    "capacitor-swipe-back": "^4.0.5",
     "cordova-plugin-purchase": "^13.12.1",
     "install": "^0.13.0",
     "vite-plugin-svelte-svgr": "^1.0.4"
