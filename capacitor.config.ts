@@ -6,9 +6,6 @@ const config: CapacitorConfig = {
   webDir: 'build',
   backgroundColor: '2e333a',
   plugins: {
-      SwipeBack: {
-        enabled: true
-      },
       LocalNotifications: {},
       SplashScreen: {
         launchShowDuration: 2000,
@@ -16,15 +13,14 @@ const config: CapacitorConfig = {
         launchFadeOutDuration: 500,
         splashFullScreen: true,
         splashImmersive: true,
-        androidScaleType: "CENTER_CROP",
-        androidSplashResourceName: "splash",
-        // "backgroundColor": "#ffffffff",
-        // "showSpinner": true,
-        // "androidSpinnerStyle": "large",
-        // "iosSpinnerStyle": "small",
-        // "spinnerColor": "#999999",
+        androidScaleType: "FIT_CENTER",
+        // androidSplashResourceName: "splash",
       },
-  }
+  },
+  ios: {
+    limitsNavigationsToAppBoundDomains: false,
+    allowsLinkPreview: true
+  },
 };
 
 export default config;

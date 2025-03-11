@@ -32,7 +32,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@awesome-cordova-plugins/in-app-purchase-2": "^6.14.0",
     "@capacitor-community/safe-area": "^7.0.0-alpha.1",
     "@capacitor/android": "^7.0.1",
     "@capacitor/app": "^7.0.0",
