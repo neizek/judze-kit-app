@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "android": "npm run build && npx cap sync && npx cap open android"
   },
   "devDependencies": {
     "@capacitor/assets": "^3.0.5",

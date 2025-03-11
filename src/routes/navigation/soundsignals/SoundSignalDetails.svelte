@@ -3,17 +3,28 @@
   import MorseCode from "./MorseCode.svelte";
   import type { SoundSignalType, SoundsType } from "./types";
   import { onDestroy } from "svelte";
+//   import { bellfivemp3, bellmp3, emptymp3, gongfivemp3, prolongedmp3, shortmp3 } from "./empty";
 
 	export let signal: SoundSignalType;
 
-	const sounds: SoundsType = {
-		"-": new Audio(`/audio/prolonged.mp3`),
-		".": new Audio(`/audio/short.mp3`),
-		" ": new Audio(`/audio/empty.mp3`),
-		"b": new Audio(`/audio/bell.mp3`),
-		"B": new Audio(`/audio/bellfive.mp3`),
-		"G": new Audio(`/audio/gongfive.mp3`)
-	}
+	// const sounds: SoundsType = {
+	// 	"-": new Audio('/audio/prolonged.mp3'),
+	// 	".": new Audio('/audio/short.mp3'),
+	// 	" ": new Audio('/audio/empty_converted.mp3'),
+	// 	"b": new Audio('/audio/bell.mp3'),
+	// 	"B": new Audio('/audio/bellfive_converted.mp3'),
+	// 	"G": new Audio('/audio/gongfive.mp3')
+	// }
+
+	// const sounds: SoundsType = {
+	// 	"-": new Audio(prolongedmp3),
+	// 	".": new Audio(shortmp3),
+	// 	" ": new Audio(emptymp3),
+	// 	"b": new Audio(bellmp3),
+	// 	"B": new Audio(bellfivemp3),
+	// 	"G": new Audio(gongfivemp3),
+	// }
+	export let sounds: SoundsType;
 
 	let activeSound: string | undefined = undefined;
 	let currentAudio: HTMLAudioElement | undefined = undefined;
@@ -21,14 +32,12 @@
 	function playAudioForLetter(letter: string, callback: () => void) {
 		currentAudio = sounds[letter];
 
-		if (currentAudio !== undefined) {
+		if (sounds[letter] && currentAudio !== undefined) {
 			currentAudio.play();
 			currentAudio.onended = () => {
 				callback();
 			}
 		}
-
-		stopPlay();
 	}
 
 	function playSound(pattern: string, index = 0) {

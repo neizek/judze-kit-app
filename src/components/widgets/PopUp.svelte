@@ -124,46 +124,6 @@
 			padding: 0px;
 		}
 	}
-
-	// .regular {
-	// 		justify-content: center;
-	// 		align-items: center;
-	
-	// 		.box {
-	// 			padding: 20px;
-	// 			max-width: 90%;
-	// 			max-height: 70vh;
-	// 			border-radius: 8px;
-	
-	// 			@include desktop {
-	// 				max-width: 40%;
-	// 			}
-	
-	// 			@include mobile {
-	// 				width: 90vw;
-	// 			}
-	// 		}
-	// 	}
-
-	// .bottom {
-	// 		.box {
-	// 			width: 100%;
-	// 			left: 0;
-	// 			right: 0;
-	// 			bottom: 0;
-	// 			border-radius: 10px 10px 0 0;
-	// 			padding: 20px 20px calc(20px + env(safe-area-inset-bottom)) 20px;
-	// 			position: fixed;
-	// 			box-shadow: 0 0 20px 1px #0000001a;
-	// 			max-height: 70lvh;
-	// 			overflow: hidden;
-
-	// 			article {
-	// 				overflow-y: scroll;
-	// 				overflow-x: hidden;
-	// 			}
-	// 		}
-	// 	}
 	
 	.Popup {
 		@include after-mobile {
@@ -190,6 +150,8 @@
 		@include mobile {
 			.box {
 				width: 100%;
+				max-width: 450px;
+				margin:0 auto;
 				left: 0;
 				right: 0;
 				bottom: 0;

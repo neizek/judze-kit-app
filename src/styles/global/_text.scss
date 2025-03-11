@@ -4,6 +4,10 @@
 	--default-font-size: 12px;
 	--default-font-color: #{$defaultFontColor};
 	--error-font-color: #{$errorFontColor};
+	--font-size-m: 16px;
+	--font-size-l: 24px;
+	--font-size-xl: 32px;
+	font-size: var(--default-font-size);
 	
 	&[data-theme='dark'] {
 		--default-font-color: #{$defaultFontColorDark};
@@ -13,14 +17,6 @@
 	@include after-mobile {
 		--default-font-size: 14px;
 	}
-
-	& {
-		font-size: var(--default-font-size);
-	}
-
-	--font-size-m: 16px;
-	--font-size-l: 24px;
-	--font-size-xl: 32px;
 }
 
 * {

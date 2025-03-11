@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { isMobileScreen } from "$lib/deviceDetector";
 	import { title } from "$lib/meta";
 	import { getContext } from "svelte";	
     import Bell from "./Bell.svelte";
@@ -9,8 +8,9 @@
 	import SoundSignalDetails from "./SoundSignalDetails.svelte";
 	import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
 	import MorseCode from "./MorseCode.svelte";
-	import type { SoundSignalsType, SoundSignalType } from "./types";
+	import type { SoundSignalsType, SoundSignalType, SoundsType } from "./types";
 	import Section from "../../../components/ui/Section.svelte";
+	import { bellfivemp3, bellmp3, emptymp3, gongfivemp3, prolongedmp3, shortmp3 } from "./sounds";
 
 	$title = 'Sound signals'
 
@@ -44,6 +44,15 @@
 		}
 	]
 
+	const sounds: SoundsType = {
+		"-": new Audio(prolongedmp3),
+		".": new Audio(shortmp3),
+		" ": new Audio(emptymp3),
+		"b": new Audio(bellmp3),
+		"B": new Audio(bellfivemp3),
+		"G": new Audio(gongfivemp3),
+	}
+
 	const createPopup: CreatePopup = getContext('createPopup');
 
 	function openDescription(signal: SoundSignalType) {
@@ -53,10 +62,10 @@
 				content: {
 					component: SoundSignalDetails,
 					props: {
-						signal
+						signal,
+						sounds
 					}
-				},
-				bottomSticked: isMobileScreen
+				}
 			})
 		}
 	}
