@@ -12,6 +12,19 @@
 	}
 }
 
+// Hiding the scrollbar
+
+html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+	&::-webkit-scrollbar { 
+		display: none;
+	}
+}
+
+// End of hiding the scrollbar
+
 body {
 	background-color: var(--body-background-color);
 	min-height: 100vh;
@@ -207,6 +220,18 @@ section {
 	transform: translate(-50%, -50%);
 	top: 50%;
 	left: 50%;
+}
+
+.p {
+	&a {
+		padding: 4px;
+		&-l{
+			padding: 8px;
+		}
+		&-xl {
+			padding: 16px;
+		}
+	}
 }
 
 .space {

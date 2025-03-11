@@ -1,25 +1,25 @@
 <script lang="ts">
     import { title } from "$lib/meta";
     import { initTheme } from "$lib/theme";
-    import { fade, fly, scale, slide } from "svelte/transition";
+    import { fade } from "svelte/transition";
     import Footer from "../components/widgets/Footer/Footer.svelte";
     import Header from "../components/widgets/Header.svelte";
     import PopUp from "../components/widgets/PopUp.svelte";
-  import { page } from "$app/stores";
-  import { cubicOut } from "svelte/easing";
+	// import { page } from "$app/stores";
+	import { cubicOut } from "svelte/easing";
 
 	initTheme();
 
 	export let data;
 
-	let previousPath = '';
-	let isGoingForward = true;
+	// let previousPath = '';
+	// let isGoingForward = true;
 
-	$: {
-		const currentPath = $page.url.pathname;
-		isGoingForward = currentPath > previousPath;
-		previousPath = currentPath;
-	}
+	// $: {
+	// 	const currentPath = $page.url.pathname;
+	// 	isGoingForward = currentPath > previousPath;
+	// 	previousPath = currentPath;
+	// }
 	
 </script>
 
@@ -29,10 +29,14 @@
 <PopUp>
 	<Header />
 	{#key data.url}
-		<div 
+		<!-- <div 
 			class="Content wrapper w1000"
 			in:fly={{ x: isGoingForward ? -200 : 200, duration: 200, delay: 200, easing: cubicOut}}
 			out:fly={{ x: isGoingForward ? 200 : -200, duration: 200, easing: cubicOut }}
+		> -->
+		<div
+			class="Content wrapper w1000"
+			in:fade="{{duration: 200, easing: cubicOut}}"
 		>
 			<slot></slot>
 		</div>

@@ -74,35 +74,33 @@
 	})
 </script>
 
-<div class="Details vertical space">
-	<span>{signal.description}</span>
-	<div class="space-between space">
+<div class="space-between space-xl">
+	<div class="vertical-flex space">
 		<div class="line-blocks space big">
 			<span>Pattern:</span>
 			<MorseCode morse="{signal.morse}" />
 		</div>
-		<div>
-			{#if signal.pattern === activeSound && activeSound !== undefined}
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<!-- svelte-ignore a11y-no-static-element-interactions -->
-				<div on:click={() => stopPlay()} >
-					<span class="material-icons notranslate" in:scale>pause_circle</span>
-				</div>
-			{:else}
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<!-- svelte-ignore a11y-no-static-element-interactions -->
-				<div class="link" on:click={() => playSound(signal.pattern)}>
-					<span class="material-icons notranslate" in:scale>play_circle</span>
-				</div>
-			{/if}
-		</div>
+		<span>{signal.description}</span>
 	</div>
+		{#if signal.pattern === activeSound && activeSound !== undefined}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
+			<span
+				class="material-icons notranslate pa"
+				in:scale
+				on:click={() => stopPlay()} 
+			>
+				pause_circle
+			</span>
+		{:else}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
+			<span
+				class="material-icons notranslate link pa"
+				in:scale
+				on:click={() => playSound(signal.pattern)}
+			>
+				play_circle
+			</span>
+		{/if}
 </div>
-
-<style lang="scss">
-	.Details {
-		@include after-mobile {
-			width: 400px;
-		}
-	}
-</style>

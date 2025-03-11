@@ -95,7 +95,7 @@
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<span class="opacity-transition" on:click={() => closePopUp(popUp.id)}>
 					<!-- <i class="fa-solid fa-xmark"></i> -->
-					<span class="material-icons">close</span>
+					<span class="material-icons pa">close</span>
 				</span>
 			</header>
 			<article class="hide-scroll">

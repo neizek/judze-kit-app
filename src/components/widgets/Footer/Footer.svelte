@@ -23,17 +23,14 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class="line-blocks space big">
-		<span class="link" on:click="{() => openPopUp('Support Us', Donations)}">Support Us</span>
-		<span class="link" on:click="{() => openPopUp('About Us', AboutUs)}">About Us</span>
+		<span class="link pa-l" on:click="{() => openPopUp('Support Us', Donations)}">Support Us</span>
+		<span class="link pa-l" on:click="{() => openPopUp('About Us', AboutUs)}">About Us</span>
 	</div>
 	<span>Judze {new Date().getFullYear()}</span>
 	<!-- <WaveSVG />  -->
 </footer>
 
 <style lang="scss">
-	.link {
-		padding: 8px;
-	}
 	
 	footer {
 		padding-top: 24px;
