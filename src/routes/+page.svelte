@@ -28,7 +28,7 @@
 			label: 'Other',
 			items: [
 				{label: 'Distress Signals', icon: 'lifebuoy', link: 'other/distress'},
-				// {label: 'Chimes', icon: 'chime', link: 'other/chime'}
+				{label: 'Chimes', icon: 'chime', link: 'other/chime'}
 			]
 		}
 	]

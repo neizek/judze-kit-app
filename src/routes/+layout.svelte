@@ -5,19 +5,34 @@
     import Footer from "../components/widgets/Footer/Footer.svelte";
     import Header from "../components/widgets/Header.svelte";
     import PopUp from "../components/widgets/PopUp.svelte";
-	// import { page } from "$app/stores";
+	import { page } from "$app/stores";
 	import { cubicOut } from "svelte/easing";
+  import { afterNavigate, beforeNavigate } from "$app/navigation";
 
 	initTheme();
 
 	export let data;
 
-	// let previousPath = '';
+	// let userInitiatedNavigation = false;
+	let historyNavigation = false;
+	let previousPath = '';
+
+	beforeNavigate(({ type }) => {
+		previousPath = $page.url.pathname;
+		// if (!userInitiatedNavigation) {
+			historyNavigation = (type === 'popstate');
+		// }
+	})
+
+	afterNavigate(() => {
+		historyNavigation = false;
+	})
+
 	// let isGoingForward = true;
 
 	// $: {
 	// 	const currentPath = $page.url.pathname;
-	// 	isGoingForward = currentPath > previousPath;
+	// // 	isGoingForward = currentPath > previousPath;
 	// 	previousPath = currentPath;
 	// }
 	
@@ -27,7 +42,7 @@
 	<title>{ $title }</title>
 </svelte:head>
 <PopUp>
-	<Header />
+	<Header previousPath="{previousPath}" />
 	{#key data.url}
 		<!-- <div 
 			class="Content wrapper w1000"
@@ -36,7 +51,7 @@
 		> -->
 		<div
 			class="Content wrapper w1000"
-			in:fade="{{duration: 200, easing: cubicOut}}"
+			in:fade="{{duration: historyNavigation ? 0 : 2000, easing: cubicOut}}"
 		>
 			<slot></slot>
 		</div>

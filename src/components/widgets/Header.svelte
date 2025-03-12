@@ -6,6 +6,11 @@
     import Settings from "./Settings.svelte";
     import isMobile from "$lib/deviceDetector";
 	import LogoSVG from "$lib/judze-logo-letters.svg?raw";
+  import { goto } from "$app/navigation";
+
+  export let previousPath: string = '/';
+
+//   $: console.log(previousPath)
 
 	const createPopup: CreatePopup = getContext('createPopup');
 
@@ -27,7 +32,7 @@
 			<div class="equal-flex">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
-				<span class="material-icons notranslate" on:click={() => window.history.back()}>chevron_left</span>
+				<span class="material-icons notranslate" on:click={() => goto(previousPath)}>chevron_left</span>
 			</div>
 		{/if}
 		{#if $page.url.pathname === '/' || $page.url.pathname === ''}
