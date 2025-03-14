@@ -42,7 +42,7 @@
     "@capacitor/splash-screen": "^7.0.0",
     "@capacitor/status-bar": "^7.0.0",
     "astronomy-bundle": "^7.7.7",
-    "capacitor-ios-swipe-gestures": "file:../capacitor-ios-swipe-gestures/capacitor-ios-swipe-gestures-0.0.1.tgz",
+    "capacitor-swipe-gestures": "file:../capacitor-swipe-gestures/capacitor-swipe-gestures-0.0.1.tgz",
     "cordova-plugin-purchase": "^13.12.1",
     "install": "^0.13.0",
     "vite-plugin-svelte-svgr": "^1.0.4"
