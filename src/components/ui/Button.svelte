@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from "./Icon.svelte";
     import Loader from "./Loader.svelte";
 
 
@@ -14,12 +15,12 @@
 
 <button
 	on:click
-	class="{(type ?? '') + (bordered ? ' bordered' : '') + (maxwidth ? ' max-width' : '')} ripple"
+	class="{(type ?? '') + (bordered ? ' bordered' : '') + (maxwidth ? ' max-width' : '')} ripple space"
 	disabled="{disabled}"
 	type="{submit ? 'submit' : 'button'}"
 >
 	{#if icon}
-		<i class="fa-solid fa-{icon}"></i>
+		<Icon name="{icon}" --size="24px" --margin="-4px" />
 	{/if}
 	{#if label}
 		<span>{label}</span>
@@ -36,22 +37,6 @@
 
 		@include mobile {
 			width: 100%;
-		}
-		
-		&:disabled {
-			span,
-			i {
-				opacity: 0.5;
-				text-shadow: none;
-			}
-		}
-
-		span {
-			display: block;
-		}
-
-		i:not(:only-child) {
-			font-size: 14px;
 		}
 	}
 

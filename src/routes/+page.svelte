@@ -28,6 +28,7 @@
 			label: 'Other',
 			items: [
 				{label: 'Distress Signals', icon: 'lifebuoy', link: 'other/distress'},
+				{label: 'Documents', icon: 'documents', link: 'other/documents'},
 				// {label: 'Chimes', icon: 'chime', link: 'other/chime'}
 			]
 		}
