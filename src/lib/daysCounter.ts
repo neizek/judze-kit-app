@@ -3,6 +3,7 @@ import storage from "./storage";
 import { browser } from "$app/environment";
 
 export interface DaysCounter {
+	new: boolean,
 	enabled: boolean,
 	startFrom: Date,
 	endTo: Date
@@ -12,13 +13,15 @@ function initStore() {
 	const store = browser ? storage.get<DaysCounter>('counter') : undefined;
 	if (store) {
 		return {
+			new: false,
 			enabled: store.enabled,
 			startFrom: new Date(store.startFrom),
 			endTo: new Date(store.endTo)
 		}
 	}
 	return {
-		enabled: false,
+		new: true,
+		enabled: true,
 		startFrom: new Date(Date.now() - 1728000000),
 		endTo: new Date(Date.now() + 7889400000),	
 	}

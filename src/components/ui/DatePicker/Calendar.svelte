@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onDestroy } from "svelte";
+
 	export let date: Date | undefined = undefined;
 	export let minDate: Date | undefined = undefined;
 	export let maxDate: Date | undefined = undefined;
@@ -10,7 +12,7 @@
 	if (minDate) minDate.setUTCHours(0, 0, 0, 0);
 	if (maxDate) maxDate.setUTCHours(0, 0, 0, 0);
 
-	let handledDate: Date = date ?? new Date();
+	let handledDate: Date = date ? new Date(date) : new Date();
 	let rows = Array(5).fill([]);
 
 	$: {
@@ -66,6 +68,8 @@
 		setDate(thisDate);
 		if (closePopup && popupId) closePopup(popupId);
 	}
+
+	$: console.log(date);
 </script>
 
 <section class="Calendar vertical-flex space">
@@ -97,7 +101,9 @@
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<!-- svelte-ignore a11y_no_static_element_interactions -->
 					<div
-						class="transparent"
+						class={date?.toDateString() === thisDate.toDateString()
+							? `primary`
+							: `transparent`}
 						class:button={day !== 0}
 						class:disabled={(minDate && thisDate <= minDate) ||
 							(maxDate && thisDate >= maxDate) ||

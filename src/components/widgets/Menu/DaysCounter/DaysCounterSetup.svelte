@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { daysCounterStore } from "$lib/daysCounter";
+	import { daysCounterStore } from "$lib/daysCounter";
 	import Button from "../../../ui/Button.svelte";
 	import DatePicker from "../../../ui/DatePicker/DatePicker.svelte";
 	import FormItem from "../../../ui/FormItem.svelte";
@@ -14,9 +14,9 @@
 	$: {
 		if (startDate || endDate) {
 			if (startDate > endDate) {
-				errorMessage = 'Your start date can not be later than the end date';
+				errorMessage = "Your start date can not be later than the end date";
 			} else {
-				errorMessage = undefined
+				errorMessage = undefined;
 			}
 		}
 	}
@@ -24,6 +24,8 @@
 		if (errorMessage) {
 			return;
 		}
+
+		if ($daysCounterStore.new) $daysCounterStore.new = false;
 
 		$daysCounterStore.startFrom = startDate;
 		$daysCounterStore.endTo = endDate;
@@ -36,16 +38,21 @@
 		<span class="error">{errorMessage}</span>
 	{/if}
 	<FormItem label="Start of the contract">
-		<DatePicker bind:value="{startDate}" maxDate="{endDate}"/>
+		<DatePicker bind:value={startDate} maxDate={endDate} />
 	</FormItem>
 	<FormItem label="End of the contract">
-		<DatePicker bind:value="{endDate}" minDate="{startDate}"/>
+		<DatePicker bind:value={endDate} minDate={startDate} />
 	</FormItem>
-	<Button label="Start counting" type="primary" on:click="{handleSave}" disabled="{errorMessage !== undefined}" />
+	<Button
+		label="Start counting"
+		type="primary"
+		on:click={handleSave}
+		disabled={errorMessage !== undefined}
+	/>
 </div>
 
 <style lang="scss">
 	.error {
-		color: var(--error-font-color)
+		color: var(--error-font-color);
 	}
 </style>
