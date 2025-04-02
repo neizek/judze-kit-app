@@ -9,13 +9,8 @@
 	import { cubicOut } from "svelte/easing";
 	import { beforeNavigate } from "$app/navigation";
 	import { onMount } from "svelte";
-	import { initializeDocuments } from "$lib/documents";
 
 	initTheme();
-
-	onMount(() => {
-		initializeDocuments();
-	});
 
 	export let data;
 
@@ -79,15 +74,11 @@
 		margin-top: calc(
 			74px + var(--safe-area-inset-top, env(safe-area-inset-top))
 		);
-		// margin-top: calc(74px + env(safe-area-inset-top, 20px));
-		// margin-top: 94px;
 
 		@include after-mobile {
 			margin-top: calc(
 				82px + var(--safe-area-inset-top, env(safe-area-inset-top))
 			);
-			// margin-top: calc(82px + env(safe-area-inset-top, 20px));
-			// margin-top: 102px;
 		}
 	}
 </style>

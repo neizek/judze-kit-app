@@ -17,7 +17,7 @@
 		handledDate;
 		constructDays();
 	}
-	
+
 	function constructDays() {
 		const year = handledDate.getFullYear();
 		const month = handledDate.getMonth();
@@ -29,13 +29,13 @@
 		let currentDayIndex = 1;
 
 		while (currentDayIndex <= maxDays) {
-			if(!rows[rowIndex]) {
-				rows[rowIndex] = []
+			if (!rows[rowIndex]) {
+				rows[rowIndex] = [];
 			}
 
-			if(index % 7 === 0 && index > 0) rowIndex++;
+			if (index % 7 === 0 && index > 0) rowIndex++;
 
-			if(index < firstDayIndex) {
+			if (index < firstDayIndex) {
 				rows[rowIndex] = [...rows[rowIndex], 0];
 			} else {
 				rows[rowIndex] = [...rows[rowIndex], currentDayIndex];
@@ -47,20 +47,20 @@
 	}
 
 	function nextMonth() {
-		handledDate = new Date(handledDate.setMonth(handledDate.getMonth()+1));
+		handledDate = new Date(handledDate.setMonth(handledDate.getMonth() + 1));
 	}
 
 	function previousMonth() {
-		handledDate = new Date(handledDate.setMonth(handledDate.getMonth()-1));
+		handledDate = new Date(handledDate.setMonth(handledDate.getMonth() - 1));
 	}
 
 	function chooseDate(thisDate: Date) {
-		if (minDate && thisDate < minDate) {
+		if (minDate && thisDate <= minDate) {
 			return;
 		}
 
-		if(maxDate && thisDate > maxDate) {
-			return
+		if (maxDate && thisDate >= maxDate) {
+			return;
 		}
 		date = thisDate;
 		setDate(thisDate);
@@ -68,40 +68,51 @@
 	}
 </script>
 
-	<section class="Calendar vertical-flex space">
+<section class="Calendar vertical-flex space">
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<header class="space-between">
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<header class="space-between">
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y_no_static_element_interactions -->
-			<div class="button transparent" on:click="{previousMonth}">
-				<span class="material-icons notranslate">chevron_left</span>
+		<div class="button transparent" on:click={previousMonth}>
+			<span class="material-icons notranslate">chevron_left</span>
+		</div>
+		<span class="text-size-m"
+			>{handledDate.toLocaleString("default", {
+				month: "long",
+				year: "numeric",
+			})}</span
+		>
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="button transparent" on:click={nextMonth}>
+			<span class="material-icons notranslate">chevron_right</span>
+		</div>
+	</header>
+	<article class="columns">
+		{#each rows as row}
+			<div class="rows">
+				{#each row as day}
+					{@const thisDate = new Date(
+						Date.UTC(handledDate.getFullYear(), handledDate.getMonth(), day)
+					)}
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<!-- svelte-ignore a11y_no_static_element_interactions -->
+					<div
+						class="transparent"
+						class:button={day !== 0}
+						class:disabled={(minDate && thisDate <= minDate) ||
+							(maxDate && thisDate >= maxDate) ||
+							disabled}
+						on:click={() => {
+							chooseDate(thisDate);
+						}}
+					>
+						<span>{day ? day.toString() : ""}</span>
+					</div>
+				{/each}
 			</div>
-			<span class="text-size-m">{handledDate.toLocaleString('default', { month: 'long', year: 'numeric'})}</span>
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div class="button transparent" on:click="{nextMonth}">
-				<span class="material-icons notranslate">chevron_right</span>
-			</div>
-		</header>
-		<article class="columns">
-			{#each rows as row}
-				<div class="rows">
-					{#each row as day}
-						{@const thisDate = new Date(Date.UTC(handledDate.getFullYear(), handledDate.getMonth(), day))}
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<!-- svelte-ignore a11y_no_static_element_interactions -->
-						<div
-							class="transparent"
-							class:button="{day !== 0}"
-							class:disabled="{(minDate && thisDate < minDate) || (maxDate && thisDate > maxDate) || disabled}"
-							on:click="{() => {chooseDate(thisDate)}}"
-						>
-							<span>{day ? day.toString() : ''}</span>
-						</div>
-					{/each}
-				</div>
-			{/each}
-		</article>
-	</section>
+		{/each}
+	</article>
+</section>
 
 <style lang="scss">
 	.columns {
@@ -115,7 +126,7 @@
 		gap: 5px;
 		grid-template-columns: repeat(7, 1fr);
 	}
-	
+
 	.button {
 		aspect-ratio: 1 / 1;
 		justify-content: center;
@@ -123,7 +134,7 @@
 		border: 1px solid var(--input-border-color);
 
 		&.disabled {
-			opacity: .5;
+			opacity: 0.5;
 
 			&:hover {
 				background-color: transparent;

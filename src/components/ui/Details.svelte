@@ -1,15 +1,13 @@
 <script lang="ts">
-    import { fade, slide } from "svelte/transition";
-
 	export let header: string;
 </script>
 
 <details>
 	<summary class="space-between">
-		<h3>{ header }</h3>
+		<h3>{header}</h3>
 		<span class="material-icons notranslate">chevron_right</span>
 	</summary>
-	<article in:fade="{{duration: 200}}"><slot></slot></article>
+	<article><slot></slot></article>
 </details>
 
 <style lang="scss">
@@ -19,17 +17,11 @@
 
 		&[open] > summary {
 			background-color: var(--button-background-color-hover);
-			
+
 			> span.material-icons {
 				transform: rotate(90deg);
 			}
-			
-
 		}
-
-		// &[open] article {
-		// 	max-height: 1000px;
-		// }
 
 		summary {
 			-webkit-tap-highlight-color: transparent;
@@ -42,26 +34,20 @@
 			}
 
 			&::marker {
-				content: '';
+				content: "";
 			}
 
 			&::-webkit-details-marker {
-				display:none;
+				display: none;
 			}
 
 			> span.material-icons {
-				transition: transform .3s ease-in-out;
+				transition: transform 0.3s ease-in-out;
 			}
 		}
 
 		article {
 			padding: 10px;
-			// max-height: 0;
-			// overflow: hidden;
-			// transition: max-height 0.5s ease-out;
 		}
-
-
 	}
-
 </style>

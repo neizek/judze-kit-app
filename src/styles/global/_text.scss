@@ -4,6 +4,8 @@
 	--default-font-size: 12px;
 	--default-font-color: #{$defaultFontColor};
 	--error-font-color: #{$errorFontColor};
+	--font-size-xs: 10px;
+	--font-size-s: 12px;
 	--font-size-m: 16px;
 	--font-size-l: 24px;
 	--font-size-xl: 32px;
@@ -76,6 +78,14 @@ ul {
 
 .text {
 	&-size {
+		&-xs {
+			font-size: var(--font-size-xs);
+		}
+
+		&-s {
+			font-size: var(--font-size-s);
+		}
+
 		&-m {
 			font-size: var(--font-size-m);
 		}

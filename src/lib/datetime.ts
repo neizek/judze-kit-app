@@ -28,3 +28,7 @@ export function convertDateToUTC(datetime: Date) {
 export function getDaysBetweenDates(startDate: Date, endDate: Date) {
 	return Math.round(Math.abs((Number(endDate) - Number(startDate)) / oneDay));
 }
+
+export function getTimeFromDate(datetime: Date) {
+	return datetime.toISOString().substr(11, 8);
+}
