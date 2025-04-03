@@ -1,51 +1,56 @@
 <script>
-    import { title } from "$lib/meta";
-    import Details from "../../../components/ui/Details.svelte";
-    import Section from "../../../components/ui/Section.svelte";
-    import RuleEight from "./rulesTexts/PartB/RuleEight.svelte";
-    import RuleEleven from "./rulesTexts/PartB/RuleEleven.svelte";
-    import RuleFifteen from "./rulesTexts/PartB/RuleFifteen.svelte";
-    import RuleFive from "./rulesTexts/PartB/RuleFive.svelte";
-    import RuleFour from "./rulesTexts/PartB/RuleFour.svelte";
-    import RuleFourteen from "./rulesTexts/PartB/RuleFourteen.svelte";
-    import RuleNine from "./rulesTexts/PartB/RuleNine.svelte";
-    import RuleOne from "./rulesTexts/PartA/RuleOne.svelte";
-    import RuleSeven from "./rulesTexts/PartB/RuleSeven.svelte";
-    import RuleSeventeen from "./rulesTexts/PartB/RuleSeventeen.svelte";
-    import RuleSix from "./rulesTexts/PartB/RuleSix.svelte";
-    import RuleSixteen from "./rulesTexts/PartB/RuleSixteen.svelte";
-    import RuleTen from "./rulesTexts/PartB/RuleTen.svelte";
-    import RuleThirtheen from "./rulesTexts/PartB/RuleThirtheen.svelte";
-    import RuleTwelve from "./rulesTexts/PartB/RuleTwelve.svelte";
-    import RuleTwo from "./rulesTexts/PartA/RuleTwo.svelte";
-    import RulteThree from "./rulesTexts/PartA/RulteThree.svelte";
-    import RuleEighteen from "./rulesTexts/PartB/RuleEighteen.svelte";
-    import RuleNineteen from "./rulesTexts/PartB/RuleNineteen.svelte";
-    import RuleTwenty from "./rulesTexts/PartC/RuleTwenty.svelte";
-    import RuleTwentyOne from "./rulesTexts/PartC/RuleTwentyOne.svelte";
-    import RuleTwentyTwo from "./rulesTexts/PartC/RuleTwentyTwo.svelte";
-    import RuleTwentyThree from "./rulesTexts/PartC/RuleTwentyThree.svelte";
-    import RuleTwentyFour from "./rulesTexts/PartC/RuleTwentyFour.svelte";
-    import RuleTwentyFive from "./rulesTexts/PartC/RuleTwentyFive.svelte";
-    import RuleTwentySix from "./rulesTexts/PartC/RuleTwentySix.svelte";
-    import RuleTwentySeven from "./rulesTexts/PartC/RuleTwentySeven.svelte";
-    import RuleTwentyEight from "./rulesTexts/PartC/RuleTwentyEight.svelte";
-    import RuleTwentyNine from "./rulesTexts/PartC/RuleTwentyNine.svelte";
-    import RuleThirty from "./rulesTexts/PartC/RuleThirty.svelte";
-    import RuleFourtyOne from "./rulesTexts/PartF/RuleFourtyOne.svelte";
-    import RuleFourty from "./rulesTexts/PartF/RuleFourty.svelte";
-    import RuleThirtyNine from "./rulesTexts/PartF/RuleThirtyNine.svelte";
-    import RuleThirtyEight from "./rulesTexts/PartE/RuleThirtyEight.svelte";
-    import RuleThirtyThree from "./rulesTexts/PartD/RuleThirtyThree.svelte";
-    import RuleThirtyTwo from "./rulesTexts/PartD/RuleThirtyTwo.svelte";
-    import RuleThirtyFour from "./rulesTexts/PartD/RuleThirtyFour.svelte";
-    import RuleThirtyFive from "./rulesTexts/PartD/RuleThirtyFive.svelte";
-    import RuleThirtySix from "./rulesTexts/PartD/RuleThirtySix.svelte";
-    import RuleThirtySeven from "./rulesTexts/PartD/RuleThirtySeven.svelte";
-    import RuleThirtyOne from "./rulesTexts/PartC/RuleThirtyOne.svelte";
+	import { title } from "$lib/meta";
+	import Details from "../../../components/ui/Details.svelte";
+	import Section from "../../../components/ui/Section.svelte";
+	import RuleEight from "./rulesTexts/PartB/RuleEight.svelte";
+	import RuleEleven from "./rulesTexts/PartB/RuleEleven.svelte";
+	import RuleFifteen from "./rulesTexts/PartB/RuleFifteen.svelte";
+	import RuleFive from "./rulesTexts/PartB/RuleFive.svelte";
+	import RuleFour from "./rulesTexts/PartB/RuleFour.svelte";
+	import RuleFourteen from "./rulesTexts/PartB/RuleFourteen.svelte";
+	import RuleNine from "./rulesTexts/PartB/RuleNine.svelte";
+	import RuleOne from "./rulesTexts/PartA/RuleOne.svelte";
+	import RuleSeven from "./rulesTexts/PartB/RuleSeven.svelte";
+	import RuleSeventeen from "./rulesTexts/PartB/RuleSeventeen.svelte";
+	import RuleSix from "./rulesTexts/PartB/RuleSix.svelte";
+	import RuleSixteen from "./rulesTexts/PartB/RuleSixteen.svelte";
+	import RuleTen from "./rulesTexts/PartB/RuleTen.svelte";
+	import RuleThirtheen from "./rulesTexts/PartB/RuleThirtheen.svelte";
+	import RuleTwelve from "./rulesTexts/PartB/RuleTwelve.svelte";
+	import RuleTwo from "./rulesTexts/PartA/RuleTwo.svelte";
+	import RulteThree from "./rulesTexts/PartA/RulteThree.svelte";
+	import RuleEighteen from "./rulesTexts/PartB/RuleEighteen.svelte";
+	import RuleNineteen from "./rulesTexts/PartB/RuleNineteen.svelte";
+	import RuleTwenty from "./rulesTexts/PartC/RuleTwenty.svelte";
+	import RuleTwentyOne from "./rulesTexts/PartC/RuleTwentyOne.svelte";
+	import RuleTwentyTwo from "./rulesTexts/PartC/RuleTwentyTwo.svelte";
+	import RuleTwentyThree from "./rulesTexts/PartC/RuleTwentyThree.svelte";
+	import RuleTwentyFour from "./rulesTexts/PartC/RuleTwentyFour.svelte";
+	import RuleTwentyFive from "./rulesTexts/PartC/RuleTwentyFive.svelte";
+	import RuleTwentySix from "./rulesTexts/PartC/RuleTwentySix.svelte";
+	import RuleTwentySeven from "./rulesTexts/PartC/RuleTwentySeven.svelte";
+	import RuleTwentyEight from "./rulesTexts/PartC/RuleTwentyEight.svelte";
+	import RuleTwentyNine from "./rulesTexts/PartC/RuleTwentyNine.svelte";
+	import RuleThirty from "./rulesTexts/PartC/RuleThirty.svelte";
+	import RuleFourtyOne from "./rulesTexts/PartF/RuleFourtyOne.svelte";
+	import RuleFourty from "./rulesTexts/PartF/RuleFourty.svelte";
+	import RuleThirtyNine from "./rulesTexts/PartF/RuleThirtyNine.svelte";
+	import RuleThirtyEight from "./rulesTexts/PartE/RuleThirtyEight.svelte";
+	import RuleThirtyThree from "./rulesTexts/PartD/RuleThirtyThree.svelte";
+	import RuleThirtyTwo from "./rulesTexts/PartD/RuleThirtyTwo.svelte";
+	import RuleThirtyFour from "./rulesTexts/PartD/RuleThirtyFour.svelte";
+	import RuleThirtyFive from "./rulesTexts/PartD/RuleThirtyFive.svelte";
+	import RuleThirtySix from "./rulesTexts/PartD/RuleThirtySix.svelte";
+	import RuleThirtySeven from "./rulesTexts/PartD/RuleThirtySeven.svelte";
+	import RuleThirtyOne from "./rulesTexts/PartC/RuleThirtyOne.svelte";
+	import AnnexI from "./rulesTexts/Annexes/AnnexI.svelte";
+	import AnnexIii from "./rulesTexts/Annexes/AnnexIII.svelte";
+	import AnnexIi from "./rulesTexts/Annexes/AnnexII.svelte";
+	import AnnexIv from "./rulesTexts/Annexes/AnnexIV.svelte";
 
-	title.set('Rules')
+	title.set("Rules");
 </script>
+
 <div class="vertical-flex space-xl max-width">
 	<Section title="Part A - General">
 		<Details header="Rule 1 - Application">
@@ -133,7 +138,9 @@
 		<Details header="Rule 26 - Fishing Vessels">
 			<RuleTwentySix />
 		</Details>
-		<Details header="Rule 27 - Vessels not under Command or Restricted in their Ability to Manoeuvre">
+		<Details
+			header="Rule 27 - Vessels not under Command or Restricted in their Ability to Manoeuvre"
+		>
 			<RuleTwentySeven />
 		</Details>
 		<Details header="Rule 28 - Vessel constrained by their draught">
@@ -174,15 +181,31 @@
 			<RuleThirtyEight />
 		</Details>
 	</Section>
-	<Section title="Part F - Verification of compliance with the provisions of the Convention">
+	<Section
+		title="Part F - Verification of compliance with the provisions of the Convention"
+	>
 		<Details header="Rule 39 - Definitions">
 			<RuleThirtyNine />
- 		</Details>
+		</Details>
 		<Details header="Rule 40 - Application">
 			<RuleFourty />
 		</Details>
 		<Details header="Rule 41 - Verification of Compliance">
 			<RuleFourtyOne />
+		</Details>
+	</Section>
+	<Section title="Annexes">
+		<Details header="Annex I">
+			<AnnexI />
+		</Details>
+		<Details header="Annex II">
+			<AnnexIi />
+		</Details>
+		<Details header="Annex III">
+			<AnnexIii />
+		</Details>
+		<Details header="Annex IV">
+			<AnnexIv />
 		</Details>
 	</Section>
 </div>
