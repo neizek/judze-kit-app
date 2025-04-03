@@ -11,8 +11,8 @@
 	const dispatch = createEventDispatcher();
 
 	function confirmTime(hours: number, minutes: number, seconds: number) {
-		dispatch("change");
 		value = new Date(value.setUTCHours(hours, minutes, seconds));
+		dispatch("change");
 	}
 
 	function openTimeWheel(event: Event) {

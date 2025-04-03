@@ -15,7 +15,7 @@ dependencies {
     implementation project(':capacitor-local-notifications')
     implementation project(':capacitor-splash-screen')
     implementation project(':capacitor-status-bar')
-    implementation project(':capacitor-ios-swipe-gestures')
+    implementation project(':capacitor-swipe-gestures')
     implementation "com.android.billingclient:billing:7.1.1"
 }
 

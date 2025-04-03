@@ -26,13 +26,15 @@
 			value.setUTCDate(date.getUTCDate());
 			value.setUTCFullYear(date.getUTCFullYear());
 			value.setUTCMonth(date.getUTCMonth());
-		} else if (timeOrDate === "time") {
+		}
+		if (timeOrDate === "time") {
 			value.setUTCHours(time.getUTCHours());
 			value.setUTCMinutes(time.getUTCMinutes());
 			value.setUTCSeconds(time.getUTCSeconds());
 		}
 
 		value = value;
+		console.log(value);
 		dispatch("change");
 	}
 
