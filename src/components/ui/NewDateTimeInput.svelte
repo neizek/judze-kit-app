@@ -34,7 +34,6 @@
 		}
 
 		value = value;
-		console.log(value);
 		dispatch("change");
 	}
 

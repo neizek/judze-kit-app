@@ -68,8 +68,6 @@
 		setDate(thisDate);
 		if (closePopup && popupId) closePopup(popupId);
 	}
-
-	$: console.log(date);
 </script>
 
 <section class="Calendar vertical-flex space">
