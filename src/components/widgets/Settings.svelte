@@ -35,6 +35,7 @@
 		/>
 		{#if $daysCounterStore.enabled}
 			<Button
+				icon="settings"
 				label="Set up widget"
 				type="transparent"
 				on:click={openDaysCounterSetup}

@@ -55,5 +55,10 @@
 			</FormItem>
 		</div>
 	</div>
-	<Button label="Set current date & time" on:click={updateDateTime} maxwidth />
+	<Button
+		icon="schedule"
+		label="Set current date & time"
+		on:click={updateDateTime}
+		maxwidth
+	/>
 </div>

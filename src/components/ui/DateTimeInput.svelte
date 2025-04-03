@@ -56,7 +56,12 @@
 			<Input type="number" bind:value={seconds} min={0} max={59} />
 		</div>
 	</FormItem>
-	<Button label="Set current date & time" on:click={updateDateTime} maxwidth />
+	<Button
+		icon="schedule"
+		label="Set current date & time"
+		on:click={updateDateTime}
+		maxwidth
+	/>
 </div>
 
 <style lang="scss">

@@ -29,7 +29,7 @@
 	:root {
 		--FormItem-required-color: #{$c-blood};
 
-		&[data-theme='dark'] {
+		&[data-theme="dark"] {
 			--FormItem-required-color: #{$c-lightRed};
 		}
 	}
@@ -67,7 +67,7 @@
 			margin: 5px 0;
 
 			&::before {
-				content: '×';
+				content: "×";
 				padding-right: 8px;
 			}
 		}

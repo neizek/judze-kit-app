@@ -1,129 +1,106 @@
 <script lang="ts">
-    import { isMobileScreen } from "$lib/deviceDetector";
-import { title } from "$lib/meta";
-    import { getContext } from "svelte";
-    import Button from "../../../components/ui/Button.svelte";
-    import EqualGrid from "../../../components/ui/EqualGrid.svelte";
-    import Image from "../../../components/ui/Image.svelte";
-import Section from "../../../components/ui/Section.svelte";
-    import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
-    import VisibilityRange from "./VisibilityRange.svelte";
+	import { isMobileScreen } from "$lib/deviceDetector";
+	import { title } from "$lib/meta";
+	import { getContext } from "svelte";
+	import Button from "../../../components/ui/Button.svelte";
+	import EqualGrid from "../../../components/ui/EqualGrid.svelte";
+	import Image from "../../../components/ui/Image.svelte";
+	import Section from "../../../components/ui/Section.svelte";
+	import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
+	import VisibilityRange from "./VisibilityRange.svelte";
 
 	const lights = [
 		{
-			title: 'Power-driven vessels underway',
+			title: "Power-driven vessels underway",
 			lights: [
 				{
-					description: 'A power-driven vessel underway (over 50 meters in length)',
-					images: [
-						'underway-bow',
-						'underway-side',
-						'underway-stern'
-					]
+					description:
+						"A power-driven vessel underway (over 50 meters in length)",
+					images: ["underway-bow", "underway-side", "underway-stern"],
 				},
 				{
-					description: 'A power-driven vessel underway (under 50 meters in length)',
+					description:
+						"A power-driven vessel underway (under 50 meters in length)",
 					images: [
-						'underway-50m-bow',
-						'underway-50m-side',
-						'underway-50m-stern'
-					]
+						"underway-50m-bow",
+						"underway-50m-side",
+						"underway-50m-stern",
+					],
 				},
 				{
-					description: 'A power-driven vessel underway (under 12 meters in length)',
+					description:
+						"A power-driven vessel underway (under 12 meters in length)",
 					images: [
-						'underway-12m-bow',
-						'underway-12m-side',
-						'underway-12m-stern'
-					]
-				}
-			]
+						"underway-12m-bow",
+						"underway-12m-side",
+						"underway-12m-stern",
+					],
+				},
+			],
 		},
 		{
-			title: 'Vessels at anchor or aground',
+			title: "Vessels at anchor or aground",
 			lights: [
 				{
-					description: 'A vessel at anchor',
-					images: [
-						'anchored-bow',
-						'anchored-side',
-						'anchored-bow'
-					]
+					description: "A vessel at anchor",
+					images: ["anchored-bow", "anchored-side", "anchored-bow"],
 				},
 				{
-					description: 'A vessel at anchor (over 100m in length)',
-					images: [
-						'anchored-bow',
-						'anchored-100m-side',
-						'anchored-bow'
-					]
+					description: "A vessel at anchor (over 100m in length)",
+					images: ["anchored-bow", "anchored-100m-side", "anchored-bow"],
 				},
 				{
-					description: 'A vessel aground',
-					images: [
-						'aground-bow',
-						'aground-side',
-						'aground-bow'
-					]
-				}
-			]
+					description: "A vessel aground",
+					images: ["aground-bow", "aground-side", "aground-bow"],
+				},
+			],
 		},
 		{
-			title: 'Restricted or constrained vessels',
+			title: "Restricted or constrained vessels",
 			lights: [
 				{
-					description: 'A vessel not under command',
-					images: [
-						'nuc-bow',
-						'nuc-side',
-						'nuc-bow'
-					]
+					description: "A vessel not under command",
+					images: ["nuc-bow", "nuc-side", "nuc-bow"],
 				},
 				{
-					description: 'A vessel not under command but making way',
+					description: "A vessel not under command but making way",
 					images: [
-						'underway-nuc-bow',
-						'underway-nuc-side',
-						'underway-nuc-stern'
-					]
+						"underway-nuc-bow",
+						"underway-nuc-side",
+						"underway-nuc-stern",
+					],
 				},
 				{
-					description: 'A vessel restricted in her ability to maneuver',
-					images: [
-						'restricted-bow',
-						'restricted-side',
-						'restricted-bow'
-					]
+					description: "A vessel restricted in her ability to maneuver",
+					images: ["restricted-bow", "restricted-side", "restricted-bow"],
 				},
 				{
-					description: 'A vessel restricted in her ability to maneuver at anchor',
+					description:
+						"A vessel restricted in her ability to maneuver at anchor",
 					images: [
-						'anchored-restricted-bow',
-						'anchored-restricted-side',
-						'anchored-restricted-bow'
-					]
+						"anchored-restricted-bow",
+						"anchored-restricted-side",
+						"anchored-restricted-bow",
+					],
 				},
 				{
-					description: 'A vessel restricted in her ability to maneuver  making way',
+					description:
+						"A vessel restricted in her ability to maneuver  making way",
 					images: [
-						'underway-restricted-bow',
-						'underway-restricted-side',
-						'underway-restricted-stern'
-					]
+						"underway-restricted-bow",
+						"underway-restricted-side",
+						"underway-restricted-stern",
+					],
 				},
 				{
-					description: 'A vessel constrained by her draught',
-					images: [
-						'constrained-bow',
-						'constrained-side',
-						'constrained-stern'
-					]
+					description: "A vessel constrained by her draught",
+					images: ["constrained-bow", "constrained-side", "constrained-stern"],
 				},
-			]
-		}
+			],
+		},
 	];
 
-	const createPopup: CreatePopup = getContext('createPopup');
+	const createPopup: CreatePopup = getContext("createPopup");
 
 	function openVisibilityRanges() {
 		createPopup({
@@ -131,23 +108,25 @@ import Section from "../../../components/ui/Section.svelte";
 			content: {
 				component: VisibilityRange,
 			},
-			bottomSticked: isMobileScreen
-		})
+			bottomSticked: isMobileScreen,
+		});
 	}
 
-	title.set('Lights')
+	title.set("Lights");
 </script>
+
 <section class="vertical-flex max-width space-xl">
 	<div class="line-blocks space" style="align-self: end;">
 		<Button
+			icon="pie_chart"
 			type="transparent"
 			bordered
 			label="Visibility ranges"
-			on:click="{openVisibilityRanges}"
+			on:click={openVisibilityRanges}
 		/>
 	</div>
 	{#each lights as lightscategory}
-		<Section title="{lightscategory.title}">
+		<Section title={lightscategory.title}>
 			<div class="vertical-flex space-xl">
 				{#each lightscategory.lights as light}
 					<div class="Card vertical-flex space">
@@ -194,11 +173,10 @@ import Section from "../../../components/ui/Section.svelte";
 	{/each}
 </section>
 
-
 <style lang="scss">
 	.Card {
 		display: grid;
-		
+
 		.bow,
 		.side,
 		.stern {

@@ -1,10 +1,14 @@
 <script lang="ts">
 	import Icon from "./Icon.svelte";
-    import Loader from "./Loader.svelte";
-
+	import Loader from "./Loader.svelte";
 
 	export let icon: string | undefined = undefined;
-	export let type: 'primary' | 'secondary' | 'dangerous' | 'transparent' | undefined = undefined;
+	export let type:
+		| "primary"
+		| "secondary"
+		| "dangerous"
+		| "transparent"
+		| undefined = undefined;
 	export let label: string | undefined = undefined;
 	export let submit = false;
 	export let bordered = false;
@@ -15,12 +19,14 @@
 
 <button
 	on:click
-	class="{(type ?? '') + (bordered ? ' bordered' : '') + (maxwidth ? ' max-width' : '')} ripple space"
-	disabled="{disabled}"
-	type="{submit ? 'submit' : 'button'}"
+	class="{(type ?? '') +
+		(bordered ? ' bordered' : '') +
+		(maxwidth ? ' max-width' : '')} ripple space"
+	{disabled}
+	type={submit ? "submit" : "button"}
 >
 	{#if icon}
-		<Icon name="{icon}" --size="24px" --margin="-4px" />
+		<Icon name={icon} --size="24px" --margin="-4px 0" />
 	{/if}
 	{#if label}
 		<span>{label}</span>
@@ -47,7 +53,7 @@
 
 	// .ripple{
 	// 	position: relative;
-	// 	overflow: hidden; 
+	// 	overflow: hidden;
 	// }
 
 	// .ripple:before {

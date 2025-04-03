@@ -770,6 +770,7 @@
 				{/key}
 			</FormItem>
 			<Button
+				icon="location_on"
 				label="Set current position"
 				on:click={updatePosition}
 				isLoading={isLoadingPosition}

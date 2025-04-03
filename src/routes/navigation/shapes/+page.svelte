@@ -98,7 +98,7 @@
 					},
 					details: [
 						{
-							tag: "p",
+							tag: "span",
 							title: "Location",
 							text: shape.location,
 						},

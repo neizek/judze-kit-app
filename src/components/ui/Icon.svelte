@@ -1,8 +1,11 @@
 <script lang="ts">
 	export let name: string;
+	export let filled: boolean = false;
 </script>
 
-<span class="Icon material-icons notranslate">{name}</span>
+<span class="Icon material-icons notranslate {filled ? `filled` : ``}"
+	>{name}</span
+>
 
 <style lang="scss">
 	.Icon {

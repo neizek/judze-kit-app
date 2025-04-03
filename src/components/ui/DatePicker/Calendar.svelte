@@ -123,21 +123,24 @@
 <style lang="scss">
 	.columns {
 		display: grid;
-		gap: 5px;
+		gap: 8px;
 		grid-template-rows: repeat(6, 1fr);
 	}
 
 	.rows {
 		display: grid;
-		gap: 5px;
+		gap: 8px;
 		grid-template-columns: repeat(7, 1fr);
 	}
 
 	.button {
 		aspect-ratio: 1 / 1;
 		justify-content: center;
-		padding: 8px;
-		border: 1px solid var(--input-border-color);
+		padding: 4px;
+		background-color: var(--button-background-color-hover);
+		&.primary {
+			background-color: var(--primary-color);
+		}
 
 		&.disabled {
 			opacity: 0.5;
