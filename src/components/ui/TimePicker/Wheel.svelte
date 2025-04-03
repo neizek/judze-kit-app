@@ -28,7 +28,9 @@
 >
 	<span>_</span>
 	{#each Array(items) as _, index}
-		<span class:active={choosenItem === index}>{index}</span>
+		<span class="text-noselect" class:active={choosenItem === index}>
+			{index}
+		</span>
 	{/each}
 	<span>_</span>
 </div>

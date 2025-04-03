@@ -77,6 +77,12 @@ ul {
 }
 
 .text {
+	&-noselect {
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
 	&-size {
 		&-xs {
 			font-size: var(--font-size-xs);

@@ -112,7 +112,7 @@
 							chooseDate(thisDate);
 						}}
 					>
-						<span>{day ? day.toString() : ""}</span>
+						<span class="text-noselect">{day ? day.toString() : ""}</span>
 					</div>
 				{/each}
 			</div>

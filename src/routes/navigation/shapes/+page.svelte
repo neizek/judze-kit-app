@@ -109,7 +109,6 @@
 					],
 				},
 			},
-			bottomSticked: isMobileScreen,
 		});
 	}
 
