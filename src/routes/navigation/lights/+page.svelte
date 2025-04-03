@@ -98,6 +98,23 @@
 				},
 			],
 		},
+		{
+			title: "Other vessels",
+			lights: [
+				{
+					description: "A pilot vessel underway",
+					images: ["pilot-bow", "pilot-side", "pilot-stern"],
+				},
+				{
+					description: "A vessel engaged in mine cleaning operations",
+					images: ["minesweeper-bow", "minesweeper-side", "minesweeper-stern"],
+				},
+				{
+					description: "A sailing vessel",
+					images: ["sailing-bow", "sailing-side", "sailing-stern"],
+				},
+			],
+		},
 	];
 
 	const createPopup: CreatePopup = getContext("createPopup");

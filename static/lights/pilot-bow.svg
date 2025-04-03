@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:url(#SVGID_00000084518091854749543160000001941597975817889180_);}
+	.st2{fill:#ED1C24;}
+	.st3{fill:#1CA500;}
+	.st4{fill:#FFFFFF;}
+</style>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="249.6" y1="504" x2="249.6" y2="4" gradientTransform="matrix(1 0 0 -1 0 504)">
+	<stop  offset="0" style="stop-color:#262262"/>
+	<stop  offset="0.1758" style="stop-color:#1D1752"/>
+	<stop  offset="0.4535" style="stop-color:#0C003B"/>
+	<stop  offset="0.6935" style="stop-color:#000029"/>
+	<stop  offset="0.8835" style="stop-color:#00001A"/>
+	<stop  offset="1" style="stop-color:#000013"/>
+</linearGradient>
+<rect x="-0.8" class="st0" width="500.8" height="500"/>
+<linearGradient id="SVGID_00000028307857919803160240000010363302209894952860_" gradientUnits="userSpaceOnUse" x1="919.2" y1="386.4" x2="919.2" y2="386.4" gradientTransform="matrix(1 0 0 -1 0 504)">
+	<stop  offset="0" style="stop-color:#262262"/>
+	<stop  offset="0.1758" style="stop-color:#1D1752"/>
+	<stop  offset="0.4535" style="stop-color:#0C003B"/>
+	<stop  offset="0.6935" style="stop-color:#000029"/>
+	<stop  offset="0.8835" style="stop-color:#00001A"/>
+	<stop  offset="1" style="stop-color:#000013"/>
+</linearGradient>
+<path style="fill:url(#SVGID_00000028307857919803160240000010363302209894952860_);" d="M919.2,117.6"/>
+<rect y="388" width="500" height="112"/>
+<circle class="st2" cx="306.3" cy="340.2" r="20.8"/>
+<circle class="st3" cx="193.3" cy="340.2" r="20.8"/>
+<path d="M315,342.6h-3.4l-10-62.9h-47.3v-51.1h-9.7v51.1h-47.3l-10,62.9H166c0,0,7.3,66.6,25.3,67.4v0.1h116.1
+	c18.2,0,25.6-67.5,25.6-67.5H315z"/>
+<ellipse transform="matrix(0.1602 -0.9871 0.9871 0.1602 -16.0886 439.0901)" class="st2" cx="250" cy="229" rx="20.8" ry="20.8"/>
+<ellipse transform="matrix(0.1602 -0.9871 0.9871 0.1602 33.2658 397.0992)" class="st4" cx="250" cy="179" rx="20.8" ry="20.8"/>
+</svg>
