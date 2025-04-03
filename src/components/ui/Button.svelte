@@ -40,6 +40,7 @@
 	button {
 		white-space: nowrap;
 		justify-content: center;
+		// height: var(--height, auto);
 
 		@include mobile {
 			width: 100%;
