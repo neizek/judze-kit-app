@@ -155,13 +155,15 @@
 </script>
 
 <section class="vertical-flex max-width space-xl">
-	<Selector
-		items={[
-			{ value: "a", label: "IALA System A" },
-			{ value: "b", label: "IALA System B" },
-		]}
-		bind:value={currentIala}
-	/>
+	<div style="align-self: end;">
+		<Selector
+			items={[
+				{ value: "a", label: "IALA System A" },
+				{ value: "b", label: "IALA System B" },
+			]}
+			bind:value={currentIala}
+		/>
+	</div>
 	{#each buoysArray as buoysCategory}
 		<Section title={buoysCategory.header}>
 			<EqualGrid --desktopColumnsQty={4} --mobileColumnsQty={2}>

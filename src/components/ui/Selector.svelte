@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Button from "./Button.svelte";
 	interface SelectorItem {
-		value: string | number;
+		value: string | number | boolean;
 		icon?: string;
 		label: string;
 	}
 	export let items: SelectorItem[];
-	export let value: string | number;
+	export let value: string | number | boolean;
 </script>
 
 <div class="line-blocks space">
