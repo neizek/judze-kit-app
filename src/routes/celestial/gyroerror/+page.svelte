@@ -786,10 +786,24 @@
 				{/if}
 			</FormItem>
 			<FormItem label="Gyro course">
-				<Input type="number" bind:value={GC} min={0} max={360} step={0.1} />
+				<Input
+					type="number"
+					bind:value={GC}
+					min={0}
+					max={360}
+					step={0.1}
+					placeholder="181.0"
+				/>
 			</FormItem>
 			<FormItem label="Standard course">
-				<Input type="number" bind:value={MC} min={0} max={360} step={0.1} />
+				<Input
+					type="number"
+					bind:value={MC}
+					min={0}
+					max={360}
+					step={0.1}
+					placeholder="182.0"
+				/>
 			</FormItem>
 		</Section>
 	</div>
@@ -803,7 +817,14 @@
 				{/if}
 			</FormItem>
 			<FormItem label="Gyro">
-				<Input type="number" bind:value={GB} min={0} max={360} step={0.1} />
+				<Input
+					type="number"
+					bind:value={GB}
+					min={0}
+					max={360}
+					step={0.1}
+					placeholder="242.3"
+				/>
 			</FormItem>
 			<FormItem label="Standard">
 				{#if MC && TC && azimuth}
@@ -843,16 +864,18 @@
 	<Section title="Calculated data">
 		<EqualGrid --mobileColumnsQty="2" --desktopColumnsQty={2}>
 			<FormItem label="GHA">
-				<span>{transformToCoordinates(GHA)}</span>
+				<span class="text-size-m">{transformToCoordinates(GHA)}</span>
 			</FormItem>
 			<FormItem label="LHA">
-				<span>{transformToCoordinates(LHA)}</span>
+				<span class="text-size-m">{transformToCoordinates(LHA)}</span>
 			</FormItem>
 			<FormItem label="Declination">
-				<span>{transformToCoordinates(declination, "y")}</span>
+				<span class="text-size-m"
+					>{transformToCoordinates(declination, "y")}</span
+				>
 			</FormItem>
 			<FormItem label="Azimuth">
-				<span>{Number(azimuth).toFixed(1)}&#176;</span>
+				<span class="text-size-m">{Number(azimuth).toFixed(1)}&#176;</span>
 			</FormItem>
 		</EqualGrid>
 	</Section>

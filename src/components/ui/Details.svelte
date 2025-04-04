@@ -4,7 +4,7 @@
 
 <details>
 	<summary class="space-between">
-		<h3>{header}</h3>
+		<h4>{header}</h4>
 		<span class="material-icons notranslate">chevron_right</span>
 	</summary>
 	<article><slot></slot></article>

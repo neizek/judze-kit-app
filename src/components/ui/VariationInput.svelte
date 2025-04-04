@@ -17,7 +17,13 @@
 </script>
 
 <div class="inline-blocks space">
-	<Input type="number" bind:value={inputValue} step={0.1} min={0} />
+	<Input
+		type="number"
+		bind:value={inputValue}
+		step={0.1}
+		min={0}
+		placeholder="0.4"
+	/>
 	<!-- <Select items="{items}" bind:value="{choosenItem}" /> -->
 	<Selector {items} bind:value={choosenItem} />
 </div>
