@@ -12,7 +12,8 @@
 	});
 
 	function ifActiveElement(element: HTMLSpanElement) {
-		if (element.classList.contains("active")) element.scrollIntoView();
+		if (element.classList.contains("active"))
+			element.scrollIntoView({ block: "center" });
 	}
 
 	function handleScroll(event: Event) {
