@@ -9,10 +9,11 @@
 
 	onMount(() => {
 		itemHeight = wheelBlock.scrollHeight / (items + 2);
-		wheelBlock.scrollBy({
-			top: itemHeight * choosenItem,
-		});
 	});
+
+	function ifActiveElement(element: HTMLSpanElement) {
+		if (element.classList.contains("active")) element.scrollIntoView();
+	}
 
 	function handleScroll(event: Event) {
 		const target = event.target as HTMLElement;
@@ -28,7 +29,11 @@
 >
 	<span>_</span>
 	{#each Array(items) as _, index}
-		<span class="text-noselect" class:active={choosenItem === index}>
+		<span
+			class="text-noselect"
+			class:active={choosenItem === index}
+			use:ifActiveElement
+		>
 			{index}
 		</span>
 	{/each}
