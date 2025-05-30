@@ -4,7 +4,7 @@ const config: CapacitorConfig = {
   appId: 'com.judze.app',
   appName: 'Judze',
   webDir: 'build',
-  backgroundColor: '2e333a',
+//   backgroundColor: '2e333a',
   plugins: {
       LocalNotifications: {},
       SplashScreen: {
