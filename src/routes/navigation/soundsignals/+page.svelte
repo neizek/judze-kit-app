@@ -11,6 +11,7 @@
 	import type { SoundSignalsType, SoundSignalType, SoundsType } from "./types";
 	import Section from "../../../components/ui/Section.svelte";
 	import { bellfivemp3, bellmp3, emptymp3, gongfivemp3, prolongedmp3, shortmp3 } from "./sounds";
+	import EqualGrid from "../../../components/ui/EqualGrid.svelte";
 
 	$title = 'Sound signals'
 
@@ -70,16 +71,16 @@
 		}
 	}
 </script>
-<section class="equal-flex mobile max-width space-xl">
+<EqualGrid --desktopColumnsQty="{2}" --tabletColumnsQty="{1}" --mobileColumnsQty="{1}">
 	{#each signalsArray as signalCategory}
 		<Section title="{signalCategory.header}">
 			<div class="vertical space big">
 				{#each signalCategory.signals as signal, index}
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<!-- svelte-ignore a11y-no-static-element-interactions -->
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<!-- svelte-ignore a11y-no-static-element-interactions -->
 					<div
-						class="equal-flex inlined space-xl"
-						on:click="{() => openDescription(signal)}"
+					class="equal-flex inlined space-xl"
+					on:click="{() => openDescription(signal)}"
 					>
 						<MorseCode morse="{signal.morse}" />
 						<span class="doubled">{signal.description}</span>
@@ -88,5 +89,5 @@
 			</div>
 		</Section>
 	{/each}
-</section>
+</EqualGrid>
 

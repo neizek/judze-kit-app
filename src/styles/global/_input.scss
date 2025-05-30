@@ -56,11 +56,11 @@
 	align-items: center;
 	vertical-align: baseline;
 	border-radius: #{$inputBorderRadius};
-	padding: 9px 14px;
+	padding: 10px 15px;
 	gap: 12px;
 	font-size: 13.5px;
 	background-color: var(--button-background-color);
-	border: 1px solid var(--separation-color);
+	// border: 1px solid var(--separation-color);
 	transition: background-color 0.2s, box-shadow 0.2s;
 	box-sizing: border-box;
 
@@ -89,7 +89,7 @@
 	&.secondary,
 	&.dangerous {
 		border: none;
-		padding: 10px 15px;
+		// padding: 10px 15px;
 		// box-shadow: 0 1px inset #ffffff30, 0 -1px inset #00000030;
 
 		&,

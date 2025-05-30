@@ -15,15 +15,17 @@
 	import CoordinatesInput from "../../../components/ui/CoordinatesInput.svelte";
 	import DateTimeInput from "../../../components/ui/DateTimeInput.svelte";
 	import { title } from "$lib/meta";
-	import { Geolocation } from "@capacitor/geolocation";
+	// import { Geolocation } from "@capacitor/geolocation";
 	import VariationInput from "../../../components/ui/VariationInput.svelte";
 	import Section from "../../../components/ui/Section.svelte";
 	import EqualGrid from "../../../components/ui/EqualGrid.svelte";
 	import { browser } from "$app/environment";
 	import NewDateTimeInput from "../../../components/ui/NewDateTimeInput.svelte";
+	import { formatToCompassError } from "$lib/string";
+	import type { GeolocationPlugin } from "@capacitor/geolocation";
 
 	let object: string;
-	let givenDateTime: Date = new Date(2024, 9, 29, 16, 30, 30);
+	let givenDateTime: Date = new Date();
 	let longitude: number = 24;
 	let latitude: number = 57;
 	let azimuth: number;
@@ -695,8 +697,10 @@
 		}
 	}
 
+	let Geolocation: GeolocationPlugin | undefined = undefined
+
 	async function getCurrentPosition() {
-		return await Geolocation.getCurrentPosition();
+		return Geolocation?.getCurrentPosition();
 	}
 
 	let isLoadingPosition: boolean = false;
@@ -706,20 +710,37 @@
 		isLoadingPosition = true;
 		getCurrentPosition()
 			.then((position) => {
-				longitude = Number(position.coords.longitude);
-				latitude = Number(position.coords.latitude);
-				positionObtained = !positionObtained;
-				performCalculations();
+				if (position) {
+					longitude = Number(position.coords.longitude);
+					latitude = Number(position.coords.latitude);
+					positionObtained = !positionObtained;
+					performCalculations();
+				}
 			})
 			.finally(() => {
 				isLoadingPosition = false;
 			});
 	}
 
+	onMount(async () => {
+		if (browser) {
+			const geoModule = await import("@capacitor/geolocation");
+			Geolocation = geoModule.Geolocation;
+		}
+
+		Geolocation?.checkPermissions()
+		.then((result) => {
+			if (result.location === 'granted') {
+				updatePosition();
+			}
+		});
+	})
+
 	title.set("Gyro Error");
 </script>
 
-<section class="Celestial equal-flex mobile space-xl max-width">
+<!-- <section class="Celestial equal-flex mobile space-xl max-width"> -->
+<EqualGrid --desktopColumnsQty="{3}" --mobileColumnsQty="{1}" --tabletColumnsQty="{1}" >
 	<div class="vertical-flex max-width space-xl">
 		<Section title="General data">
 			<FormItem label="Choose object">
@@ -743,10 +764,6 @@
 					></Select>
 				{/if}
 			{/key}
-			<!-- <DateTimeInput
-				bind:value={givenDateTime}
-				on:change={performCalculations}
-			/> -->
 			<NewDateTimeInput
 				bind:value={givenDateTime}
 				on:change={performCalculations}
@@ -837,14 +854,14 @@
 		<Section title="Corrections">
 			<FormItem label="Gyro Error">
 				{#if azimuth && GB}
-					<span>{(azimuth - GB).toFixed(1)}&#176;</span>
+					 <span>{ formatToCompassError(azimuth - GB) }</span>
 				{:else}
 					<span>-</span>
 				{/if}
 			</FormItem>
 			<FormItem label="Standard">
 				{#if MC && TC && azimuth}
-					<span>{(MC - TC).toFixed(1)}&#176;</span>
+					 <span>{ formatToCompassError(TC - MC) }</span>
 				{:else}
 					<span>-</span>
 				{/if}
@@ -854,7 +871,7 @@
 			</FormItem>
 			<FormItem label="Deviation">
 				{#if TC && MC && variation}
-					<span>{(MC - TC - variation).toFixed(1)}&#176;</span>
+					 <span>{formatToCompassError(TC - MC - variation)}</span>
 				{:else}
 					<span>-</span>
 				{/if}
@@ -862,7 +879,7 @@
 		</Section>
 	</div>
 	<Section title="Calculated data">
-		<EqualGrid --mobileColumnsQty="2" --desktopColumnsQty={2}>
+		<EqualGrid --mobileColumnsQty="2" --tabletColumnsQty="{2}" --desktopColumnsQty={2}>
 			<FormItem label="GHA">
 				<span class="text-size-m">{transformToCoordinates(GHA)}</span>
 			</FormItem>
@@ -879,4 +896,5 @@
 			</FormItem>
 		</EqualGrid>
 	</Section>
-</section>
+	</EqualGrid>
+<!-- </section> -->

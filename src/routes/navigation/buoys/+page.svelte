@@ -5,7 +5,6 @@
 	import Section from "../../../components/ui/Section.svelte";
 	import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
 	import { isMobileScreen } from "$lib/deviceDetector";
-	import BuoyDetails from "./BuoyDetails.svelte";
 	import DetailsCard from "../../../components/ui/DetailsCard.svelte";
 	import { title } from "$lib/meta";
 	import Selector from "../../../components/ui/Selector.svelte";
@@ -46,14 +45,14 @@
 					title: "Lateral port mark",
 					image: "lateral-port-b.svg",
 					description:
-						"Lateral marks indicate the port and starboard sides of channels. The marks topped by a red can shape are called Port Marks.",
+						"Lateral marks indicate the port and starboard sides of channels. The marks topped by a red triangle shape are called Port Marks.",
 					iala: "b",
 				},
 				{
 					title: "Lateral starboard mark",
 					image: "lateral-stbd-b.svg",
 					description:
-						"Lateral marks indicate the port and starboard sides of channels. The marks topped topped by a green triangle shape are called Starboard Marks.",
+						"Lateral marks indicate the port and starboard sides of channels. The marks topped topped by a green can shape are called Starboard Marks.",
 					iala: "b",
 				},
 			],

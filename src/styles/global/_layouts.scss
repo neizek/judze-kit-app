@@ -1,11 +1,11 @@
-@use '../abstract/abstract.scss' as *;
+@use "../abstract/abstract.scss" as *;
 
 :root {
 	--body-background-color: #{$bodyBackgroundColor};
 	--box-background-color: #{$boxBackgroundColor};
 	--box-border-color: #{$separationColor};
 
-	&[data-theme='dark'] {
+	&[data-theme="dark"] {
 		--body-background-color: #{$bodyBackgroundColorDark};
 		--box-background-color: #{$boxBackgroundColorDark};
 		--box-border-color: #{$separationColorDark};
@@ -14,11 +14,11 @@
 
 // Hiding the scrollbar
 
-html {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+html, .hide-scroll {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 
-	&::-webkit-scrollbar { 
+	&::-webkit-scrollbar {
 		display: none;
 	}
 }
@@ -54,7 +54,7 @@ section {
 	display: flex;
 	gap: 16px;
 	border-radius: #{$sectionBorderRadius};
-	
+
 	&-column {
 		flex-direction: column;
 	}
@@ -152,7 +152,7 @@ section {
 .equal-flex {
 	display: flex;
 
-	>* {
+	> * {
 		flex: 0 1 100%;
 	}
 
@@ -225,7 +225,7 @@ section {
 .p {
 	&a {
 		padding: 4px;
-		&-l{
+		&-l {
 			padding: 8px;
 		}
 		&-xl {
@@ -239,7 +239,7 @@ section {
 	gap: 8px;
 
 	&.vertical {
-		gap: 14px;
+		gap: 16px;
 		flex-direction: column;
 
 		&.small {
@@ -265,7 +265,11 @@ section {
 		> * {
 			&:not(:last-child),
 			&:not(:first-child) {
-				&, input, .input, button, .button {
+				&,
+				input,
+				.input,
+				button,
+				.button {
 					border-radius: 0;
 				}
 			}
@@ -276,27 +280,37 @@ section {
 			}
 
 			&:first-child {
-				&, input, .input, button, .button {
+				&,
+				input,
+				.input,
+				button,
+				.button {
 					border-top-left-radius: $inputBorderRadius;
 					border-bottom-left-radius: $inputBorderRadius;
 				}
 			}
 
 			&:last-child {
-				&, input, .input, button, .button {
+				&,
+				input,
+				.input,
+				button,
+				.button {
 					border-top-right-radius: $inputBorderRadius;
 					border-bottom-right-radius: $inputBorderRadius;
 				}
 			}
-	
+
 			&:focus {
-				&, * {
+				&,
+				* {
 					z-index: 1;
 				}
 			}
 
 			&:focus-within {
-				&, * {
+				&,
+				* {
 					z-index: 1;
 				}
 			}

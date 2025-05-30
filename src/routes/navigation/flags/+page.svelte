@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext, onMount } from "svelte";
+	import { getContext } from "svelte";
 	import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
 	import { title } from "$lib/meta";
 	import { isMobileScreen } from "$lib/deviceDetector";
@@ -9,30 +9,28 @@
 	import { allFlags, type FlagCategory } from "./flagsArrays";
 	import FlagItem from "./FlagItem.svelte";
 	import Selector from "../../../components/ui/Selector.svelte";
-	// import FloatingSearch from "../../../components/ui/FloatingSearch.svelte";
+	import FloatingSearch from "../../../components/ui/FloatingSearch.svelte";
 
-	// let choosenCategory: 'national' | 'navigational' = 'navigational'
-	// let searchValue: string;
+	let searchValue: string = '';
 	let isNavigational: boolean = true;
 	let flagsArray: FlagCategory[];
 
 	function getAllFlags() {
-		flagsArray = allFlags.filter((category) => {
-			return category.isNavigational === isNavigational;
-		});
-		// if (searchValue !== '' && searchValue) {
-		// 	flagsArray.forEach((category, index) => {
-		// 		category.flags = category.flags.filter(flag => flag.name.indexOf(searchValue) !== -1);
-		// 	})
-		// }
-		// console.log(flagsArray)
-	}
+		const search = searchValue.toLowerCase();
 
-	getAllFlags();
+		flagsArray = allFlags
+		.filter((category) => category.isNavigational === isNavigational)
+		.map((category) => ({
+			...category,
+			flags: category.flags.filter(flag =>
+				search === '' || flag.name.toLowerCase().includes(search)
+			)
+		}));
+	}
 
 	$: {
 		isNavigational;
-		// searchValue;
+		searchValue;
 		getAllFlags();
 	}
 
@@ -68,19 +66,26 @@
 	</div>
 	{#each flagsArray as flagCategory}
 		<Section title={flagCategory.header}>
-			<EqualGrid --mobileColumnsQty={3} --desktopColumnsQty={6}>
-				{#each flagCategory.flags as flag}
-					<FlagItem
-						{isNavigational}
-						icon="{isNavigational
-							? 'navigational'
-							: 'national'}/{flag.icon.toLocaleLowerCase()}.svg"
-						title={flag.letter ? `${flag.letter} - ${flag.name}` : flag.name}
-						on:click={() => openDescription(flag)}
-					/>
-				{/each}
-			</EqualGrid>
+			{#if flagCategory.flags.length > 0}
+				<EqualGrid --mobileColumnsQty={3} --desktopColumnsQty={6} --tabletColumnsQty="{4}">
+					{#each flagCategory.flags as flag}
+						<FlagItem
+							{isNavigational}
+							icon="{isNavigational
+								? 'navigational'
+								: 'national'}/{flag.icon.toLocaleLowerCase()}.svg"
+							title={flag.letter ? `${flag.letter} - ${flag.name}` : flag.name}
+							on:click={() => openDescription(flag)}
+						/>
+					{/each}
+				</EqualGrid>
+			{:else}
+				<div class="centered-content vertical-flex space">
+					<span class="material-icons notranslate">folder_off</span>
+					<span>Unfortunately, no any flags were found</span>
+				</div>
+			{/if}
 		</Section>
 	{/each}
-	<!-- <FloatingSearch bind:value="{searchValue}" /> -->
+	<FloatingSearch bind:value="{searchValue}" />
 </div>

@@ -20,7 +20,7 @@
 </script>
 
 <div class="vertical-flex space-xl">
-	<EqualGrid --mobileColumnsQty="3" --desktopColumnsQty="3">
+	<EqualGrid --mobileColumnsQty="3" --tabletColumnsQty="3" --desktopColumnsQty="3">
 		<Wheel items={totalHours} bind:choosenItem={hours}></Wheel>
 		<Wheel items={totalMinutes} bind:choosenItem={minutes}></Wheel>
 		<Wheel items={totalSeconds} bind:choosenItem={seconds}></Wheel>

@@ -15,7 +15,7 @@ import Input from "./Input.svelte";
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="Float space-between space">
 	{#if isActive}
-		<div transition:fly="{{y: 200}}" class="max-width">
+		<div transition:fly="{{y: 200}}" class="max-width" style="max-width: 400px;">
 			<Input bind:value="{value}" placeholder="Start typing..." />
 		</div>
 	{/if}

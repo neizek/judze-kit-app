@@ -293,7 +293,14 @@
 </script>
 
 <div class="vertical-flex right space-xl max-width">
-	<div style="align-self: end;">
+	<div class="space-between space hide-scroll" style="overflow-x: scroll;">
+		<div>
+			<Button
+				icon="calculate"
+				label="Calculator"
+				on:click="{createCalculator}"
+			/>
+		</div>
 		<Selector
 			items={[
 				{ label: "Beaufort scale", value: 0 },
@@ -302,16 +309,15 @@
 			bind:value={activeSection}
 		/>
 	</div>
+	
+		
+			
 	<Section title={windTableType.header}>
 		<div class="vertical-flex space big">
-			<!-- <Button
-				label="True wind calculator"
-				on:click="{createCalculator}"
-			/> -->
 			<Details header="Description">
 				<p>{windTableType.description}</p>
 			</Details>
-			<EqualGrid --desktopColumnsQty={4} --mobileColumnsQty={2}>
+			<EqualGrid --desktopColumnsQty={4} --tabletColumnsQty="{3}" --mobileColumnsQty={2}>
 				{#each windTableType.steps as step}
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div

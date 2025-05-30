@@ -1,4 +1,5 @@
 <script context="module" lang="ts">
+	import { beforeNavigate } from "$app/navigation";
 	import { popUpsQuantity } from "$lib/popupCounter";
 	import type { AnyObject } from "$lib/types";
 
@@ -64,6 +65,11 @@
 		popUps.update((current) => current.filter((popup) => popup.id !== id));
 		$popUpsQuantity--;
 	};
+
+	beforeNavigate(() => {
+		popUps.set([]);
+		$popUpsQuantity = 0;
+	})
 
 	setContext("createPopup", createPopup);
 </script>
