@@ -14,6 +14,8 @@
 	export let max: number | undefined = undefined;
 	export let min: number | undefined = undefined;
 	export let disabled: boolean = false;
+	export let borderless: boolean = false;
+	export let clearable: boolean = false;
 	export let readonly: boolean = false;
 
 	$: {
@@ -28,6 +30,10 @@
 	const ref = (node: HTMLInputElement) => {
 		node.type = type;
 	};
+
+	function clearValue() {
+		value = '';
+	}
 </script>
 
 {#if isFirefox() && autocomplete !== undefined}
@@ -41,9 +47,9 @@
 		readonly
 	/>
 {/if}
-<label class="input extended" class:error={hasError} class:disabled>
+<label class="input extended" class:error={hasError} class:disabled class:borderless>
 	{#if icon}
-		<i class="fa-solid fa-{icon}"></i>
+		<i class="material-icons">{icon}</i>
 	{/if}
 	<input
 		{placeholder}
@@ -69,6 +75,11 @@
 	{#if hasError}
 		<div class="errorIcon">!</div>
 	{/if}
+	{#if clearable && value.length > 0}
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<i class="material-icons" on:click="{clearValue}">close</i>
+	{/if}
 </label>
 
 <style lang="scss">
@@ -82,5 +93,10 @@
 	input[type="number"] {
 		-moz-appearance: textfield;
 		appearance: textfield;
+	}
+
+	i {
+		font-size: 24px !important;
+		margin: -8px;
 	}
 </style>

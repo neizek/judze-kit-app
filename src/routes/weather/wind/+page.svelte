@@ -12,6 +12,7 @@
 	import DetailsCard from "../../../components/ui/DetailsCard.svelte";
 	import Details from "../../../components/ui/Details.svelte";
 	import Selector from "../../../components/ui/Selector.svelte";
+	import PageControls from "../../../components/ui/PageControls.svelte";
 
 	title.set("Wind");
 
@@ -293,7 +294,7 @@
 </script>
 
 <div class="vertical-flex right space-xl max-width">
-	<div class="space-between space hide-scroll" style="overflow-x: scroll;">
+	<PageControls>
 		<div>
 			<Button
 				icon="calculate"
@@ -308,7 +309,7 @@
 			]}
 			bind:value={activeSection}
 		/>
-	</div>
+	</PageControls>
 	
 		
 			

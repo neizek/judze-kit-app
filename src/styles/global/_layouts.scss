@@ -149,6 +149,14 @@ section {
 	align-items: center;
 }
 
+.wrap {
+	flex-wrap: wrap;
+
+	>* {
+		flex: 1
+	}
+}
+
 .equal-flex {
 	display: flex;
 
@@ -316,4 +324,8 @@ section {
 			}
 		}
 	}
+}
+
+.borderless {
+	border: none !important;
 }

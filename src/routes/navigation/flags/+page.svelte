@@ -9,7 +9,8 @@
 	import { allFlags, type FlagCategory } from "./flagsArrays";
 	import FlagItem from "./FlagItem.svelte";
 	import Selector from "../../../components/ui/Selector.svelte";
-	import FloatingSearch from "../../../components/ui/FloatingSearch.svelte";
+	import Input from "../../../components/ui/Input.svelte";
+	import PageControls from "../../../components/ui/PageControls.svelte";
 
 	let searchValue: string = '';
 	let isNavigational: boolean = true;
@@ -55,7 +56,16 @@
 </script>
 
 <div class="vertical-flex space-xl max-width">
-	<div style="align-self: end;">
+	<PageControls>
+		<div>
+			<Input
+				bind:value="{searchValue}"
+				icon="search" 
+				placeholder="Search..."
+				borderless
+				clearable
+			/>
+		</div>
 		<Selector
 			items={[
 				{ label: "Navigational", value: true },
@@ -63,7 +73,7 @@
 			]}
 			bind:value={isNavigational}
 		/>
-	</div>
+	</PageControls>
 	{#each flagsArray as flagCategory}
 		<Section title={flagCategory.header}>
 			{#if flagCategory.flags.length > 0}
@@ -87,5 +97,4 @@
 			{/if}
 		</Section>
 	{/each}
-	<FloatingSearch bind:value="{searchValue}" />
 </div>
