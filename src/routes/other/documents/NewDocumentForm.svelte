@@ -1,20 +1,20 @@
 <script lang="ts">
-	import { addRecordsToDB } from "$lib/documents";
-	import Button from "../../../components/ui/Button.svelte";
-	import DatePicker from "../../../components/ui/DatePicker/DatePicker.svelte";
-	import FormItem from "../../../components/ui/FormItem.svelte";
-	import Input from "../../../components/ui/Input.svelte";
-	import Select from "../../../components/ui/Select/Select.svelte";
+	import { addRecordsToDB } from '$lib/utils/documents';
+	import Button from '$ui/Button.svelte';
+	import DatePicker from '$ui/DatePicker/DatePicker.svelte';
+	import FormItem from '$ui/FormItem.svelte';
+	import Input from '$ui/Input.svelte';
+	import Select from '$ui/Select/Select.svelte';
 
 	export let categories;
 
 	let category: string | undefined = categories[0].value;
-	let name: string = "";
+	let name: string = '';
 	let issueDate: Date;
 	let expiryDate: Date;
 
 	function addDocument() {
-		addRecordsToDB("list", [
+		addRecordsToDB('list', [
 			{
 				category,
 				name,

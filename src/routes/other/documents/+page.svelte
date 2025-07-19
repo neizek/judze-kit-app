@@ -3,18 +3,18 @@
 		getDocuments,
 		type DocumentsCategoryType,
 		type DocumentType,
-	} from "$lib/documents";
-	import { title } from "$lib/meta";
-	import { getContext, onMount } from "svelte";
-	import Button from "../../../components/ui/Button.svelte";
-	import Loader from "../../../components/ui/Loader.svelte";
-	import Section from "../../../components/ui/Section.svelte";
-	import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
-	import NewDocumentForm from "./NewDocumentForm.svelte";
-	import { formatDateSimple } from "$lib/datetime";
-	import DocumentDetails from "./DocumentDetails.svelte";
+	} from '$lib/utils/documents';
+	import { title } from '$lib/stores/meta';
+	import { getContext, onMount } from 'svelte';
+	import Button from '$ui/Button.svelte';
+	import Loader from '$ui/Loader.svelte';
+	import Section from '$ui/Section.svelte';
+	import type { CreatePopup } from '$widgets/PopUp.svelte';
+	import NewDocumentForm from './NewDocumentForm.svelte';
+	import { formatDateSimple } from '$lib/utils/datetime';
+	import DocumentDetails from './DocumentDetails.svelte';
 
-	title.set("Documents");
+	title.set('Documents');
 
 	interface CategoryType extends DocumentsCategoryType {
 		documents?: DocumentType[];
@@ -22,7 +22,7 @@
 
 	let categories: CategoryType[] | undefined = undefined;
 
-	const createPopup: CreatePopup = getContext("createPopup");
+	const createPopup: CreatePopup = getContext('createPopup');
 
 	onMount(() => {
 		getDocuments().then((result) => {
@@ -49,7 +49,7 @@
 
 	function handleNewDocument() {
 		createPopup({
-			header: "Add new document",
+			header: 'Add new document',
 			content: {
 				component: NewDocumentForm,
 				props: {
@@ -81,12 +81,7 @@
 {:else}
 	<div class="vertical-flex space-xl max-width">
 		<div class="line-blocks space" style="align-self: end;">
-			<Button
-				label="New document"
-				icon="add"
-				type="primary"
-				on:click={handleNewDocument}
-			/>
+			<Button label="New document" icon="add" type="primary" on:click={handleNewDocument} />
 		</div>
 		{#each categories as category}
 			<Section title={category.label}>
@@ -102,9 +97,9 @@
 						{#each category.documents as document}
 							<div class="space-between" on:click={() => showDetails(document)}>
 								<span>{document.name}</span>
-								<span class="text-size-xs"
-									>{formatDateSimple(document.expiryDate)}</span
-								>
+								<span class="text-size-xs">
+									{formatDateSimple(document.expiryDate)}
+								</span>
 							</div>
 						{/each}
 					</div>

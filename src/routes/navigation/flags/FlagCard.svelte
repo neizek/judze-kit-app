@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Image from "../../../components/ui/Image.svelte";
+	import Image from '$ui/Image.svelte';
 
 	export let flag;
 </script>
@@ -7,16 +7,15 @@
 <div class="horizontal-layout space big">
 	<Image
 		src="/flagIcons/{flag.letter ? 'navigational' : 'national'}/{flag.icon.toLowerCase()}.svg"
-		alt="{flag.letter}"
+		alt={flag.letter}
 		--width="100px"
 		--height="100px"
 		--object-fit="contain"
 		--border-radius="5px"
-		dropShadow
-	/>
+		dropShadow />
 	<div class="vertical-flex Description">
 		<div class="space-between">
-			<span>Morse code: </span>
+			<span>Morse code:</span>
 			<span class="morse">{flag.morse}</span>
 		</div>
 		<p>Meaning: {flag.description}</p>

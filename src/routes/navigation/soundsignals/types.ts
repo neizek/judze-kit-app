@@ -11,5 +11,4 @@ export type SoundSignalsType = {
 
 export type SoundsType = {
 	[prop: string]: HTMLAudioElement;
-	// [prop: string]: string
 }

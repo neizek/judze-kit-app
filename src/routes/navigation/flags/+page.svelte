@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { getContext } from "svelte";
-	import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
-	import { title } from "$lib/meta";
-	import { isMobileScreen } from "$lib/deviceDetector";
-	import EqualGrid from "../../../components/ui/EqualGrid.svelte";
-	import Section from "../../../components/ui/Section.svelte";
-	import FlagCard from "./FlagCard.svelte";
-	import { allFlags, type FlagCategory } from "./flagsArrays";
-	import FlagItem from "./FlagItem.svelte";
-	import Selector from "../../../components/ui/Selector.svelte";
-	import Input from "../../../components/ui/Input.svelte";
-	import PageControls from "../../../components/ui/PageControls.svelte";
+	import { getContext } from 'svelte';
+	import type { CreatePopup } from '$widgets/PopUp.svelte';
+	import { title } from '$lib/stores/meta';
+	import { isMobileScreen } from '$lib/utils/deviceDetector';
+	import EqualGrid from '$ui/EqualGrid.svelte';
+	import Section from '$ui/Section.svelte';
+	import FlagCard from './FlagCard.svelte';
+	import { allFlags, type FlagCategory } from './flagsArrays';
+	import FlagItem from './FlagItem.svelte';
+	import Selector from '$ui/Selector.svelte';
+	import Input from '$ui/Input.svelte';
+	import PageControls from '$ui/PageControls.svelte';
 
 	let searchValue: string = '';
 	let isNavigational: boolean = true;
@@ -20,13 +20,13 @@
 		const search = searchValue.toLowerCase();
 
 		flagsArray = allFlags
-		.filter((category) => category.isNavigational === isNavigational)
-		.map((category) => ({
-			...category,
-			flags: category.flags.filter(flag =>
-				search === '' || flag.name.toLowerCase().includes(search)
-			)
-		}));
+			.filter((category) => category.isNavigational === isNavigational)
+			.map((category) => ({
+				...category,
+				flags: category.flags.filter(
+					(flag) => search === '' || flag.name.toLowerCase().includes(search)
+				),
+			}));
 	}
 
 	$: {
@@ -35,10 +35,10 @@
 		getAllFlags();
 	}
 
-	const createPopup: CreatePopup = getContext("createPopup");
+	const createPopup: CreatePopup = getContext('createPopup');
 
 	function openDescription(flag: any) {
-		if (flag.description !== "" && flag.description) {
+		if (flag.description !== '' && flag.description) {
 			createPopup({
 				header: `"${flag.name}" flag meaning`,
 				content: {
@@ -52,32 +52,30 @@
 		}
 	}
 
-	title.set("Flags");
+	title.set('Flags');
 </script>
 
 <div class="vertical-flex space-xl max-width">
 	<PageControls>
 		<div>
 			<Input
-				bind:value="{searchValue}"
-				icon="search" 
+				bind:value={searchValue}
+				icon="search"
 				placeholder="Search..."
 				borderless
-				clearable
-			/>
+				clearable />
 		</div>
 		<Selector
 			items={[
-				{ label: "Navigational", value: true },
-				{ label: "National", value: false },
+				{ label: 'Navigational', value: true },
+				{ label: 'National', value: false },
 			]}
-			bind:value={isNavigational}
-		/>
+			bind:value={isNavigational} />
 	</PageControls>
 	{#each flagsArray as flagCategory}
 		<Section title={flagCategory.header}>
 			{#if flagCategory.flags.length > 0}
-				<EqualGrid --mobileColumnsQty={3} --desktopColumnsQty={6} --tabletColumnsQty="{4}">
+				<EqualGrid --mobileColumnsQty={3} --desktopColumnsQty={6} --tabletColumnsQty={4}>
 					{#each flagCategory.flags as flag}
 						<FlagItem
 							{isNavigational}
@@ -85,8 +83,7 @@
 								? 'navigational'
 								: 'national'}/{flag.icon.toLocaleLowerCase()}.svg"
 							title={flag.letter ? `${flag.letter} - ${flag.name}` : flag.name}
-							on:click={() => openDescription(flag)}
-						/>
+							on:click={() => openDescription(flag)} />
 					{/each}
 				</EqualGrid>
 			{:else}

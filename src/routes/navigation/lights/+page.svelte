@@ -1,127 +1,110 @@
 <script lang="ts">
-	import { isMobileScreen } from "$lib/deviceDetector";
-	import { title } from "$lib/meta";
-	import { getContext } from "svelte";
-	import Button from "../../../components/ui/Button.svelte";
-	import EqualGrid from "../../../components/ui/EqualGrid.svelte";
-	import Image from "../../../components/ui/Image.svelte";
-	import Section from "../../../components/ui/Section.svelte";
-	import type { CreatePopup } from "../../../components/widgets/PopUp.svelte";
-	import VisibilityRange from "./VisibilityRange.svelte";
+	import { isMobileScreen } from '$lib/utils/deviceDetector';
+	import { title } from '$lib/stores/meta';
+	import { getContext } from 'svelte';
+	import Button from '$ui/Button.svelte';
+	import EqualGrid from '$ui/EqualGrid.svelte';
+	import Image from '$ui/Image.svelte';
+	import Section from '$ui/Section.svelte';
+	import type { CreatePopup } from '$widgets/PopUp.svelte';
+	import VisibilityRange from './VisibilityRange.svelte';
 
 	const lights = [
 		{
-			title: "Power-driven vessels underway",
+			title: 'Power-driven vessels underway',
 			lights: [
 				{
-					description:
-						"A power-driven vessel underway (over 50 meters in length)",
-					images: ["underway-bow", "underway-side", "underway-stern"],
+					description: 'A power-driven vessel underway (over 50 meters in length)',
+					images: ['underway-bow', 'underway-side', 'underway-stern'],
 				},
 				{
-					description:
-						"A power-driven vessel underway (under 50 meters in length)",
-					images: [
-						"underway-50m-bow",
-						"underway-50m-side",
-						"underway-50m-stern",
-					],
+					description: 'A power-driven vessel underway (under 50 meters in length)',
+					images: ['underway-50m-bow', 'underway-50m-side', 'underway-50m-stern'],
 				},
 				{
-					description:
-						"A power-driven vessel underway (under 12 meters in length)",
-					images: [
-						"underway-12m-bow",
-						"underway-12m-side",
-						"underway-12m-stern",
-					],
+					description: 'A power-driven vessel underway (under 12 meters in length)',
+					images: ['underway-12m-bow', 'underway-12m-side', 'underway-12m-stern'],
 				},
 			],
 		},
 		{
-			title: "Vessels at anchor or aground",
+			title: 'Vessels at anchor or aground',
 			lights: [
 				{
-					description: "A vessel at anchor",
-					images: ["anchored-bow", "anchored-side", "anchored-bow"],
+					description: 'A vessel at anchor',
+					images: ['anchored-bow', 'anchored-side', 'anchored-bow'],
 				},
 				{
-					description: "A vessel at anchor (over 100m in length)",
-					images: ["anchored-bow", "anchored-100m-side", "anchored-bow"],
+					description: 'A vessel at anchor (over 100m in length)',
+					images: ['anchored-bow', 'anchored-100m-side', 'anchored-bow'],
 				},
 				{
-					description: "A vessel aground",
-					images: ["aground-bow", "aground-side", "aground-bow"],
+					description: 'A vessel aground',
+					images: ['aground-bow', 'aground-side', 'aground-bow'],
 				},
 			],
 		},
 		{
-			title: "Restricted or constrained vessels",
+			title: 'Restricted or constrained vessels',
 			lights: [
 				{
-					description: "A vessel not under command",
-					images: ["nuc-bow", "nuc-side", "nuc-bow"],
+					description: 'A vessel not under command',
+					images: ['nuc-bow', 'nuc-side', 'nuc-bow'],
 				},
 				{
-					description: "A vessel not under command but making way",
+					description: 'A vessel not under command but making way',
+					images: ['underway-nuc-bow', 'underway-nuc-side', 'underway-nuc-stern'],
+				},
+				{
+					description: 'A vessel restricted in her ability to maneuver',
+					images: ['restricted-bow', 'restricted-side', 'restricted-bow'],
+				},
+				{
+					description: 'A vessel restricted in her ability to maneuver at anchor',
 					images: [
-						"underway-nuc-bow",
-						"underway-nuc-side",
-						"underway-nuc-stern",
+						'anchored-restricted-bow',
+						'anchored-restricted-side',
+						'anchored-restricted-bow',
 					],
 				},
 				{
-					description: "A vessel restricted in her ability to maneuver",
-					images: ["restricted-bow", "restricted-side", "restricted-bow"],
-				},
-				{
-					description:
-						"A vessel restricted in her ability to maneuver at anchor",
+					description: 'A vessel restricted in her ability to maneuver  making way',
 					images: [
-						"anchored-restricted-bow",
-						"anchored-restricted-side",
-						"anchored-restricted-bow",
+						'underway-restricted-bow',
+						'underway-restricted-side',
+						'underway-restricted-stern',
 					],
 				},
 				{
-					description:
-						"A vessel restricted in her ability to maneuver  making way",
-					images: [
-						"underway-restricted-bow",
-						"underway-restricted-side",
-						"underway-restricted-stern",
-					],
-				},
-				{
-					description: "A vessel constrained by her draught",
-					images: ["constrained-bow", "constrained-side", "constrained-stern"],
+					description: 'A vessel constrained by her draught',
+					images: ['constrained-bow', 'constrained-side', 'constrained-stern'],
 				},
 			],
 		},
 		{
-			title: "Other vessels",
+			title: 'Other vessels',
 			lights: [
 				{
-					description: "A pilot vessel underway",
-					images: ["pilot-bow", "pilot-side", "pilot-stern"],
+					description: 'A pilot vessel underway',
+					images: ['pilot-bow', 'pilot-side', 'pilot-stern'],
 				},
 				{
-					description: "A vessel engaged in mine cleaning operations",
-					images: ["minesweeper-bow", "minesweeper-side", "minesweeper-stern"],
+					description: 'A vessel engaged in mine cleaning operations',
+					images: ['minesweeper-bow', 'minesweeper-side', 'minesweeper-stern'],
 				},
 				{
-					description: "A sailing vessel",
-					images: ["sailing-bow", "sailing-side", "sailing-stern"],
+					description: 'A sailing vessel',
+					images: ['sailing-bow', 'sailing-side', 'sailing-stern'],
 				},
 			],
 		},
 	];
 
-	const createPopup: CreatePopup = getContext("createPopup");
+	const createPopup: CreatePopup = getContext('createPopup');
 
 	function openVisibilityRanges() {
 		createPopup({
-			header: "Visibility range of lights",
+			header: 'Visibility range of lights',
 			content: {
 				component: VisibilityRange,
 			},
@@ -129,7 +112,7 @@
 		});
 	}
 
-	title.set("Lights");
+	title.set('Lights');
 </script>
 
 <section class="vertical-flex max-width space-xl">
@@ -139,8 +122,7 @@
 			type="transparent"
 			bordered
 			label="Visibility ranges"
-			on:click={openVisibilityRanges}
-		/>
+			on:click={openVisibilityRanges} />
 	</div>
 	{#each lights as lightscategory}
 		<Section title={lightscategory.title}>
@@ -155,8 +137,7 @@
 								--width="100%"
 								--height="auto"
 								--object-fit="cover"
-								--border-radius="5px"
-							/>
+								--border-radius="5px" />
 							<span>Bow</span>
 						</div>
 						<div class="side">
@@ -166,8 +147,7 @@
 								--aspect-ratio="2/1"
 								--width="100%"
 								--object-fit="cover"
-								--border-radius="5px"
-							/>
+								--border-radius="5px" />
 							<span>Starboard side</span>
 						</div>
 						<div class="stern">
@@ -178,8 +158,7 @@
 								--width="100%"
 								--height="auto"
 								--object-fit="cover"
-								--border-radius="5px"
-							/>
+								--border-radius="5px" />
 							<span>Stern</span>
 						</div>
 						<span>{light.description}</span>

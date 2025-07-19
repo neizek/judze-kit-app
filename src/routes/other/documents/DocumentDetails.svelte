@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { formatDateSimple } from "$lib/datetime";
-	import type { DocumentType } from "$lib/documents";
-	import Button from "../../../components/ui/Button.svelte";
+	import { formatDateSimple } from '$lib/utils/datetime';
+	import type { DocumentType } from '$lib/utils/documents';
+	import Button from '$ui/Button.svelte';
 
 	export let document: DocumentType;
 </script>

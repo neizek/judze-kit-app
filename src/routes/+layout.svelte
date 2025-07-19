@@ -1,14 +1,12 @@
 <script lang="ts">
-	import { title } from "$lib/meta";
-	import { initTheme } from "$lib/theme";
-	import { fade } from "svelte/transition";
-	import Footer from "../components/widgets/Footer/Footer.svelte";
-	import Header from "../components/widgets/Header.svelte";
-	import PopUp from "../components/widgets/PopUp.svelte";
-	// import { page } from "$app/stores";
-	import { cubicOut } from "svelte/easing";
-	import { beforeNavigate } from "$app/navigation";
-	import { onMount } from "svelte";
+	import { title } from '$lib/stores/meta';
+	import { initTheme } from '$lib/stores/theme';
+	import { fade } from 'svelte/transition';
+	import Footer from '$widgets/Footer/Footer.svelte';
+	import Header from '$widgets/Header.svelte';
+	import PopUp from '$widgets/PopUp.svelte';
+	import { cubicOut } from 'svelte/easing';
+	import { beforeNavigate } from '$app/navigation';
 
 	initTheme();
 
@@ -17,7 +15,7 @@
 	let historyNavigation = false;
 
 	beforeNavigate(({ type }) => {
-		historyNavigation = type === "popstate";
+		historyNavigation = type === 'popstate';
 	});
 
 	// let previousPath = '';
@@ -43,8 +41,7 @@
 		> -->
 		<div
 			class="Content wrapper w1000"
-			in:fade={{ duration: historyNavigation ? 0 : 200, easing: cubicOut }}
-		>
+			in:fade={{ duration: historyNavigation ? 0 : 200, easing: cubicOut }}>
 			<slot></slot>
 		</div>
 	{/key}
@@ -55,30 +52,22 @@
 	:root {
 		--gradient-color: #ffffff;
 
-		&[data-theme="dark"] {
+		&[data-theme='dark'] {
 			--gradient-color: #001429;
 		}
 	}
 
 	:global(.Container) {
-		background: linear-gradient(
-			0deg,
-			var(--gradient-color) 0%,
-			transparent 200px
-		);
+		background: linear-gradient(0deg, var(--gradient-color) 0%, transparent 200px);
 	}
 
 	.Content {
 		display: flex;
 		flex: 1;
-		margin-top: calc(
-			74px + var(--safe-area-inset-top, env(safe-area-inset-top))
-		);
+		margin-top: calc(74px + var(--safe-area-inset-top, env(safe-area-inset-top)));
 
 		@include after-mobile {
-			margin-top: calc(
-				82px + var(--safe-area-inset-top, env(safe-area-inset-top))
-			);
+			margin-top: calc(82px + var(--safe-area-inset-top, env(safe-area-inset-top)));
 		}
 	}
 </style>

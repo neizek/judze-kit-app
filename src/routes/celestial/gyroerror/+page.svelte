@@ -1,28 +1,20 @@
 <script lang="ts">
-	import {
-		onDestroy,
-		onMount,
-		tick,
-		type ComponentType,
-		type SvelteComponent,
-	} from "svelte";
-	import Button from "../../../components/ui/Button.svelte";
-	import FormItem from "../../../components/ui/FormItem.svelte";
-	import Input from "../../../components/ui/Input.svelte";
-	import Select from "../../../components/ui/Select/Select.svelte";
-	import SelectButtons from "../../../components/ui/SelectButtons.svelte";
-	import celestialObjects from "./celestialObjects.json";
-	import CoordinatesInput from "../../../components/ui/CoordinatesInput.svelte";
-	import DateTimeInput from "../../../components/ui/DateTimeInput.svelte";
-	import { title } from "$lib/meta";
-	// import { Geolocation } from "@capacitor/geolocation";
-	import VariationInput from "../../../components/ui/VariationInput.svelte";
-	import Section from "../../../components/ui/Section.svelte";
-	import EqualGrid from "../../../components/ui/EqualGrid.svelte";
-	import { browser } from "$app/environment";
-	import NewDateTimeInput from "../../../components/ui/NewDateTimeInput.svelte";
-	import { formatToCompassError } from "$lib/string";
-	import type { GeolocationPlugin } from "@capacitor/geolocation";
+	import { onDestroy, onMount, tick, type ComponentType, type SvelteComponent } from 'svelte';
+	import Button from '$ui/Button.svelte';
+	import FormItem from '$ui/FormItem.svelte';
+	import Input from '$ui/Input.svelte';
+	import Select from '$ui/Select/Select.svelte';
+	import SelectButtons from '$ui/SelectButtons.svelte';
+	import celestialObjects from './celestialObjects.json';
+	import CoordinatesInput from '$ui/CoordinatesInput.svelte';
+	import { title } from '$lib/stores/meta';
+	import VariationInput from '$ui/VariationInput.svelte';
+	import Section from '$ui/Section.svelte';
+	import EqualGrid from '$ui/EqualGrid.svelte';
+	import { browser } from '$app/environment';
+	import DateTimeInput from '$ui/DateTimeInput.svelte';
+	import { formatToCompassError } from '$lib/utils/string';
+	import type { GeolocationPlugin } from '@capacitor/geolocation';
 
 	let object: string;
 	let givenDateTime: Date = new Date();
@@ -42,24 +34,24 @@
 
 	let solarSystemObjects = [
 		{
-			value: "sun",
-			icon: "sunny",
-			label: "Sun",
+			value: 'sun',
+			icon: 'sunny',
+			label: 'Sun',
 		},
 		{
-			value: "moon",
-			icon: "dark_mode",
-			label: "Moon",
+			value: 'moon',
+			icon: 'dark_mode',
+			label: 'Moon',
 		},
 		{
-			value: "stars",
-			icon: "star",
-			label: "Star",
+			value: 'stars',
+			icon: 'star',
+			label: 'Star',
 		},
 		{
-			value: "planets",
-			icon: "adjust",
-			label: "Planet",
+			value: 'planets',
+			icon: 'adjust',
+			label: 'Planet',
 		},
 	];
 
@@ -71,8 +63,7 @@
 
 	const toRadians = (angle: number) => angle * (Math.PI / 180);
 	const toDegrees = (radians: number) => radians / (Math.PI / 180);
-	const mod = (number: number, divider: number) =>
-		((number % divider) + divider) % divider;
+	const mod = (number: number, divider: number) => ((number % divider) + divider) % divider;
 
 	function getAzimuth(
 		LHA: number,
@@ -98,9 +89,7 @@
 			}
 		})();
 
-		const preB = Math.abs(
-			Math.tan(toRadians(declination)) / Math.sin(toRadians(LHASHA))
-		);
+		const preB = Math.abs(Math.tan(toRadians(declination)) / Math.sin(toRadians(LHASHA)));
 		const B = declination > 0 ? +preB : -preB;
 
 		const C = A + B;
@@ -136,8 +125,7 @@
 		const e = (23.4393 - 0.0000003563 * time) % 360;
 		const L2 = (280.461 + 0.9856474 * time) % 360;
 		const G = (357.528 + 35999.05 * t) % 360;
-		const ec =
-			1.915 * Math.sin(toRadians(G)) + 0.02 * Math.sin(toRadians(2 * G));
+		const ec = 1.915 * Math.sin(toRadians(G)) + 0.02 * Math.sin(toRadians(2 * G));
 		const l = L2 + ec;
 		const X = Math.cos(toRadians(l));
 		const Y = Math.cos(toRadians(e)) * Math.sin(toRadians(l));
@@ -150,9 +138,7 @@
 
 		const LHA = getLHA(GHA);
 
-		const declination = toDegrees(
-			Math.asin(Math.sin(toRadians(e)) * Math.sin(toRadians(l)))
-		); // Declination completed
+		const declination = toDegrees(Math.asin(Math.sin(toRadians(e)) * Math.sin(toRadians(l)))); // Declination completed
 
 		const azimuth = getAzimuth(LHA, declination); // Azimuth completed
 
@@ -170,8 +156,7 @@
 		const ls = Ms + ws;
 		const Nm = toRadians(125.1228 - 0.0529538083 * (time + 1.5));
 		const wm = toRadians(318.0634 + 0.1643573223 * (time + 1.5));
-		const Mm =
-			toRadians(115.3654 + 13.0649929509 * (time + 1.5)) % (2 * Math.PI);
+		const Mm = toRadians(115.3654 + 13.0649929509 * (time + 1.5)) % (2 * Math.PI);
 		const Lm = Nm + wm + Mm;
 		const D = Lm - ls;
 		const Em = Mm + 0.0549 * Math.sin(Mm) * (1 + 0.0549 * Math.cos(Mm));
@@ -213,12 +198,10 @@
 		const im = toRadians(5.1454);
 		const xh =
 			sunrm *
-			(Math.cos(Nm) * Math.cos(vm + wm) -
-				Math.sin(Nm) * Math.sin(vm + wm) * Math.cos(im));
+			(Math.cos(Nm) * Math.cos(vm + wm) - Math.sin(Nm) * Math.sin(vm + wm) * Math.cos(im));
 		const yh =
 			sunrm *
-			(Math.sin(Nm) * Math.cos(vm + wm) +
-				Math.cos(Nm) * Math.sin(vm + wm) * Math.cos(im));
+			(Math.sin(Nm) * Math.cos(vm + wm) + Math.cos(Nm) * Math.sin(vm + wm) * Math.cos(im));
 		const zh = sunrm * (Math.sin(vm + wm) * Math.sin(im));
 		const x = Math.sqrt(xh * xh + yh * yh);
 
@@ -333,9 +316,7 @@
 		const GHA = (360 - d - corr) % 360; // GHA Aries
 		const LHA = getLHA(GHA);
 
-		const starData = celestialObjects.stars.find(
-			(star) => star.value === givenStar
-		);
+		const starData = celestialObjects.stars.find((star) => star.value === givenStar);
 
 		if (!starData) {
 			return;
@@ -351,8 +332,7 @@
 			9.4 * Math.cos(toRadians(125 - 0.05295 * (date - 2451545))) +
 			0.7 * Math.cos(toRadians(200 + 1.97129 * (date - 2451545)));
 		const decpr =
-			dec2000 +
-			(20.04 * Math.cos(toRadians(ra2000 * 15)) * (date - 36526)) / 365 / 3600;
+			dec2000 + (20.04 * Math.cos(toRadians(ra2000 * 15)) * (date - 36526)) / 365 / 3600;
 		const declination =
 			decpr +
 			(0.3978 * Math.cos(toRadians(ra2000 * 15)) * nutdl +
@@ -361,10 +341,7 @@
 		const SHApr = mod(
 			360 -
 				(ra2000 +
-					((3.075 +
-						1.336 *
-							Math.sin(toRadians(ra2000)) *
-							Math.tan(toRadians(dec2000))) *
+					((3.075 + 1.336 * Math.sin(toRadians(ra2000)) * Math.tan(toRadians(dec2000))) *
 						(date - 36526)) /
 						365 /
 						3600) *
@@ -374,12 +351,8 @@
 		const SHA =
 			SHApr +
 			(0.9175 +
-				0.3978 *
-					Math.sin(toRadians(ra2000 * 15) * Math.tan(toRadians(dec2000))) *
-					nutdl -
-				Math.cos(toRadians(ra2000 * 15)) *
-					Math.tan(toRadians(dec2000)) *
-					nutde) /
+				0.3978 * Math.sin(toRadians(ra2000 * 15) * Math.tan(toRadians(dec2000))) * nutdl -
+				Math.cos(toRadians(ra2000 * 15)) * Math.tan(toRadians(dec2000)) * nutde) /
 				3600;
 
 		return {
@@ -393,10 +366,7 @@
 	function getSolarCoordinates(time: number) {
 		const ws = toRadians(282.9404 + 0.0000470935 * (time + 1.5));
 		const es = 0.016709 - 0.000000001151 * (time + 1.5);
-		const Ms = mod(
-			toRadians(356.047 + 0.9856002585 * (time + 1.5)),
-			2 * Math.PI
-		);
+		const Ms = mod(toRadians(356.047 + 0.9856002585 * (time + 1.5)), 2 * Math.PI);
 		const Es = Ms + es * Math.sin(Ms) * (1 + es * Math.cos(Ms));
 		const xv = Math.cos(Es) - es;
 		const yv = Math.sqrt(1 - es * es) * Math.sin(Es);
@@ -459,13 +429,9 @@
 		const r = Math.sqrt(xv * xv + yv * yv);
 
 		const xh =
-			r *
-			(Math.cos(N) * Math.cos(v + w) -
-				Math.sin(N) * Math.sin(v + w) * Math.cos(i));
+			r * (Math.cos(N) * Math.cos(v + w) - Math.sin(N) * Math.sin(v + w) * Math.cos(i));
 		const yh =
-			r *
-			(Math.sin(N) * Math.cos(v + w) +
-				Math.cos(N) * Math.sin(v + w) * Math.cos(i));
+			r * (Math.sin(N) * Math.cos(v + w) + Math.cos(N) * Math.sin(v + w) * Math.cos(i));
 		const zh = r * (Math.sin(v + w) * Math.sin(i));
 
 		const lonecl = (() => {
@@ -516,10 +482,8 @@
 		const zg = ZH;
 
 		const xe = xg;
-		const ye =
-			yg * Math.cos(toRadians(sun.e)) - zg * Math.sin(toRadians(sun.e));
-		const ze =
-			yg * Math.sin(toRadians(sun.e)) + zg * Math.cos(toRadians(sun.e));
+		const ye = yg * Math.cos(toRadians(sun.e)) - zg * Math.sin(toRadians(sun.e));
+		const ze = yg * Math.sin(toRadians(sun.e)) + zg * Math.cos(toRadians(sun.e));
 
 		const X = Math.sqrt(xe * xe + ye * ye);
 
@@ -579,7 +543,7 @@
 		let loncorr: number = 0;
 
 		switch (planet) {
-			case "mars":
+			case 'mars':
 				N = toRadians(49.5574 + 0.0000211081 * (time + 1.5));
 				i = toRadians(1.8497 - 0.0000000178 * (time + 1.5));
 				w = toRadians(286.5016 + 0.0000292961 * (time + 1.5));
@@ -587,11 +551,10 @@
 				e = 0.093405 + 0.000000002516 * (time + 1.5);
 				M = mod(toRadians(18.6021 + 0.5240207766 * (time + 1.5)), 2 * Math.PI);
 				loncorr =
-					0.0000382394 *
-					(365.2422 * (2000 - (36526 - date) / 365 - 2000) - (time + 1.5));
+					0.0000382394 * (365.2422 * (2000 - (36526 - date) / 365 - 2000) - (time + 1.5));
 				break;
 
-			case "venus":
+			case 'venus':
 				N = toRadians(76.6799 + 0.000024659 * (time + 1.5));
 				i = toRadians(3.3946 + 0.0000000275 * (time + 1.5));
 				w = toRadians(54.891 + 0.0000138374 * (time + 1.5));
@@ -599,11 +562,10 @@
 				e = 0.006773 - 0.000000001302 * (time + 1.5);
 				M = mod(toRadians(48.0052 + 1.6021302244 * (time + 1.5)), 2 * Math.PI);
 				loncorr =
-					0.0000382394 *
-					(365.2422 * (2000 - (36526 - date) / 365 - 2000) - (time + 1.5));
+					0.0000382394 * (365.2422 * (2000 - (36526 - date) / 365 - 2000) - (time + 1.5));
 				break;
 
-			case "jupiter":
+			case 'jupiter':
 				N = toRadians(100.4542 + 0.0000276854 * (time + 1.5));
 				i = toRadians(1.303 - 0.0000001557 * (time + 1.5));
 				w = toRadians(273.8777 + 0.0000164505 * (time + 1.5));
@@ -611,11 +573,10 @@
 				e = 0.048498 + 0.000000004469 * (time + 1.5);
 				M = mod(toRadians(19.895 + 0.0830853001 * (time + 1.5)), 2 * Math.PI);
 				loncorr =
-					0.0000382394 *
-					(365.2422 * (2000 - (36526 - date) / 365 - 2000) - (time + 1.5));
+					0.0000382394 * (365.2422 * (2000 - (36526 - date) / 365 - 2000) - (time + 1.5));
 				break;
 
-			case "saturnus":
+			case 'saturnus':
 				N = toRadians(113.6634 + 0.000023898 * (time + 1.5));
 				i = toRadians(2.4886 - 0.0000001081 * (time + 1.5));
 				w = toRadians(339.3939 + 0.0000297661 * (time + 1.5));
@@ -623,8 +584,7 @@
 				e = 0.055546 - 0.000000009499 * (time + 1.5);
 				M = mod(toRadians(316.967 + 0.0334442282 * (time + 1.5)), 2 * Math.PI);
 				loncorr =
-					0.0000382394 *
-					(365.2422 * (2000 - (36526 - date) / 365 - 2000) - (time + 1.5));
+					0.0000382394 * (365.2422 * (2000 - (36526 - date) / 365 - 2000) - (time + 1.5));
 				break;
 		}
 
@@ -637,8 +597,7 @@
 		const minutes = givenDateTime.getUTCMinutes();
 		const seconds = givenDateTime.getUTCSeconds();
 
-		const time =
-			-36525 + date - 1.5 + (hours + minutes / 60 + seconds / 3600) / 24;
+		const time = -36525 + date - 1.5 + (hours + minutes / 60 + seconds / 3600) / 24;
 		// const b = -36525 + date - 1.5 + hours / 24;
 		// const c = -36525 + date - 1.5 + (hours + 1) / 24;
 
@@ -647,13 +606,13 @@
 
 		const objectData = (() => {
 			switch (object) {
-				case "sun":
+				case 'sun':
 					return getSolarData(time);
-				case "moon":
+				case 'moon':
 					return getMoonData(time);
-				case "stars":
+				case 'stars':
 					return getStarData(time, givenStarOrPlanet);
-				case "planets":
+				case 'planets':
 					return getPlanetData(time, givenStarOrPlanet);
 			}
 		})();
@@ -672,18 +631,15 @@
 		performCalculations();
 	});
 
-	function transformToCoordinates(
-		number: number,
-		direction: "x" | "y" | undefined = undefined
-	) {
+	function transformToCoordinates(number: number, direction: 'x' | 'y' | undefined = undefined) {
 		const sign = (() => {
 			if (!direction) {
-				return "";
+				return '';
 			}
-			if (direction === "y") {
-				return number < 0 ? "S" : "N";
+			if (direction === 'y') {
+				return number < 0 ? 'S' : 'N';
 			} else {
-				return number < 0 ? "W" : "E";
+				return number < 0 ? 'W' : 'E';
 			}
 		})();
 		number = number > 0 ? number : -number;
@@ -697,10 +653,12 @@
 		}
 	}
 
-	let Geolocation: GeolocationPlugin | undefined = undefined
+	let Geolocation: GeolocationPlugin | undefined = undefined;
 
 	async function getCurrentPosition() {
-		return Geolocation?.getCurrentPosition();
+		return Geolocation?.getCurrentPosition({
+			enableHighAccuracy: true,
+		});
 	}
 
 	let isLoadingPosition: boolean = false;
@@ -722,25 +680,32 @@
 			});
 	}
 
+	function isDefinedNumber(numbers: Array<number | undefined | null>): boolean {
+		if (numbers.some((number) => number === undefined || number === null)) {
+			return false;
+		}
+
+		return true;
+	}
+
 	onMount(async () => {
 		if (browser) {
-			const geoModule = await import("@capacitor/geolocation");
+			const geoModule = await import('@capacitor/geolocation');
 			Geolocation = geoModule.Geolocation;
 		}
 
-		Geolocation?.checkPermissions()
-		.then((result) => {
+		Geolocation?.checkPermissions().then((result) => {
 			if (result.location === 'granted') {
 				updatePosition();
 			}
 		});
-	})
+	});
 
-	title.set("Gyro Error");
+	title.set('Gyro Error');
 </script>
 
 <!-- <section class="Celestial equal-flex mobile space-xl max-width"> -->
-<EqualGrid --desktopColumnsQty="{3}" --mobileColumnsQty="{1}" --tabletColumnsQty="{1}" >
+<EqualGrid --desktopColumnsQty={3} --mobileColumnsQty={1} --tabletColumnsQty={1}>
 	<div class="vertical-flex max-width space-xl">
 		<Section title="General data">
 			<FormItem label="Choose object">
@@ -749,32 +714,26 @@
 					bind:selectedItem={object}
 					on:choose={() => {
 						givenStarOrPlanet = undefined;
-						if (object === "sun" || object === "moon") performCalculations();
-					}}
-				/>
+						if (object === 'sun' || object === 'moon') performCalculations();
+					}} />
 			</FormItem>
 			{#key object}
-				{#if object === "planets" || object === "stars"}
+				{#if object === 'planets' || object === 'stars'}
 					<Select
 						bind:this={field}
 						items={celestialObjects[object]}
 						bind:value={givenStarOrPlanet}
 						placeholder="Choose object"
-						on:select={performCalculations}
-					></Select>
+						on:select={performCalculations}></Select>
 				{/if}
 			{/key}
-			<NewDateTimeInput
-				bind:value={givenDateTime}
-				on:change={performCalculations}
-			/>
+			<DateTimeInput bind:value={givenDateTime} on:change={performCalculations} />
 			<FormItem label="Latitude">
 				{#key positionObtained}
 					<CoordinatesInput
 						coordinatesType="latitude"
 						bind:value={latitude}
-						on:change={performCalculations}
-					/>
+						on:change={performCalculations} />
 				{/key}
 			</FormItem>
 			<FormItem label="Longitude">
@@ -782,8 +741,7 @@
 					<CoordinatesInput
 						coordinatesType="longitude"
 						bind:value={longitude}
-						on:change={performCalculations}
-					/>
+						on:change={performCalculations} />
 				{/key}
 			</FormItem>
 			<Button
@@ -791,12 +749,11 @@
 				label="Set current position"
 				on:click={updatePosition}
 				isLoading={isLoadingPosition}
-				maxwidth
-			/>
+				maxwidth />
 		</Section>
 		<Section title="Ship's heading">
 			<FormItem label="True course">
-				{#if GC && azimuth && GB}
+				{#if isDefinedNumber([GC, azimuth, GB])}
 					<span>{(GC - (azimuth - GB)).toFixed(1)}&#176;</span>
 				{:else}
 					<span>-</span>
@@ -809,8 +766,7 @@
 					min={0}
 					max={360}
 					step={0.1}
-					placeholder="181.0"
-				/>
+					placeholder="181.0" />
 			</FormItem>
 			<FormItem label="Standard course">
 				<Input
@@ -819,15 +775,14 @@
 					min={0}
 					max={360}
 					step={0.1}
-					placeholder="182.0"
-				/>
+					placeholder="182.0" />
 			</FormItem>
 		</Section>
 	</div>
 	<div class="vertical-flex max-width space-xl">
 		<Section title="Object's bearing">
 			<FormItem label="True">
-				{#if azimuth}
+				{#if isDefinedNumber([azimuth])}
 					<span>{azimuth.toFixed(1)}&#176;</span>
 				{:else}
 					<span>-</span>
@@ -840,12 +795,11 @@
 					min={0}
 					max={360}
 					step={0.1}
-					placeholder="242.3"
-				/>
+					placeholder="242.3" />
 			</FormItem>
 			<FormItem label="Standard">
-				{#if MC && TC && azimuth}
-					<span>{(azimuth + (MC - TC)).toFixed(1)}&#176;</span>
+				{#if isDefinedNumber([MC, TC, azimuth])}
+					<span>{(azimuth + (MC - TC!)).toFixed(1)}&#176;</span>
 				{:else}
 					<span>-</span>
 				{/if}
@@ -853,15 +807,15 @@
 		</Section>
 		<Section title="Corrections">
 			<FormItem label="Gyro Error">
-				{#if azimuth && GB}
-					 <span>{ formatToCompassError(azimuth - GB) }</span>
+				{#if isDefinedNumber([azimuth, GB])}
+					<span>{formatToCompassError(azimuth - GB)}</span>
 				{:else}
 					<span>-</span>
 				{/if}
 			</FormItem>
 			<FormItem label="Standard">
-				{#if MC && TC && azimuth}
-					 <span>{ formatToCompassError(TC - MC) }</span>
+				{#if isDefinedNumber([MC, TC, azimuth])}
+					<span>{formatToCompassError(TC! - MC)}</span>
 				{:else}
 					<span>-</span>
 				{/if}
@@ -870,8 +824,8 @@
 				<VariationInput bind:value={variation} />
 			</FormItem>
 			<FormItem label="Deviation">
-				{#if TC && MC && variation}
-					 <span>{formatToCompassError(TC - MC - variation)}</span>
+				{#if isDefinedNumber([TC, MC, variation])}
+					<span>{formatToCompassError(TC! - MC - variation)}</span>
 				{:else}
 					<span>-</span>
 				{/if}
@@ -879,7 +833,7 @@
 		</Section>
 	</div>
 	<Section title="Calculated data">
-		<EqualGrid --mobileColumnsQty="2" --tabletColumnsQty="{2}" --desktopColumnsQty={2}>
+		<EqualGrid --mobileColumnsQty="2" --tabletColumnsQty={2} --desktopColumnsQty={2}>
 			<FormItem label="GHA">
 				<span class="text-size-m">{transformToCoordinates(GHA)}</span>
 			</FormItem>
@@ -887,14 +841,12 @@
 				<span class="text-size-m">{transformToCoordinates(LHA)}</span>
 			</FormItem>
 			<FormItem label="Declination">
-				<span class="text-size-m"
-					>{transformToCoordinates(declination, "y")}</span
-				>
+				<span class="text-size-m">{transformToCoordinates(declination, 'y')}</span>
 			</FormItem>
 			<FormItem label="Azimuth">
 				<span class="text-size-m">{Number(azimuth).toFixed(1)}&#176;</span>
 			</FormItem>
 		</EqualGrid>
 	</Section>
-	</EqualGrid>
+</EqualGrid>
 <!-- </section> -->

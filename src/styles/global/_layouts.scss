@@ -75,6 +75,10 @@ section {
 		border: 1px solid var(--box-border-color);
 	}
 
+	&.transparent {
+		background-color: transparent;
+	}
+
 	@include after-mobile {
 		padding: 24px;
 	}
