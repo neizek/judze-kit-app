@@ -3,7 +3,8 @@
 	import Loader from './Loader.svelte';
 
 	export let icon: string | undefined = undefined;
-	export let type: 'primary' | 'secondary' | 'dangerous' | 'transparent' | undefined = undefined;
+	export let type: 'primary' | 'secondary' | 'dangerous' | 'transparent' | 'tab' | undefined =
+		undefined;
 	export let label: string | undefined = undefined;
 	export let submit = false;
 	export let bordered = false;

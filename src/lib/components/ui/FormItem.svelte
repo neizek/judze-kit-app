@@ -1,12 +1,13 @@
 <script lang="ts">
 	export let label: string | undefined = undefined;
 	export let errors: string[] = [];
-	export let messages: { [error: string]: string } = {};
+	// export let messages: { [error: string]: string } = {};
 	export let required = false;
+	export let text: undefined | string = undefined;
 </script>
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
-<div class="formItem">
+<div class="formItem" class:inline={text}>
 	{#if label}
 		<span class="label">
 			<span>{label}</span>
@@ -15,21 +16,25 @@
 			{/if}
 		</span>
 	{/if}
+	{#if text}
+		<span class="text-size-s">{text}</span>
+	{:else}
+		<slot />
+	{/if}
 	{#if errors.length > 0}
 		<ul class="errors">
 			{#each errors as error}
-				<li>{messages[error]}</li>
+				<li>{error}</li>
 			{/each}
 		</ul>
 	{/if}
-	<slot />
 </div>
 
 <style lang="scss">
 	:root {
 		--FormItem-required-color: #{$c-blood};
 
-		&[data-theme="dark"] {
+		&[data-theme='dark'] {
 			--FormItem-required-color: #{$c-lightRed};
 		}
 	}
@@ -37,6 +42,10 @@
 	.formItem {
 		display: grid;
 		gap: 8px;
+
+		&.inline {
+			grid-template-columns: 1fr minmax(min-content, max-content);
+		}
 
 		&:focus-within .errors {
 			display: block;
@@ -59,6 +68,7 @@
 
 	.errors {
 		list-style-position: inside;
+		margin: 0;
 
 		li {
 			list-style-type: none;
@@ -67,7 +77,7 @@
 			margin: 5px 0;
 
 			&::before {
-				content: "×";
+				content: '×';
 				padding-right: 8px;
 			}
 		}

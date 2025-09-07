@@ -6,6 +6,7 @@ import { App, type BackButtonListenerEvent } from "@capacitor/app";
 import { LocalNotifications } from '@capacitor/local-notifications';
 
 export const csr = true;
+export const ssr = false;
 export const prerender = false;
 
 export const load = ({ url }) => {

@@ -113,6 +113,7 @@
 	function onSelect(item: SelectItem): void {
 		open = false;
 		addValue(item);
+		dispatch('close');
 	}
 
 	function onInput(event: Event): boolean {
@@ -202,13 +203,7 @@
 		{/if}
 	</label>
 	{#if open && browser && !isMobileScreen}
-		<!-- {#if isMobile}
-			<BottomBox bind:isOpened={open}>
-				<ItemsList shownItems="{shownItems}" onSelect="{onSelect}" />
-			</BottomBox>
-		{:else} -->
 		<ItemsList {shownItems} {onSelect} />
-		<!-- {/if} -->
 	{/if}
 </div>
 

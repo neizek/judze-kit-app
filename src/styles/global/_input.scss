@@ -132,6 +132,12 @@
 			background-color: #00000016;
 		}
 	}
+
+	&.tab {
+		background-color: transparent;
+		border-bottom: 2px solid var(--button-background-color-primary);
+		border-radius: 0;
+	}
 }
 
 input::placeholder {

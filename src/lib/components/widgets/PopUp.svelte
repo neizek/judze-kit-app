@@ -47,7 +47,7 @@
 				component: data.content.component,
 				props: {
 					...data.content.props,
-					closePopup: closePopUp,
+					closePopup: () => closePopUp(newCount),
 					popupId: newCount,
 				},
 			};

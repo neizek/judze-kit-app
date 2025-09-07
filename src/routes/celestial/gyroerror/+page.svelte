@@ -13,24 +13,30 @@
 	import EqualGrid from '$ui/EqualGrid.svelte';
 	import { browser } from '$app/environment';
 	import DateTimeInput from '$ui/DateTimeInput.svelte';
-	import { formatToCompassError } from '$lib/utils/string';
+	import { formatToAngle, formatToCompassError, transformToCoordinates } from '$lib/utils/string';
 	import type { GeolocationPlugin } from '@capacitor/geolocation';
+	import { gyroErrorData } from '$lib/stores/gyroErrorForm';
+	import { dateToExcelSerial } from '$lib/utils/datetime';
+	import { mod, toDegrees, toRadians } from '$lib/utils/math';
 
-	let object: string;
-	let givenDateTime: Date = new Date();
-	let longitude: number = 24;
-	let latitude: number = 57;
-	let azimuth: number;
-	let LHA: number;
-	let GHA: number;
-	let declination: number;
-	let GC: number;
-	let GB: number;
-	let variation: number;
-	let MC: number;
-	let givenStarOrPlanet: string | undefined;
+	console.log($gyroErrorData);
+	let {
+		object,
+		givenDateTime,
+		longitude,
+		latitude,
+		azimuth,
+		givenStarOrPlanet,
+		LHA,
+		GHA,
+		declination,
+		GC,
+		GB,
+		variation,
+		MC,
+	} = $gyroErrorData;
 
-	$: TC = GC && azimuth && GB ? GC - (azimuth - GB) : undefined;
+	$: TC = isDefinedNumber([GC, azimuth, GB]) ? GC! + (azimuth! - GB!) : undefined;
 
 	let solarSystemObjects = [
 		{
@@ -54,16 +60,6 @@
 			label: 'Planet',
 		},
 	];
-
-	function dateToExcelSerial(date: Date) {
-		const excelBaseDate = new Date(Date.UTC(1900, 0, 1));
-		const timeDifference = Number(date) - Number(excelBaseDate);
-		return Math.floor(timeDifference / (1000 * 60 * 60 * 24)) + 2;
-	}
-
-	const toRadians = (angle: number) => angle * (Math.PI / 180);
-	const toDegrees = (radians: number) => radians / (Math.PI / 180);
-	const mod = (number: number, divider: number) => ((number % divider) + divider) % divider;
 
 	function getAzimuth(
 		LHA: number,
@@ -611,9 +607,9 @@
 				case 'moon':
 					return getMoonData(time);
 				case 'stars':
-					return getStarData(time, givenStarOrPlanet);
+					return getStarData(time, givenStarOrPlanet!);
 				case 'planets':
-					return getPlanetData(time, givenStarOrPlanet);
+					return getPlanetData(time, givenStarOrPlanet!);
 			}
 		})();
 
@@ -630,21 +626,6 @@
 	onMount(() => {
 		performCalculations();
 	});
-
-	function transformToCoordinates(number: number, direction: 'x' | 'y' | undefined = undefined) {
-		const sign = (() => {
-			if (!direction) {
-				return '';
-			}
-			if (direction === 'y') {
-				return number < 0 ? 'S' : 'N';
-			} else {
-				return number < 0 ? 'W' : 'E';
-			}
-		})();
-		number = number > 0 ? number : -number;
-		return `${Math.trunc(number)}°${((number - Math.floor(number)) * 60).toFixed(1)} ${sign}`;
-	}
 
 	let field: SvelteComponent;
 	$: {
@@ -694,10 +675,29 @@
 			Geolocation = geoModule.Geolocation;
 		}
 
-		Geolocation?.checkPermissions().then((result) => {
-			if (result.location === 'granted') {
-				updatePosition();
-			}
+		// Geolocation?.checkPermissions().then((result) => {
+		// 	if (result.location === 'granted') {
+		// 		updatePosition();
+		// 	}
+		// });
+	});
+
+	onDestroy(() => {
+		Object.assign($gyroErrorData, {
+			object,
+			givenDateTime,
+			longitude,
+			latitude,
+			azimuth,
+			GB,
+			GC,
+			MC,
+			TC,
+			variation,
+			GHA,
+			LHA,
+			declination,
+			givenStarOrPlanet,
 		});
 	});
 
@@ -705,7 +705,7 @@
 </script>
 
 <!-- <section class="Celestial equal-flex mobile space-xl max-width"> -->
-<EqualGrid --desktopColumnsQty={3} --mobileColumnsQty={1} --tabletColumnsQty={1}>
+<EqualGrid --desktopColumnsQty={2} --mobileColumnsQty={1} --tabletColumnsQty={1}>
 	<div class="vertical-flex max-width space-xl">
 		<Section title="General data">
 			<FormItem label="Choose object">
@@ -727,7 +727,11 @@
 						on:select={performCalculations}></Select>
 				{/if}
 			{/key}
-			<DateTimeInput bind:value={givenDateTime} on:change={performCalculations} />
+			<DateTimeInput
+				label="UTC Date and time"
+				bind:value={givenDateTime}
+				on:change={performCalculations}
+				isUTC />
 			<FormItem label="Latitude">
 				{#key positionObtained}
 					<CoordinatesInput
@@ -751,14 +755,18 @@
 				isLoading={isLoadingPosition}
 				maxwidth />
 		</Section>
+		<Section title="Calculated data">
+			<FormItem label="GHA" text={transformToCoordinates(GHA!)} />
+			<FormItem label="LHA" text={LHA ? transformToCoordinates(LHA) : '-'} />
+			<FormItem label="Declination" text={transformToCoordinates(declination!, 'y')} />
+			<FormItem label="Azimuth" text="{Number(azimuth).toFixed(1)}°" />
+		</Section>
+	</div>
+	<div class="vertical-flex max-width space-xl">
 		<Section title="Ship's heading">
-			<FormItem label="True course">
-				{#if isDefinedNumber([GC, azimuth, GB])}
-					<span>{(GC - (azimuth - GB)).toFixed(1)}&#176;</span>
-				{:else}
-					<span>-</span>
-				{/if}
-			</FormItem>
+			<FormItem
+				label="True course"
+				text={isDefinedNumber([TC]) ? formatToAngle(mod(TC!, 360)) : '-'} />
 			<FormItem label="Gyro course">
 				<Input
 					type="number"
@@ -766,87 +774,55 @@
 					min={0}
 					max={360}
 					step={0.1}
-					placeholder="181.0" />
+					placeholder="181.0°" />
 			</FormItem>
-			<FormItem label="Standard course">
+			<FormItem label="Standard / magnetic course">
 				<Input
 					type="number"
 					bind:value={MC}
 					min={0}
 					max={360}
 					step={0.1}
-					placeholder="182.0" />
+					placeholder="182.0°" />
 			</FormItem>
 		</Section>
-	</div>
-	<div class="vertical-flex max-width space-xl">
 		<Section title="Object's bearing">
-			<FormItem label="True">
-				{#if isDefinedNumber([azimuth])}
-					<span>{azimuth.toFixed(1)}&#176;</span>
-				{:else}
-					<span>-</span>
-				{/if}
-			</FormItem>
-			<FormItem label="Gyro">
+			<FormItem
+				label="True bearing"
+				text={isDefinedNumber([azimuth]) ? formatToAngle(azimuth!) : '-'} />
+			<FormItem
+				label="Standard / magnetic bearing"
+				text={isDefinedNumber([MC, TC, azimuth])
+					? formatToAngle(azimuth! + (MC! - TC!))
+					: '-'} />
+			<FormItem label="Gyro bearing">
 				<Input
 					type="number"
 					bind:value={GB}
 					min={0}
 					max={360}
 					step={0.1}
-					placeholder="242.3" />
-			</FormItem>
-			<FormItem label="Standard">
-				{#if isDefinedNumber([MC, TC, azimuth])}
-					<span>{(azimuth + (MC - TC!)).toFixed(1)}&#176;</span>
-				{:else}
-					<span>-</span>
-				{/if}
+					placeholder="242.3°" />
 			</FormItem>
 		</Section>
 		<Section title="Corrections">
-			<FormItem label="Gyro Error">
-				{#if isDefinedNumber([azimuth, GB])}
-					<span>{formatToCompassError(azimuth - GB)}</span>
-				{:else}
-					<span>-</span>
-				{/if}
-			</FormItem>
-			<FormItem label="Standard">
-				{#if isDefinedNumber([MC, TC, azimuth])}
-					<span>{formatToCompassError(TC! - MC)}</span>
-				{:else}
-					<span>-</span>
-				{/if}
-			</FormItem>
+			<FormItem
+				label="Gyro Error"
+				text={isDefinedNumber([azimuth, GB])
+					? formatToCompassError(azimuth! - GB!)
+					: '-'} />
+			<FormItem
+				label="Standard"
+				text={isDefinedNumber([MC, TC, azimuth]) ? formatToCompassError(TC! - MC!) : '-'} />
+			<FormItem
+				label="Deviation"
+				text={isDefinedNumber([TC, MC, variation])
+					? formatToCompassError(TC! - MC! - variation!)
+					: '-'} />
 			<FormItem label="Variation">
-				<VariationInput bind:value={variation} />
-			</FormItem>
-			<FormItem label="Deviation">
-				{#if isDefinedNumber([TC, MC, variation])}
-					<span>{formatToCompassError(TC! - MC - variation)}</span>
-				{:else}
-					<span>-</span>
-				{/if}
+				<VariationInput bind:value={variation!} />
 			</FormItem>
 		</Section>
 	</div>
-	<Section title="Calculated data">
-		<EqualGrid --mobileColumnsQty="2" --tabletColumnsQty={2} --desktopColumnsQty={2}>
-			<FormItem label="GHA">
-				<span class="text-size-m">{transformToCoordinates(GHA)}</span>
-			</FormItem>
-			<FormItem label="LHA">
-				<span class="text-size-m">{transformToCoordinates(LHA)}</span>
-			</FormItem>
-			<FormItem label="Declination">
-				<span class="text-size-m">{transformToCoordinates(declination, 'y')}</span>
-			</FormItem>
-			<FormItem label="Azimuth">
-				<span class="text-size-m">{Number(azimuth).toFixed(1)}&#176;</span>
-			</FormItem>
-		</EqualGrid>
-	</Section>
 </EqualGrid>
 <!-- </section> -->

@@ -11,6 +11,7 @@
 	import Selector from '$ui/Selector.svelte';
 	import Input from '$ui/Input.svelte';
 	import PageControls from '$ui/PageControls.svelte';
+	import EmptySection from '$ui/EmptySection.svelte';
 
 	let searchValue: string = '';
 	let isNavigational: boolean = true;
@@ -87,10 +88,7 @@
 					{/each}
 				</EqualGrid>
 			{:else}
-				<div class="centered-content vertical-flex space">
-					<span class="material-icons notranslate">folder_off</span>
-					<span>Unfortunately, no any flags were found</span>
-				</div>
+				<EmptySection note="No any flags were found" icon="folder_off" />
 			{/if}
 		</Section>
 	{/each}

@@ -1,13 +1,12 @@
 <script lang="ts">
-	import { onDestroy } from "svelte";
+	import { onDestroy } from 'svelte';
 
 	export let date: Date | undefined = undefined;
 	export let minDate: Date | undefined = undefined;
 	export let maxDate: Date | undefined = undefined;
 	export let disabled: boolean = false;
 	export let setDate: (date: Date) => void;
-	export let closePopup: ((id: number) => void) | undefined = undefined;
-	export let popupId: number | undefined = undefined;
+	export let closePopup: (() => void) | undefined = undefined;
 
 	if (minDate) minDate.setUTCHours(0, 0, 0, 0);
 	if (maxDate) maxDate.setUTCHours(0, 0, 0, 0);
@@ -66,7 +65,7 @@
 		}
 		date = thisDate;
 		setDate(thisDate);
-		if (closePopup && popupId) closePopup(popupId);
+		if (closePopup) closePopup();
 	}
 </script>
 
@@ -78,12 +77,12 @@
 		<div class="button transparent" on:click={previousMonth}>
 			<span class="material-icons notranslate">chevron_left</span>
 		</div>
-		<span class="text-size-m"
-			>{handledDate.toLocaleString("default", {
-				month: "long",
-				year: "numeric",
-			})}</span
-		>
+		<span class="text-size-m">
+			{handledDate.toLocaleString('default', {
+				month: 'long',
+				year: 'numeric',
+			})}
+		</span>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div class="button transparent" on:click={nextMonth}>
 			<span class="material-icons notranslate">chevron_right</span>
@@ -108,9 +107,8 @@
 							disabled}
 						on:click={() => {
 							chooseDate(thisDate);
-						}}
-					>
-						<span class="text-noselect">{day ? day.toString() : ""}</span>
+						}}>
+						<span class="text-noselect">{day ? day.toString() : ''}</span>
 					</div>
 				{/each}
 			</div>

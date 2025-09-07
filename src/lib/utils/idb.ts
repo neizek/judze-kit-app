@@ -1,50 +1,61 @@
-import { browser } from "$app/environment";
-import { writable, type Writable } from "svelte/store";
+import { dbStoresEnum } from "$lib/enums/db";
 
 const dbName = 'judzeDB';
-const dbVersion = 1;
+const dbVersion = 2;
+const storeNames = Object.keys(dbStoresEnum);
 
-export function openDB(): IDBDatabase | undefined {
-	if (!browser) {
-		return;
-	}
+let dbPromise: Promise<IDBDatabase> | null = null;
 
-	const request = indexedDB.open(dbName, dbVersion);
+export function openDB() {
+	if (dbPromise) return dbPromise;
+
+	dbPromise = new Promise<IDBDatabase>((resolve, reject) => {
+		const request = indexedDB.open(dbName, dbVersion);
 		
-		request.onerror = (event) => {
-			throw Error(`Error: ${event}`);
-		};
-	
-		request.onsuccess = (event) => {
-			return (event.target as IDBOpenDBRequest)?.result as IDBDatabase;
+		request.onupgradeneeded = (event) => {
+			const db = (event.target as IDBOpenDBRequest)?.result;
+
+			storeNames.forEach(storeName => {
+				if (!db.objectStoreNames.contains(storeName)) {
+					db.createObjectStore(storeName, { keyPath: 'id', autoIncrement: true })
+				}
+			})
 		}
+
+		request.onsuccess = (event) => {
+			resolve((event.target as IDBOpenDBRequest)?.result);
+		}
+
+		request.onerror = (event) => {
+			reject((event.target as IDBOpenDBRequest)?.error)
+		}
+	});
 	
-		request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
-			const db = (event.target as IDBOpenDBRequest)?.result as IDBDatabase;
-
-			if (!db.objectStoreNames.contains('todos')) {
-				db.createObjectStore('todos', { keyPath: 'id', autoIncrement: true });
-			}
-
-			if (!db.objectStoreNames.contains('documents')) {
-				db.createObjectStore('documents', { keyPath: 'id', autoIncrement: true });
-			}
-		
-			// const categoriesStore = db.createObjectStore('categories', { keyPath: 'id' });
-			// const transaction = categoriesStore.transaction;
-
-			// transaction.oncomplete = () => {
-			// 	const documentsObjectStore = db
-			// 	.transaction('categories', 'readwrite')
-			// 	.objectStore('categories');
-		
-			// 	documentsCategories.forEach((category) => {
-			// 		documentsObjectStore.add(category);
-			// 	});
-			// };
-	
-			// db.createObjectStore('list', { autoIncrement: true });
-		};
+	return dbPromise;
 }
 
-export const db: Writable<IDBDatabase | undefined> = writable(openDB());
+export async function getAll<T>(storeName: string): Promise<T[]> {
+	const db = await openDB();
+
+	return new Promise((resolve, reject) => {
+		const tx = db.transaction(storeName, 'readonly');
+		const store = tx.objectStore(storeName);
+		const request = store.getAll();
+
+		request.onsuccess = (event) => resolve(request.result);
+		request.onerror = (event) => reject(request.error);
+	})
+}
+
+export async function addItem(storeName: string, item: any): Promise<IDBValidKey> {
+	const db = await openDB();
+
+	return new Promise((resolve, reject) => {
+		const tx = db.transaction(storeName, 'readwrite');
+		const store = tx.objectStore(storeName);
+		const request = store.add(item);
+
+		request.onsuccess = (event) => resolve(request.result);
+		request.onerror = (event) => reject(request.error);
+	})
+}

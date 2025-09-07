@@ -79,6 +79,10 @@ section {
 		background-color: transparent;
 	}
 
+	&.paddingless {
+		padding: 0 !important;
+	}
+
 	@include after-mobile {
 		padding: 24px;
 	}

@@ -5,6 +5,7 @@
 	import FormItem from '$ui/FormItem.svelte';
 	import Input from '$ui/Input.svelte';
 	import Select from '$ui/Select/Select.svelte';
+	import Separator from '$ui/Separator.svelte';
 
 	export let categories;
 
@@ -38,6 +39,7 @@
 	<FormItem label="Expiration date">
 		<DatePicker bind:value={expiryDate} />
 	</FormItem>
+	<Separator />
 	<Button label="Confirm new file" type="primary" on:click={addDocument} />
 	<Button label="Cancel" type="transparent" bordered />
 </div>

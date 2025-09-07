@@ -1,20 +1,19 @@
 <script lang="ts">
-	import { daysCounterStore } from "$lib/stores/daysCounter";
-	import Button from "../../../ui/Button.svelte";
-	import DatePicker from "../../../ui/DatePicker/DatePicker.svelte";
-	import FormItem from "../../../ui/FormItem.svelte";
+	import { daysCounterStore } from '$lib/stores/daysCounter';
+	import Button from '../../../ui/Button.svelte';
+	import DatePicker from '../../../ui/DatePicker/DatePicker.svelte';
+	import FormItem from '../../../ui/FormItem.svelte';
 
 	let startDate: Date = $daysCounterStore.startFrom;
 	let endDate: Date = $daysCounterStore.endTo;
 	let errorMessage: string | undefined = undefined;
 
-	export let closePopup: ((id: number) => void) | undefined = undefined;
-	export let popupId: number | undefined = undefined;
+	export let closePopup: () => void;
 
 	$: {
 		if (startDate || endDate) {
 			if (startDate > endDate) {
-				errorMessage = "Your start date can not be later than the end date";
+				errorMessage = 'Your start date can not be later than the end date';
 			} else {
 				errorMessage = undefined;
 			}
@@ -29,7 +28,7 @@
 
 		$daysCounterStore.startFrom = startDate;
 		$daysCounterStore.endTo = endDate;
-		if (closePopup && popupId) closePopup(popupId);
+		closePopup();
 	}
 </script>
 
@@ -47,8 +46,7 @@
 		label="Start counting"
 		type="primary"
 		on:click={handleSave}
-		disabled={errorMessage !== undefined}
-	/>
+		disabled={errorMessage !== undefined} />
 </div>
 
 <style lang="scss">

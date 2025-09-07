@@ -32,7 +32,7 @@
 			label: 'Other',
 			items: [
 				{ label: 'Distress Signals', icon: 'lifebuoy', link: 'other/distress' },
-				{ label: 'ToDo', icon: 'chime', link: 'other/todo' },
+				{ label: 'Notes', icon: 'chime', link: 'other/notes' },
 			],
 		},
 	];

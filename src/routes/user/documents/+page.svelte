@@ -13,6 +13,7 @@
 	import NewDocumentForm from './NewDocumentForm.svelte';
 	import { formatDateSimple } from '$lib/utils/datetime';
 	import DocumentDetails from './DocumentDetails.svelte';
+	import EmptySection from '$ui/EmptySection.svelte';
 
 	title.set('Documents');
 
@@ -61,6 +62,7 @@
 			},
 		});
 	}
+
 	function showDetails(document: DocumentType) {
 		createPopup({
 			header: "Document's detals",
@@ -80,16 +82,13 @@
 	</div>
 {:else}
 	<div class="vertical-flex space-xl max-width">
-		<div class="line-blocks space" style="align-self: end;">
-			<Button label="New document" icon="add" type="primary" on:click={handleNewDocument} />
-		</div>
 		{#each categories as category}
 			<Section title={category.label}>
+				<div slot="controls">
+					<Button label="New document" icon="add" on:click={handleNewDocument} />
+				</div>
 				{#if !category.documents || category.documents?.length === 0}
-					<div class="centered-content vertical-flex space">
-						<span class="material-icons notranslate">folder_off</span>
-						<span>No any documents added</span>
-					</div>
+					<EmptySection note="No any documents added" icon="folder_off" />
 				{:else}
 					<div class="vertical-flex space-l">
 						<!-- svelte-ignore a11y_no_static_element_interactions -->
