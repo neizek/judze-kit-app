@@ -1,76 +1,17 @@
-<script context="module" lang="ts">
-	import { beforeNavigate } from '$app/navigation';
-	import { popUpsQuantity } from '$lib/stores/popupCounter';
-	import type { AnyObject } from '$lib/types/types';
-
-	interface PopUpComponent {
-		component: ConstructorOfATypedSvelteComponent;
-		props?: AnyObject;
-	}
-
-	interface PopUp {
-		header?: string;
-		content: string | PopUpComponent;
-		onConfirm?: () => void;
-		bottomSticked?: boolean;
-	}
-
-	interface CreatedPopUp extends PopUp {
-		id: number;
-	}
-
-	export type CreatePopup = (data: PopUp) => void;
-	export type ClosePopup = (id: number) => void;
-</script>
-
 <script lang="ts">
-	import { setContext, type ComponentType, type SvelteComponent } from 'svelte';
 	import { cubicOut } from 'svelte/easing';
-	import { writable, type Writable } from 'svelte/store';
 	import { fade, fly } from 'svelte/transition';
+	import { closeAllPopUps, closePopUp, popUps } from '.';
+	import { beforeNavigate } from '$app/navigation';
 
 	const handleKeydown = (e: KeyboardEvent) => {
 		if (e.key === ('Escape' as string)) {
-			popUps.set([]);
-			count = 0;
+			closeAllPopUps();
 			return;
 		}
 	};
 
-	const popUps: Writable<CreatedPopUp[]> = writable([]);
-	let count = 0;
-
-	export const createPopup = (data: PopUp) => {
-		const newCount = count + 0;
-		if (typeof data.content !== 'string') {
-			data.content = {
-				component: data.content.component,
-				props: {
-					...data.content.props,
-					closePopup: () => closePopUp(newCount),
-					popupId: newCount,
-				},
-			};
-		}
-		popUps.update((current) => {
-			const newArray = [...current, { id: newCount, ...data }];
-			count += 1;
-			return newArray;
-		});
-		$popUpsQuantity++;
-	};
-
-	export const closePopUp = (id: number) => {
-		popUps.update((current) => current.filter((popup) => popup.id !== id));
-		$popUpsQuantity--;
-	};
-
-	beforeNavigate(() => {
-		popUps.set([]);
-		$popUpsQuantity = 0;
-	});
-
-	setContext('createPopup', createPopup);
+	beforeNavigate(() => closeAllPopUps);
 </script>
 
 <svelte:window on:keydown={handleKeydown} />

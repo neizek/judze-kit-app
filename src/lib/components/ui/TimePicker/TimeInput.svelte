@@ -1,13 +1,12 @@
 <script lang="ts">
-	import { createEventDispatcher, getContext } from 'svelte';
-	import type { CreatePopup } from '../../widgets/PopUp.svelte';
+	import { createEventDispatcher } from 'svelte';
 	import TimeWheel from './TimeWheel.svelte';
 	import { getTimeFromDate } from '$lib/utils/datetime';
 	import InputButton from '../InputButton.svelte';
+	import { createPopup } from '$widgets/PopUp';
 
 	export let value: Date;
 
-	const createPopup: CreatePopup = getContext('createPopup');
 	const dispatch = createEventDispatcher();
 
 	function confirmTime(hours: number, minutes: number, seconds: number) {
@@ -17,6 +16,7 @@
 
 	function openTimeWheel(event: Event) {
 		event?.preventDefault();
+
 		createPopup({
 			header: 'Time setup',
 			content: {

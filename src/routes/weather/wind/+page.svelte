@@ -1,18 +1,16 @@
 <script lang="ts">
 	import { isMobileScreen } from '$lib/utils/deviceDetector';
 	import { title } from '$lib/stores/meta';
-	import { getContext } from 'svelte';
 	import Button from '$ui/Button.svelte';
 	import EqualGrid from '$ui/EqualGrid.svelte';
 	import Section from '$ui/Section.svelte';
-	import type { CreatePopup } from '$widgets/PopUp.svelte';
 	import WindCalculator from './WindCalculator.svelte';
-	import WindCard from './WindCard.svelte';
 	import Image from '$ui/Image.svelte';
 	import DetailsCard from '$ui/DetailsCard.svelte';
 	import Details from '$ui/Details.svelte';
 	import Selector from '$ui/Selector.svelte';
 	import PageControls from '$ui/PageControls.svelte';
+	import { createPopup } from '$widgets/PopUp';
 
 	title.set('Wind');
 
@@ -245,8 +243,6 @@
 	let activeSection: number = 0;
 	$: windTableType = windTable.find((object) => object.id === activeSection);
 	if (!windTableType) windTableType = windTable[0];
-
-	const createPopup: CreatePopup = getContext('createPopup');
 
 	function createCalculator() {
 		createPopup({

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
-	import type { CreatePopup } from '$widgets/PopUp.svelte';
 	import { title } from '$lib/stores/meta';
 	import { isMobileScreen } from '$lib/utils/deviceDetector';
 	import EqualGrid from '$ui/EqualGrid.svelte';
@@ -12,6 +10,7 @@
 	import Input from '$ui/Input.svelte';
 	import PageControls from '$ui/PageControls.svelte';
 	import EmptySection from '$ui/EmptySection.svelte';
+	import { createPopup } from '$widgets/PopUp';
 
 	let searchValue: string = '';
 	let isNavigational: boolean = true;
@@ -35,8 +34,6 @@
 		searchValue;
 		getAllFlags();
 	}
-
-	const createPopup: CreatePopup = getContext('createPopup');
 
 	function openDescription(flag: any) {
 		if (flag.description !== '' && flag.description) {

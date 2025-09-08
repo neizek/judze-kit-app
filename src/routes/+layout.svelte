@@ -4,7 +4,7 @@
 	import { fade } from 'svelte/transition';
 	import Footer from '$widgets/Footer/Footer.svelte';
 	import Header from '$widgets/Header.svelte';
-	import PopUp from '$widgets/PopUp.svelte';
+	import PopUp from '$widgets/PopUp/index.svelte';
 	import { cubicOut } from 'svelte/easing';
 	import { beforeNavigate } from '$app/navigation';
 

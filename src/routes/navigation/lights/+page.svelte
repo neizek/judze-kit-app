@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { isMobileScreen } from '$lib/utils/deviceDetector';
 	import { title } from '$lib/stores/meta';
-	import { getContext } from 'svelte';
 	import Button from '$ui/Button.svelte';
-	import EqualGrid from '$ui/EqualGrid.svelte';
 	import Image from '$ui/Image.svelte';
 	import Section from '$ui/Section.svelte';
-	import type { CreatePopup } from '$widgets/PopUp.svelte';
 	import VisibilityRange from './VisibilityRange.svelte';
+	import { createPopup } from '$widgets/PopUp';
 
 	const lights = [
 		{
@@ -99,8 +97,6 @@
 			],
 		},
 	];
-
-	const createPopup: CreatePopup = getContext('createPopup');
 
 	function openVisibilityRanges() {
 		createPopup({

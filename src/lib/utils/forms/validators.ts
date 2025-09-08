@@ -103,7 +103,7 @@ export const formsValidator = (): Validator => async (forms): Promise<ValidatorR
 		}, {valid: true, name: 'invalid_nested_form'} as ValidatorResult<undefined>));
 }
 
-export const email = (): Validator => async (value): Promise<ValidatorResult<undefined>> => {
+export const isEmail = (): Validator => async (value): Promise<ValidatorResult<undefined>> => {
 	if (
 		!value
 		|| typeof value !== 'string'

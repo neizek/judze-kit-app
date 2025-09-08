@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { isMobileScreen } from '$lib/utils/deviceDetector';
 	import EqualGrid from '$ui/EqualGrid.svelte';
 	import Image from '$ui/Image.svelte';
 
@@ -27,11 +26,3 @@
 		</div>
 	{/each}
 </EqualGrid>
-
-<!-- <style lang="scss">
-	.Range {
-		:global(img) {
-			filter: drop-shadow(rgba(99, 99, 99, 0.2) 0px 2px 8px)
-		}
-	}
-</style> -->

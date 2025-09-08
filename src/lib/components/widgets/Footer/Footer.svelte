@@ -1,11 +1,8 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
-	import type { CreatePopup } from '../PopUp.svelte';
 	import Donations from './Donations.svelte';
 	import { isMobileScreen } from '$lib/utils/deviceDetector';
 	import AboutUs from './AboutUs.svelte';
-
-	const createPopup: CreatePopup = getContext('createPopup');
+	import { createPopup } from '$widgets/PopUp';
 
 	function openPopUp(header: string, component: ConstructorOfATypedSvelteComponent) {
 		createPopup({

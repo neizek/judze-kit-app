@@ -1,21 +1,16 @@
 <script lang="ts">
 	import Button from '$ui/Button.svelte';
-	import Icon from '$ui/Icon.svelte';
 	import Section from '$ui/Section.svelte';
-	import type { CreatePopup } from '$widgets/PopUp.svelte';
-	import { getContext, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import AddVoyageForm from './AddVoyageForm.svelte';
 	import EmptySection from '$ui/EmptySection.svelte';
 	import { title } from '$lib/stores/meta';
 	import { addItem, getAll } from '$lib/utils/idb';
 	import { dbStoresEnum } from '$lib/enums/db';
-	import Separator from '$ui/Separator.svelte';
 	import type { Voyage } from '$lib/types/seaservice';
-	import { formatDateSimple, getDuration } from '$lib/utils/datetime';
-	import DurationText from './DurationText.svelte';
+	import { getDuration } from '$lib/utils/datetime';
 	import VoyageCard from './VoyageCard.svelte';
-
-	const createPopup: CreatePopup = getContext('createPopup');
+	import { createPopup } from '$widgets/PopUp';
 
 	let voyages: Voyage[] = [];
 	let isLoading: boolean = false;

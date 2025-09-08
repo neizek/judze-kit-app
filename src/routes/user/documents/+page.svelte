@@ -5,15 +5,15 @@
 		type DocumentType,
 	} from '$lib/utils/documents';
 	import { title } from '$lib/stores/meta';
-	import { getContext, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import Button from '$ui/Button.svelte';
 	import Loader from '$ui/Loader.svelte';
 	import Section from '$ui/Section.svelte';
-	import type { CreatePopup } from '$widgets/PopUp.svelte';
 	import NewDocumentForm from './NewDocumentForm.svelte';
 	import { formatDateSimple } from '$lib/utils/datetime';
 	import DocumentDetails from './DocumentDetails.svelte';
 	import EmptySection from '$ui/EmptySection.svelte';
+	import { createPopup } from '$widgets/PopUp';
 
 	title.set('Documents');
 
@@ -22,8 +22,6 @@
 	}
 
 	let categories: CategoryType[] | undefined = undefined;
-
-	const createPopup: CreatePopup = getContext('createPopup');
 
 	onMount(() => {
 		getDocuments().then((result) => {

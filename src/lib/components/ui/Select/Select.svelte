@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { createEventDispatcher, getContext } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 	import ItemsList from './ItemsList.svelte';
 	import type { SelectItem } from './types';
 	import { compareObjects } from '$lib/utils/objects';
 	import { clickOutside } from '$lib/utils/other';
 	import { isMobileScreen } from '$lib/utils/deviceDetector';
-	import type { CreatePopup } from '../../widgets/PopUp.svelte';
 	import { browser } from '$app/environment';
+	import { createPopup } from '$widgets/PopUp';
 
 	function getSelectedLabel(selectedValue: any, selectItems: SelectItem[]): string | undefined {
 		for (const item of selectItems) {
@@ -144,8 +144,6 @@
 	$: currentLabel = getSelectedLabel(value, items);
 	$: {
 		if (open && isMobileScreen) {
-			const createPopup: CreatePopup = getContext('createPopup');
-
 			createPopup({
 				header: 'Choose something',
 				content: {

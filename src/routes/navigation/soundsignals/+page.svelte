@@ -1,17 +1,16 @@
 <script lang="ts">
 	import { title } from '$lib/stores/meta';
-	import { getContext } from 'svelte';
 	import Bell from './Bell.svelte';
 	import BellGong from './BellGong.svelte';
 	import Bells from './Bells.svelte';
 	import BellsGong from './BellsGong.svelte';
 	import SoundSignalDetails from './SoundSignalDetails.svelte';
-	import type { CreatePopup } from '$widgets/PopUp.svelte';
 	import MorseCode from './MorseCode.svelte';
 	import type { SoundSignalsType, SoundSignalType, SoundsType } from './types';
 	import Section from '$ui/Section.svelte';
 	import { bellfivemp3, bellmp3, emptymp3, gongfivemp3, prolongedmp3, shortmp3 } from './sounds';
 	import EqualGrid from '$ui/EqualGrid.svelte';
+	import { createPopup } from '$widgets/PopUp';
 
 	$title = 'Sound signals';
 
@@ -86,8 +85,6 @@
 		B: new Audio(bellfivemp3),
 		G: new Audio(gongfivemp3),
 	};
-
-	const createPopup: CreatePopup = getContext('createPopup');
 
 	function openDescription(signal: SoundSignalType) {
 		if (signal.description !== '' && signal.description) {

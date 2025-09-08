@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { getTwoYearsAgo } from '$lib/utils/datetime';
 	import { createEventDispatcher } from 'svelte';
 	import DatePicker from './DatePicker/DatePicker.svelte';
 	import FormItem from './FormItem.svelte';

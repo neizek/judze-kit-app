@@ -1,13 +1,12 @@
 <script lang="ts">
-	import { getContext } from 'svelte';
 	import EqualGrid from '$ui/EqualGrid.svelte';
 	import Image from '$ui/Image.svelte';
 	import Section from '$ui/Section.svelte';
-	import type { CreatePopup } from '$widgets/PopUp.svelte';
 	import { isMobileScreen } from '$lib/utils/deviceDetector';
 	import DetailsCard from '$ui/DetailsCard.svelte';
 	import { title } from '$lib/stores/meta';
 	import Selector from '$ui/Selector.svelte';
+	import { createPopup } from '$widgets/PopUp';
 
 	type BuoyType = {
 		title: string;
@@ -120,8 +119,6 @@
 			],
 		},
 	];
-
-	const createPopup: CreatePopup = getContext('createPopup');
 
 	function openDescription(buoy: any) {
 		createPopup({

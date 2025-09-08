@@ -1,21 +1,18 @@
 <script lang="ts">
-	import { daysCounterStore } from "$lib/stores/daysCounter";
-	import { theme, themesItems } from "$lib/stores/theme";
-	import { getContext } from "svelte";
-	import Button from "../ui/Button.svelte";
-	import FormItem from "../ui/FormItem.svelte";
-	import SelectButtons from "../ui/SelectButtons.svelte";
-	import Switch from "../ui/Switch.svelte";
-	import type { CreatePopup } from "./PopUp.svelte";
-	import DaysCounterSetup from "./Menu/DaysCounter/DaysCounterSetup.svelte";
-
-	const createPopup: CreatePopup = getContext("createPopup");
+	import { daysCounterStore } from '$lib/stores/daysCounter';
+	import { theme, themesItems } from '$lib/stores/theme';
+	import Button from '../ui/Button.svelte';
+	import FormItem from '../ui/FormItem.svelte';
+	import SelectButtons from '../ui/SelectButtons.svelte';
+	import Switch from '../ui/Switch.svelte';
+	import DaysCounterSetup from './Menu/DaysCounter/DaysCounterSetup.svelte';
+	import { createPopup } from './PopUp';
 
 	let daysCounterEnabled: boolean = $daysCounterStore.enabled;
 
 	function openDaysCounterSetup() {
 		createPopup({
-			header: "Days Counter setup",
+			header: 'Days Counter setup',
 			content: {
 				component: DaysCounterSetup,
 			},
@@ -31,16 +28,14 @@
 		<Switch
 			bind:value={daysCounterEnabled}
 			onChange={() => ($daysCounterStore.enabled = !daysCounterEnabled)}
-			label="Switch on / off days counter"
-		/>
+			label="Switch on / off days counter" />
 		{#if $daysCounterStore.enabled}
 			<Button
 				icon="settings"
 				label="Set up widget"
 				type="transparent"
 				on:click={openDaysCounterSetup}
-				bordered
-			/>
+				bordered />
 		{/if}
 	</FormItem>
 </div>

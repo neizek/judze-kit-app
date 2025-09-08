@@ -1,12 +1,10 @@
 <script lang="ts">
 	import { title } from '$lib/stores/meta';
-	import { getContext } from 'svelte';
 	import EqualGrid from '$ui/EqualGrid.svelte';
 	import Image from '$ui/Image.svelte';
 	import Section from '$ui/Section.svelte';
-	import type { CreatePopup } from '$widgets/PopUp.svelte';
 	import DetailsCard from '$ui/DetailsCard.svelte';
-	import { text } from '@sveltejs/kit';
+	import { createPopup } from '$widgets/PopUp';
 
 	$title = 'Distress Signals';
 
@@ -116,8 +114,6 @@
 			rule: 'COLREG / Annex IV / 1(k)',
 		},
 	];
-
-	const createPopup: CreatePopup = getContext('createPopup');
 
 	function openDescription(signal: DistressSignalType) {
 		createPopup({

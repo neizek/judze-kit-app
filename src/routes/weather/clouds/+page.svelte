@@ -1,12 +1,11 @@
 <script lang="ts">
-	import isMobile, { isMobileScreen } from '$lib/utils/deviceDetector';
+	import { isMobileScreen } from '$lib/utils/deviceDetector';
 	import { title } from '$lib/stores/meta';
-	import { getContext } from 'svelte';
 	import EqualGrid from '$ui/EqualGrid.svelte';
 	import Image from '$ui/Image.svelte';
 	import Section from '$ui/Section.svelte';
-	import type { CreatePopup } from '$widgets/PopUp.svelte';
 	import DetailsCard from '$ui/DetailsCard.svelte';
+	import { createPopup } from '$widgets/PopUp';
 
 	$title = 'Clouds';
 
@@ -92,8 +91,6 @@
 			],
 		},
 	];
-
-	const createPopup: CreatePopup = getContext('createPopup');
 
 	function openDescription(cloud: any) {
 		createPopup({

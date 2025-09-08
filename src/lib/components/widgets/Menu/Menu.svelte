@@ -1,22 +1,21 @@
 <script context="module" lang="ts">
-    import type { MenuItem } from "./Grid.svelte";
-    import Grid from "./Grid.svelte";
+	import type { MenuItem } from './Grid.svelte';
+	import Grid from './Grid.svelte';
 
 	export interface MenuSection {
 		label: string;
-		items: MenuItem[]
+		items: MenuItem[];
 	}
 </script>
-	
+
 <script lang="ts">
-  import { title } from "$lib/stores/meta";
-  import Section from "../../ui/Section.svelte";
+	import Section from '../../ui/Section.svelte';
 
 	export let navTree: MenuSection[];
 </script>
 
-{#each navTree as section }
-	<Section title="{section.label}">
-		<Grid items="{section.items}" />
+{#each navTree as section}
+	<Section title={section.label}>
+		<Grid items={section.items} />
 	</Section>
 {/each}

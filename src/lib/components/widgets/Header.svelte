@@ -1,14 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { title } from '$lib/stores/meta';
-	import { getContext } from 'svelte';
-	import type { CreatePopup } from './PopUp.svelte';
 	import Settings from './Settings.svelte';
 	import isMobile from '$lib/utils/deviceDetector';
 	import LogoSVG from '$lib/judze-logo-letters.svg?raw';
 	import { goto } from '$app/navigation';
-
-	const createPopup: CreatePopup = getContext('createPopup');
+	import { createPopup } from './PopUp';
 
 	function openSettings() {
 		createPopup({
@@ -16,7 +13,6 @@
 			content: {
 				component: Settings,
 			},
-			bottomSticked: isMobile,
 		});
 	}
 

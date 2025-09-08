@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
-
 	export let date: Date | undefined = undefined;
 	export let minDate: Date | undefined = undefined;
 	export let maxDate: Date | undefined = undefined;

@@ -1,18 +1,15 @@
 <script lang="ts">
 	import { title } from '$lib/stores/meta';
-	import { getContext } from 'svelte';
 	import Button from '$ui/Button.svelte';
 	import Section from '$ui/Section.svelte';
-	import type { CreatePopup } from '$widgets/PopUp.svelte';
 	import NoteForm from './NoteForm.svelte';
 	import EmptySection from '$ui/EmptySection.svelte';
 	import { getAll } from '$lib/utils/idb';
 	import { dbStoresEnum } from '$lib/enums/db';
 	import type { Note } from '$lib/types/notes';
+	import { createPopup } from '$widgets/PopUp';
 
 	$title = 'Notes';
-
-	const createPopup: CreatePopup = getContext('createPopup');
 
 	$: notes = getAll<Note>(dbStoresEnum.note);
 
