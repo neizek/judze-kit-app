@@ -28,7 +28,7 @@
 		);
 
 		.Notification {
-			width: 100%;
+			width: inherit;
 			margin: 0 10px;
 			margin-top: 10px;
 			height: auto;

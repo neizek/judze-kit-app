@@ -8,10 +8,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        // self.window = UIWindow(frame: UIScreen.main.bounds)
-        // let myViewController = MyViewController()
-        // self.window?.rootViewController = myViewController
-        // self.window?.makeKeyAndVisible()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = MyViewController()
+        self.window?.makeKeyAndVisible()
         return true
     }
 

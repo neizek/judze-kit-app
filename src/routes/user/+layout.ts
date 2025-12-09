@@ -14,7 +14,8 @@ export async function load({ url }) {
 	
 	const navigateToLink = get(previousUrl) ?? '/';
 	goto(navigateToLink, { replaceState: true });
-	preventIfOfflineModeOn().then(() => {
+	preventIfOfflineModeOn().then((permitted) => {
+		if (!permitted) return;
 		openSignInFormPopUp();
 	})
 }

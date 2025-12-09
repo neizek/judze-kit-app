@@ -64,7 +64,7 @@
 		top: calc(10px + var(--safe-area-inset-top, env(safe-area-inset-top)));
 		align-self: center;
 		border: none;
-		padding-top: var(--safe-area-inset-top, env(safe-area-inset-top));
+		// padding-top: var(--safe-area-inset-top, env(safe-area-inset-top));
 		position: fixed;
 		z-index: 97;
 
