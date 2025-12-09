@@ -6,28 +6,31 @@
 	export let onChange: (() => void) | undefined = undefined;
 </script>
 
-<label class="space-between" class:error="{hasError}">
+<label class="Label space-between {disabled ? 'disabled' : ''}" class:error={hasError}>
 	{#if label}
 		<span>{label}</span>
 	{/if}
-	<div class="Switch" >
+	<div class="Switch">
 		<input
 			type="checkbox"
 			on:blur
-			on:change="{onChange}"
+			on:change={onChange}
 			on:keypress
 			on:keydown
 			on:keyup
 			on:input
-			bind:checked="{value}"
-			{disabled}
-		/>
+			bind:checked={value}
+			{disabled} />
 		<span class="Slider input"></span>
 	</div>
 </label>
 
 <style lang="scss">
-	
+	.Label.disabled {
+		opacity: 0.6;
+		pointer-events: none;
+	}
+
 	.Switch {
 		--switchWidth: 50px;
 		--switchHeight: 24px;
@@ -67,11 +70,11 @@
 
 		&:before {
 			position: absolute;
-			content: "";
-			height: var(--switcClackHeight);		
+			content: '';
+			height: var(--switcClackHeight);
 			width: var(--switcClackHeight);
 			left: var(--switchButtonPadding);
-			bottom: calc(50% - var(--switcClackHeight)/2);
+			bottom: calc(50% - var(--switcClackHeight) / 2);
 			background-color: var(--default-font-color);
 			transition: 0.4s ease-out;
 			border-radius: 50%;

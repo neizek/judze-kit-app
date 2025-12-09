@@ -6,14 +6,14 @@
 	export let paddingless: boolean = false;
 </script>
 
-<div class="vertical-flex space-l max-width">
-	<div class="space-between space-l" style="align-items: baseline;">
+<div class="flex flex-column space-l max-width">
+	<div class="space-between space-l ai-center">
 		{#if title}
-			<h2 in:fade>{title}</h2>
+			<h2 style="text-indent: var(--size-m);" in:fade>{title}</h2>
 		{/if}
 		<slot name="controls"></slot>
 	</div>
-	<div class="section-box vertical space" class:transparent class:paddingless>
+	<div class="section-box flex flex-column space-l" class:transparent class:paddingless>
 		<slot></slot>
 	</div>
 </div>

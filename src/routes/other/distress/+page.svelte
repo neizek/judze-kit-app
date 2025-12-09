@@ -3,8 +3,9 @@
 	import EqualGrid from '$ui/EqualGrid.svelte';
 	import Image from '$ui/Image.svelte';
 	import Section from '$ui/Section.svelte';
-	import DetailsCard from '$ui/DetailsCard.svelte';
+	import DetailsCard from '$ui/DetailsCard/DetailsCard.svelte';
 	import { createPopup } from '$widgets/PopUp';
+	import { LifeBuoy } from '@lucide/svelte';
 
 	$title = 'Distress Signals';
 
@@ -118,6 +119,7 @@
 	function openDescription(signal: DistressSignalType) {
 		createPopup({
 			header: signal.label,
+			icon: LifeBuoy,
 			content: {
 				component: DetailsCard,
 				props: {

@@ -12,7 +12,7 @@
 
 <EqualGrid --mobileColumnsQty={4} --desktopColumnsQty={4}>
 	{#each lightRanges as range}
-		<div class="Range vertical-flex maxwidth centered-content space big">
+		<div class="Range vertical-flex maxwidth centered-content space-l">
 			<Image
 				src="/lights/{range.image}.svg"
 				alt={range.range}

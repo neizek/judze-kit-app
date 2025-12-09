@@ -4,11 +4,12 @@
 	--default-font-size: 12px;
 	--default-font-color: #{$defaultFontColor};
 	--error-font-color: #{$errorFontColor};
-	--font-size-xs: 10px;
+	--font-size-xxs: 10px
+	--font-size-xs: 12px;
 	--font-size-s: 14px;
 	--font-size-m: 16px;
-	--font-size-l: 24px;
-	--font-size-xl: 32px;
+	--font-size-l: 20px;
+	--font-size-xl: 24px;
 	font-size: var(--default-font-size);
 	
 	&[data-theme='dark'] {
@@ -89,6 +90,9 @@ ul {
 	}
 
 	&-size {
+		&-xxs {
+			font-size: var(--font-size-xxs);
+		}
 		&-xs {
 			font-size: var(--font-size-xs);
 		}

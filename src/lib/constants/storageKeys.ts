@@ -1,0 +1,9 @@
+export const SEA_SERVICE_STORAGE_KEY = 'seaService';
+export const RANKS_STORAGE_KEY = 'ranks';
+export const VESSEL_TYPES_STORAGE_KEY = 'vesselTypes';
+export const AUTO_SYNC_ENABLED_STORAGE_KEY = 'autoSyncEnabled';
+export const SESSION_STORAGE_KEY = 'session';
+export const SYNC_COMPLETED_STORAGE_KEY = 'syncCompleted';
+export const GYRO_ERROR_FORM_STORAGE_KEY = 'gyroErrorForm';
+export const ETA_FORM_STORAGE_KEY = 'ETAForm';
+export const DAYS_COUNTER_ENABLED_STORAGE_KEY = 'daysCounterEnabled'

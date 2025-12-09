@@ -5,17 +5,20 @@
 	import Footer from '$widgets/Footer/Footer.svelte';
 	import Header from '$widgets/Header.svelte';
 	import PopUp from '$widgets/PopUp/index.svelte';
+	import Toaster from '$widgets/Toaster/index.svelte';
 	import { cubicOut } from 'svelte/easing';
 	import { beforeNavigate } from '$app/navigation';
+	import { previousUrl } from '$lib/stores/navigation.js';
 
 	initTheme();
 
 	export let data;
 
-	let historyNavigation = false;
+	let historyNavigation = true;
 
-	beforeNavigate(({ type }) => {
+	beforeNavigate(({ type, from }) => {
 		historyNavigation = type === 'popstate';
+		previousUrl.set(from?.url.pathname);
 	});
 
 	// let previousPath = '';
@@ -31,6 +34,7 @@
 <svelte:head>
 	<title>{$title}</title>
 </svelte:head>
+<Toaster />
 <PopUp>
 	<Header />
 	{#key data.url}
@@ -64,10 +68,10 @@
 	.Content {
 		display: flex;
 		flex: 1;
-		margin-top: calc(74px + var(--safe-area-inset-top, env(safe-area-inset-top)));
+		margin-top: calc(84px + var(--safe-area-inset-top, env(safe-area-inset-top)));
 
 		@include after-mobile {
-			margin-top: calc(82px + var(--safe-area-inset-top, env(safe-area-inset-top)));
+			margin-top: calc(102px + var(--safe-area-inset-top, env(safe-area-inset-top)));
 		}
 	}
 </style>

@@ -1,11 +1,15 @@
 <script lang="ts">
+	import { ChevronRight } from '@lucide/svelte';
+
 	export let header: string;
 </script>
 
 <details>
 	<summary class="space-between">
 		<h4>{header}</h4>
-		<span class="material-icons notranslate">chevron_right</span>
+		<div class="icon pa-sm">
+			<ChevronRight />
+		</div>
 	</summary>
 	<article><slot></slot></article>
 </details>
@@ -18,7 +22,7 @@
 		&[open] > summary {
 			background-color: var(--button-background-color-hover);
 
-			> span.material-icons {
+			> .icon {
 				transform: rotate(90deg);
 			}
 		}
@@ -34,14 +38,15 @@
 			}
 
 			&::marker {
-				content: "";
+				content: '';
 			}
 
 			&::-webkit-details-marker {
 				display: none;
 			}
 
-			> span.material-icons {
+			> .icon {
+				margin-right: 6px;
 				transition: transform 0.3s ease-in-out;
 			}
 		}

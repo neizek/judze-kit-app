@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { isMobileScreen } from '$lib/utils/deviceDetector';
 	import { title } from '$lib/stores/meta';
 	import Button from '$ui/Button.svelte';
 	import EqualGrid from '$ui/EqualGrid.svelte';
 	import Section from '$ui/Section.svelte';
 	import WindCalculator from './WindCalculator.svelte';
 	import Image from '$ui/Image.svelte';
-	import DetailsCard from '$ui/DetailsCard.svelte';
+	import DetailsCard from '$ui/DetailsCard/DetailsCard.svelte';
 	import Details from '$ui/Details.svelte';
 	import Selector from '$ui/Selector.svelte';
 	import PageControls from '$ui/PageControls.svelte';
 	import { createPopup } from '$widgets/PopUp';
+	import { Wind, WindArrowDown } from '@lucide/svelte';
 
 	title.set('Wind');
 
@@ -247,16 +247,17 @@
 	function createCalculator() {
 		createPopup({
 			header: 'True Wind Calculator',
+			icon: WindArrowDown,
 			content: {
 				component: WindCalculator,
 			},
-			bottomSticked: isMobileScreen,
 		});
 	}
 
 	function openDescription(step: any) {
 		createPopup({
 			header: step.description,
+			icon: Wind,
 			content: {
 				component: DetailsCard,
 				props: {
@@ -270,20 +271,26 @@
 							text: step.seaConditions,
 						},
 						{
-							tag: 'span',
-							text: `Waves: ${step.waveHeight}`,
-						},
-						step.windSpeed
-							? {
+							tag: 'div',
+							class: 'flex space-between',
+							text: '',
+							children: [
+								{
 									tag: 'span',
-									text: `Wind: ${step.windSpeed}`,
-								}
-							: {},
+									text: `Waves: ${step.waveHeight}`,
+								},
+								step.windSpeed
+									? {
+											tag: 'span',
+											text: `Wind: ${step.windSpeed}`,
+										}
+									: {},
+							],
+						},
 					],
 					isBigImage: true,
 				},
 			},
-			bottomSticked: isMobileScreen,
 		});
 	}
 </script>
@@ -291,7 +298,12 @@
 <div class="vertical-flex right space-xl max-width">
 	<PageControls>
 		<div>
-			<Button icon="calculate" label="Calculator" on:click={createCalculator} />
+			<Button
+				type="transparent"
+				icon={WindArrowDown}
+				label="Calculator"
+				onclick={createCalculator}
+				bordered />
 		</div>
 		<Selector
 			items={[
@@ -302,7 +314,7 @@
 	</PageControls>
 
 	<Section title={windTableType.header}>
-		<div class="vertical-flex space big">
+		<div class="vertical-flex space-l">
 			<Details header="Description">
 				<p>{windTableType.description}</p>
 			</Details>
@@ -324,7 +336,6 @@
 							--background-color="#ffffff" />
 						<span>{step.number} - {step.description}</span>
 					</div>
-					<!-- <WindCard windStep="{step}" isBf="{windTableType.id === 0}"/> -->
 				{/each}
 			</EqualGrid>
 		</div>

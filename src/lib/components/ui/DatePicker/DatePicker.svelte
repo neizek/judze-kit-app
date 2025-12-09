@@ -4,10 +4,12 @@
 	import { createEventDispatcher } from 'svelte';
 	import InputButton from '../InputButton.svelte';
 	import { createPopup } from '$widgets/PopUp';
+	import { Calendar1Icon, CalendarDays } from '@lucide/svelte';
 
 	export let value: Date | undefined = undefined;
 	export let minDate: Date | undefined = undefined;
 	export let maxDate: Date | undefined = undefined;
+	export let full: boolean = false;
 
 	const dispatch = createEventDispatcher();
 
@@ -19,6 +21,7 @@
 	function openCalendar() {
 		createPopup({
 			header: 'Calendar',
+			icon: CalendarDays,
 			content: {
 				component: Calendar,
 				props: {
@@ -32,4 +35,10 @@
 	}
 </script>
 
-<InputButton on:click={openCalendar} bind:value mask={formatDateSimple} />
+<InputButton
+	on:click={openCalendar}
+	icon={CalendarDays}
+	bind:value
+	mask={formatDateSimple}
+	{full}
+	{...$$restProps} />

@@ -4,8 +4,10 @@
 	import { getTimeFromDate } from '$lib/utils/datetime';
 	import InputButton from '../InputButton.svelte';
 	import { createPopup } from '$widgets/PopUp';
+	import { Clock } from '@lucide/svelte';
 
 	export let value: Date;
+	export let withSeconds: boolean = true;
 
 	const dispatch = createEventDispatcher();
 
@@ -25,6 +27,7 @@
 					hours: value.getUTCHours(),
 					minutes: value.getUTCMinutes(),
 					seconds: value.getUTCSeconds(),
+					withSeconds: withSeconds,
 					confirmTime: confirmTime,
 				},
 			},
@@ -32,4 +35,8 @@
 	}
 </script>
 
-<InputButton on:click={openTimeWheel} bind:value mask={getTimeFromDate} />
+<InputButton
+	on:click={openTimeWheel}
+	bind:value
+	icon={Clock}
+	mask={(value) => getTimeFromDate(value, withSeconds)} />

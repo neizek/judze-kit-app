@@ -1,42 +1,38 @@
 <script lang="ts">
-	import { dbStoresEnum } from '$lib/enums/db';
-	import { RankEnum } from '$lib/enums/ranks';
-	import { VesselTypeEnum } from '$lib/enums/vessels';
-	import type { Voyage } from '$lib/types/seaservice';
+	import { ranksOptions, vesselTypesOptions } from '$lib/stores/lookups';
+	import { getDuration, getOneWeekLater } from '$lib/utils/datetime';
 	import { createField, createForm } from '$lib/utils/forms/forms';
 	import { required } from '$lib/utils/forms/validators';
-	import { addItem } from '$lib/utils/idb';
+	import { addVoyage } from '$lib/utils/seaService';
 	import Button from '$ui/Button.svelte';
 	import DatePicker from '$ui/DatePicker/DatePicker.svelte';
-	import EqualGrid from '$ui/EqualGrid.svelte';
 	import FormItem from '$ui/FormItem.svelte';
 	import Input from '$ui/Input.svelte';
 	import Select from '$ui/Select/Select.svelte';
-	import Separator from '$ui/Separator.svelte';
+	import { Plus, XIcon } from '@lucide/svelte';
 
-	export let addNewVoyage: (voyage: Partial<Voyage>) => void;
 	export let closePopup: () => void;
 
-	const vessel = createField<string>('vessel', '', [required(`Vessel's name can't be empty`)]);
-	const vesselType = createField<undefined | VesselTypeEnum>('vesselType', undefined, [
-		required(`Choose your vessel's type`),
+	const vessel = createField<string>('vessel', '', [required('Name of the vessel is mandatory')]);
+	const vesselType = createField<string | undefined>('vesselType', undefined, [
+		required('Choose type of the vessel'),
 	]);
-	const rank = createField<undefined | RankEnum>('vessel', undefined, []);
-	const dateFrom = createField('vessel', new Date(), []);
-	const dateTo = createField('vessel', new Date(), []);
-	const voyageForm = createForm(vessel, vesselType);
+	const rank = createField<string | undefined>('rank', undefined, [required('Choose your rank')]);
+	const dateFrom = createField<Date | undefined>('dateFrom', undefined, [required()]);
+	const dateTo = createField<Date | undefined>('dateTo', undefined, [required()]);
 
-	const vesselTypes = Object.entries(VesselTypeEnum).map(([label, value]) => ({ label, value }));
+	const voyageForm = createForm(vessel, vesselType, rank, dateFrom, dateTo);
 
 	function confirmNewVoyage() {
 		voyageForm.validate().then((success) => {
-			if (success) {
-				addNewVoyage({
+			if (success && $vesselType.value && $rank.value && $dateFrom.value && $dateTo.value) {
+				addVoyage({
 					vessel: $vessel.value,
-					vesselType: $vesselType.value,
-					rank: $rank.value,
+					vesselTypeId: Number($vesselType.value),
+					rankId: Number($rank.value),
 					dateFrom: $dateFrom.value,
 					dateTo: $dateTo.value,
+					duration: getDuration($dateFrom.value, $dateTo.value),
 				});
 				closePopup();
 			}
@@ -46,24 +42,42 @@
 
 <div class="vertical-flex space-l">
 	<FormItem label="Name of the vessel" errors={$vessel.errors}>
-		<Input placeholder="Flex Freedom" bind:value={$vessel.value} hasError={!$vessel.valid} />
+		<Input
+			type="text"
+			placeholder="Santa Maria"
+			bind:value={$vessel.value}
+			hasError={!$vessel.valid} />
 	</FormItem>
 	<FormItem label="Type of the vessel" errors={$vesselType.errors}>
 		<Select
-			items={vesselTypes}
+			items={$vesselTypesOptions}
 			bind:value={$vesselType.value}
 			placeholder="Choose type of the vessel"
 			hasError={!$vesselType.valid} />
 	</FormItem>
-	<EqualGrid --mobileColumnsQty="2">
-		<FormItem label="Start of sailing">
-			<DatePicker bind:value={$dateFrom.value} />
-		</FormItem>
-		<FormItem label="End of sailing">
-			<DatePicker bind:value={$dateTo.value} />
-		</FormItem>
-	</EqualGrid>
-	<Separator transparent />
-	<Button type="primary" icon="check" label="Add new voyage" on:click={confirmNewVoyage} />
-	<Button icon="close" label="Cancel" />
+	<FormItem label="Your rank" errors={$rank.errors}>
+		<Select
+			items={$ranksOptions}
+			bind:value={$rank.value}
+			placeholder="Choose your rank"
+			hasError={!$rank.valid} />
+	</FormItem>
+	<FormItem
+		label="Duration of sailing"
+		errors={!$dateFrom.valid || !$dateTo.valid ? ['Enter duration of the voyage'] : []}>
+		<div class="line-blocks space-m max-width">
+			<DatePicker
+				bind:value={$dateFrom.value}
+				maxDate={$dateTo.value}
+				hasError={!$dateFrom.valid} />
+			<DatePicker
+				bind:value={$dateTo.value}
+				minDate={$dateFrom.value}
+				hasError={!$dateTo.valid} />
+		</div>
+	</FormItem>
+	<div class="flex space-m space-between mt-m">
+		<Button type="primary" icon={Plus} label="Add new voyage" onclick={confirmNewVoyage} full />
+		<Button type="tonal" icon={XIcon} label="Cancel" onclick={closePopup} />
+	</div>
 </div>

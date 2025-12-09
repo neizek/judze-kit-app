@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Icon from './Icon.svelte';
+	import type { Icon as IconType } from '@lucide/svelte';
 
 	export let note: string;
-	export let icon: string;
+	export let icon: typeof IconType;
 </script>
 
 <div class="section-box centered-content vertical-flex space">
-	<Icon name={icon} />
+	<svelte:component this={icon} />
 	<span>{note}</span>
 </div>

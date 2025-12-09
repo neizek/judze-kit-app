@@ -1,18 +1,21 @@
 <script lang="ts">
 	import { getDaysBetweenDates } from '$lib/utils/datetime';
-	import { daysCounterStore } from '$lib/stores/daysCounter';
 	import Button from '../../../ui/Button.svelte';
 	import CircleDiagram from '../../../ui/CircleDiagram.svelte';
-	import DaysCounterSetup from './DaysCounterSetup.svelte';
-	import { createPopup } from '$widgets/PopUp';
+	import { daysCounterEnabled } from '$lib/stores/daysCounter';
+	import type { VoyageModel } from '$lib/types/seaservice';
+	import { goto } from '$app/navigation';
+	import { ROUTES } from '$lib/constants/routes';
+	import { scale } from 'svelte/transition';
 
-	export let startDate: Date;
-	export let endDate: Date;
+	export let voyage: VoyageModel | undefined;
+	export let startDate: Date = voyage?.dateFrom ?? new Date();
+	export let endDate: Date = voyage?.dateTo ?? new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
 
 	const today: Date = new Date(Date.now());
 
 	let timePeriod: 'before' | 'after' | 'new' | undefined = (() => {
-		if ($daysCounterStore.new) {
+		if (!voyage) {
 			return 'new';
 		}
 
@@ -47,20 +50,15 @@
 	let percentsDone = Math.floor((daysPassed / daysTotal) * 100);
 
 	function hideWidget() {
-		$daysCounterStore.enabled = false;
+		$daysCounterEnabled = false;
 	}
 
 	function setUpWidget() {
-		createPopup({
-			header: 'Days Counter setup',
-			content: {
-				component: DaysCounterSetup,
-			},
-		});
+		goto(ROUTES.USER.SEASERVICE);
 	}
 </script>
 
-{#if $daysCounterStore.enabled}
+{#if $daysCounterEnabled}
 	<div class="equal-flex space">
 		<CircleDiagram percentage={percentsDone} style="max-height: 190px;">
 			<span class="absolute-center text-size-l text-weight-l">{percentsDone}%</span>
@@ -80,12 +78,12 @@
 								type="transparent"
 								label="Set up dates"
 								bordered
-								on:click={setUpWidget} />
+								onclick={setUpWidget} />
 							<Button
 								type="transparent"
 								label="Hide counter"
 								bordered
-								on:click={hideWidget} />
+								onclick={hideWidget} />
 						</div>
 					{:else}
 						<span>Congratulations on completing another chapter of your journey!</span>
@@ -93,7 +91,7 @@
 							type="transparent"
 							label="Hide counter"
 							bordered
-							on:click={hideWidget} />
+							onclick={hideWidget} />
 					{/if}
 				</div>
 			{/if}
@@ -125,7 +123,7 @@
 
 		@include after-mobile {
 			max-width: 70%;
-			font-size: var(--font-size-l);
+			font-size: var(--font-size-xl);
 		}
 	}
 	.blured {

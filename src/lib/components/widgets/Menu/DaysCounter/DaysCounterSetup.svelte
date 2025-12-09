@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { daysCounterStore } from '$lib/stores/daysCounter';
 	import Button from '../../../ui/Button.svelte';
 	import DatePicker from '../../../ui/DatePicker/DatePicker.svelte';
@@ -45,7 +45,7 @@
 	<Button
 		label="Start counting"
 		type="primary"
-		on:click={handleSave}
+		onclick={handleSave}
 		disabled={errorMessage !== undefined} />
 </div>
 
@@ -53,4 +53,4 @@
 	.error {
 		color: var(--error-font-color);
 	}
-</style>
+</style> -->

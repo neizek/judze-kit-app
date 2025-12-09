@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { daysCounterStore } from '$lib/stores/daysCounter';
+	import { isAuthorised } from '$lib/stores/auth';
+	import { daysCounterEnabled } from '$lib/stores/daysCounter';
 	import { title } from '$lib/stores/meta';
+	import { seaServiceVisible } from '$lib/stores/seaService';
 	import DaysLeft from '$widgets/Menu/DaysCounter/DaysCounter.svelte';
 	import Menu from '$widgets/Menu/Menu.svelte';
 
@@ -18,6 +20,7 @@
 				{ label: 'Shapes', icon: 'shapes', link: 'navigation/shapes' },
 				{ label: 'Buoys', icon: 'buoy', link: 'navigation/buoys' },
 				{ label: 'Rules', icon: 'books', link: 'navigation/rules' },
+				{ label: 'ETA', icon: 'calendar-clock', link: 'navigation/eta' },
 			],
 		},
 		{
@@ -32,7 +35,7 @@
 			label: 'Other',
 			items: [
 				{ label: 'Distress Signals', icon: 'lifebuoy', link: 'other/distress' },
-				{ label: 'Notes', icon: 'chime', link: 'other/notes' },
+				// { label: 'Notes', icon: 'chime', link: 'other/notes' },
 			],
 		},
 	];
@@ -41,8 +44,8 @@
 </script>
 
 <div class="vertical-flex space-xl max-width">
-	{#key $daysCounterStore}
-		<DaysLeft startDate={$daysCounterStore.startFrom} endDate={$daysCounterStore.endTo} />
-	{/key}
+	{#if $daysCounterEnabled && $isAuthorised}
+		<DaysLeft voyage={$seaServiceVisible[0]} />
+	{/if}
 	<Menu {navTree} />
 </div>

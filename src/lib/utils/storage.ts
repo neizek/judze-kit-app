@@ -1,4 +1,5 @@
-import { browser } from "$app/environment";
+import { Preferences } from '@capacitor/preferences';
+import { dateReviver } from './datetime';
 
 export interface StorageItem<T> {
 	value: T;
@@ -13,17 +14,17 @@ export interface StorageItem<T> {
 }
 
 class AppStorage {
-	public get<T>(key: string): T | null {
-		const encoded = localStorage.getItem(key);
+	public async get<T>(key: string): Promise<T | null> {
+		const encoded = await Preferences.get({ key });
 
-		if (!encoded) {
+		if (!encoded || encoded.value === null) {
 			return null;
 		}
 
-		const { value, lifetime, createdAt }: StorageItem<T> = JSON.parse(encoded);
+		const { value, lifetime, createdAt }: StorageItem<T> = JSON.parse(encoded.value, dateReviver);
 
 		if (lifetime && Date.now() - createdAt > lifetime) {
-			localStorage.removeItem(key);
+			await Preferences.remove({ key });
 
 			return null;
 		}
@@ -40,19 +41,19 @@ class AppStorage {
 	 * @param value
 	 * @param lifetime in milliseconds.
 	 */
-	public set<T>(key: string, value: T, lifetime?: number): void {
-		localStorage.setItem(
+	public async set<T>(key: string, value: T, lifetime?: number): Promise<void> {
+		await Preferences.set({
 			key,
-			JSON.stringify({
+			value: JSON.stringify({
 				value,
 				lifetime,
 				createdAt: Date.now()
 			})
-		);
+		});
 	}
 
-	public remove(key: string): void {
-		if (browser) localStorage.removeItem(key);
+	public async remove(key: string): Promise<void> {
+		await Preferences.remove({ key });
 	}
 }
 

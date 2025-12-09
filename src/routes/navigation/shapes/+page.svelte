@@ -2,9 +2,10 @@
 	import EqualGrid from '$ui/EqualGrid.svelte';
 	import Image from '$ui/Image.svelte';
 	import Section from '$ui/Section.svelte';
-	import DetailsCard from '$ui/DetailsCard.svelte';
+	import DetailsCard from '$ui/DetailsCard/DetailsCard.svelte';
 	import { title } from '$lib/stores/meta';
 	import { createPopup } from '$widgets/PopUp';
+	import { Shapes } from '@lucide/svelte';
 
 	const shapes = [
 		{
@@ -85,6 +86,7 @@
 	function openDescription(shape: any) {
 		createPopup({
 			header: shape.title,
+			icon: Shapes,
 			content: {
 				component: DetailsCard,
 				props: {

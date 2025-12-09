@@ -8,6 +8,7 @@
 	import { dbStoresEnum } from '$lib/enums/db';
 	import type { Note } from '$lib/types/notes';
 	import { createPopup } from '$widgets/PopUp';
+	import { AlertTriangle, Waves } from '@lucide/svelte';
 
 	$title = 'Notes';
 
@@ -29,11 +30,11 @@
 <section class="vertical-flex max-width">
 	<Section title="List of notes" transparent paddingless>
 		<div slot="controls">
-			<Button label="Add note" icon="data_alert" on:click={openNoteFormPopup} />
+			<Button label="Add note" icon={AlertTriangle} onclick={openNoteFormPopup} />
 		</div>
 		{#await notes then notes}
 			{#if !notes || notes.length === 0}
-				<EmptySection note="No any notes added" icon="waves" />
+				<EmptySection note="No any notes added" icon={Waves} />
 			{:else}
 				{#each notes as note}
 					<div class="section-box vertical-flex space">

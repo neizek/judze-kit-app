@@ -33,13 +33,17 @@
 	<FormItem label="Name of the document">
 		<Input bind:value={name} />
 	</FormItem>
-	<FormItem label="Date issued">
-		<DatePicker bind:value={issueDate} />
-	</FormItem>
-	<FormItem label="Expiration date">
-		<DatePicker bind:value={expiryDate} />
-	</FormItem>
+	<div class="equal-flex space">
+		<FormItem label="Date issued">
+			<DatePicker bind:value={issueDate} />
+		</FormItem>
+		<FormItem label="Expiration date">
+			<DatePicker bind:value={expiryDate} />
+		</FormItem>
+	</div>
 	<Separator />
-	<Button label="Confirm new file" type="primary" on:click={addDocument} />
-	<Button label="Cancel" type="transparent" bordered />
+	<div class="line-blocks space">
+		<Button label="Confirm new file" type="primary" onclick={addDocument} />
+		<Button label="Cancel" type="transparent" bordered />
+	</div>
 </div>

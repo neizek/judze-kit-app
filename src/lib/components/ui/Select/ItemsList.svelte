@@ -1,21 +1,45 @@
 <script lang="ts">
+	import Input from '$ui/Input.svelte';
+	import { Search, SearchX } from '@lucide/svelte';
 	import type { SelectItem } from './types';
+	import Button from '$ui/Button.svelte';
+	import EmptySection from '$ui/EmptySection.svelte';
+	import isMobile, { isMobileScreen } from '$lib/utils/deviceDetector';
 
 	export let shownItems: SelectItem[];
 	export let onSelect: (item: SelectItem) => void;
 	export let closePopup: (() => void) | undefined = undefined;
+
+	let sortedItems: SelectItem[] = shownItems;
+	let searchTerm: string = '';
+
+	$: {
+		onInputChange(searchTerm);
+	}
+
+	function onInputChange(value: string): void {
+		const term = value.toLowerCase().trim();
+
+		if (term === '') {
+			sortedItems = shownItems;
+			return;
+		}
+
+		sortedItems = shownItems.filter((item) => item.label.toLowerCase().includes(term));
+	}
 </script>
 
-<div class="items">
-	{#if shownItems.length === 0}
-		<div class="item space-between">
+<div class="items flex flex-column space-m pa-m hide-scroll">
+	{#if sortedItems.length === 0}
+		<!-- <div class="item space-between">
 			<span>No data</span>
-		</div>
+		</div> -->
+		<EmptySection note="No items found" icon={SearchX} />
 	{:else}
-		{#each shownItems as item}
+		{#each sortedItems as item}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<div
+			<!-- <div
 				class="item space-between"
 				on:click={() => {
 					onSelect(item);
@@ -25,13 +49,32 @@
 				{#if item.icon}
 					<i class="fa-solid fa-{item.icon}"></i>
 				{/if}
-			</div>
+			</div> -->
+			<Button
+				type="transparent"
+				label={item.label}
+				icon={item.icon}
+				onclick={() => {
+					onSelect(item);
+					if (closePopup) closePopup();
+				}}
+				full
+				withChevron />
 		{/each}
+	{/if}
+	{#if shownItems.length > 5 && isMobileScreen()}
+		<div class="searchBox">
+			<Input
+				placeholder="Type to search..."
+				icon={Search}
+				bind:value={searchTerm}
+				clearable />
+		</div>
 	{/if}
 </div>
 
 <style lang="scss">
-	@include desktop {
+	@include after-mobile {
 		.items {
 			position: absolute;
 			background-color: var(--input-background-color);
@@ -42,34 +85,38 @@
 			left: 0;
 			right: 0;
 			box-shadow: 0 2px 8px var(--Select-items-shadow-color);
-
-			@include desktop {
-				max-height: 700%;
-				overflow-y: scroll;
-				overflow-x: hidden;
-			}
+			max-height: 700%;
+			overflow-y: scroll;
+			overflow-x: hidden;
 		}
 	}
 
-	.item {
-		padding: 10px 15px;
-		background-color: transparent;
-		transition: background-color 0.2s;
-		font-size: 13.5px;
+	// .item {
+	// 	padding: 10px 15px;
+	// 	background-color: transparent;
+	// 	transition: background-color 0.2s;
+	// 	font-size: 13.5px;
 
-		&:first-of-type {
-			border-top-left-radius: #{$inputBorderRadius};
-			border-top-right-radius: #{$inputBorderRadius};
-		}
+	// 	&:first-of-type {
+	// 		border-top-left-radius: #{$inputBorderRadius};
+	// 		border-top-right-radius: #{$inputBorderRadius};
+	// 	}
 
-		&:last-of-type {
-			border-bottom-left-radius: #{$inputBorderRadius};
-			border-bottom-right-radius: #{$inputBorderRadius};
-		}
+	// 	&:last-of-type {
+	// 		border-bottom-left-radius: #{$inputBorderRadius};
+	// 		border-bottom-right-radius: #{$inputBorderRadius};
+	// 	}
 
-		&:hover {
-			cursor: pointer;
-			background-color: var(--input-background-color-hover);
-		}
+	// 	&:hover {
+	// 		cursor: pointer;
+	// 		background-color: var(--input-background-color-hover);
+	// 	}
+	// }
+
+	.searchBox {
+		position: sticky;
+		bottom: var(--size-m);
+		left: 0;
+		right: 0;
 	}
 </style>

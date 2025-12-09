@@ -23,12 +23,14 @@ export function isFirefox(): boolean {
 	return navigator.userAgent.indexOf('Firefox') > 0;
 }
 
-export const isMobileScreen = (() => {
+export const isMobileScreen = () => {
 	if (browser) {
-		return (window.innerWidth < 768)
+		return (window.innerWidth < 601)
 	}
 
 	return false;
-})();
+};
+
+
 
 export default isMobile;

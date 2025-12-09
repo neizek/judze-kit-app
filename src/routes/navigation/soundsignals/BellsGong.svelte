@@ -1,8 +1,12 @@
-<div class="line-blocks small-space">
+<script lang="ts">
+	import { Bell, Disc2 } from '@lucide/svelte';
+</script>
+
+<div class="line-blocks space-xs">
 	<span>!!!</span>
-	<span class="material-icons">notifications_active</span>
-	<span> 5s </span>
-	<span>!!!</span>
-	<span class="material-icons">disc_full</span>
+	<Bell />
 	<span>5s</span>
-</div>	
+	<span>!!!</span>
+	<Disc2 />
+	<span>5s</span>
+</div>

@@ -117,7 +117,7 @@
 	exhibited forward of amidships; except that a vessel of less than 20 m in length need not
 	exhibit this light forward of amidships but shall exhibit it as far forward as is practicable.
 </p>
-<p class="text-weight-l text-size-xs">
+<p class="text-weight-l text-size-xxs">
 	MSC.1/Circ.1260 - UNIFIED INTERPRETATIONS OF COLREG 1972, AS AMENDED
 </p>
 <p class="text-weight-l text-size-m">
@@ -314,7 +314,7 @@
 	one all-round light, two all-round lights shall be used suitably positioned or screened so that
 	they appear, as far as practicable, as one light at a distance of one mile.
 </p>
-<p class="text-weight-l text-size-xs">
+<p class="text-weight-l text-size-xxs">
 	MSC.1/Circ.1260/Rev.1 - UNIFIED INTERPRETATIONS OF COLREG 1972, AS AMENDED
 </p>
 <p class="text-weight-l text-size-m">Annex I, section 9(b) - Horizontal sectors</p>
@@ -382,7 +382,7 @@
 	vertically apart from the masthead light.
 </p>
 <p class="text-weight-l text-size-m">13. High Speed Craft*</p>
-<p class="text-weight-l text-size-xs">
+<p class="text-weight-l text-size-xxs">
 	(This section shall enter into force on 29 November 2003 by Resolution A.910(22))
 </p>
 <p>

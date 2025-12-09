@@ -53,7 +53,7 @@ export const validateField = async <T>(field: Field<T>): Promise<boolean> => {
 export const createField: CreateField = <T>(
 	name: string,
 	value: T,
-	validators: Validator[] = [],
+	validators: Validator[],
 	reference: HTMLElement | undefined = undefined
 ): Field<T> => {
 	const store: Writable<FieldData<any>> = writable({
@@ -71,10 +71,9 @@ export const createField: CreateField = <T>(
 		subscribe,
 		update,
 		name,
-		validators,
+		validators: [...validators],
 		set: function (this: Field<T>, value: T): void {
 			const fieldData = get(this);
-			
 			if (isFieldData(value)) {
 				const storeValue = value as FieldData<T>;
 				const rawValue = storeValue.value;
@@ -154,7 +153,7 @@ export const createForm: CreateForm = (...fields: Field<any>[]) => ({
 	}),
 	validate: async function (): Promise<boolean> {
 		const store = get(this) as FormData;
-
+		
 		return Promise.all(
 			Object.values(store.fields)
 			.map(field => field.validate().then(() => field))

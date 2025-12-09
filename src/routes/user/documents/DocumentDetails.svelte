@@ -2,6 +2,7 @@
 	import { formatDateSimple } from '$lib/utils/datetime';
 	import type { DocumentType } from '$lib/utils/documents';
 	import Button from '$ui/Button.svelte';
+	import { Trash } from '@lucide/svelte';
 
 	export let document: DocumentType;
 </script>
@@ -15,5 +16,5 @@
 			)}
 		</span>
 	</div>
-	<Button type="dangerous" label="Delete Document" icon="delete" />
+	<Button type="dangerous" label="Delete Document" icon={Trash} />
 </div>

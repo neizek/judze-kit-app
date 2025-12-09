@@ -4,7 +4,7 @@
 	export let flag;
 </script>
 
-<div class="horizontal-layout space big">
+<div class="flex space-l">
 	<Image
 		src="/flagIcons/{flag.letter ? 'navigational' : 'national'}/{flag.icon.toLowerCase()}.svg"
 		alt={flag.letter}

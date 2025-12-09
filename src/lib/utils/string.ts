@@ -20,3 +20,11 @@ export function transformToCoordinates(number: number, direction: 'x' | 'y' | un
 	number = number > 0 ? number : -number;
 	return `${Math.trunc(number)}°${((number - Math.floor(number)) * 60).toFixed(1)} ${sign}`;
 }
+
+export const numberToSpeedInKn = (number: number) => `${ Number(!isNaN(number) ? number : 0).toFixed(1)} kn`;
+export const hoursToTimeString = (hours: number) => {
+	const d = Math.floor(hours / 24);
+	const h = Math.floor(hours % 24);
+	const m = Math.floor((hours - Math.floor(hours)) * 60);
+	return `${d}d ${h}h ${m}m`;
+}

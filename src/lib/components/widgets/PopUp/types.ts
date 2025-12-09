@@ -1,15 +1,18 @@
 import type { AnyObject } from "$lib/types/types";
+import type { Icon } from "@lucide/svelte";
+import type { Component } from "svelte";
 
 	export interface PopUpComponent {
-		component: ConstructorOfATypedSvelteComponent;
+		component: Component<any>;
 		props?: AnyObject;
 	}
 
 	export interface PopUp {
 		header?: string;
+		icon?: typeof Icon;
 		content: string | PopUpComponent;
 		onConfirm?: () => void;
-		bottomSticked?: boolean;
+		onCancel?: () => void;
 	}
 
 	export interface CreatedPopUp extends PopUp {

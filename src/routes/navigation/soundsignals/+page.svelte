@@ -11,6 +11,7 @@
 	import { bellfivemp3, bellmp3, emptymp3, gongfivemp3, prolongedmp3, shortmp3 } from './sounds';
 	import EqualGrid from '$ui/EqualGrid.svelte';
 	import { createPopup } from '$widgets/PopUp';
+	import { AudioWaveform, BellRing } from '@lucide/svelte';
 
 	$title = 'Sound signals';
 
@@ -90,6 +91,7 @@
 		if (signal.description !== '' && signal.description) {
 			createPopup({
 				header: 'Sound signal details',
+				icon: AudioWaveform,
 				content: {
 					component: SoundSignalDetails,
 					props: {
@@ -105,12 +107,12 @@
 <EqualGrid --desktopColumnsQty={2} --tabletColumnsQty={1} --mobileColumnsQty={1}>
 	{#each signalsArray as signalCategory}
 		<Section title={signalCategory.header}>
-			<div class="vertical space big">
+			<div class="flex flex-column space-l">
 				{#each signalCategory.signals as signal, index}
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<!-- svelte-ignore a11y-no-static-element-interactions -->
 					<div
-						class="equal-flex inlined space-xl"
+						class="equal-flex ai-center space-xl"
 						on:click={() => openDescription(signal)}>
 						<MorseCode morse={signal.morse} />
 						<span class="doubled">{signal.description}</span>

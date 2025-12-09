@@ -103,7 +103,7 @@ export const formsValidator = (): Validator => async (forms): Promise<ValidatorR
 		}, {valid: true, name: 'invalid_nested_form'} as ValidatorResult<undefined>));
 }
 
-export const isEmail = (): Validator => async (value): Promise<ValidatorResult<undefined>> => {
+export const isEmail = (errorMessage: string): Validator => async (value): Promise<ValidatorResult<undefined>> => {
 	if (
 		!value
 		|| typeof value !== 'string'
@@ -111,13 +111,13 @@ export const isEmail = (): Validator => async (value): Promise<ValidatorResult<u
 	) {
 		return {
 			valid: false,
-			name: 'invalidMail'
+			name: errorMessage ?? 'invalidMail'
 		};
 	}
 
 	return {
 		valid: true,
-		name: 'invalidMail'
+		name: errorMessage ?? 'invalidMail'
 	};
 }
 
@@ -190,14 +190,19 @@ export const urlPart = (): Validator => async (value): Promise<ValidatorResult<u
 }
 
 export const required = (errorMessage?: string): Validator => async (value): Promise<ValidatorResult<undefined>> => {
-	console.log(value);
+
 	if (isANumber(value)) {
 		return {
 			valid: !isNaN(value),
 			name: errorMessage ?? 'required'
 		};
 	}
-	
+	if (value instanceof Date) {
+		return {
+			valid: !isNaN(value.getTime()),
+			name: errorMessage ?? 'required'
+		};
+	}
 	if (
 		!value
 		|| (typeof value === 'object' && Object.keys(value).length <= 0)
@@ -237,6 +242,7 @@ const compare = (
 
 export const min = (
 	minimum: number,
+	errorMessage?: string,
 	including: boolean = true
 ): Validator => async (value): Promise<ValidatorResult<undefined>> => {
 	if (
@@ -256,7 +262,7 @@ export const min = (
 	) {
 		return {
 			valid: false,
-			name: 'min'
+			name: errorMessage ?? 'min'
 		}
 	}
 

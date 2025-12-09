@@ -7,7 +7,7 @@
 		display: grid;
 		grid-template-columns: repeat(var(--mobileColumnsQty), 1fr);
 		width: var(--width, 100%);
-		grid-gap: 16px;
+		grid-gap: 24px;
 
 		@include tablet {
 			grid-template-columns: repeat(var(--tabletColumnsQty, 4), 1fr);

@@ -3,6 +3,7 @@
 	import MorseCode from './MorseCode.svelte';
 	import type { SoundSignalType, SoundsType } from './types';
 	import { onDestroy } from 'svelte';
+	import { Play, Pause } from '@lucide/svelte';
 
 	export let signal: SoundSignalType;
 	export let sounds: SoundsType;
@@ -55,27 +56,20 @@
 </script>
 
 <div class="space-between space-xl">
-	<div class="vertical-flex space">
-		<div class="line-blocks space big">
+	<div class="flex flex-column space-l">
+		<div class="line-blocks space-l">
 			<span>Pattern:</span>
 			<MorseCode morse={signal.morse} />
 		</div>
 		<span>{signal.description}</span>
 	</div>
 	{#if signal.pattern === activeSound && activeSound !== undefined}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<span class="material-icons notranslate pa" in:scale on:click={() => stopPlay()}>
-			pause_circle
-		</span>
+		<button class="pa-m" on:click={() => stopPlay()} in:scale>
+			<Pause size={24} />
+		</button>
 	{:else}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-static-element-interactions -->
-		<span
-			class="material-icons notranslate link pa"
-			in:scale
-			on:click={() => playSound(signal.pattern)}>
-			play_circle
-		</span>
+		<button class="pa-m" on:click={() => playSound(signal.pattern)} in:scale>
+			<Play size={24} />
+		</button>
 	{/if}
 </div>

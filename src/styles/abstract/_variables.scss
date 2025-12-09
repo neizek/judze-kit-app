@@ -51,11 +51,11 @@ $inputBackgroundColor: #ffffff;
 $inputBackgroundColorHover: color.adjust($c-white, $lightness: -5%);
 $inputBackgroundColorDark: color.adjust($c-wetAsphalt, $lightness: -6%);
 $inputBackgroundColorDarkHover: color.adjust($c-wetAsphalt, $lightness: -3%);
-$inputBorderRadius: 4px;
-$inputBorderColor: #00000030;
-$inputBorderColorHover: #00000045;
-$inputBorderColorDark: #ffffff20;
-$inputBorderColorDarkHover: #ffffff35;
+$inputBorderRadius: 8px;
+$inputBorderColor: $separationColor;
+$inputBorderColorHover: color.adjust($separationColor, $lightness: -10%);
+$inputBorderColorDark: $separationColorDark;
+$inputBorderColorDarkHover: color.adjust($separationColorDark, $lightness: 15%);
 
 // Table
 $tableBorderRadius: 8px;

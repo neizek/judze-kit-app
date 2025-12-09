@@ -143,7 +143,7 @@
 
 	$: currentLabel = getSelectedLabel(value, items);
 	$: {
-		if (open && isMobileScreen) {
+		if (open && isMobileScreen()) {
 			createPopup({
 				header: 'Choose something',
 				content: {
@@ -153,7 +153,6 @@
 						onSelect,
 					},
 				},
-				bottomSticked: true,
 			});
 		}
 	}
@@ -200,7 +199,7 @@
 			<div class="errorIcon">!</div>
 		{/if}
 	</label>
-	{#if open && browser && !isMobileScreen}
+	{#if open && browser && !isMobileScreen()}
 		<ItemsList {shownItems} {onSelect} />
 	{/if}
 </div>

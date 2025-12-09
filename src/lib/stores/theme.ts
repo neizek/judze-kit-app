@@ -2,6 +2,7 @@ import { get, writable, type Writable } from "svelte/store";
 import storage from "../utils/storage";
 import { browser } from "$app/environment";
 import { SafeArea } from "@capacitor-community/safe-area";
+import { Moon, Sun, SunMoon } from "@lucide/svelte";
 
 export const THEME_STORAGE_KEY = 'theme';
 export const DARK_THEME_NAME = 'dark';
@@ -26,16 +27,6 @@ export function isDarkPreferred(): boolean {
 	return false;
 }
 
-export function isDarkSelected(): boolean {
-	const saved = storage.get<Theme>(THEME_STORAGE_KEY);
-
-	if (saved !== null && saved !== Theme.Browser) {
-		return saved === Theme.Dark;
-	}
-
-	return isDarkPreferred();
-}
-
 export function getPreferredTheme(): Theme {
 	return isDarkPreferred() ? Theme.Dark : Theme.Light;
 }
@@ -50,7 +41,8 @@ export function getThemeName(t: Theme): string {
 	return selectedTheme === Theme.Dark ? DARK_THEME_NAME : LIGHT_THEME_NAME;
 }
 
-export const theme: Writable<Theme> = writable(getInitialTheme());
+// Initialize the theme store with a default value
+export const theme: Writable<Theme> = writable(Theme.Browser);
 
 function watchPreferredTheme(): void {
 	if (browser && window.matchMedia) {
@@ -69,11 +61,11 @@ function watchPreferredTheme(): void {
 	}
 }
 
-function getInitialTheme() {
-	const initTheme = browser ? storage.get(THEME_STORAGE_KEY) as string | null : null;
+async function getInitialTheme() {
+	const savedTheme = browser ? await storage.get(THEME_STORAGE_KEY) as string | null : null;
 
-	if (initTheme !== null) {
-		return initTheme as Theme;
+	if (savedTheme !== null) {
+		return savedTheme as Theme;
 	}
 
 	return Theme.Browser;
@@ -90,7 +82,11 @@ const isDarkTheme = (newTheme: Theme) => {
 	}
 }
 
-export function initTheme(): void {
+export async function initTheme(): Promise<void> {
+	// Fetch the initial theme asynchronously and update the store
+	const initialTheme = await getInitialTheme();
+	theme.set(initialTheme);
+
 	theme.subscribe(newTheme => {
 		if (browser) {
 			storage.set(THEME_STORAGE_KEY, newTheme);
@@ -118,16 +114,16 @@ export const themesItems = [
 	{
 		label: 'Auto',
 		value: Theme.Browser,
-		icon: 'night_sight_auto'
+		icon: SunMoon
 	},
 	{
 		label: 'Light',
 		value: Theme.Light,
-		icon: 'light_mode'
+		icon: Sun
 	},
 	{
 		label: 'Dark',
 		value: Theme.Dark,
-		icon: 'dark_mode'
+		icon: Moon
 	}
-]
+];

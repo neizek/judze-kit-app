@@ -1,4 +1,14 @@
 @use '../abstract/mixins' as *;
+@use '../abstract/variables' as *;
+@use "sass:color";
+
+:root {
+	--lg-background-color: #{color.scale($boxBackgroundColor, $alpha: -30%)};
+
+	&[data-theme='dark'] {
+		--lg-background-color: #{color.scale($boxBackgroundColorDark, $alpha: -30%)};
+	}
+}
 
 .opacity-transition {
 	@include desktop {
@@ -9,5 +19,30 @@
 		&:hover {
 			opacity: 1;
 		}
+	}
+}
+
+.shadow {
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.liquid-glass {
+	// border-top: 1px solid rgba(96, 96, 96, 0.4);
+	background-color: var(--lg-background-color) !important;
+	backdrop-filter: blur(15px);
+}
+
+.spin {
+	animation: spin 1.8s ease infinite;;
+}
+
+@keyframes spin {
+	0%{
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(360deg);
 	}
 }

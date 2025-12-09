@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { isMobileScreen } from '$lib/utils/deviceDetector';
 	import { title } from '$lib/stores/meta';
 	import Button from '$ui/Button.svelte';
 	import Image from '$ui/Image.svelte';
 	import Section from '$ui/Section.svelte';
 	import VisibilityRange from './VisibilityRange.svelte';
 	import { createPopup } from '$widgets/PopUp';
+	import { ChartPie } from '@lucide/svelte';
 
 	const lights = [
 		{
@@ -101,10 +101,10 @@
 	function openVisibilityRanges() {
 		createPopup({
 			header: 'Visibility range of lights',
+			icon: ChartPie,
 			content: {
 				component: VisibilityRange,
 			},
-			bottomSticked: isMobileScreen,
 		});
 	}
 
@@ -114,11 +114,11 @@
 <section class="vertical-flex max-width space-xl">
 	<div class="line-blocks space" style="align-self: end;">
 		<Button
-			icon="pie_chart"
+			icon={ChartPie}
 			type="transparent"
 			bordered
 			label="Visibility ranges"
-			on:click={openVisibilityRanges} />
+			onclick={openVisibilityRanges} />
 	</div>
 	{#each lights as lightscategory}
 		<Section title={lightscategory.title}>

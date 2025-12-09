@@ -1,65 +1,60 @@
 <script lang="ts">
 	import Button from '$ui/Button.svelte';
 	import Section from '$ui/Section.svelte';
-	import { onMount } from 'svelte';
 	import AddVoyageForm from './AddVoyageForm.svelte';
 	import EmptySection from '$ui/EmptySection.svelte';
 	import { title } from '$lib/stores/meta';
-	import { addItem, getAll } from '$lib/utils/idb';
-	import { dbStoresEnum } from '$lib/enums/db';
-	import type { Voyage } from '$lib/types/seaservice';
-	import { getDuration } from '$lib/utils/datetime';
 	import VoyageCard from './VoyageCard.svelte';
 	import { createPopup } from '$widgets/PopUp';
-
-	let voyages: Voyage[] = [];
-	let isLoading: boolean = false;
+	import { Cog, Plus, Settings, Waves } from '@lucide/svelte';
+	import SeaServiceSettings from './SeaServiceSettings.svelte';
+	import { seaServiceVisible } from '$lib/stores/seaService';
+	import { flip } from 'svelte/animate';
+	import StatsSection from './StatsSection.svelte';
+	import EqualGrid from '$ui/EqualGrid.svelte';
 
 	function openAddVoyageFormPopUp() {
 		createPopup({
-			header: 'Add new voyage',
+			header: 'New voyage',
+			icon: Plus,
 			content: {
 				component: AddVoyageForm,
-				props: {
-					addNewVoyage: addVoyage,
-				},
 			},
 		});
 	}
 
-	function addVoyage(voyage: Voyage) {
-		addItem(dbStoresEnum.voyage, voyage);
-		retrieveVoyages();
-	}
-
-	function retrieveVoyages() {
-		isLoading = true;
-
-		getAll<Voyage>(dbStoresEnum.voyage).then((thisVoyages) => {
-			isLoading = false;
-			voyages = thisVoyages.map((voyage) => ({
-				...voyage,
-				duration: getDuration(voyage.dateFrom, voyage.dateTo),
-			}));
+	function openSeaServiceSettingsPopUp() {
+		createPopup({
+			header: 'Sea service settings',
+			icon: Cog,
+			content: {
+				component: SeaServiceSettings,
+			},
 		});
 	}
-
-	onMount(() => {
-		retrieveVoyages();
-	});
 
 	$title = 'Sea service';
 </script>
 
-<Section title="List of sea service" transparent paddingless>
-	<div slot="controls">
-		<Button icon="add" label="Add voyage" on:click={openAddVoyageFormPopUp}></Button>
-	</div>
-	{#if !voyages || voyages.length === 0}
-		<EmptySection note="No any voyages added" icon="waves" />
-	{:else}
-		{#each voyages as voyage}
-			<VoyageCard {voyage} />
-		{/each}
+<EqualGrid --desktopColumnsQty={2} --tabletColumnsQty={1} --mobileColumnsQty={1}>
+	{#if $seaServiceVisible && $seaServiceVisible.length > 0}
+		{#key $seaServiceVisible}
+			<StatsSection />
+		{/key}
 	{/if}
-</Section>
+	<Section title="List of sea service" transparent paddingless>
+		<div class="flex space-s" slot="controls">
+			<Button type="transparent" icon={Plus} label="Add" onclick={openAddVoyageFormPopUp} />
+			<Button type="transparent" icon={Settings} onclick={openSeaServiceSettingsPopUp} />
+		</div>
+		{#if !$seaServiceVisible || $seaServiceVisible.length === 0}
+			<EmptySection note="No any voyages added" icon={Waves} />
+		{:else}
+			{#each $seaServiceVisible as voyage (voyage.id)}
+				<div animate:flip={{ duration: 200 }}>
+					<VoyageCard {voyage} />
+				</div>
+			{/each}
+		{/if}
+	</Section>
+</EqualGrid>

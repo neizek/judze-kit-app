@@ -1,20 +1,21 @@
 <script lang="ts">
-	import Button from "./Button.svelte";
-	interface SelectorItem {
-		value: string | number | boolean;
-		icon?: string;
-		label: string;
+	import type { SelectorItem, SelectorProps } from '$lib/types/ui';
+	import Button from './Button.svelte';
+
+	let { items, value = $bindable(), onSelect }: SelectorProps = $props();
+
+	function onButtonClick(item: SelectorItem) {
+		value = item.value;
+		if (onSelect) onSelect();
 	}
-	export let items: SelectorItem[];
-	export let value: string | number | boolean;
 </script>
 
 <div class="line-blocks space">
 	{#each items as item}
 		<Button
-			type={item.value === value ? `primary` : `transparent`}
+			type={item.value === value ? 'primary' : 'transparent'}
 			label={item.label}
-			on:click={() => (value = item.value)}
-		/>
+			icon={item.icon}
+			onclick={() => onButtonClick(item)} />
 	{/each}
 </div>

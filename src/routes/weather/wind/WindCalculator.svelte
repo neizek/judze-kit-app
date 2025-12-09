@@ -136,6 +136,7 @@
 					min={0}
 					max={360}
 					step={1}
+					suffix="deg"
 					placeholder="240" />
 			</FormItem>
 			<FormItem label="Speed">
@@ -146,6 +147,7 @@
 					min={0}
 					max={250}
 					step={0.1}
+					suffix="kn"
 					placeholder="21.5" />
 			</FormItem>
 		</EqualGrid>
@@ -161,6 +163,7 @@
 					min={0}
 					max={360}
 					step={1}
+					suffix="deg"
 					placeholder="264" />
 			</FormItem>
 			<FormItem label="Speed">
@@ -171,6 +174,7 @@
 					min={0}
 					max={250}
 					step={0.1}
+					suffix="kn"
 					placeholder="16.2" />
 			</FormItem>
 		</EqualGrid>

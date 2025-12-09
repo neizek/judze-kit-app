@@ -4,10 +4,11 @@
 	// export let messages: { [error: string]: string } = {};
 	export let required = false;
 	export let text: undefined | string = undefined;
+	export let inline: boolean = false;
 </script>
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
-<div class="formItem" class:inline={text}>
+<div class="formItem" class:inline={text || inline}>
 	{#if label}
 		<span class="label">
 			<span>{label}</span>
@@ -69,17 +70,11 @@
 	.errors {
 		list-style-position: inside;
 		margin: 0;
+		padding-left: 1rem;
 
 		li {
 			list-style-type: none;
 			color: var(--error-font-color);
-			font-size: 13.5px;
-			margin: 5px 0;
-
-			&::before {
-				content: '×';
-				padding-right: 8px;
-			}
 		}
 	}
 </style>

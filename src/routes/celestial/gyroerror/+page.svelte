@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy, onMount, tick, type ComponentType, type SvelteComponent } from 'svelte';
+	import { onDestroy, onMount, tick, type SvelteComponent } from 'svelte';
 	import Button from '$ui/Button.svelte';
 	import FormItem from '$ui/FormItem.svelte';
 	import Input from '$ui/Input.svelte';
@@ -11,15 +11,14 @@
 	import VariationInput from '$ui/VariationInput.svelte';
 	import Section from '$ui/Section.svelte';
 	import EqualGrid from '$ui/EqualGrid.svelte';
-	import { browser } from '$app/environment';
 	import DateTimeInput from '$ui/DateTimeInput.svelte';
 	import { formatToAngle, formatToCompassError, transformToCoordinates } from '$lib/utils/string';
-	import type { GeolocationPlugin } from '@capacitor/geolocation';
 	import { gyroErrorData } from '$lib/stores/gyroErrorForm';
 	import { dateToExcelSerial } from '$lib/utils/datetime';
 	import { mod, toDegrees, toRadians } from '$lib/utils/math';
+	import { Sun, Moon, Star, Orbit, Locate, CircleDot } from '@lucide/svelte';
+	import { getCurrentPosition } from '$lib/utils/geolocation';
 
-	console.log($gyroErrorData);
 	let {
 		object,
 		givenDateTime,
@@ -41,22 +40,22 @@
 	let solarSystemObjects = [
 		{
 			value: 'sun',
-			icon: 'sunny',
+			icon: Sun,
 			label: 'Sun',
 		},
 		{
 			value: 'moon',
-			icon: 'dark_mode',
+			icon: Moon,
 			label: 'Moon',
 		},
 		{
 			value: 'stars',
-			icon: 'star',
+			icon: Star,
 			label: 'Star',
 		},
 		{
 			value: 'planets',
-			icon: 'adjust',
+			icon: CircleDot,
 			label: 'Planet',
 		},
 	];
@@ -634,19 +633,12 @@
 		}
 	}
 
-	let Geolocation: GeolocationPlugin | undefined = undefined;
-
-	async function getCurrentPosition() {
-		return Geolocation?.getCurrentPosition({
-			enableHighAccuracy: true,
-		});
-	}
-
 	let isLoadingPosition: boolean = false;
 	let positionObtained = false;
 
 	function updatePosition() {
 		isLoadingPosition = true;
+
 		getCurrentPosition()
 			.then((position) => {
 				if (position) {
@@ -669,20 +661,7 @@
 		return true;
 	}
 
-	onMount(async () => {
-		if (browser) {
-			const geoModule = await import('@capacitor/geolocation');
-			Geolocation = geoModule.Geolocation;
-		}
-
-		// Geolocation?.checkPermissions().then((result) => {
-		// 	if (result.location === 'granted') {
-		// 		updatePosition();
-		// 	}
-		// });
-	});
-
-	onDestroy(() => {
+	$: {
 		Object.assign($gyroErrorData, {
 			object,
 			givenDateTime,
@@ -699,12 +678,11 @@
 			declination,
 			givenStarOrPlanet,
 		});
-	});
+	}
 
 	title.set('Gyro Error');
 </script>
 
-<!-- <section class="Celestial equal-flex mobile space-xl max-width"> -->
 <EqualGrid --desktopColumnsQty={2} --mobileColumnsQty={1} --tabletColumnsQty={1}>
 	<div class="vertical-flex max-width space-xl">
 		<Section title="General data">
@@ -731,6 +709,7 @@
 				label="UTC Date and time"
 				bind:value={givenDateTime}
 				on:change={performCalculations}
+				showCurrentDateTimeButton
 				isUTC />
 			<FormItem label="Latitude">
 				{#key positionObtained}
@@ -749,11 +728,12 @@
 				{/key}
 			</FormItem>
 			<Button
-				icon="location_on"
+				type="transparent"
+				icon={Locate}
 				label="Set current position"
-				on:click={updatePosition}
+				onclick={updatePosition}
 				isLoading={isLoadingPosition}
-				maxwidth />
+				full />
 		</Section>
 		<Section title="Calculated data">
 			<FormItem label="GHA" text={transformToCoordinates(GHA!)} />
@@ -774,6 +754,7 @@
 					min={0}
 					max={360}
 					step={0.1}
+					suffix="deg"
 					placeholder="181.0°" />
 			</FormItem>
 			<FormItem label="Standard / magnetic course">
@@ -783,6 +764,7 @@
 					min={0}
 					max={360}
 					step={0.1}
+					suffix="deg"
 					placeholder="182.0°" />
 			</FormItem>
 		</Section>
@@ -802,6 +784,7 @@
 					min={0}
 					max={360}
 					step={0.1}
+					suffix="deg"
 					placeholder="242.3°" />
 			</FormItem>
 		</Section>
@@ -825,4 +808,3 @@
 		</Section>
 	</div>
 </EqualGrid>
-<!-- </section> -->

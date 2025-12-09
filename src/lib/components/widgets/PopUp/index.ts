@@ -27,6 +27,22 @@ export const createPopup = (data: PopUp) => {
 	});
 };
 
+export const createConfirmationPopup = (data: PopUp): Promise<boolean> => {
+  return new Promise<boolean>((resolve) => {
+    createPopup({
+      ...data,
+      onConfirm: () => {
+		if (data.onConfirm) data.onConfirm();
+        resolve(true);
+      },
+      onCancel: () => {
+		if (data.onCancel) data.onCancel();
+        resolve(false);
+      }
+    });
+  });
+}
+
 export const closePopUp = (id: number) => {
 	popUps.update((current) => current.filter((popup) => popup.id !== id));
 };

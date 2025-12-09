@@ -2,14 +2,15 @@
 	import { page } from '$app/stores';
 	import { title } from '$lib/stores/meta';
 	import Settings from './Settings.svelte';
-	import isMobile from '$lib/utils/deviceDetector';
 	import LogoSVG from '$lib/judze-logo-letters.svg?raw';
 	import { goto } from '$app/navigation';
 	import { createPopup } from './PopUp';
+	import { SettingsIcon, ChevronLeft, User } from '@lucide/svelte';
 
 	function openSettings() {
 		createPopup({
-			header: 'User settings',
+			header: 'Settings',
+			icon: SettingsIcon,
 			content: {
 				component: Settings,
 			},
@@ -21,58 +22,61 @@
 	}
 </script>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<header>
-	<div class="space-between space wrapper w1000">
-		{#if $page.url.pathname !== '/' && $page.url.pathname !== ''}
+<header class="wrapper w1000">
+	<div class="space-between shadow liquid-glass ai-center space">
+		{#if $page.url.pathname !== '/'}
 			<div class="equal-flex">
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<!-- svelte-ignore a11y-no-static-element-interactions -->
-				<span class="material-icons notranslate" on:click={() => window.history.back()}>
-					chevron_left
-				</span>
+				<button class="pa-s" on:click={() => window.history.back()}>
+					<ChevronLeft />
+				</button>
 			</div>
 		{/if}
-		{#if $page.url.pathname === '/' || $page.url.pathname === ''}
-			<div class="Logo" style="height: 100%; padding: 14px 0;">
+		{#if $page.url.pathname === '/'}
+			<div class="Logo" style="height: 100%; padding: 14px 4px;">
 				{@html LogoSVG}
 			</div>
 		{:else}
 			<h1 class="max-width" style="font-weight: 500;">{$title}</h1>
 		{/if}
-		<div class="flex space">
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<span class="material-icons filled notranslate" on:click={openSettings}>settings</span>
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<span class="material-icons filled notranslate" on:click={openProfile}>person</span>
+		<div class="flex space ai-center">
+			<button class="pa-s" on:click={openSettings}>
+				<SettingsIcon />
+			</button>
+			<button class="pa-s" on:click={openProfile}>
+				<User />
+			</button>
 		</div>
 	</div>
 </header>
 
 <style lang="scss">
 	:root {
+		--header-height: 50px;
 		--logo-filter: none;
 
 		&[data-theme='dark'] {
 			--logo-filter: invert(100%);
 		}
 	}
-	header {
-		height: calc(50px + var(--safe-area-inset-top, env(safe-area-inset-top)));
-		top: 0;
-		left: 0;
-		right: 0;
-		padding-top: var(--safe-area-inset-top, env(safe-area-inset-top));
-		background-color: var(--box-background-color);
-		position: fixed;
-		z-index: 99;
 
-		-webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-		-moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-		box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+	header {
+		height: var(--header-height);
+		top: calc(10px + var(--safe-area-inset-top, env(safe-area-inset-top)));
+		align-self: center;
+		border: none;
+		padding-top: var(--safe-area-inset-top, env(safe-area-inset-top));
+		position: fixed;
+		z-index: 97;
+
+		> div {
+			padding: 0 8px;
+			height: var(--header-height);
+			border-radius: 8px;
+			background-color: var(--box-background-color);
+		}
 
 		.Logo {
-			height: 100%;
+			height: inherit;
 			padding: 14px 0;
 			filter: var(--logo-filter);
 		}

@@ -89,3 +89,12 @@ export interface GyroErrorFormData {
 	MC?: number,
 	givenStarOrPlanet?: string,
 }
+
+export interface ETACalculationsFormData {
+	departureDateTime: Date;
+	departureTZ: number;
+	arrivalDateTime: Date,
+	arrivalTZ: number;
+	averageSpeed: number;
+	totalDistance: number;
+}

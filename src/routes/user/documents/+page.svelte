@@ -14,6 +14,7 @@
 	import DocumentDetails from './DocumentDetails.svelte';
 	import EmptySection from '$ui/EmptySection.svelte';
 	import { createPopup } from '$widgets/PopUp';
+	import { FolderClosed, Plus } from '@lucide/svelte';
 
 	title.set('Documents');
 
@@ -83,10 +84,10 @@
 		{#each categories as category}
 			<Section title={category.label}>
 				<div slot="controls">
-					<Button label="New document" icon="add" on:click={handleNewDocument} />
+					<Button label="New document" icon={Plus} onclick={handleNewDocument} />
 				</div>
 				{#if !category.documents || category.documents?.length === 0}
-					<EmptySection note="No any documents added" icon="folder_off" />
+					<EmptySection note="No any documents added" icon={FolderClosed} />
 				{:else}
 					<div class="vertical-flex space-l">
 						<!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -94,7 +95,7 @@
 						{#each category.documents as document}
 							<div class="space-between" on:click={() => showDetails(document)}>
 								<span>{document.name}</span>
-								<span class="text-size-xs">
+								<span class="text-size-xxs">
 									{formatDateSimple(document.expiryDate)}
 								</span>
 							</div>

@@ -1,34 +1,20 @@
-import { writable, type Writable } from "svelte/store";
-import storage from "../utils/storage";
-import { browser } from "$app/environment";
+import { DAYS_COUNTER_ENABLED_STORAGE_KEY } from "$lib/constants/storageKeys";
+import storage from "$lib/utils/storage";
+import { derived, writable } from "svelte/store";
 
-export interface DaysCounter {
-	new: boolean,
-	enabled: boolean,
-	startFrom: Date,
-	endTo: Date
-}
+export const daysCounterEnabled = writable(true);
 
-function initStore() {
-	const store = browser ? storage.get<DaysCounter>('counter') : undefined;
-	if (store) {
-		return {
-			new: false,
-			enabled: store.enabled,
-			startFrom: new Date(store.startFrom),
-			endTo: new Date(store.endTo)
+function init() {
+	storage.get<boolean>(DAYS_COUNTER_ENABLED_STORAGE_KEY).then(enabled => {
+		if (enabled) {
+			daysCounterEnabled.set(enabled)
 		}
-	}
-	return {
-		new: true,
-		enabled: true,
-		startFrom: new Date(Date.now() - 1728000000),
-		endTo: new Date(Date.now() + 7889400000),	
-	}
+	})
 }
 
-export const daysCounterStore: Writable<DaysCounter> = writable(initStore());
+init();
 
-daysCounterStore.subscribe((store) => {
-	if (browser) storage.set('counter', store);
-})
+derived(
+	daysCounterEnabled,
+	($daysCounterEnabled) => storage.set(DAYS_COUNTER_ENABLED_STORAGE_KEY, $daysCounterEnabled)
+);

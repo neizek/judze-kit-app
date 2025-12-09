@@ -40,7 +40,7 @@
 		<Switch bind:value={enableNotification} label="Enable notification reminder"></Switch>
 	</FormItem> -->
 	<div class="space-between space">
-		<Button type="primary" label="Add" on:click={onAddToDoItem} />
+		<Button type="primary" label="Add" onclick={onAddToDoItem} />
 		<Button type="transparent" label="Cancel" bordered />
 	</div>
 </div>

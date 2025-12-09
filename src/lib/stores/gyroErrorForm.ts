@@ -1,4 +1,4 @@
-import { browser } from "$app/environment";
+import { GYRO_ERROR_FORM_STORAGE_KEY } from "$lib/constants/storageKeys";
 import type { GyroErrorFormData } from "$lib/types/forms";
 import storage from "$lib/utils/storage";
 import { writable } from "svelte/store";
@@ -17,12 +17,21 @@ const defaultData: GyroErrorFormData = {
 	variation: undefined,
 	MC: undefined,
 	givenStarOrPlanet: undefined,
-}
+};
 
-function initData(): GyroErrorFormData {
-	const restoredData = storage.get('gyroErrorForm') as GyroErrorFormData;
-
+async function initData(): Promise<GyroErrorFormData> {
+	const restoredData = await storage.get<GyroErrorFormData>(GYRO_ERROR_FORM_STORAGE_KEY);
 	return restoredData ?? defaultData;
 }
 
-export const gyroErrorData = writable<GyroErrorFormData>(initData())
+const gyroErrorData = writable<GyroErrorFormData>(defaultData);
+
+gyroErrorData.subscribe(data => {
+	storage.set(GYRO_ERROR_FORM_STORAGE_KEY, data)
+})
+
+initData().then((data) => {
+	gyroErrorData.set(data);
+});
+
+export { gyroErrorData };

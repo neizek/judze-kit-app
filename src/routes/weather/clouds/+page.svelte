@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { isMobileScreen } from '$lib/utils/deviceDetector';
 	import { title } from '$lib/stores/meta';
 	import EqualGrid from '$ui/EqualGrid.svelte';
 	import Image from '$ui/Image.svelte';
 	import Section from '$ui/Section.svelte';
-	import DetailsCard from '$ui/DetailsCard.svelte';
+	import DetailsCard from '$ui/DetailsCard/DetailsCard.svelte';
 	import { createPopup } from '$widgets/PopUp';
+	import { Cloud } from '@lucide/svelte';
 
 	$title = 'Clouds';
 
@@ -95,6 +95,7 @@
 	function openDescription(cloud: any) {
 		createPopup({
 			header: cloud.title,
+			icon: Cloud,
 			content: {
 				component: DetailsCard,
 				props: {
@@ -111,7 +112,6 @@
 					isBigImage: true,
 				},
 			},
-			bottomSticked: isMobileScreen,
 		});
 	}
 </script>

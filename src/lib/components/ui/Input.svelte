@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { isFirefox } from "$lib/utils/deviceDetector";
-	import type { FullAutoFill } from "svelte/elements";
+	import { isFirefox } from '$lib/utils/deviceDetector';
+	import type { FullAutoFill } from 'svelte/elements';
+	import type { Icon as IconType } from '@lucide/svelte';
+	import { XIcon } from '@lucide/svelte';
 
-	export let type: "email" | "text" | "password" | "number" | "tel" | "time" =
-		"text";
+	export let type: 'email' | 'text' | 'password' | 'number' | 'tel' | 'time' = 'text';
 	export let step = 1;
 	export let placeholder: string | undefined = undefined;
 	export let name: string | undefined = undefined;
 	export let value: any = undefined;
 	export let hasError = false;
-	export let icon: string | undefined = undefined;
+	export let icon: typeof IconType | undefined = undefined;
 	export let autocomplete: FullAutoFill | null | undefined = undefined;
 	export let max: number | undefined = undefined;
 	export let min: number | undefined = undefined;
@@ -17,10 +18,11 @@
 	export let borderless: boolean = false;
 	export let clearable: boolean = false;
 	export let readonly: boolean = false;
+	export let suffix: string | undefined = undefined;
 
 	$: {
 		if (value) {
-			if (type === "number" && min !== undefined && max !== undefined) {
+			if (type === 'number' && min !== undefined && max !== undefined) {
 				value = value < min ? min : value;
 				value = value > max ? max : value;
 			}
@@ -39,22 +41,28 @@
 {#if isFirefox() && autocomplete !== undefined}
 	<input
 		{type}
-		inputmode={type === "number" ? "decimal" : "text"}
+		inputmode={type === 'number' ? 'decimal' : 'text'}
 		style="display:none;"
 		tabindex="-1"
 		{autocomplete}
 		disabled
-		readonly
-	/>
+		readonly />
 {/if}
 <label class="input extended" class:error={hasError} class:disabled class:borderless>
 	{#if icon}
-		<i class="material-icons">{icon}</i>
+		<div class="icon">
+			<svelte:component
+				this={icon}
+				class="icon"
+				size={18}
+				color={`var(--input-border-color)`} />
+		</div>
 	{/if}
 	<input
 		{placeholder}
-		inputmode={type === "number" ? "decimal" : "text"}
+		inputmode={type === 'number' ? 'decimal' : 'text'}
 		maxlength={max}
+		bind:value
 		{min}
 		{max}
 		{name}
@@ -68,21 +76,27 @@
 		on:keydown
 		on:keyup
 		on:input
-		bind:value
 		use:ref
 		{readonly}
-	/>
+		style="width: inherit; pointer-events: {readonly ? 'none' : 'auto'};" />
 	{#if hasError}
 		<div class="errorIcon">!</div>
 	{/if}
+	{#if suffix}
+		<span>{suffix}</span>
+	{/if}
 	{#if clearable && value.length > 0}
-		<!-- svelte-ignore a11y_click_events_have_key_events -->
-		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<i class="material-icons" on:click="{clearValue}">close</i>
+		<button class="pa-s icon" on:click={clearValue} tabindex="-1">
+			<XIcon size={16} color={`var(--input-border-color)`} />
+		</button>
 	{/if}
 </label>
 
 <style lang="scss">
+	input {
+		width: inherit;
+	}
+
 	input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
 		-webkit-appearance: none;
@@ -90,13 +104,17 @@
 	}
 
 	/* Firefox */
-	input[type="number"] {
+	input[type='number'] {
 		-moz-appearance: textfield;
 		appearance: textfield;
 	}
 
-	i {
-		font-size: 24px !important;
-		margin: -8px;
+	.icon {
+		all: unset;
+		margin: -4px -8px;
+		align-self: stretch;
+		display: flex;
+		align-items: center;
+		padding: 0 4px;
 	}
 </style>

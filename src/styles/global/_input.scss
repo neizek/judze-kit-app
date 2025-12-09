@@ -4,6 +4,8 @@
 :root {
 	--button-background-color: #{$c-white};
 	--button-background-color-hover: #{color.adjust($c-white, $lightness: -2%)};
+	--button-background-color-tonal: #{color.adjust($c-white, $lightness: -5%)};
+	--button-background-color-tonal-hover: #{color.adjust($c-white, $lightness: -7%)};
 	--button-background-color-primary: #{$primaryColor};
 	--button-background-color-primary-hover: #{color.adjust($primaryColor, $lightness: -7%)};
 	--button-background-color-secondary: #{$secondaryColor};
@@ -24,6 +26,8 @@
 	&[data-theme='dark'] {
 		--button-background-color: #{color.adjust($bodyBackgroundColorDark, $lightness: 3%)};
 		--button-background-color-hover: #{color.adjust($bodyBackgroundColorDark, $lightness: 7%)};
+		--button-background-color-tonal: #{color.adjust($bodyBackgroundColorDark, $lightness: 8%)};
+		--button-background-color-tonal-hover: #{color.adjust($bodyBackgroundColorDark, $lightness: 10%)};
 		--button-background-color-primary: #{$primaryColorDark};
 		--button-background-color-primary-hover: #{color.adjust($primaryColorDark, $lightness: -7%)};
 		--button-background-color-secondary: #{$secondaryColorDark};
@@ -62,6 +66,19 @@
 	background-color: var(--button-background-color);
 	transition: background-color 0.2s, box-shadow 0.2s;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+
+	&.size {
+		&-s {
+			font-size: 12px;
+			padding: 8px 12px;
+		}
+
+		&-xs {
+			height: 24px;
+		}
+	}
 
 	&,
 	*:not(i) {
@@ -81,6 +98,7 @@
 	}
 
 	&:disabled {
+		opacity: 0.5;
 		box-shadow: none;
 	}
 
@@ -91,7 +109,6 @@
 
 		&,
 		* {
-			text-shadow: 1px 1px 1px #00000030;
 			color: color.adjust($c-white, $lightness: 2%);
 		}
 	}
@@ -133,10 +150,12 @@
 		}
 	}
 
-	&.tab {
-		background-color: transparent;
-		border-bottom: 2px solid var(--button-background-color-primary);
-		border-radius: 0;
+	&.tonal {
+		background-color: var(--button-background-color-tonal);
+
+		&:hover {
+			background-color: var(--button-background-color-tonal-hover);
+		}
 	}
 }
 
@@ -152,7 +171,7 @@ input::placeholder {
 	padding: 10px 15px;
 	font-size: 13.5px;
 	display: block;
-	width: 100%;
+	width: inherit;
 	transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
 
 	&:hover {
@@ -186,6 +205,7 @@ input::placeholder {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+		min-width: 60px;
 		gap: 12px;
 
 		&.disabled {

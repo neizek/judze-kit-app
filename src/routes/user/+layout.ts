@@ -1,10 +1,18 @@
-import { isAuthorised, openSignInForm } from "$lib/utils/auth";
+import { goto } from "$app/navigation";
+import { initSession, session } from "$lib/stores/auth";
+import { previousUrl } from "$lib/stores/navigation";
+import { openSignInFormPopUp } from "$lib/utils/auth";
+import { initLookups } from "$lib/utils/lookups";
+import { get } from "svelte/store";
 
-export async function load({ url, parent }) {
+export async function load({ url }) {
+	await initSession();
 
-	if (isAuthorised) {
+	if (get(session) !== undefined) {
 		return {}
 	}
-
-	openSignInForm()
+	
+	const navigateToLink = get(previousUrl) ?? '/';
+	goto(navigateToLink, { replaceState: true });
+	openSignInFormPopUp();
 }

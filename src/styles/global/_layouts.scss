@@ -1,14 +1,22 @@
 @use "../abstract/abstract.scss" as *;
 
 :root {
+	--size-xs: 2px;
+	--size-s: 4px;
+	--size-m: 8px;
+	--size-l: 16px;
+	--size-xl: 24px;
+
 	--body-background-color: #{$bodyBackgroundColor};
 	--box-background-color: #{$boxBackgroundColor};
 	--box-border-color: #{$separationColor};
+	--focus-background-color: rgba(255, 255, 255, 0.5);
 
 	&[data-theme="dark"] {
 		--body-background-color: #{$bodyBackgroundColorDark};
 		--box-background-color: #{$boxBackgroundColorDark};
 		--box-border-color: #{$separationColorDark};
+		--focus-background-color: rgba(0, 0, 0, 0.5);
 	}
 }
 
@@ -134,12 +142,12 @@ section {
 
 .focus-background {
 	position: fixed;
-	z-index: 100;
+	z-index: 98;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: rgba(0, 0, 0, 0.5);
+	background: var(--focus-background-color);
 	backdrop-filter: blur(2px);
 	will-change: auto;
 }
@@ -159,6 +167,13 @@ section {
 	align-items: center;
 }
 
+.space-around {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+
 .wrap {
 	flex-wrap: wrap;
 
@@ -167,15 +182,23 @@ section {
 	}
 }
 
+.ai {
+	&-center {
+		align-items: center;
+	}
+	&-start {
+		align-items: flex-start;
+	}
+	&-baseline {
+		align-items: baseline;
+	}
+}
+
 .equal-flex {
 	display: flex;
 
 	> * {
 		flex: 0 1 100%;
-	}
-
-	& .inlined {
-		align-items: center;
 	}
 
 	& .doubled {
@@ -240,15 +263,32 @@ section {
 	left: 50%;
 }
 
-.p {
-	&a {
-		padding: 4px;
-		&-l {
-			padding: 8px;
-		}
-		&-xl {
-			padding: 16px;
-		}
+.flex {
+	display: flex;
+
+	&-column {
+		flex-direction: column;
+	}
+}
+
+@each $size in xs, s, m, l, xl {
+	.p {
+		&a-#{$size} { padding: var(--size-#{$size}); }
+		&y-#{$size} { padding: var(--size-#{$size}) 0; }
+		&x-#{$size} { padding: 0 var(--size-#{$size}); }
+	}
+
+	.m {
+		&b-#{$size} { margin-bottom: var(--size-#{$size}); }
+		&t-#{$size} { margin-top: var(--size-#{$size}); }
+	}
+
+	.space {
+		&-#{$size} { gap: var(--size-#{$size})}
+	}
+
+	.rounded {
+		&-#{$size} { border-radius: var(--size-#{$size});}
 	}
 }
 
@@ -263,18 +303,6 @@ section {
 		&.small {
 			gap: 5px;
 		}
-	}
-
-	&.big {
-		gap: 16px;
-	}
-
-	&-l {
-		gap: 16px;
-	}
-
-	&-xl {
-		gap: 24px;
 	}
 
 	&.compact:not(.vertical) {

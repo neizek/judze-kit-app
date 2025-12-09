@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { title } from '$lib/stores/meta';
-	import { isMobileScreen } from '$lib/utils/deviceDetector';
 	import EqualGrid from '$ui/EqualGrid.svelte';
 	import Section from '$ui/Section.svelte';
 	import FlagCard from './FlagCard.svelte';
@@ -11,6 +10,7 @@
 	import PageControls from '$ui/PageControls.svelte';
 	import EmptySection from '$ui/EmptySection.svelte';
 	import { createPopup } from '$widgets/PopUp';
+	import { Flag, FlagOff, Search } from '@lucide/svelte';
 
 	let searchValue: string = '';
 	let isNavigational: boolean = true;
@@ -39,13 +39,13 @@
 		if (flag.description !== '' && flag.description) {
 			createPopup({
 				header: `"${flag.name}" flag meaning`,
+				icon: Flag,
 				content: {
 					component: FlagCard,
 					props: {
 						flag,
 					},
 				},
-				bottomSticked: isMobileScreen,
 			});
 		}
 	}
@@ -58,7 +58,7 @@
 		<div>
 			<Input
 				bind:value={searchValue}
-				icon="search"
+				icon={Search}
 				placeholder="Search..."
 				borderless
 				clearable />
@@ -85,7 +85,7 @@
 					{/each}
 				</EqualGrid>
 			{:else}
-				<EmptySection note="No any flags were found" icon="folder_off" />
+				<EmptySection note="No any flags were found" icon={FlagOff} />
 			{/if}
 		</Section>
 	{/each}

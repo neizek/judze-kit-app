@@ -1,33 +1,52 @@
 <script lang="ts">
-	import Icon from './Icon.svelte';
-	import Loader from './Loader.svelte';
+	import type { ButtonProps } from '$lib/types/ui';
+	import { ChevronRight, ShipWheel } from '@lucide/svelte';
 
-	export let icon: string | undefined = undefined;
-	export let type: 'primary' | 'secondary' | 'dangerous' | 'transparent' | 'tab' | undefined =
-		undefined;
-	export let label: string | undefined = undefined;
-	export let submit = false;
-	export let bordered = false;
-	export let disabled = false;
-	export let isLoading = false;
-	export let maxwidth = false;
+	let {
+		icon,
+		type = 'primary',
+		label,
+		submit = false,
+		bordered = false,
+		disabled = false,
+		isLoading = false,
+		full = false,
+		withChevron = false,
+		size,
+		onclick,
+	}: ButtonProps = $props();
+
+	const Icon = icon;
+	const clases = $derived([
+		type,
+		bordered ? 'bordered' : '',
+		full ? 'max-width' : '',
+		withChevron && !isLoading ? 'menu' : '',
+		'space-m',
+		size ? `size-${size}` : '',
+	]);
+
+	function handleClick(e: MouseEvent) {
+		(e.currentTarget as HTMLButtonElement).blur();
+		if (onclick) onclick();
+	}
 </script>
 
-<button
-	on:click
-	class="{(type ?? '') +
-		(bordered ? ' bordered' : '') +
-		(maxwidth ? ' max-width' : '')} ripple space"
-	{disabled}
-	type={submit ? 'submit' : 'button'}>
-	{#if icon}
-		<Icon name={icon} --size="24px" --margin="-4px 0" />
-	{/if}
-	{#if label}
-		<span>{label}</span>
-	{/if}
+<button onclick={handleClick} class={clases} {disabled} type={submit ? 'submit' : 'button'}>
 	{#if isLoading}
-		<Loader --size="16px" --line-width="2px" />
+		<ShipWheel size={20} class="spin" />
+	{:else}
+		{#if icon}
+			<div class="icon">
+				<Icon size={20} />
+			</div>
+		{/if}
+		{#if label}
+			<span>{label}</span>
+		{/if}
+		{#if withChevron}
+			<ChevronRight size={20} />
+		{/if}
 	{/if}
 </button>
 
@@ -35,14 +54,22 @@
 	button {
 		white-space: nowrap;
 		justify-content: center;
+	}
 
-		@include mobile {
-			width: 100%;
+	.menu {
+		text-align: start;
+		align-content: center;
+		gap: var(--size-l);
+
+		> span {
+			flex: 1;
 		}
 	}
 
-	.loader {
-		width: 16px;
-		height: 16px;
+	.icon {
+		margin-top: -3px;
+		margin-bottom: -3px;
+		display: flex;
+		align-items: center;
 	}
 </style>

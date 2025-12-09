@@ -24,6 +24,7 @@ select:-webkit-autofill:focus {
 input,
 button {
 	width: max-content;
+	height: 36px;
 }
 
 * {
@@ -38,6 +39,7 @@ button {
 	outline: none;
 	outline-style: none;
 	position: relative;
+	-webkit-tap-highlight-color: transparent;
 }
 :root {
 	--primary-color: #{$primaryColor};

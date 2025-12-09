@@ -28,6 +28,12 @@
 	}
 }
 
+@mixin small-mobile {
+	@media (max-width: 370px) {
+		@content;
+	}
+}
+
 @mixin standalone {
 	@media all and (display-mode: standalone) {
 		@content;

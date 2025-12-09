@@ -2,11 +2,11 @@
 	import EqualGrid from '$ui/EqualGrid.svelte';
 	import Image from '$ui/Image.svelte';
 	import Section from '$ui/Section.svelte';
-	import { isMobileScreen } from '$lib/utils/deviceDetector';
-	import DetailsCard from '$ui/DetailsCard.svelte';
+	import DetailsCard from '$ui/DetailsCard/DetailsCard.svelte';
 	import { title } from '$lib/stores/meta';
 	import Selector from '$ui/Selector.svelte';
 	import { createPopup } from '$widgets/PopUp';
+	import { Cone } from '@lucide/svelte';
 
 	type BuoyType = {
 		title: string;
@@ -123,9 +123,12 @@
 	function openDescription(buoy: any) {
 		createPopup({
 			header: buoy.title,
+			icon: Cone,
 			content: {
 				component: DetailsCard,
 				props: {
+					isBigImage: true,
+					imageFit: 'contain',
 					image: {
 						src: `/buoys/${buoy.image}`,
 						alt: buoy.title,
@@ -143,7 +146,6 @@
 					],
 				},
 			},
-			bottomSticked: isMobileScreen,
 		});
 	}
 

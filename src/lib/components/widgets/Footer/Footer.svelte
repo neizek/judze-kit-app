@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Donations from './Donations.svelte';
-	import { isMobileScreen } from '$lib/utils/deviceDetector';
 	import AboutUs from './AboutUs.svelte';
 	import { createPopup } from '$widgets/PopUp';
 
@@ -10,7 +9,6 @@
 			content: {
 				component: component,
 			},
-			bottomSticked: isMobileScreen,
 		});
 	}
 </script>
@@ -18,11 +16,11 @@
 <footer class="vertical-flex space">
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div class="line-blocks space big">
-		<span class="link pa-l" on:click={() => openPopUp('Support Us', Donations)}>
+	<div class="line-blocks space-l">
+		<span class="link pa-m" on:click={() => openPopUp('Support Us', Donations)}>
 			Support Us
 		</span>
-		<span class="link pa-l" on:click={() => openPopUp('About Us', AboutUs)}>About Us</span>
+		<span class="link pa-m" on:click={() => openPopUp('About Us', AboutUs)}>About Us</span>
 	</div>
 	<span>Judze {new Date().getFullYear()}</span>
 </footer>
