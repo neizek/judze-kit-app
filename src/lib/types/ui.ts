@@ -17,6 +17,7 @@ export interface ButtonProps {
 	full?: boolean;
 	size?: ButtonPropsSize;
 	onclick?: () => void | Promise<void>;
+	onsubmit?: () => void;
 }
 
 // #endregion

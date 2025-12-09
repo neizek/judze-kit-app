@@ -19,6 +19,8 @@ const defaultData: GyroErrorFormData = {
 	givenStarOrPlanet: undefined,
 };
 
+let isInitialized = false;
+
 async function initData(): Promise<GyroErrorFormData> {
 	const restoredData = await storage.get<GyroErrorFormData>(GYRO_ERROR_FORM_STORAGE_KEY);
 	return restoredData ?? defaultData;
@@ -27,11 +29,12 @@ async function initData(): Promise<GyroErrorFormData> {
 const gyroErrorData = writable<GyroErrorFormData>(defaultData);
 
 gyroErrorData.subscribe(data => {
-	storage.set(GYRO_ERROR_FORM_STORAGE_KEY, data)
+	if (isInitialized) storage.set(GYRO_ERROR_FORM_STORAGE_KEY, data)
 })
 
 initData().then((data) => {
 	gyroErrorData.set(data);
+	isInitialized = true;
 });
 
 export { gyroErrorData };

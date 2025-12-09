@@ -123,7 +123,6 @@
 	}
 </script>
 
-<!-- <EqualGrid --desktopColumnsQty="{1}" --mobileColumnsQty={1}> -->
 <div class="vertical-flex space-xl">
 	<div class="vertical-flex space-l">
 		<h3>Relative Wind</h3>
@@ -198,4 +197,3 @@
 		</div>
 	</div>
 </div>
-<!-- </EqualGrid> -->

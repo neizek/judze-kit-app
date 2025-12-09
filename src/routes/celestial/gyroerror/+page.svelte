@@ -661,24 +661,21 @@
 		return true;
 	}
 
-	$: {
-		Object.assign($gyroErrorData, {
-			object,
-			givenDateTime,
-			longitude,
-			latitude,
-			azimuth,
-			GB,
-			GC,
-			MC,
-			TC,
-			variation,
-			GHA,
-			LHA,
-			declination,
-			givenStarOrPlanet,
-		});
-	}
+	$: gyroErrorData.set({
+		object,
+		givenDateTime,
+		longitude,
+		latitude,
+		azimuth,
+		GB,
+		GC,
+		MC,
+		variation,
+		GHA,
+		LHA,
+		declination,
+		givenStarOrPlanet,
+	});
 
 	title.set('Gyro Error');
 </script>

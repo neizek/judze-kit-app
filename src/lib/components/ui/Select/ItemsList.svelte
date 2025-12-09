@@ -31,25 +31,9 @@
 
 <div class="items flex flex-column space-m pa-m hide-scroll">
 	{#if sortedItems.length === 0}
-		<!-- <div class="item space-between">
-			<span>No data</span>
-		</div> -->
 		<EmptySection note="No items found" icon={SearchX} />
 	{:else}
 		{#each sortedItems as item}
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<!-- <div
-				class="item space-between"
-				on:click={() => {
-					onSelect(item);
-					if (closePopup) closePopup();
-				}}>
-				<span>{item.label}</span>
-				{#if item.icon}
-					<i class="fa-solid fa-{item.icon}"></i>
-				{/if}
-			</div> -->
 			<Button
 				type="transparent"
 				label={item.label}
@@ -90,28 +74,6 @@
 			overflow-x: hidden;
 		}
 	}
-
-	// .item {
-	// 	padding: 10px 15px;
-	// 	background-color: transparent;
-	// 	transition: background-color 0.2s;
-	// 	font-size: 13.5px;
-
-	// 	&:first-of-type {
-	// 		border-top-left-radius: #{$inputBorderRadius};
-	// 		border-top-right-radius: #{$inputBorderRadius};
-	// 	}
-
-	// 	&:last-of-type {
-	// 		border-bottom-left-radius: #{$inputBorderRadius};
-	// 		border-bottom-right-radius: #{$inputBorderRadius};
-	// 	}
-
-	// 	&:hover {
-	// 		cursor: pointer;
-	// 		background-color: var(--input-background-color-hover);
-	// 	}
-	// }
 
 	.searchBox {
 		position: sticky;

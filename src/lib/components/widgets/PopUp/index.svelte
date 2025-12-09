@@ -78,7 +78,6 @@
 				{/if}
 			</article>
 		</div>
-		<!-- </div> -->
 	{/each}
 {/if}
 <slot></slot>

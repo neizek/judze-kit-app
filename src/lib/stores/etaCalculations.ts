@@ -12,6 +12,8 @@ const initialETAData: ETACalculationsFormData = {
 	totalDistance: 458
 };
 
+let isInitialized = false;
+
 async function initETAData() {
 	const savedETAData = await storage.get<ETACalculationsFormData>(ETA_FORM_STORAGE_KEY);
 	return savedETAData ?? initialETAData;
@@ -21,8 +23,9 @@ export const ETACalculations = writable<ETACalculationsFormData>(initialETAData)
 
 initETAData().then((data) => {
 	ETACalculations.set(data);
+	isInitialized = true;
 });
 
 ETACalculations.subscribe((data) => {
-	storage.set(ETA_FORM_STORAGE_KEY, data);
+	if (isInitialized) storage.set(ETA_FORM_STORAGE_KEY, data);
 });

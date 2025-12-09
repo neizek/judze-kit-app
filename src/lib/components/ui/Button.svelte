@@ -6,7 +6,6 @@
 		icon,
 		type = 'primary',
 		label,
-		submit = false,
 		bordered = false,
 		disabled = false,
 		isLoading = false,
@@ -14,6 +13,7 @@
 		withChevron = false,
 		size,
 		onclick,
+		onsubmit,
 	}: ButtonProps = $props();
 
 	const Icon = icon;
@@ -32,7 +32,12 @@
 	}
 </script>
 
-<button onclick={handleClick} class={clases} {disabled} type={submit ? 'submit' : 'button'}>
+<button
+	onclick={handleClick}
+	class={clases}
+	{disabled}
+	type={onsubmit ? 'submit' : 'button'}
+	{onsubmit}>
 	{#if isLoading}
 		<ShipWheel size={20} class="spin" />
 	{:else}

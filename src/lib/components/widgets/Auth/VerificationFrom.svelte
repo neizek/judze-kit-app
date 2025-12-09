@@ -34,9 +34,13 @@
 	}
 
 	function onSubmit() {
-		isLoading = true;
+		form.validate().then((valid) => {
+			if (!valid) {
+				return;
+			}
 
-		form.validate().then(() => {
+			isLoading = true;
+
 			verifyOTP({ email, token: $token.value, type: 'email' })
 				.then((user) => {
 					if (closePopup) closePopup();
@@ -120,7 +124,7 @@
 			icon={Check}
 			{isLoading}
 			onclick={onSubmit}
-			submit
+			onsubmit={onSubmit}
 			full />
 		<div class="line-blocks space">
 			<Button

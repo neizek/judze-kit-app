@@ -19,8 +19,11 @@
 	export let closePopup: () => void;
 
 	async function sendEmailToSignIn() {
-		isLoading = true;
+		await email.validate();
+
 		if ($email.valid) {
+			isLoading = true;
+
 			sendOTP($email.value)
 				.then(() => {
 					openVerificationFormPopUp($email.value);
@@ -28,6 +31,9 @@
 				})
 				.catch((error) => {
 					createErrorToast(error);
+				})
+				.finally(() => {
+					isLoading = false;
 				});
 		}
 	}
@@ -55,7 +61,7 @@
 			{isLoading}
 			onclick={sendEmailToSignIn}
 			full
-			submit />
+			onsubmit={sendEmailToSignIn} />
 	</Form>
 </div>
 

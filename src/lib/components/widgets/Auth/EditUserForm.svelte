@@ -124,6 +124,7 @@
 		label={isEditMode ? 'Save changes' : 'Sign Up'}
 		icon={Check}
 		{isLoading}
+		onsubmit={onSubmit}
 		onclick={onSubmit}
 		full />
 </Form>

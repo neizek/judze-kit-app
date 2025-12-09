@@ -59,7 +59,7 @@ export async function sendOTP(email: string) {
 
 export async function verifyOTP(payload: VerifyEmailOtpParams) {
 	if (payload.email === WHITELISTED_EMAIL) {
-		return signInWithPassword(payload.email, payload.token);
+		return signInWithPassword(payload.email, String(payload.token));
 	}
 
 	if (typeof payload.token === 'number') {
