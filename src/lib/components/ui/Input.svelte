@@ -79,7 +79,7 @@
 		on:input
 		use:ref
 		{readonly}
-		style="width: inherit; pointer-events: {readonly ? 'none' : 'auto'};" />
+		style="pointer-events: {readonly ? 'none' : 'auto'};" />
 	{#if hasError}
 		<div class="errorIcon">!</div>
 	{/if}
@@ -95,7 +95,7 @@
 
 <style lang="scss">
 	input {
-		width: inherit;
+		width: 100% !important;
 	}
 
 	input::-webkit-outer-spin-button,
