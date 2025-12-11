@@ -94,6 +94,8 @@
 						src: `/shapes/${shape.image}.svg`,
 						alt: shape.title,
 					},
+					isBigImage: true,
+					imageFit: 'contain',
 					details: [
 						{
 							tag: 'span',

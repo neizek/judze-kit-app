@@ -24,18 +24,16 @@
 
 <header class="wrapper w1000">
 	<div class="space-between shadow liquid-glass ai-center space">
-		{#if $page.url.pathname !== '/'}
+		{#if $page.route.id === '/' || $page.route.id === null || $title === 'Judze'}
+			<div class="Logo" style="height: 100%; padding: 14px 4px;">
+				{@html LogoSVG}
+			</div>
+		{:else}
 			<div class="equal-flex">
 				<button class="pa-s" on:click={() => window.history.back()}>
 					<ChevronLeft />
 				</button>
 			</div>
-		{/if}
-		{#if $page.url.pathname === '/'}
-			<div class="Logo" style="height: 100%; padding: 14px 4px;">
-				{@html LogoSVG}
-			</div>
-		{:else}
 			<h1 class="max-width" style="font-weight: 500;">{$title}</h1>
 		{/if}
 		<div class="flex space ai-center">

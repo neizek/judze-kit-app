@@ -26,15 +26,15 @@ async function initData(): Promise<GyroErrorFormData> {
 	return restoredData ?? defaultData;
 }
 
-const gyroErrorData = writable<GyroErrorFormData>(defaultData);
+const gef = writable<GyroErrorFormData>(defaultData);
 
-gyroErrorData.subscribe(data => {
+gef.subscribe(data => {
 	if (isInitialized) storage.set(GYRO_ERROR_FORM_STORAGE_KEY, data)
 })
 
 initData().then((data) => {
-	gyroErrorData.set(data);
+	gef.set(data);
 	isInitialized = true;
 });
 
-export { gyroErrorData };
+export { gef };

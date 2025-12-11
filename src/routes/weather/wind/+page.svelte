@@ -240,6 +240,11 @@
 		},
 	];
 
+	const windScaleOptions = [
+		{ label: 'Beaufort scale', value: 0 },
+		{ label: 'Douglas scale', value: 1 },
+	];
+
 	let activeSection: number = 0;
 	$: windTableType = windTable.find((object) => object.id === activeSection);
 	if (!windTableType) windTableType = windTable[0];
@@ -305,17 +310,12 @@
 				onclick={createCalculator}
 				bordered />
 		</div>
-		<Selector
-			items={[
-				{ label: 'Beaufort scale', value: 0 },
-				{ label: 'Douglas scale', value: 1 },
-			]}
-			bind:value={activeSection} />
+		<Selector items={windScaleOptions} bind:value={activeSection} />
 	</PageControls>
 
 	<Section title={windTableType.header}>
 		<div class="vertical-flex space-l">
-			<Details header="Description">
+			<Details header="Scale description">
 				<p>{windTableType.description}</p>
 			</Details>
 			<EqualGrid --desktopColumnsQty={4} --tabletColumnsQty={3} --mobileColumnsQty={2}>

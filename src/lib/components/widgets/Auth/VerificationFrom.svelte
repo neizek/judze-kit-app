@@ -111,7 +111,8 @@
 	</span>
 	<FormItem label="Verification code" errors={$token.errors}>
 		<Input
-			type="number"
+			type="text"
+			inputmode="numeric"
 			autocomplete="one-time-code"
 			placeholder="123456"
 			bind:value={$token.value}

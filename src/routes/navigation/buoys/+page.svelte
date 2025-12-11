@@ -138,11 +138,13 @@
 							tag: 'p',
 							text: buoy.description,
 						},
-						{
-							tag: 'span',
-							title: 'Light sequence',
-							text: buoy.lightSequence,
-						},
+						buoy.lightSequence
+							? {
+									tag: 'span',
+									title: 'Light sequence',
+									text: buoy.lightSequence,
+								}
+							: {},
 					],
 				},
 			},

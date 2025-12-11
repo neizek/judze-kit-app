@@ -30,9 +30,3 @@ export const isOfflineMode = (() => {
 		update,
 	}
 })();
-
-isOfflineMode.subscribe((value) => {
-	if (value === true) {
-		autoSyncEnabled.set(false);
-	}
-});

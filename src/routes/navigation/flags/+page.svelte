@@ -11,6 +11,7 @@
 	import EmptySection from '$ui/EmptySection.svelte';
 	import { createPopup } from '$widgets/PopUp';
 	import { Flag, FlagOff, Search } from '@lucide/svelte';
+	import DetailsCard from '$ui/DetailsCard/DetailsCard.svelte';
 
 	let searchValue: string = '';
 	let isNavigational: boolean = true;
@@ -44,6 +45,31 @@
 					component: FlagCard,
 					props: {
 						flag,
+					},
+				},
+			});
+		} else {
+			createPopup({
+				header: flag.name,
+				icon: Flag,
+				content: {
+					component: DetailsCard,
+					props: {
+						image: {
+							src: `/flagIcons/national/${flag.icon.toLowerCase()}.svg`,
+						},
+						isBigImage: true,
+						details: [
+							{
+								tag: 'div',
+								class: 'flex space-between space-l',
+								children: [
+									{ tag: 'span', title: 'ISO Code', text: flag.iso },
+
+									{ tag: 'span', title: 'Phone code', text: `+${flag.code}` },
+								],
+							},
+						],
 					},
 				},
 			});

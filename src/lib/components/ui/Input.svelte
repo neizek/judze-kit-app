@@ -19,6 +19,7 @@
 	export let clearable: boolean = false;
 	export let readonly: boolean = false;
 	export let suffix: string | undefined = undefined;
+	export let inputmode: 'decimal' | 'email' | 'numeric' | 'tel' | 'text' = 'text';
 
 	$: {
 		if (value) {
@@ -41,7 +42,7 @@
 {#if isFirefox() && autocomplete !== undefined}
 	<input
 		{type}
-		inputmode={type === 'number' ? 'decimal' : 'text'}
+		inputmode={(inputmode ?? type === 'number') ? 'decimal' : 'text'}
 		style="display:none;"
 		tabindex="-1"
 		{autocomplete}
